@@ -7,8 +7,12 @@
 <style>
   *{margin:0;padding:0;box-sizing:border-box}
   body{background:radial-gradient(1200px 700px at 50% -10%,#0e2050 0%,#060d24 55%,#04081a 100%) fixed;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;color:#eaf6ff;font-variant-numeric:tabular-nums;line-height:1.6;padding:14px}
-  .wrap{max-width:1280px;margin:0 auto;display:grid;grid-template-columns:repeat(12,1fr);gap:12px}
-  .panel{position:relative;background:linear-gradient(165deg,rgba(13,26,62,.97),rgba(7,14,38,.98));border:1px solid rgba(0,229,255,.26);border-radius:10px;box-shadow:0 12px 34px rgba(2,10,40,.5),inset 0 0 30px rgba(0,90,220,.08);padding:12px 14px}
+  .wrap{max-width:1320px;margin:0 auto;display:grid;grid-template-columns:3fr 6fr 3fr;gap:12px;
+    grid-template-areas:"hd hd hd" "cmp gau top" "por gau top" "por flw top" "str str str";align-items:stretch}
+  .a-hd{grid-area:hd}.a-cmp{grid-area:cmp}.a-gau{grid-area:gau}.a-top{grid-area:top}.a-por{grid-area:por}.a-flw{grid-area:flw}.a-str{grid-area:str}
+  @media (max-width:980px){.wrap{grid-template-columns:1fr;grid-template-areas:"hd" "cmp" "gau" "top" "por" "flw" "str"}}
+  .panel{position:relative;display:flex;flex-direction:column;background:linear-gradient(165deg,rgba(13,26,62,.97),rgba(7,14,38,.98));border:1px solid rgba(0,229,255,.26);border-radius:10px;box-shadow:0 12px 34px rgba(2,10,40,.5),inset 0 0 30px rgba(0,90,220,.08);padding:12px 14px}
+  .panel .fill{flex:1}
   .cn{position:absolute;width:11px;height:11px;border:2px solid rgba(0,229,255,.7);pointer-events:none}
   .tl{top:-1px;left:-1px;border-right:none;border-bottom:none;border-radius:8px 0 0 0}
   .tr{top:-1px;right:-1px;border-left:none;border-bottom:none;border-radius:0 8px 0 0}
@@ -20,7 +24,7 @@
   .ph h2::before{right:100%}.ph h2::after{left:100%;transform:scaleX(-1)}
   .ph .mt{font-size:8.5px;color:rgba(150,190,230,.55);display:block;margin-top:1px}
   /* header band */
-  .band{grid-column:1/-1;position:relative;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:10px;height:64px;padding:0 16px;background:linear-gradient(180deg,rgba(14,32,76,.9),rgba(8,17,44,.85));border:1px solid rgba(0,229,255,.3);border-radius:10px;box-shadow:0 8px 26px rgba(2,10,40,.5),inset 0 0 26px rgba(0,90,220,.12)}
+  .band{position:relative;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:10px;height:64px;padding:0 16px;background:linear-gradient(180deg,rgba(14,32,76,.9),rgba(8,17,44,.85));border:1px solid rgba(0,229,255,.3);border-radius:10px;box-shadow:0 8px 26px rgba(2,10,40,.5),inset 0 0 26px rgba(0,90,220,.12)}
   .band::before{content:"";position:absolute;top:0;left:6%;right:6%;height:1px;background:linear-gradient(90deg,transparent,rgba(140,225,255,.7),transparent)}
   .side{display:flex;align-items:center;gap:8px;font-size:10px;color:rgba(150,200,240,.75)}
   .side.r{justify-content:flex-end}
@@ -35,12 +39,6 @@
   .wing.l{right:100%}.wing.r{left:100%;transform:translateY(-50%) scaleX(-1)}
   .wing i{display:block;height:2px;margin:3.5px 0;background:linear-gradient(90deg,transparent,#00e5ff);box-shadow:0 0 7px rgba(0,229,255,.7)}
   .wing i:nth-child(1){width:100%}.wing i:nth-child(2){width:70%;margin-left:30%;opacity:.7}.wing i:nth-child(3){width:42%;margin-left:58%;opacity:.45}
-  /* columns */
-  .c-l{grid-column:span 3;display:flex;flex-direction:column;gap:12px}
-  .c-m{grid-column:span 6;display:flex;flex-direction:column;gap:12px}
-  .c-r{grid-column:span 3;display:flex;flex-direction:column;gap:12px}
-  .full{grid-column:1/-1}
-  @media (max-width:900px){.c-l,.c-m,.c-r{grid-column:1/-1}}
   /* bars */
   .grp{margin-bottom:9px}
   .grp-t{font-size:9px;color:rgba(168,208,240,.72);margin-bottom:4px;display:flex;justify-content:space-between}
@@ -60,7 +58,7 @@
   .baseline em{position:absolute;top:-14px;right:-6px;font-style:normal;font-size:8px;color:#fbbf24;white-space:nowrap}
   .note{margin-top:8px;padding-top:7px;border-top:1px dashed rgba(96,170,255,.18);font-size:9px;color:rgba(150,190,230,.6);line-height:1.65}
   .note b{color:rgba(200,225,250,.85)}
-  /* gauge */
+  /* gauge card */
   .gwrap{display:flex;align-items:center;gap:14px;justify-content:center;padding:4px 0 2px}
   .gauge{position:relative;width:190px;height:110px;flex:none}
   .gauge svg{width:100%;height:100%}
@@ -70,7 +68,10 @@
   .glegend{font-size:9.5px;color:rgba(168,208,240,.85);line-height:2}
   .glegend b{font-size:12px}
   .glegend .dy{color:#25d6e6}.glegend .sp{color:#a855f7}
-  /* tabs */
+  .digits{display:flex;gap:6px;justify-content:center;margin:8px 0 2px}
+  .digits i{font-style:normal;width:30px;height:38px;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:800;color:#7fe9ff;background:rgba(6,18,46,.9);border:1px solid rgba(0,229,255,.4);border-radius:6px;box-shadow:inset 0 0 12px rgba(0,120,255,.2),0 0 8px rgba(0,229,255,.15);text-shadow:0 0 10px rgba(0,229,255,.7)}
+  .dsub{text-align:center;font-size:9px;color:rgba(150,190,230,.6)}
+  .dsub b{color:#34d399}
   .tabs{display:flex;gap:6px;margin:10px 0 8px}
   .tab{flex:1;text-align:center;font-size:10.5px;padding:5px 0;border:1px solid rgba(0,229,255,.25);border-radius:6px;background:rgba(8,24,58,.6);cursor:pointer;color:rgba(168,208,240,.8);user-select:none}
   .tab.on{background:linear-gradient(180deg,rgba(0,120,220,.35),rgba(0,60,140,.25));color:#bfefff;border-color:rgba(0,229,255,.55);box-shadow:0 0 12px rgba(0,150,255,.25)}
@@ -84,15 +85,24 @@
   .diag.sp{border-left-color:#a855f7}
   .diag b{color:#ffd54a}
   /* top list */
-  .trow{display:flex;align-items:center;gap:6px;margin:6px 0}
-  .trank{width:16px;flex:none;font-size:9.5px;color:rgba(150,190,230,.6);text-align:center}
-  .trank.hot{color:#fbbf24;font-weight:800}
+  .tkpis{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:9px}
+  .tkpi{border:1px solid rgba(0,229,255,.3);border-left:3px solid #a855f7;border-radius:8px;background:rgba(8,24,58,.55);padding:6px 9px}
+  .tkpi.dy{border-left-color:#25d6e6}
+  .tkpi .l{font-size:8.5px;color:rgba(150,190,230,.6)}
+  .tkpi .v{font-size:16px;font-weight:800;color:#eaf6ff}
+  .tkpi .v em{font-style:normal;font-size:9px;color:#34d399;margin-left:4px;vertical-align:2px}
+  .trow{display:flex;align-items:flex-start;gap:7px;margin:7px 0;padding:5px 6px;border-radius:7px}
+  .trow.hot1{border:1px solid rgba(251,191,36,.55);background:rgba(251,191,36,.06)}
+  .trank{width:17px;height:17px;flex:none;font-size:9.5px;color:#0a1836;background:rgba(150,190,230,.55);border-radius:4px;display:flex;align-items:center;justify-content:center;font-weight:800;margin-top:1px}
+  .trank.g{background:#fbbf24}.trank.s{background:#c8d8ea}.trank.b{background:#fb923c}
   .tmain{flex:1;min-width:0}
   .tname{font-size:9.5px;color:#dcefff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-  .tbar{height:7px;border-radius:4px;background:rgba(8,24,58,.85);border:1px solid rgba(96,170,255,.12);position:relative;margin-top:2px}
-  .tv{width:52px;flex:none;text-align:right;font-size:9px;color:#22d3ee}
+  .tbar{height:6px;border-radius:4px;background:rgba(8,24,58,.85);border:1px solid rgba(96,170,255,.12);position:relative;margin:3px 0 2px}
+  .tmeta{font-size:8.5px;color:rgba(150,190,230,.65)}
+  .tmeta b{color:#22d3ee;font-size:9.5px}
+  .tmeta .d{float:right;color:rgba(150,190,230,.45)}
   .badge{display:inline-block;font-size:8px;border:1px solid rgba(251,191,36,.5);color:#fbbf24;border-radius:4px;padding:0 4px;margin-left:4px;vertical-align:1px}
-  /* portrait rings */
+  /* portrait */
   .prow{display:flex;gap:10px;align-items:center;justify-content:space-around;padding:2px 0 4px}
   .ring{position:relative;width:92px;height:92px;flex:none}
   .ring svg{transform:rotate(-90deg)}
@@ -101,27 +111,51 @@
   .ring .c span{font-size:8px;color:rgba(150,190,230,.6)}
   .plist{font-size:9.5px;color:rgba(190,220,245,.85);line-height:1.9}
   .plist i{display:inline-block;width:7px;height:7px;border-radius:2px;margin-right:5px}
-  /* cargo */
   .cargo{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:6px}
   .cargo .kpi .v{font-size:14px}
   .flow{display:flex;align-items:center;justify-content:center;gap:5px;font-size:9.5px;color:#bfefff;background:rgba(8,24,58,.5);border:1px dashed rgba(251,191,36,.4);border-radius:8px;padding:6px;margin-top:2px}
   .flow b{color:#fbbf24}
+  /* ▼ 流量来源 · 母题反差 (图二版式) */
+  .fx{display:grid;grid-template-columns:6fr 5fr;gap:16px;flex:1}
+  @media (max-width:980px){.fx{grid-template-columns:1fr}}
+  .fx-t{display:flex;justify-content:space-between;align-items:baseline;font-size:10.5px;font-weight:700;color:#dcefff;margin-bottom:6px}
+  .fx-t em{font-style:normal;font-size:9px;font-weight:400;color:#fbbf24}
+  .vchart{display:flex;align-items:flex-end;gap:10px;height:158px;padding:0 2px}
+  .vb{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;min-width:0}
+  .vb .val{font-size:10px;font-weight:800;color:#7fe9ff;margin-bottom:3px;white-space:nowrap}
+  .vb.hot .val{color:#fbbf24;text-shadow:0 0 10px rgba(251,191,36,.5)}
+  .vb .bar{width:70%;max-width:44px;height:0;border-radius:6px 6px 2px 2px;transition:height 1.1s cubic-bezier(.2,.8,.25,1)}
+  .vb .bar.c1{background:linear-gradient(180deg,#fbbf24,rgba(251,191,36,.35));box-shadow:0 0 14px rgba(251,191,36,.35)}
+  .vb .bar.c2{background:linear-gradient(180deg,#a855f7,rgba(168,85,247,.3))}
+  .vb .bar.c3{background:linear-gradient(180deg,#25d6e6,rgba(37,214,230,.3))}
+  .vb .bar.c4{background:linear-gradient(180deg,#a855f7,rgba(168,85,247,.25))}
+  .vb .bar.c5{background:linear-gradient(180deg,#25d6e6,rgba(37,214,230,.25))}
+  .vb .bar.c6{background:linear-gradient(180deg,#a855f7,rgba(168,85,247,.2))}
+  .vb .nm{font-size:9px;color:rgba(168,208,240,.75);margin-top:5px;white-space:nowrap}
+  .vfoot{font-size:9px;color:rgba(150,190,230,.6);margin-top:8px;border-top:1px dashed rgba(96,170,255,.18);padding-top:6px;line-height:1.65}
+  .vfoot b{color:rgba(200,225,250,.85)}
+  .duo{display:flex;align-items:flex-end;justify-content:space-around;gap:18px;height:158px;padding:0 8px}
+  .duo .vb .bar.win{background:linear-gradient(180deg,#25d6e6,rgba(37,214,230,.35));box-shadow:0 0 16px rgba(37,214,230,.35);width:78%;max-width:78px}
+  .duo .vb .bar.lose{background:linear-gradient(180deg,#f87171,rgba(248,113,113,.3));width:78%;max-width:78px}
+  .duo .vb .val{font-size:13px}
+  .duo .vb.lose .val{color:#f87171;text-shadow:0 0 10px rgba(248,113,113,.5)}
+  .duo .vb .nm{font-size:9.5px}
   /* strategy footer */
   .stripe{display:flex;align-items:center;gap:10px;background:linear-gradient(90deg,rgba(0,120,220,.25),rgba(168,85,247,.18));border:1px solid rgba(0,229,255,.3);border-radius:8px;padding:8px 12px;font-size:11px;margin-bottom:10px}
   .stripe b{color:#ffd54a}
   .cards3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
-  @media (max-width:900px){.cards3{grid-template-columns:1fr}}
+  @media (max-width:980px){.cards3{grid-template-columns:1fr}}
   .rc{background:rgba(8,24,58,.5);border:1px solid rgba(96,170,255,.16);border-radius:8px;padding:9px 11px;font-size:10px;line-height:1.7;color:rgba(190,220,245,.88)}
   .rc h3{font-size:11px;margin-bottom:4px}
   .rc.risk h3{color:#f87171}.rc.act h3{color:#34d399}.rc.win h3{color:#fbbf24}
   .foot{grid-column:1/-1;text-align:center;font-size:9px;color:rgba(150,190,230,.45);padding:6px 0 2px}
-  @media (prefers-reduced-motion:reduce){.bf,.needle{transition:none}.live i{animation:none}}
+  @media (prefers-reduced-motion:reduce){.bf,.vb .bar,#needle{transition:none}.live i{animation:none}}
 </style>
 </head>
 <body>
 <div class="wrap">
 
-  <header class="band">
+  <header class="band a-hd">
     <div class="side">
       <span class="pill">统计周期 2026-07-13 ~ 07-19</span>
       <span class="pill">更新 07-19 深夜</span>
@@ -138,159 +172,180 @@
     </div>
   </header>
 
-  <!-- 左列: 双平台对比 + 画像 -->
-  <div class="c-l">
-    <section class="panel">
-      <i class="cn tl"></i><i class="cn tr"></i><i class="cn bl"></i><i class="cn br"></i>
-      <div class="ph"><h2>双平台 · 数据对比</h2><span class="mt">组内最大值归一 · 互动率绝对刻度</span></div>
-      <div class="grp"><div class="grp-t"><span>7日播放</span><span>视频号 ≈ 抖音 2.5×</span></div>
-        <div class="brow"><span class="bn"><i class="dot dy"></i>抖音</span><div class="bt"><div class="bf dy" data-w="39.5"></div></div><span class="bv">104,600</span></div>
-        <div class="brow"><span class="bn"><i class="dot sp"></i>视频号</span><div class="bt"><div class="bf sp" data-w="100"></div></div><span class="bv">264,906</span></div>
-      </div>
-      <div class="grp"><div class="grp-t"><span>粉丝总量</span></div>
-        <div class="brow"><span class="bn"><i class="dot dy"></i>抖音</span><div class="bt"><div class="bf dy" data-w="100"></div></div><span class="bv">1,219*</span></div>
-        <div class="brow"><span class="bn"><i class="dot sp"></i>视频号</span><div class="bt"><div class="bf sp" data-w="97.6"></div></div><span class="bv">1,190</span></div>
-      </div>
-      <div class="grp"><div class="grp-t"><span>7日净增粉</span><em>视频号爆发</em></div>
-        <div class="brow"><span class="bn"><i class="dot dy"></i>抖音</span><div class="bt"><div class="bf dim" data-w="1.5"></div></div><span class="bv">+1*</span></div>
-        <div class="brow"><span class="bn"><i class="dot sp"></i>视频号</span><div class="bt"><div class="bf sp" data-w="100"></div></div><span class="bv">+586</span></div>
-      </div>
-      <div class="grp"><div class="grp-t"><span>互动率 · 绝对刻度 0~2.5%</span><em>均未过线</em></div>
-        <div class="brow"><span class="bn"><i class="dot dy"></i>抖音</span><div class="bt"><div class="bf dy" data-w="18.4"></div><span class="baseline" style="left:80%"><em>健康线 2%</em></span></div><span class="bv">0.46%</span></div>
-        <div class="brow"><span class="bn"><i class="dot sp"></i>视频号</span><div class="bt"><div class="bf sp" data-w="3.4"></div></div><span class="bv">0.08%</span></div>
-      </div>
-      <p class="note"><b>读法</b>：前三组按组内最大值归一（组间不可比）；互动率为绝对刻度并标 2% 健康线。<b>*抖音粉丝/净增两字段互相矛盾（1,219 vs +1），抓取存疑待人工核。</b>视频号中老年盘收藏&gt;评论，互动率天然偏低，别按评论判死活。</p>
-    </section>
+  <!-- 双平台对比 -->
+  <section class="panel a-cmp">
+    <i class="cn tl"></i><i class="cn tr"></i><i class="cn bl"></i><i class="cn br"></i>
+    <div class="ph"><h2>双平台 · 数据对比</h2><span class="mt">组内最大值归一 · 互动率绝对刻度</span></div>
+    <div class="grp"><div class="grp-t"><span>7日播放</span><span>视频号 ≈ 抖音 2.5×</span></div>
+      <div class="brow"><span class="bn"><i class="dot dy"></i>抖音</span><div class="bt"><div class="bf dy" data-w="39.5"></div></div><span class="bv">104,600</span></div>
+      <div class="brow"><span class="bn"><i class="dot sp"></i>视频号</span><div class="bt"><div class="bf sp" data-w="100"></div></div><span class="bv">264,906</span></div>
+    </div>
+    <div class="grp"><div class="grp-t"><span>粉丝总量</span></div>
+      <div class="brow"><span class="bn"><i class="dot dy"></i>抖音</span><div class="bt"><div class="bf dy" data-w="100"></div></div><span class="bv">1,219*</span></div>
+      <div class="brow"><span class="bn"><i class="dot sp"></i>视频号</span><div class="bt"><div class="bf sp" data-w="97.6"></div></div><span class="bv">1,190</span></div>
+    </div>
+    <div class="grp"><div class="grp-t"><span>7日净增粉</span><em>视频号爆发</em></div>
+      <div class="brow"><span class="bn"><i class="dot dy"></i>抖音</span><div class="bt"><div class="bf dim" data-w="1.5"></div></div><span class="bv">+1*</span></div>
+      <div class="brow"><span class="bn"><i class="dot sp"></i>视频号</span><div class="bt"><div class="bf sp" data-w="100"></div></div><span class="bv">+586</span></div>
+    </div>
+    <div class="grp"><div class="grp-t"><span>互动率 · 绝对刻度 0~2.5%</span><em>均未过线</em></div>
+      <div class="brow"><span class="bn"><i class="dot dy"></i>抖音</span><div class="bt"><div class="bf dy" data-w="18.4"></div><span class="baseline" style="left:80%"><em>健康线 2%</em></span></div><span class="bv">0.46%</span></div>
+      <div class="brow"><span class="bn"><i class="dot sp"></i>视频号</span><div class="bt"><div class="bf sp" data-w="3.4"></div></div><span class="bv">0.08%</span></div>
+    </div>
+    <div class="fill"></div>
+    <p class="note"><b>读法</b>：前三组按组内最大值归一（组间不可比）；互动率为绝对刻度并标 2% 健康线。<b>*抖音粉丝/净增字段矛盾，抓取存疑待核。</b>中老年盘收藏&gt;评论，互动率天然偏低。</p>
+  </section>
 
-    <section class="panel">
-      <i class="cn tl"></i><i class="cn tr"></i><i class="cn bl"></i><i class="cn br"></i>
-      <div class="ph"><h2>视频号 · 粉丝画像</h2><span class="mt">共 1,188 人</span></div>
-      <div class="prow">
-        <div class="ring">
-          <svg viewBox="0 0 92 92"><circle cx="46" cy="46" r="38" fill="none" stroke="rgba(8,24,58,.9)" stroke-width="10"/><circle cx="46" cy="46" r="38" fill="none" stroke="#a855f7" stroke-width="10" stroke-dasharray="188.2 238.8" stroke-linecap="round"/></svg>
-          <div class="c"><b>78.8%</b><span>50岁+</span></div>
-        </div>
-        <div class="plist">
-          <div><i style="background:#a855f7"></i>50岁+ <b>78.8%</b></div>
-          <div><i style="background:#7c5cd6"></i>40-49 岁 8.1%</div>
-          <div><i style="background:#5a48b0"></i>30-39 岁 7.9%</div>
-          <div><i style="background:#3d3680"></i>其他 5.2%</div>
-        </div>
+  <!-- 健康罗盘 -->
+  <section class="panel a-gau">
+    <i class="cn tl"></i><i class="cn tr"></i><i class="cn bl"></i><i class="cn br"></i>
+    <div class="ph"><h2>运营健康罗盘 · 平台下钻</h2><span class="mt">综合 81 = (抖音72 + 视频号90) / 2</span></div>
+    <div class="gwrap">
+      <div class="gauge">
+        <svg viewBox="0 0 190 110">
+          <path d="M15 100 A80 80 0 0 1 175 100" fill="none" stroke="rgba(8,24,58,.9)" stroke-width="12" stroke-linecap="round"/>
+          <path d="M15 100 A80 80 0 0 1 175 100" fill="none" stroke="url(#gg)" stroke-width="12" stroke-linecap="round" stroke-dasharray="203.5 251.3"/>
+          <defs><linearGradient id="gg" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#f87171"/><stop offset=".5" stop-color="#fbbf24"/><stop offset="1" stop-color="#34d399"/></linearGradient></defs>
+          <g id="needle" style="transform-origin:95px 100px;transform:rotate(-90deg);transition:transform 1.4s cubic-bezier(.2,.8,.25,1)">
+            <path d="M95 100 L91 96 L95 32 L99 96 Z" fill="#7fe9ff" style="filter:drop-shadow(0 0 6px rgba(0,229,255,.8))"/>
+            <circle cx="95" cy="100" r="6" fill="#0a1836" stroke="#7fe9ff" stroke-width="2"/>
+          </g>
+        </svg>
+        <div class="gval"><b>81</b><span>综合健康分 · 双平台均值</span></div>
       </div>
-      <div class="prow" style="margin-top:2px">
-        <div class="ring">
-          <svg viewBox="0 0 92 92"><circle cx="46" cy="46" r="38" fill="none" stroke="rgba(236,72,153,.35)" stroke-width="10"/><circle cx="46" cy="46" r="38" fill="none" stroke="#25d6e6" stroke-width="10" stroke-dasharray="135.6 238.8" stroke-linecap="round"/></svg>
-          <div class="c"><b>56.8%</b><span>男性</span></div>
-        </div>
-        <div class="plist">
-          <div><i style="background:#25d6e6"></i>男 56.8% ｜ <i style="background:rgba(236,72,153,.7)"></i>女 39.6%</div>
-          <div>粉丝来源：推荐 <b style="color:#7fe9ff">93%</b></div>
-          <div style="color:rgba(150,190,230,.6)">1,103 推荐 / 46 其他 / 30 分享</div>
-        </div>
+      <div class="glegend">
+        <div><span class="dy">■ 抖音</span> 健康 <b class="dy">72</b> ｜ 留存历史最好区间</div>
+        <div><span class="sp">■ 视频号</span> 健康 <b class="sp">90</b> ｜ 爆发引擎+带货破零</div>
+        <div style="color:rgba(251,191,36,.85)">▲ 今夜决赛收官 = 流量池退潮临界点</div>
       </div>
-      <p class="note"><b>结论</b>：50 岁+男性老球迷盘 → 只吃「确定叙事」（已发生的对阵/赛果），拒绝假设前瞻与球星花絮；涨粉引擎 = 算法推荐流，非粉丝盘。</p>
-    </section>
-  </div>
+    </div>
+    <div class="digits" id="digits"><i>3</i><i>6</i><i>9</i><i>5</i><i>0</i><i>6</i></div>
+    <div class="dsub">7日总播放 · 双平台 ｜ 合计粉丝 2,409 · 净增 <b>+587*</b> · 本期投稿 13 条</div>
+    <div class="tabs" id="tabs">
+      <div class="tab on" data-t="t0">总览</div>
+      <div class="tab" data-t="t1">抖音</div>
+      <div class="tab" data-t="t2">视频号</div>
+    </div>
+    <div class="tp on" id="t0">
+      <div class="kpis">
+        <div class="kpi"><div class="v">369.5k</div><div class="l">双平台7日播放</div></div>
+        <div class="kpi"><div class="v">2,409</div><div class="l">双平台粉丝</div></div>
+        <div class="kpi"><div class="v good">¥7.9</div><div class="l">带货GMV(首单破零)</div></div>
+        <div class="kpi"><div class="v good">3次</div><div class="l">视频号官方推荐</div></div>
+      </div>
+      <div class="diag"><b>总览诊断</b>：世界杯周期借力成功——12天视频号 604→1,190 粉、抖音完播 23%→49%；带货链路(口播+道具+挂车)全打通并出首单，决赛夜 4 条挂车就位。收官后核心命题 = 用非世界杯确定叙事接住中老年盘。</div>
+    </div>
+    <div class="tp" id="t1">
+      <div class="kpis">
+        <div class="kpi"><div class="v">104.6k</div><div class="l">7日播放</div></div>
+        <div class="kpi"><div class="v good">49.23%</div><div class="l">5s完播(↑历史最好)</div></div>
+        <div class="kpi"><div class="v good">27.19%</div><div class="l">2s跳出(↓历史最好)</div></div>
+        <div class="kpi"><div class="v">11.44s</div><div class="l">条均时长</div></div>
+      </div>
+      <div class="diag"><b>根因</b>：强钩子15秒口播+一梯队题材轮换把留存拉进历史最好区间；泛球迷转粉慢。<b>杠杆</b>：沉淀高留存模板备非世界杯题复用；粉丝数抓取矛盾待人工核。</div>
+    </div>
+    <div class="tp" id="t2">
+      <div class="kpis">
+        <div class="kpi"><div class="v">264.9k</div><div class="l">7日播放</div></div>
+        <div class="kpi"><div class="v good">+586</div><div class="l">7日净增粉</div></div>
+        <div class="kpi"><div class="v">168/55</div><div class="l">7日赞/评</div></div>
+        <div class="kpi"><div class="v good">✓×4</div><div class="l">挂车条就位决赛夜</div></div>
+      </div>
+      <div class="diag sp"><b>根因</b>：50+男性盘对「确定叙事对阵/赛果」极度买账，连获3次官方推荐，播放来源推荐占93%。<b>杠杆</b>：带货三件套(口播+道具+挂车)定死；只做一二梯队题材；同一对阵不双发。</div>
+    </div>
+    <div class="fill"></div>
+    <div class="diag" style="border-left-color:#34d399;margin-top:8px"><b>策略 · 双平台一体</b>：视频号按 50+ 男性盘定制「确定叙事」(已发生的对阵/赛果/破纪录，稳重口吻站队 CTA)；抖音同素材吃留存红利。<b>共同引擎</b>：一梯队题材 × 带货三件套——挂车是成交的开关，内容即货架。</div>
+  </section>
 
-  <!-- 中列: 健康罗盘+Tab下钻 + 题材反差 -->
-  <div class="c-m">
-    <section class="panel">
-      <i class="cn tl"></i><i class="cn tr"></i><i class="cn bl"></i><i class="cn br"></i>
-      <div class="ph"><h2>健康罗盘 · 平台下钻</h2><span class="mt">综合 81 = 双平台均值（抖音72 / 视频号90）</span></div>
-      <div class="gwrap">
-        <div class="gauge">
-          <svg viewBox="0 0 190 110">
-            <path d="M15 100 A80 80 0 0 1 175 100" fill="none" stroke="rgba(8,24,58,.9)" stroke-width="12" stroke-linecap="round"/>
-            <path d="M15 100 A80 80 0 0 1 175 100" fill="none" stroke="url(#gg)" stroke-width="12" stroke-linecap="round" stroke-dasharray="203.5 251.3"/>
-            <defs><linearGradient id="gg" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#f87171"/><stop offset=".5" stop-color="#fbbf24"/><stop offset="1" stop-color="#34d399"/></linearGradient></defs>
-            <g id="needle" style="transform-origin:95px 100px;transform:rotate(-90deg);transition:transform 1.4s cubic-bezier(.2,.8,.25,1)">
-              <path d="M95 100 L91 96 L95 32 L99 96 Z" fill="#7fe9ff" style="filter:drop-shadow(0 0 6px rgba(0,229,255,.8))"/>
-              <circle cx="95" cy="100" r="6" fill="#0a1836" stroke="#7fe9ff" stroke-width="2"/>
-            </g>
-          </svg>
-          <div class="gval"><b>81</b><span>综合健康分</span></div>
-        </div>
-        <div class="glegend">
-          <div><span class="dy">■ 抖音</span> 健康 <b class="dy">72</b> ｜ 留存历史最好区间</div>
-          <div><span class="sp">■ 视频号</span> 健康 <b class="sp">90</b> ｜ 爆发引擎+带货破零</div>
-          <div style="color:rgba(251,191,36,.85)">▲ 7/19 决赛后世界杯池退潮 = 最大变量</div>
-        </div>
-      </div>
-      <div class="tabs" id="tabs">
-        <div class="tab on" data-t="t0">总览</div>
-        <div class="tab" data-t="t1">抖音</div>
-        <div class="tab" data-t="t2">视频号</div>
-      </div>
-      <div class="tp on" id="t0">
-        <div class="kpis">
-          <div class="kpi"><div class="v">369.5k</div><div class="l">双平台7日播放</div></div>
-          <div class="kpi"><div class="v">2,409</div><div class="l">双平台粉丝</div></div>
-          <div class="kpi"><div class="v good">¥7.9</div><div class="l">带货GMV(首单破零)</div></div>
-          <div class="kpi"><div class="v good">3次</div><div class="l">视频号官方推荐</div></div>
-        </div>
-        <div class="diag"><b>总览诊断</b>：世界杯周期借力成功——12天视频号 604→1,190 粉、抖音完播 23%→49%；带货链路(口播+道具+挂车)全打通并出首单。收官后核心命题 = 用非世界杯确定叙事接住中老年盘。</div>
-      </div>
-      <div class="tp" id="t1">
-        <div class="kpis">
-          <div class="kpi"><div class="v">104.6k</div><div class="l">7日播放</div></div>
-          <div class="kpi"><div class="v good">49.23%</div><div class="l">5s完播(↑历史最好)</div></div>
-          <div class="kpi"><div class="v good">27.19%</div><div class="l">2s跳出(↓历史最好)</div></div>
-          <div class="kpi"><div class="v">11.44s</div><div class="l">条均时长</div></div>
-        </div>
-        <div class="diag"><b>根因</b>：强钩子15秒口播+一梯队题材轮换把留存拉进历史最好区间；泛球迷转粉慢。<b>杠杆</b>：沉淀高留存模板备非世界杯题复用；粉丝数抓取矛盾待人工核。</div>
-      </div>
-      <div class="tp" id="t2">
-        <div class="kpis">
-          <div class="kpi"><div class="v">264.9k</div><div class="l">7日播放</div></div>
-          <div class="kpi"><div class="v good">+586</div><div class="l">7日净增粉</div></div>
-          <div class="kpi"><div class="v">168/55</div><div class="l">7日赞/评</div></div>
-          <div class="kpi"><div class="v good">✓</div><div class="l">挂车自动化上线</div></div>
-        </div>
-        <div class="diag sp"><b>根因</b>：50+男性盘对「确定叙事对阵/赛果」极度买账，连获3次官方推荐，推荐流占93%。<b>杠杆</b>：带货三件套(口播+道具+挂车)定死；只做一二梯队题材；同一对阵不双发。</div>
-      </div>
-    </section>
+  <!-- TOP 榜 (通高) -->
+  <section class="panel a-top">
+    <i class="cn tl"></i><i class="cn tr"></i><i class="cn bl"></i><i class="cn br"></i>
+    <div class="ph"><h2>视频号 · 7日 TOP 视频</h2><span class="mt">条宽 = √(播放/榜首) 压缩刻度</span></div>
+    <div class="tkpis">
+      <div class="tkpi"><div class="l">视频号 · 7日播放</div><div class="v">264,906<em>▲ +586 关注</em></div></div>
+      <div class="tkpi dy"><div class="l">抖音 · 7日播放</div><div class="v">104,600<em>▲ +1* 粉丝</em></div></div>
+    </div>
+    <div class="trow hot1"><span class="trank g">1</span><div class="tmain"><div class="tname">阿英赛果 · 卫冕冠军绝杀进决赛</div><div class="tbar"><div class="bf gold" data-w="100"></div></div><div class="tmeta"><b>17,982</b> 赞 12 评 10 藏 24<span class="d">07-16</span></div></div></div>
+    <div class="trow"><span class="trank s">2</span><div class="tmain"><div class="tname">收官盘点 · 首条真挂车<span class="badge">带货</span></div><div class="tbar"><div class="bf gold" data-w="91"></div></div><div class="tmeta"><b>14,963</b> 赞 7 评 2 藏 9<span class="d">07-17</span></div></div></div>
+    <div class="trow"><span class="trank b">3</span><div class="tmain"><div class="tname">梅西亚马尔 · 决赛剧本</div><div class="tbar"><div class="bf sp" data-w="65"></div></div><div class="tmeta"><b>7,584</b> 赞 2 评 0 藏 4<span class="d">07-16</span></div></div></div>
+    <div class="trow"><span class="trank">4</span><div class="tmain"><div class="tname">姆巴佩金靴无缘决赛</div><div class="tbar"><div class="bf sp" data-w="49"></div></div><div class="tmeta"><b>4,314</b> 赞 0 评 0 藏 4<span class="d">07-15</span></div></div></div>
+    <div class="trow"><span class="trank">5</span><div class="tmain"><div class="tname">西班牙2比0进决赛 · 王朝归来</div><div class="tbar"><div class="bf sp" data-w="45"></div></div><div class="tmeta"><b>3,615</b> 赞 2 评 0 藏 1<span class="d">07-15</span></div></div></div>
+    <div class="trow"><span class="trank">6</span><div class="tmain"><div class="tname">英格兰魔咒 · 闯进四强</div><div class="tbar"><div class="bf sp" data-w="42"></div></div><div class="tmeta"><b>3,156</b> 赞 0 评 0 藏 6<span class="d">07-14</span></div></div></div>
+    <div class="trow"><span class="trank">7</span><div class="tmain"><div class="tname">西班牙王朝 · 后防最铁</div><div class="tbar"><div class="bf sp" data-w="42"></div></div><div class="tmeta"><b>3,136</b> 赞 0 评 0 藏 1<span class="d">07-14</span></div></div></div>
+    <div class="trow"><span class="trank">8</span><div class="tmain"><div class="tname">铜牌战10球大战<span class="badge">带货</span></div><div class="tbar"><div class="bf gold" data-w="38"></div></div><div class="tmeta"><b>2,570</b> 赞 1 评 0 藏 2<span class="d">07-19</span></div></div></div>
+    <div class="fill"></div>
+    <div class="note"><b>历史峰值</b>(已滚出7日窗)：四强出炉 <b>77,668</b> ｜ 西法带货 <b>60,841</b>。</div>
+    <div class="ph" style="margin-top:10px"><h2>带货战报 · 首单破零</h2><span class="mt">微信小店成交分析 · 07-12~07-18</span></div>
+    <div class="cargo">
+      <div class="kpi"><div class="v good">¥7.9</div><div class="l">成交金额</div></div>
+      <div class="kpi"><div class="v">1单</div><div class="l">零退款</div></div>
+      <div class="kpi"><div class="v">18%</div><div class="l">佣金率</div></div>
+    </div>
+    <div class="flow">短视频挂车 <b>→</b> 推荐流路人 <b>→</b> 数小时成交</div>
+    <p class="note">场景 <b>100% 短视频</b>、购买者 <b>100% 非粉丝新客</b> → <b>挂车是成交的开关</b>。橱窗：卤味花生 ¥7.9(置顶) / 单丛口粮茶 ¥69.9。<b>挂车条已×4 就位决赛夜</b>。</p>
+  </section>
 
-    <section class="panel">
-      <i class="cn tl"></i><i class="cn tr"></i><i class="cn bl"></i><i class="cn br"></i>
-      <div class="ph"><h2>题材梯队 · 均播放反差</h2><span class="mt">近10条逐条归因 · 诚实同刻度</span></div>
-      <div class="brow"><span class="bn" style="width:104px">一梯队·对阵/赛果</span><div class="bt"><div class="bf gold" data-w="100"></div></div><span class="bv">30,360</span></div>
-      <div class="brow"><span class="bn" style="width:104px">二梯队·谢幕情怀</span><div class="bt"><div class="bf sp" data-w="78.7"></div></div><span class="bv">23,898</span></div>
-      <div class="brow"><span class="bn" style="width:104px">三梯队·球星花絮</span><div class="bt"><div class="bf dim" data-w="16.8"></div></div><span class="bv">5,110</span></div>
-      <p class="note"><b>反差 5.9×</b>：中老年盘只要「谁碰谁、谁赢谁输」；自认神梗的球星花絮(梅西给婴儿亚马尔洗澡)也扑。<b>带货挂车条播放中位反超纯情怀 6×</b>——带货即流量款，放心在一梯队上挂车。</p>
-    </section>
-  </div>
-
-  <!-- 右列: TOP榜 + 带货战报 -->
-  <div class="c-r">
-    <section class="panel">
-      <i class="cn tl"></i><i class="cn tr"></i><i class="cn bl"></i><i class="cn br"></i>
-      <div class="ph"><h2>视频号 · TOP 视频榜</h2><span class="mt">近7天 · 条宽=√(播放/榜首)</span></div>
-      <div class="trow"><span class="trank hot">1</span><div class="tmain"><div class="tname">阿英赛果·卫冕冠军绝杀进决赛</div><div class="tbar"><div class="bf sp" data-w="100"></div></div></div><span class="tv">17,982</span></div>
-      <div class="trow"><span class="trank hot">2</span><div class="tmain"><div class="tname">收官盘点·首条真挂车<span class="badge">带货</span></div><div class="tbar"><div class="bf gold" data-w="91"></div></div></div><span class="tv">14,963</span></div>
-      <div class="trow"><span class="trank hot">3</span><div class="tmain"><div class="tname">梅西亚马尔·决赛剧本</div><div class="tbar"><div class="bf sp" data-w="65"></div></div></div><span class="tv">7,584</span></div>
-      <div class="trow"><span class="trank">4</span><div class="tmain"><div class="tname">姆巴佩金靴无缘决赛</div><div class="tbar"><div class="bf sp" data-w="49"></div></div></div><span class="tv">4,314</span></div>
-      <div class="trow"><span class="trank">5</span><div class="tmain"><div class="tname">西班牙2比0进决赛·王朝归来</div><div class="tbar"><div class="bf sp" data-w="45"></div></div></div><span class="tv">3,615</span></div>
-      <div class="trow"><span class="trank">6</span><div class="tmain"><div class="tname">英格兰魔咒·闯进四强</div><div class="tbar"><div class="bf sp" data-w="42"></div></div></div><span class="tv">3,156</span></div>
-      <div class="trow"><span class="trank">7</span><div class="tmain"><div class="tname">西班牙王朝·后防最铁</div><div class="tbar"><div class="bf sp" data-w="42"></div></div></div><span class="tv">3,136</span></div>
-      <div class="trow"><span class="trank">8</span><div class="tmain"><div class="tname">铜牌战10球大战<span class="badge">带货</span></div><div class="tbar"><div class="bf gold" data-w="38"></div></div></div><span class="tv">2,570</span></div>
-      <p class="note"><b>读法</b>：√刻度压缩量级差，小名次不消失。历史峰值(已滚出7日窗)：四强出炉 <b>77,668</b> / 西法带货 <b>60,841</b>。</p>
-    </section>
-
-    <section class="panel">
-      <i class="cn tl"></i><i class="cn tr"></i><i class="cn bl"></i><i class="cn br"></i>
-      <div class="ph"><h2>带货战报 · 首单破零</h2><span class="mt">窗口 07-12 ~ 07-18</span></div>
-      <div class="cargo">
-        <div class="kpi"><div class="v good">¥7.9</div><div class="l">成交金额</div></div>
-        <div class="kpi"><div class="v">1单</div><div class="l">零退款</div></div>
-        <div class="kpi"><div class="v">18%</div><div class="l">佣金率</div></div>
+  <!-- 粉丝画像 -->
+  <section class="panel a-por">
+    <i class="cn tl"></i><i class="cn tr"></i><i class="cn bl"></i><i class="cn br"></i>
+    <div class="ph"><h2>视频号 · 粉丝画像</h2><span class="mt">共 1,188 人</span></div>
+    <div class="prow">
+      <div class="ring">
+        <svg viewBox="0 0 92 92"><circle cx="46" cy="46" r="38" fill="none" stroke="rgba(8,24,58,.9)" stroke-width="10"/><circle cx="46" cy="46" r="38" fill="none" stroke="#a855f7" stroke-width="10" stroke-dasharray="188.2 238.8" stroke-linecap="round"/></svg>
+        <div class="c"><b>78.8%</b><span>50岁+</span></div>
       </div>
-      <div class="flow">短视频挂车 <b>→</b> 推荐流路人 <b>→</b> 数小时成交</div>
-      <p class="note">场景构成 <b>100% 短视频</b>、购买者 <b>100% 非粉丝新客</b> → <b>挂车是成交的开关</b>（此前只口播不挂车 GMV=0），内容即货架。橱窗：卤味花生 ¥7.9(置顶) / 单丛口粮茶 ¥69.9(高客单待测)。<b>挂车条已×4 就位决赛夜</b>（收官盘点/金靴/铜牌战/决赛之夜）——周期最高意向槽位全覆盖。</p>
-    </section>
-  </div>
+      <div class="plist">
+        <div><i style="background:#a855f7"></i>50岁+ <b>78.8%</b></div>
+        <div><i style="background:#7c5cd6"></i>40-49 岁 8.1%</div>
+        <div><i style="background:#5a48b0"></i>30-39 岁 7.9%</div>
+        <div><i style="background:#3d3680"></i>其他 5.2%</div>
+      </div>
+    </div>
+    <div class="prow" style="margin-top:2px">
+      <div class="ring">
+        <svg viewBox="0 0 92 92"><circle cx="46" cy="46" r="38" fill="none" stroke="rgba(236,72,153,.35)" stroke-width="10"/><circle cx="46" cy="46" r="38" fill="none" stroke="#25d6e6" stroke-width="10" stroke-dasharray="135.6 238.8" stroke-linecap="round"/></svg>
+        <div class="c"><b>56.8%</b><span>男性</span></div>
+      </div>
+      <div class="plist">
+        <div><i style="background:#25d6e6"></i>男 56.8% ｜ <i style="background:rgba(236,72,153,.7)"></i>女 39.6%</div>
+        <div>粉丝来源：推荐 <b style="color:#7fe9ff">93%</b></div>
+        <div style="color:rgba(150,190,230,.6)">1,103 推荐 / 46 其他 / 30 分享</div>
+      </div>
+    </div>
+    <div class="fill"></div>
+    <p class="note"><b>结论</b>：50 岁+男性老球迷盘 → 只吃「确定叙事」（已发生的对阵/赛果），拒绝假设前瞻与球星花絮；涨粉引擎 = 算法推荐流，非粉丝盘。选题与 CTA 按中老年男性口味定制。</p>
+  </section>
 
-  <!-- 底部: 策略·风险·下一条 -->
-  <section class="panel full">
+  <!-- ▼ 流量来源 · 母题反差 (图二版式重设计) -->
+  <section class="panel a-flw">
+    <i class="cn tl"></i><i class="cn tr"></i><i class="cn bl"></i><i class="cn br"></i>
+    <div class="ph"><h2>流量来源 · 题材反差</h2><span class="mt">视频号 7日播放来源 ｜ 题材梯队均播放</span></div>
+    <div class="fx">
+      <div>
+        <div class="fx-t"><span>视频号 · 7日流量来源</span><em>推荐占 93% · √刻度</em></div>
+        <div class="vchart">
+          <div class="vb hot"><span class="val">247,424</span><div class="bar c1" data-h="100"></div><span class="nm">推荐</span></div>
+          <div class="vb"><span class="val">12,248</span><div class="bar c2" data-h="22.3"></div><span class="nm">分享</span></div>
+          <div class="vb"><span class="val">3,457</span><div class="bar c3" data-h="11.8"></div><span class="nm">朋友♡</span></div>
+          <div class="vb"><span class="val">788</span><div class="bar c4" data-h="5.6"></div><span class="nm">其他</span></div>
+          <div class="vb"><span class="val">543</span><div class="bar c5" data-h="4.7"></div><span class="nm">订阅号</span></div>
+          <div class="vb"><span class="val">234</span><div class="bar c6" data-h="3.1"></div><span class="nm">主页</span></div>
+        </div>
+        <div class="vfoot"><b>算法推荐是绝对主场（93%）</b>——涨粉与成交都来自推荐流路人，内容即货架。</div>
+      </div>
+      <div>
+        <div class="fx-t"><span>题材梯队 · 均播放</span><em>反差 5.9×</em></div>
+        <div class="duo">
+          <div class="vb"><span class="val">30,360</span><div class="bar win" data-h="100"></div><span class="nm">一梯队·对阵/赛果 · 5条</span></div>
+          <div class="vb lose"><span class="val">5,110</span><div class="bar lose" data-h="16.8"></div><span class="nm">三梯队·球星花絮 · 3条</span></div>
+        </div>
+        <div class="vfoot">花絮条均评论 0.7、洗澡神梗仅 7,391——<b>自认再妙的梗也扑</b>；一梯队对阵/赛果才是主战场，带货挂车条中位再高 6×。</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 策略·风险·下一条 -->
+  <section class="panel a-str">
     <i class="cn tl"></i><i class="cn tr"></i><i class="cn bl"></i><i class="cn br"></i>
     <div class="stripe">🎯 <span><b>一句话策略</b>：一梯队对阵/赛果 × 带货三件套（口播+道具+真挂车）；决赛收官继续挂车，发完立测非世界杯确定叙事接住 50+ 老球迷盘。（信心 88）</span></div>
     <div class="cards3">
@@ -300,7 +355,7 @@
     </div>
   </section>
 
-  <div class="foot">广州潮少 · V3 运营罗盘 ｜ 数据源：抖音创作者中心 + 视频号助手 + 微信小店成交分析 ｜ 仅运营指标，不含账号凭证 ｜ 设计参考大陈 V4 运营飞轮规格</div>
+  <div class="foot">广州潮少 · 百商AI新媒体运营飞轮 ｜ 数据源：抖音创作者中心 + 视频号助手 + 微信小店成交分析 ｜ 仅运营指标，不含账号凭证 ｜ 设计参考大陈 V4 运营飞轮规格</div>
 </div>
 
 <script>
@@ -312,6 +367,10 @@
   document.querySelectorAll(".bf[data-w]").forEach(function(b,i){
     b.style.transitionDelay=(0.1+i*0.04)+"s";
     requestAnimationFrame(function(){requestAnimationFrame(function(){b.style.width=b.dataset.w+"%"})});
+  });
+  document.querySelectorAll(".bar[data-h]").forEach(function(b,i){
+    b.style.transitionDelay=(0.15+i*0.06)+"s";
+    requestAnimationFrame(function(){requestAnimationFrame(function(){b.style.height=b.dataset.h+"%"})});
   });
   var needle=document.getElementById("needle");
   setTimeout(function(){needle.style.transform="rotate(55.8deg)"},300);
