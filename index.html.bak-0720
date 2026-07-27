@@ -157,8 +157,8 @@
 
   <header class="band a-hd">
     <div class="side">
-      <span class="pill">统计周期 2026-07-21 ~ 07-27</span>
-      <span class="pill">更新 07-27 · 定位v2</span>
+      <span class="pill">统计周期 2026-07-13 ~ 07-19</span>
+      <span class="pill">更新 07-19 深夜</span>
     </div>
     <div class="btitle">
       <span class="wing l"><i></i><i></i><i></i></span>
@@ -176,51 +176,51 @@
   <section class="panel a-cmp">
     <i class="cn tl"></i><i class="cn tr"></i><i class="cn bl"></i><i class="cn br"></i>
     <div class="ph"><h2>双平台 · 数据对比</h2><span class="mt">组内最大值归一 · 互动率绝对刻度</span></div>
-    <div class="grp"><div class="grp-t"><span>7日播放</span><span>视频号 ≈ 抖音 3.4×</span></div>
-      <div class="brow"><span class="bn"><i class="dot dy"></i>抖音</span><div class="bt"><div class="bf dy" data-w="29.5"></div></div><span class="bv">35,600</span></div>
-      <div class="brow"><span class="bn"><i class="dot sp"></i>视频号</span><div class="bt"><div class="bf sp" data-w="100"></div></div><span class="bv">120,692</span></div>
+    <div class="grp"><div class="grp-t"><span>7日播放</span><span>视频号 ≈ 抖音 2.5×</span></div>
+      <div class="brow"><span class="bn"><i class="dot dy"></i>抖音</span><div class="bt"><div class="bf dy" data-w="39.5"></div></div><span class="bv">104,600</span></div>
+      <div class="brow"><span class="bn"><i class="dot sp"></i>视频号</span><div class="bt"><div class="bf sp" data-w="100"></div></div><span class="bv">264,906</span></div>
     </div>
     <div class="grp"><div class="grp-t"><span>粉丝总量</span></div>
-      <div class="brow"><span class="bn"><i class="dot dy"></i>抖音</span><div class="bt"><div class="bf dy" data-w="100"></div></div><span class="bv">1,235*</span></div>
-      <div class="brow"><span class="bn"><i class="dot sp"></i>视频号</span><div class="bt"><div class="bf sp" data-w="98.8"></div></div><span class="bv">1,220</span></div>
+      <div class="brow"><span class="bn"><i class="dot dy"></i>抖音</span><div class="bt"><div class="bf dy" data-w="100"></div></div><span class="bv">1,219*</span></div>
+      <div class="brow"><span class="bn"><i class="dot sp"></i>视频号</span><div class="bt"><div class="bf sp" data-w="97.6"></div></div><span class="bv">1,190</span></div>
     </div>
-    <div class="grp"><div class="grp-t"><span>7日净增粉</span><em>双双失速</em></div>
-      <div class="brow"><span class="bn"><i class="dot dy"></i>抖音</span><div class="bt"><div class="bf dim" data-w="31"></div></div><span class="bv">+9*</span></div>
-      <div class="brow"><span class="bn"><i class="dot sp"></i>视频号</span><div class="bt"><div class="bf sp" data-w="100"></div></div><span class="bv">+29</span></div>
+    <div class="grp"><div class="grp-t"><span>7日净增粉</span><em>视频号爆发</em></div>
+      <div class="brow"><span class="bn"><i class="dot dy"></i>抖音</span><div class="bt"><div class="bf dim" data-w="1.5"></div></div><span class="bv">+1*</span></div>
+      <div class="brow"><span class="bn"><i class="dot sp"></i>视频号</span><div class="bt"><div class="bf sp" data-w="100"></div></div><span class="bv">+586</span></div>
     </div>
     <div class="grp"><div class="grp-t"><span>互动率 · 绝对刻度 0~2.5%</span><em>均未过线</em></div>
-      <div class="brow"><span class="bn"><i class="dot dy"></i>抖音</span><div class="bt"><div class="bf dy" data-w="22.4"></div><span class="baseline" style="left:80%"><em>健康线 2%</em></span></div><span class="bv">0.56%</span></div>
-      <div class="brow"><span class="bn"><i class="dot sp"></i>视频号</span><div class="bt"><div class="bf sp" data-w="6.2"></div></div><span class="bv">0.15%</span></div>
+      <div class="brow"><span class="bn"><i class="dot dy"></i>抖音</span><div class="bt"><div class="bf dy" data-w="18.4"></div><span class="baseline" style="left:80%"><em>健康线 2%</em></span></div><span class="bv">0.46%</span></div>
+      <div class="brow"><span class="bn"><i class="dot sp"></i>视频号</span><div class="bt"><div class="bf sp" data-w="3.4"></div></div><span class="bv">0.08%</span></div>
     </div>
     <div class="fill"></div>
-    <p class="note"><b>读法</b>：前三组按组内最大值归一（组间不可比）；互动率为绝对刻度并标 2% 健康线。<b>*抖音 1,235 粉含大量回关粉</b>（账号关注 1,623 人、07-16 一夜 +1,084 而净增字段=1）——<b>抖音数据不作内容效果读数、不参与选题决策</b>。中老年盘收藏&gt;评论，互动率天然偏低。</p>
+    <p class="note"><b>读法</b>：前三组按组内最大值归一（组间不可比）；互动率为绝对刻度并标 2% 健康线。<b>*抖音粉丝/净增字段矛盾，抓取存疑待核。</b>中老年盘收藏&gt;评论，互动率天然偏低。</p>
   </section>
 
   <!-- 健康罗盘 -->
   <section class="panel a-gau">
     <i class="cn tl"></i><i class="cn tr"></i><i class="cn bl"></i><i class="cn br"></i>
-    <div class="ph"><h2>运营健康罗盘 · 平台下钻</h2><span class="mt">综合 52 = (抖音45 + 视频号58) / 2</span></div>
+    <div class="ph"><h2>运营健康罗盘 · 平台下钻</h2><span class="mt">综合 81 = (抖音72 + 视频号90) / 2</span></div>
     <div class="gwrap">
       <div class="gauge">
         <svg viewBox="0 0 190 110">
           <path d="M15 100 A80 80 0 0 1 175 100" fill="none" stroke="rgba(8,24,58,.9)" stroke-width="12" stroke-linecap="round"/>
-          <path d="M15 100 A80 80 0 0 1 175 100" fill="none" stroke="url(#gg)" stroke-width="12" stroke-linecap="round" stroke-dasharray="130.7 251.3"/>
+          <path d="M15 100 A80 80 0 0 1 175 100" fill="none" stroke="url(#gg)" stroke-width="12" stroke-linecap="round" stroke-dasharray="203.5 251.3"/>
           <defs><linearGradient id="gg" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#f87171"/><stop offset=".5" stop-color="#fbbf24"/><stop offset="1" stop-color="#34d399"/></linearGradient></defs>
           <g id="needle" style="transform-origin:95px 100px;transform:rotate(-90deg);transition:transform 1.4s cubic-bezier(.2,.8,.25,1)">
             <path d="M95 100 L91 96 L95 32 L99 96 Z" fill="#7fe9ff" style="filter:drop-shadow(0 0 6px rgba(0,229,255,.8))"/>
             <circle cx="95" cy="100" r="6" fill="#0a1836" stroke="#7fe9ff" stroke-width="2"/>
           </g>
         </svg>
-        <div class="gval"><b>52</b><span>综合健康分 · 双平台均值</span></div>
+        <div class="gval"><b>81</b><span>综合健康分 · 双平台均值</span></div>
       </div>
       <div class="glegend">
-        <div><span class="dy">■ 抖音</span> 健康 <b class="dy">45</b> ｜ 数据不可信·只发不听</div>
-        <div><span class="sp">■ 视频号</span> 健康 <b class="sp">58</b> ｜ 爆量在·涨粉断层</div>
-        <div style="color:rgba(251,191,36,.85)">▲ 退潮进行中 · 定位v2 剥壳引擎已上线</div>
+        <div><span class="dy">■ 抖音</span> 健康 <b class="dy">72</b> ｜ 留存历史最好区间</div>
+        <div><span class="sp">■ 视频号</span> 健康 <b class="sp">90</b> ｜ 爆发引擎+带货破零</div>
+        <div style="color:rgba(251,191,36,.85)">▲ 今夜决赛收官 = 流量池退潮临界点</div>
       </div>
     </div>
-    <div class="digits" id="digits"><i>1</i><i>5</i><i>6</i><i>2</i><i>9</i><i>2</i></div>
-    <div class="dsub">7日总播放 · 双平台 ｜ 合计粉丝 2,455 · 净增 <b>+38*</b> · 本期投稿 8 条</div>
+    <div class="digits" id="digits"><i>3</i><i>6</i><i>9</i><i>5</i><i>0</i><i>6</i></div>
+    <div class="dsub">7日总播放 · 双平台 ｜ 合计粉丝 2,409 · 净增 <b>+587*</b> · 本期投稿 13 条</div>
     <div class="tabs" id="tabs">
       <div class="tab on" data-t="t0">总览</div>
       <div class="tab" data-t="t1">抖音</div>
@@ -228,32 +228,32 @@
     </div>
     <div class="tp on" id="t0">
       <div class="kpis">
-        <div class="kpi"><div class="v">156.3k</div><div class="l">双平台7日播放</div></div>
-        <div class="kpi"><div class="v">2,455</div><div class="l">双平台粉丝</div></div>
-        <div class="kpi"><div class="v warn">0.2%</div><div class="l">播放→关注转化</div></div>
-        <div class="kpi"><div class="v">17/98</div><div class="l">★转发/收藏(7条窗)</div></div>
+        <div class="kpi"><div class="v">369.5k</div><div class="l">双平台7日播放</div></div>
+        <div class="kpi"><div class="v">2,409</div><div class="l">双平台粉丝</div></div>
+        <div class="kpi"><div class="v good">¥7.9</div><div class="l">带货GMV(首单破零)</div></div>
+        <div class="kpi"><div class="v good">3次</div><div class="l">视频号官方推荐</div></div>
       </div>
-      <div class="diag"><b>总览诊断</b>：病根不是选题、不是脸、也不是世界杯——是花 50 天优化了一个受众几乎不做的动作(<b>关注</b>)。50 万+累计播放只沉淀 1,220 粉 ≈ 0.2%；视频号 50 岁+占八成，他们的高频动作是<b>转发和收藏</b>。已切「当日确定事实 → 剥壳成 50+ 处境 → 两半话」引擎。</div>
+      <div class="diag"><b>总览诊断</b>：世界杯周期借力成功——12天视频号 604→1,190 粉、抖音完播 23%→49%；带货链路(口播+道具+挂车)全打通并出首单，决赛夜 4 条挂车就位。收官后核心命题 = 用非世界杯确定叙事接住中老年盘。</div>
     </div>
     <div class="tp" id="t1">
       <div class="kpis">
-        <div class="kpi"><div class="v">35.6k</div><div class="l">7日播放(↓45.5k)</div></div>
-        <div class="kpi"><div class="v good">49.19%</div><div class="l">5s完播</div></div>
-        <div class="kpi"><div class="v good">26.19%</div><div class="l">2s跳出</div></div>
-        <div class="kpi"><div class="v">11.57s</div><div class="l">条均时长</div></div>
+        <div class="kpi"><div class="v">104.6k</div><div class="l">7日播放</div></div>
+        <div class="kpi"><div class="v good">49.23%</div><div class="l">5s完播(↑历史最好)</div></div>
+        <div class="kpi"><div class="v good">27.19%</div><div class="l">2s跳出(↓历史最好)</div></div>
+        <div class="kpi"><div class="v">11.44s</div><div class="l">条均时长</div></div>
       </div>
-      <div class="diag"><b>根因</b>：留存指标本身健康，但播放长期平坦 2,000-8,800 无分辨率，且规律与视频号<b>相反</b>（同素材马拉多纳 3,948 &gt; 梅罗 3,249，视频号完全颠倒）。<b>杠杆</b>：只发不听——继续同步发布保持日更不断档，但不参与任何选题与人设决策。</div>
+      <div class="diag"><b>根因</b>：强钩子15秒口播+一梯队题材轮换把留存拉进历史最好区间；泛球迷转粉慢。<b>杠杆</b>：沉淀高留存模板备非世界杯题复用；粉丝数抓取矛盾待人工核。</div>
     </div>
     <div class="tp" id="t2">
       <div class="kpis">
-        <div class="kpi"><div class="v">120.7k</div><div class="l">7日播放</div></div>
-        <div class="kpi"><div class="v warn">+29</div><div class="l">7日净增粉</div></div>
-        <div class="kpi"><div class="v">90/97</div><div class="l">7日赞/评</div></div>
-        <div class="kpi"><div class="v">17/98</div><div class="l">★转发/收藏(7条窗)</div></div>
+        <div class="kpi"><div class="v">264.9k</div><div class="l">7日播放</div></div>
+        <div class="kpi"><div class="v good">+586</div><div class="l">7日净增粉</div></div>
+        <div class="kpi"><div class="v">168/55</div><div class="l">7日赞/评</div></div>
+        <div class="kpi"><div class="v good">✓×4</div><div class="l">挂车条就位决赛夜</div></div>
       </div>
-      <div class="diag sp"><b>根因</b>：爆量主战场，但涨粉断层——干净区间 137,000 播只换 <b>+19 粉 = 0.014%</b>；而世界杯期 78,000 播那条（评论率全表倒数）带来 <b>+526 粉 = 0.67%</b>，<b>差 48 倍</b>。→ 决定涨粉的不是内容类型，是<b>有没有正在进行的赛事在驱动关注意图</b>。<b>杠杆</b>：不设计「逼关注」（关注流是弱入口），改设计<b>转发</b>——每条第五句固定「两半话」。</div>
+      <div class="diag sp"><b>根因</b>：50+男性盘对「确定叙事对阵/赛果」极度买账，连获3次官方推荐，播放来源推荐占93%。<b>杠杆</b>：带货三件套(口播+道具+挂车)定死；只做一二梯队题材；同一对阵不双发。</div>
     </div>
-    <div class="diag" style="border-left-color:#34d399;margin-top:8px"><b>策略 · 双平台一体</b>：内容选题<b>只认视频号信号</b>；抖音只发不听。<b>共同引擎</b>：当日确定事实 → 剥壳成 50+ 处境 → 两半话 → 「你站哪半句，转给该听的人」。<b>北极星已从播放/关注改为 7 条滚动窗口的转发+收藏</b>。</div>
+    <div class="diag" style="border-left-color:#34d399;margin-top:8px"><b>策略 · 双平台一体</b>：视频号按 50+ 男性盘定制「确定叙事」(已发生的对阵/赛果/破纪录，稳重口吻站队 CTA)；抖音同素材吃留存红利。<b>共同引擎</b>：一梯队题材 × 带货三件套——挂车是成交的开关，内容即货架。</div>
     <div class="fill"></div>
   </section>
 
@@ -262,33 +262,33 @@
     <i class="cn tl"></i><i class="cn tr"></i><i class="cn bl"></i><i class="cn br"></i>
     <div class="ph"><h2>视频号 · 7日 TOP 视频</h2><span class="mt">条宽 = √(播放/榜首) 压缩刻度</span></div>
     <div class="tkpis">
-      <div class="tkpi"><div class="l">视频号 · 7日播放</div><div class="v">120,692<em>▲ +29 关注</em></div></div>
-      <div class="tkpi dy"><div class="l">抖音 · 7日播放</div><div class="v">35,600<em>▲ +9* 粉丝</em></div></div>
+      <div class="tkpi"><div class="l">视频号 · 7日播放</div><div class="v">264,906<em>▲ +586 关注</em></div></div>
+      <div class="tkpi dy"><div class="l">抖音 · 7日播放</div><div class="v">104,600<em>▲ +1* 粉丝</em></div></div>
     </div>
-    <div class="trow hot1"><span class="trank g">1</span><div class="tmain"><div class="tname">梅罗时代落幕 · 同代真对立</div><div class="tbar"><div class="bf gold" data-w="100"></div></div><div class="tmeta"><b>59,139</b> 赞48 评50 藏68 转16<span class="d">07-22</span></div></div></div>
-    <div class="trow"><span class="trank s">2</span><div class="tmain"><div class="tname">姆巴佩超了梅西 你服不服</div><div class="tbar"><div class="bf sp" data-w="52.8"></div></div><div class="tmeta"><b>16,488</b> 赞6 评27 藏16 转1<span class="d">07-24</span></div></div></div>
-    <div class="trow"><span class="trank b">3</span><div class="tmain"><div class="tname">阿根廷第一人 老马还是梅西<span class="badge">跨代·伪对立</span></div><div class="tbar"><div class="bf dim" data-w="41.9"></div></div><div class="tmeta"><b>10,380</b> 赞6 评7 藏8<span class="d">07-23</span></div></div></div>
-    <div class="trow"><span class="trank">4</span><div class="tmain"><div class="tname">梅西世界杯谢幕 · 纯情怀</div><div class="tbar"><div class="bf dim" data-w="34.1"></div></div><div class="tmeta"><b>6,878</b> 赞6 评4 藏7<span class="d">07-22</span></div></div></div>
-    <div class="trow"><span class="trank">5</span><div class="tmain"><div class="tname">阿根廷第一人（★重复发布条）</div><div class="tbar"><div class="bf dim" data-w="28.0"></div></div><div class="tmeta"><b>4,625</b> 赞1 评1 藏4<span class="d">07-23</span></div></div></div>
-    <div class="trow"><span class="trank">6</span><div class="tmain"><div class="tname">该撑还是该退 · 价值判断轴<span class="badge">v2</span></div><div class="tbar"><div class="bf sp" data-w="24.1"></div></div><div class="tmeta"><b>3,431</b> 赞5 <b>评16</b> 藏2<span class="d">07-25</span></div></div></div>
-    <div class="trow"><span class="trank">7</span><div class="tmain"><div class="tname">发刊词 · 定位v2 D1<span class="badge">v2</span></div><div class="tbar"><div class="bf sp" data-w="13.1"></div></div><div class="tmeta"><b>1,009</b> 赞0 评0 藏0<span class="d">07-26</span></div></div></div>
-    <div class="trow"><span class="trank">8</span><div class="tmain"><div class="tname">奥乔亚 · 剥壳引擎 D2<span class="badge">v2</span></div><div class="tbar"><div class="bf sp" data-w="4.1"></div></div><div class="tmeta"><b>99</b> 刚发布 · 待72h<span class="d">07-27</span></div></div></div>
+    <div class="trow hot1"><span class="trank g">1</span><div class="tmain"><div class="tname">阿英赛果 · 卫冕冠军绝杀进决赛</div><div class="tbar"><div class="bf gold" data-w="100"></div></div><div class="tmeta"><b>17,982</b> 赞 12 评 10 藏 24<span class="d">07-16</span></div></div></div>
+    <div class="trow"><span class="trank s">2</span><div class="tmain"><div class="tname">收官盘点 · 首条真挂车<span class="badge">带货</span></div><div class="tbar"><div class="bf gold" data-w="91"></div></div><div class="tmeta"><b>14,963</b> 赞 7 评 2 藏 9<span class="d">07-17</span></div></div></div>
+    <div class="trow"><span class="trank b">3</span><div class="tmain"><div class="tname">梅西亚马尔 · 决赛剧本</div><div class="tbar"><div class="bf sp" data-w="65"></div></div><div class="tmeta"><b>7,584</b> 赞 2 评 0 藏 4<span class="d">07-16</span></div></div></div>
+    <div class="trow"><span class="trank">4</span><div class="tmain"><div class="tname">姆巴佩金靴无缘决赛</div><div class="tbar"><div class="bf sp" data-w="49"></div></div><div class="tmeta"><b>4,314</b> 赞 0 评 0 藏 4<span class="d">07-15</span></div></div></div>
+    <div class="trow"><span class="trank">5</span><div class="tmain"><div class="tname">西班牙2比0进决赛 · 王朝归来</div><div class="tbar"><div class="bf sp" data-w="45"></div></div><div class="tmeta"><b>3,615</b> 赞 2 评 0 藏 1<span class="d">07-15</span></div></div></div>
+    <div class="trow"><span class="trank">6</span><div class="tmain"><div class="tname">英格兰魔咒 · 闯进四强</div><div class="tbar"><div class="bf sp" data-w="42"></div></div><div class="tmeta"><b>3,156</b> 赞 0 评 0 藏 6<span class="d">07-14</span></div></div></div>
+    <div class="trow"><span class="trank">7</span><div class="tmain"><div class="tname">西班牙王朝 · 后防最铁</div><div class="tbar"><div class="bf sp" data-w="42"></div></div><div class="tmeta"><b>3,136</b> 赞 0 评 0 藏 1<span class="d">07-14</span></div></div></div>
+    <div class="trow"><span class="trank">8</span><div class="tmain"><div class="tname">铜牌战10球大战<span class="badge">带货</span></div><div class="tbar"><div class="bf gold" data-w="38"></div></div><div class="tmeta"><b>2,570</b> 赞 1 评 0 藏 2<span class="d">07-19</span></div></div></div>
     <div class="fill"></div>
-    <div class="note"><b>历史峰值</b>(已滚出7日窗)：1/16收官 <b>211,000</b> ｜ 四强出炉 <b>78,000</b>。<b>★07-25 那条评论 10(2h)→16(72h)、播放 2,613→3,431</b> —— 长尾在走，<b>2 小时数据不可用</b>。</div>
-    <div class="ph" style="margin-top:10px"><h2>带货战报 · 养粉期暂停</h2><span class="mt">累计 · 微信小店成交分析</span></div>
+    <div class="note"><b>历史峰值</b>(已滚出7日窗)：四强出炉 <b>77,668</b> ｜ 西法带货 <b>60,841</b>。</div>
+    <div class="ph" style="margin-top:10px"><h2>带货战报 · 首单破零</h2><span class="mt">微信小店成交分析 · 07-12~07-18</span></div>
     <div class="cargo">
-      <div class="kpi"><div class="v good">¥7.9</div><div class="l">累计成交</div></div>
+      <div class="kpi"><div class="v good">¥7.9</div><div class="l">成交金额</div></div>
       <div class="kpi"><div class="v">1单</div><div class="l">零退款</div></div>
-      <div class="kpi"><div class="v warn">0单</div><div class="l">本周期(未挂车)</div></div>
+      <div class="kpi"><div class="v">18%</div><div class="l">佣金率</div></div>
     </div>
     <div class="flow">短视频挂车 <b>→</b> 推荐流路人 <b>→</b> 数小时成交</div>
-    <p class="note">场景 <b>100% 短视频</b>、购买者 <b>100% 非粉丝新客</b> → <b>挂车是成交的开关</b>。<b>本周期养粉不挂车，故 GMV=0（预期内，非异常）</b>。扩品闸口＝连续两周同时满足 转发中位≥2×S0、净增粉≥1.5×F0、GMV 有单。</p>
+    <p class="note">场景 <b>100% 短视频</b>、购买者 <b>100% 非粉丝新客</b> → <b>挂车是成交的开关</b>。橱窗：卤味花生 ¥7.9(置顶) / 单丛口粮茶 ¥69.9。<b>挂车条已×4 就位决赛夜</b>。</p>
   </section>
 
   <!-- 粉丝画像 -->
   <section class="panel a-por">
     <i class="cn tl"></i><i class="cn tr"></i><i class="cn bl"></i><i class="cn br"></i>
-    <div class="ph"><h2>视频号 · 粉丝画像</h2><span class="mt">共 1,220 人 ｜ 年龄/性别为最近捕获(07-19)</span></div>
+    <div class="ph"><h2>视频号 · 粉丝画像</h2><span class="mt">共 1,188 人</span></div>
     <div class="prow">
       <div class="ring">
         <svg viewBox="0 0 92 92"><circle cx="46" cy="46" r="38" fill="none" stroke="rgba(8,24,58,.9)" stroke-width="10"/><circle cx="46" cy="46" r="38" fill="none" stroke="#a855f7" stroke-width="10" stroke-dasharray="188.2 238.8" stroke-linecap="round"/></svg>
@@ -308,38 +308,38 @@
       </div>
       <div class="plist">
         <div><i style="background:#25d6e6"></i>男 56.8% ｜ <i style="background:rgba(236,72,153,.7)"></i>女 39.6%</div>
-        <div>粉丝来源：推荐 <b style="color:#7fe9ff">92.5%</b></div>
-        <div style="color:rgba(150,190,230,.6)">1,129 推荐 / 46 其他 / 34 分享 / 5 朋友♡ / 3 主页</div>
+        <div>粉丝来源：推荐 <b style="color:#7fe9ff">93%</b></div>
+        <div style="color:rgba(150,190,230,.6)">1,103 推荐 / 46 其他 / 30 分享</div>
       </div>
     </div>
     <div class="fill"></div>
-    <p class="note"><b>结论</b>：50 岁+男性老球迷盘<b>无需改</b>——这是实测不是假设。但<b>他们在视频号几乎不点关注</b>，高频动作是转发和收藏，关注流本身就是弱入口。→ 不设计「逼关注」，改设计转发。<b>粉丝来源为本次实抓；年龄/性别本次未返回，沿用最近一次捕获值。</b></p>
+    <p class="note"><b>结论</b>：50 岁+男性老球迷盘 → 只吃「确定叙事」（已发生的对阵/赛果），拒绝假设前瞻与球星花絮；涨粉引擎 = 算法推荐流，非粉丝盘。选题与 CTA 按中老年男性口味定制。</p>
   </section>
 
-  <!-- ▼ 流量来源 · 涨粉断层 -->
+  <!-- ▼ 流量来源 · 母题反差 (图二版式重设计) -->
   <section class="panel a-flw">
     <i class="cn tl"></i><i class="cn tr"></i><i class="cn bl"></i><i class="cn br"></i>
-    <div class="ph"><h2>流量来源 · 涨粉断层</h2><span class="mt">视频号 7日播放来源 ｜ 赛事驱动反差</span></div>
+    <div class="ph"><h2>流量来源 · 题材反差</h2><span class="mt">视频号 7日播放来源 ｜ 题材梯队均播放</span></div>
     <div class="fx">
       <div>
-        <div class="fx-t"><span>视频号 · 7日流量来源</span><em>推荐占 88.5% · √刻度</em></div>
+        <div class="fx-t"><span>视频号 · 7日流量来源</span><em>推荐占 93% · √刻度</em></div>
         <div class="vchart">
-          <div class="vb hot"><span class="val">106,834</span><div class="bar c1" data-h="100"></div><span class="nm">推荐</span></div>
-          <div class="vb"><span class="val">11,414</span><div class="bar c2" data-h="32.7"></div><span class="nm">分享</span></div>
-          <div class="vb"><span class="val">1,326</span><div class="bar c3" data-h="11.1"></div><span class="nm">朋友♡</span></div>
-          <div class="vb"><span class="val">657</span><div class="bar c4" data-h="7.8"></div><span class="nm">订阅号</span></div>
-          <div class="vb"><span class="val">310</span><div class="bar c5" data-h="5.4"></div><span class="nm">其他</span></div>
-          <div class="vb"><span class="val">63</span><div class="bar c6" data-h="2.4"></div><span class="nm">主页</span></div>
+          <div class="vb hot"><span class="val">247,424</span><div class="bar c1" data-h="100"></div><span class="nm">推荐</span></div>
+          <div class="vb"><span class="val">12,248</span><div class="bar c2" data-h="22.3"></div><span class="nm">分享</span></div>
+          <div class="vb"><span class="val">3,457</span><div class="bar c3" data-h="11.8"></div><span class="nm">朋友♡</span></div>
+          <div class="vb"><span class="val">788</span><div class="bar c4" data-h="5.6"></div><span class="nm">其他</span></div>
+          <div class="vb"><span class="val">543</span><div class="bar c5" data-h="4.7"></div><span class="nm">订阅号</span></div>
+          <div class="vb"><span class="val">234</span><div class="bar c6" data-h="3.1"></div><span class="nm">主页</span></div>
         </div>
-        <div class="vfoot"><b>算法推荐是绝对主场（88.5%）</b>——涨粉与成交都来自推荐流路人。<b>分享占 9.5% 且是第二大来源</b>，正是新北极星押注转发的依据。</div>
+        <div class="vfoot"><b>算法推荐是绝对主场（93%）</b>——涨粉与成交都来自推荐流路人，内容即货架。</div>
       </div>
       <div>
-        <div class="fx-t"><span>播放→关注 转化率</span><em>反差 48×</em></div>
+        <div class="fx-t"><span>题材梯队 · 均播放</span><em>反差 5.9×</em></div>
         <div class="duo">
-          <div class="vb"><span class="val">0.67%</span><div class="bar win" data-h="100"></div><span class="nm">有赛事期 · 78,000播→+526粉</span></div>
-          <div class="vb lose"><span class="val">0.014%</span><div class="bar lose" data-h="14.5"></div><span class="nm">退潮期 · 137,000播→+19粉</span></div>
+          <div class="vb"><span class="val">30,360</span><div class="bar win" data-h="100"></div><span class="nm">一梯队·对阵/赛果 · 5条</span></div>
+          <div class="vb lose"><span class="val">5,110</span><div class="bar lose" data-h="16.8"></div><span class="nm">三梯队·球星花絮 · 3条</span></div>
         </div>
-        <div class="vfoot">★<b>决定涨粉的不是内容类型，是有没有正在进行的赛事在驱动关注意图</b>。而高的那一边正是曾被判「最差资产」的赛程节点内容（评论率 0.037% 全表倒数）。→ <b>赛事型内容不得永久砍</b>：空窗期降为每周 1-2 条对照组，<b>8 月中五大联赛重启＝关注意图回归窗口，届时必须加回主力</b>。</div>
+        <div class="vfoot">花絮条均评论 0.7、洗澡神梗仅 7,391——<b>自认再妙的梗也扑</b>；一梯队对阵/赛果才是主战场，带货挂车条中位再高 6×。</div>
       </div>
     </div>
   </section>
@@ -347,17 +347,16 @@
   <!-- 策略·风险·下一条 -->
   <section class="panel a-str">
     <i class="cn tl"></i><i class="cn tr"></i><i class="cn bl"></i><i class="cn br"></i>
-    <div class="stripe">🎯 <span><b>一句话策略</b>：不设计「逼关注」，改设计<b>转发</b>——当日确定事实 → 剥壳成 50+ 处境 → 两半话 →「你站哪半句，转给该听的人」。北极星＝<b>7 条滚动窗口的转发+收藏</b>，最终裁判＝净增粉时序。（信心 62）</span></div>
+    <div class="stripe">🎯 <span><b>一句话策略</b>：一梯队对阵/赛果 × 带货三件套（口播+道具+真挂车）；决赛收官继续挂车，发完立测非世界杯确定叙事接住 50+ 老球迷盘。（信心 88）</span></div>
     <div class="cards3">
-      <div class="rc risk"><h3>⚠ 三大风险</h3>① <b>两半话能否被 50+ 转进微信群＝零验证</b>，基于行业常识、不来自本账号后台；② <b>剥壳引擎证据仍是小样本</b>——两周判据任一不过 → 不换脸，只换纵轴再跑 7 条；③ <b>防轴漂移</b>：不同事实剥出同一个问题，观众会觉得天天在讲一件事（07-27 评审已抓出两稿滑回时机轴）——须建轴台账+格言台账。</div>
-      <div class="rc win"><h3>★ 本周期战果</h3>完成<b>定位 v2 重新定位</b>（11-agent 工作流：4 诊断→3 方案→3 对抗全毙→定稿）；<b>剥壳引擎 S1-S6 骨架跑通</b>（D1 发刊词 + D2 奥乔亚）；<b>人设 lint 上线</b>（禁词/零数字/专名，生成前拦截）；<b>场景红线全部取消</b>（三连未过证明拦不住，画面反而更像足球内容）；推翻了自己两个错误结论（12.8 倍幻觉、赛事内容该全砍）。</div>
-      <div class="rc act"><h3>▶ 下一条 · 行动卡</h3><b>剥壳引擎 D3 · 必须换轴</b>（已用：时机轴 07-25、价值轴 07-27）。候选轴：忠诚与背叛 / 被年轻人顶掉 / 该不该原谅 / 一辈子只待一个单位。引子只取<b>当日已官宣确定事实</b>（永不做预测，22 倍死区）。★台词零数字词、外国人名≤2、S6 一字不改。发完执行评论回复（每条带具体追问＝唯一主动召回通道）。</div>
+      <div class="rc risk"><h3>⚠ 三大风险</h3>① <b>退潮悬崖</b>：今夜决赛收官后世界杯流量池断崖，+586/周的涨粉引擎失速；② 带货 n=1 别过度外推（但"挂车=开关"的 0→1 结论扎实）；③ 自烧三废法（自烧/安全闸/面部漂移）独立存在——烧录台词零数字词硬规、五查每项必做。</div>
+      <div class="rc win"><h3>★ 本周期战果</h3>视频号 604→1,190 粉（12天）、单条峰值 77,668 播、连获 3 次官方推荐；抖音完播 23%→49%；带货首单破零 + 挂车/去噪提示词(零数字词硬规)/打包卫士全链路自动化；决赛夜 4 条挂车就位；全程零人工剪辑。</div>
+      <div class="rc act"><h3>▶ 下一条 · 行动卡</h3><b>决赛赛果（今夜凌晨开球·明早出）</b>：0-1s 直接给冠军（阿根廷 or 西班牙）→ 关键过程（★零数字词硬规）→ 梅西谢幕/王朝复兴情怀收束 → 花生挂车收官 CTA。同条收金靴+梅西结局；发完即测非世界杯题。</div>
     </div>
   </section>
 
   <div class="foot">广州潮少 · 百商AI新媒体运营飞轮 ｜ 数据源：抖音创作者中心 + 视频号助手 + 微信小店成交分析 ｜ 仅运营指标，不含账号凭证 ｜ 设计参考大陈 V4 运营飞轮规格</div>
 </div>
-
 
 <script>
 (function(){
@@ -374,7 +373,7 @@
     requestAnimationFrame(function(){requestAnimationFrame(function(){b.style.height=b.dataset.h+"%"})});
   });
   var needle=document.getElementById("needle");
-  setTimeout(function(){needle.style.transform="rotate(3.6deg)"},300);
+  setTimeout(function(){needle.style.transform="rotate(55.8deg)"},300);
   document.querySelectorAll("#tabs .tab").forEach(function(t){
     t.addEventListener("click",function(){
       document.querySelectorAll("#tabs .tab").forEach(function(x){x.classList.remove("on")});
