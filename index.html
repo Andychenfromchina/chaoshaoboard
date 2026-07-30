@@ -60,10 +60,12 @@
   .note b{color:rgba(200,225,250,.85)}
   /* gauge card */
   .gwrap{display:flex;align-items:center;gap:14px;justify-content:center;padding:4px 0 2px}
-  .gauge{position:relative;width:190px;height:110px;flex:none}
-  .gauge svg{width:100%;height:100%}
-  .gval{position:absolute;left:0;right:0;bottom:2px;text-align:center}
-  .gval b{font-size:28px;color:#7fe9ff;text-shadow:0 0 16px rgba(0,229,255,.6)}
+  /* v4.2:表盘与读数分层——原来 gval 压在指针轴心上,数字被指针穿过;
+     指针改为数值色后两者同色、几乎读不出来。把读数移到表盘下方,彻底不重叠。 */
+  .gauge{position:relative;width:190px;height:134px;flex:none}
+  .gauge svg{width:100%;height:110px;display:block}
+  .gval{position:absolute;left:0;right:0;bottom:0;text-align:center}
+  .gval b{font-size:26px;line-height:1;text-shadow:0 0 16px rgba(0,229,255,.5)}
   .gval span{display:block;font-size:8.5px;color:rgba(150,190,230,.6)}
   .glegend{font-size:9.5px;color:rgba(168,208,240,.85);line-height:2}
   .glegend b{font-size:12px}
@@ -102,15 +104,29 @@
   .tmeta b{color:#22d3ee;font-size:9.5px}
   .tmeta .d{float:right;color:rgba(150,190,230,.45)}
   .badge{display:inline-block;font-size:8px;border:1px solid rgba(251,191,36,.5);color:#fbbf24;border-radius:4px;padding:0 4px;margin-left:4px;vertical-align:1px}
-  /* portrait */
-  .prow{display:flex;gap:10px;align-items:center;justify-content:space-around;padding:2px 0 4px}
+  /* portrait —— v4.2 工整对齐:双列网格,两环同列、两图例同起点、行高与环等高 */
+  .pgrid{display:grid;grid-template-columns:92px 1fr;column-gap:14px;row-gap:12px;align-items:center;padding:2px 0 6px}
   .ring{position:relative;width:92px;height:92px;flex:none}
   .ring svg{transform:rotate(-90deg)}
   .ring .c{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
   .ring .c b{font-size:16px;color:#7fe9ff}
   .ring .c span{font-size:8px;color:rgba(150,190,230,.6)}
-  .plist{font-size:9.5px;color:rgba(190,220,245,.85);line-height:1.9}
-  .plist i{display:inline-block;width:7px;height:7px;border-radius:2px;margin-right:5px}
+  .plist{list-style:none;font-size:9.5px;color:rgba(190,220,245,.85)}
+  .plist li{display:flex;align-items:center;gap:6px;height:23px;border-bottom:1px dashed rgba(96,170,255,.10)}
+  .plist li:last-child{border-bottom:0}
+  .plist li>span{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .plist li>b{font-size:11px;color:#dcefff;font-variant-numeric:tabular-nums;letter-spacing:.2px}
+  .plist li.wk>b{color:rgba(150,190,230,.75)}
+  .plist i{width:7px;height:7px;border-radius:2px;flex:none}
+  /* 粉丝来源构成条(v4.2 新增:补上卡片中部空档,并参与动态渲染) */
+  .srcwrap{margin-top:2px}
+  .srcwrap .fx-t{margin-bottom:5px}
+  .stack{display:flex;height:12px;border-radius:6px;overflow:hidden;background:rgba(8,24,58,.85);border:1px solid rgba(96,170,255,.12)}
+  .stack .sg{width:0;transition:width 1.1s cubic-bezier(.2,.8,.25,1);min-width:0}
+  .slgd{display:flex;flex-wrap:wrap;gap:4px 12px;margin-top:6px;font-size:8.5px;color:rgba(168,208,240,.75)}
+  .slgd span{display:flex;align-items:center;gap:4px;white-space:nowrap}
+  .slgd i{width:7px;height:7px;border-radius:2px;flex:none}
+  .slgd b{color:#dcefff;font-variant-numeric:tabular-nums}
   .cargo{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:6px}
   .cargo .kpi .v{font-size:14px}
   .flow{display:flex;align-items:center;justify-content:center;gap:5px;font-size:9.5px;color:#bfefff;background:rgba(8,24,58,.5);border:1px dashed rgba(251,191,36,.4);border-radius:8px;padding:6px;margin-top:2px}
@@ -149,7 +165,12 @@
   .rc h3{font-size:11px;margin-bottom:4px}
   .rc.risk h3{color:#f87171}.rc.act h3{color:#34d399}.rc.win h3{color:#fbbf24}
   .foot{grid-column:1/-1;text-align:center;font-size:9px;color:rgba(150,190,230,.45);padding:6px 0 2px}
-  @media (prefers-reduced-motion:reduce){.bf,.vb .bar,#needle{transition:none}.live i{animation:none}}
+  /* v4.2 动态渲染:罗盘弧/画像环原来是写死的 dasharray、完全不动,现在从 0 扫到目标值 */
+  .garc,.rarc{transition:stroke-dasharray 1.5s cubic-bezier(.2,.8,.25,1),stroke 1.5s ease}
+  .bf,.vb .bar,.stack .sg{transition-property:width,height,background,box-shadow}
+  @media (prefers-reduced-motion:reduce){
+    .bf,.vb .bar,.stack .sg,#needle,.garc,.rarc{transition:none}.live i{animation:none}
+  }
 </style>
 </head>
 <body>
@@ -204,18 +225,18 @@
       <div class="gauge">
         <svg viewBox="0 0 190 110">
           <path d="M15 100 A80 80 0 0 1 175 100" fill="none" stroke="rgba(8,24,58,.9)" stroke-width="12" stroke-linecap="round"/>
-          <path d="M15 100 A80 80 0 0 1 175 100" fill="none" stroke="url(#gg)" stroke-width="12" stroke-linecap="round" stroke-dasharray="130.7 251.3"/>
+          <path class="garc" data-v="52" d="M15 100 A80 80 0 0 1 175 100" fill="none" stroke="url(#gg)" stroke-width="12" stroke-linecap="round" stroke-dasharray="0 251.3"/>
           <defs><linearGradient id="gg" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#f87171"/><stop offset=".5" stop-color="#fbbf24"/><stop offset="1" stop-color="#34d399"/></linearGradient></defs>
-          <g id="needle" style="transform-origin:95px 100px;transform:rotate(-90deg);transition:transform 1.4s cubic-bezier(.2,.8,.25,1)">
-            <path d="M95 100 L91 96 L95 32 L99 96 Z" fill="#7fe9ff" style="filter:drop-shadow(0 0 6px rgba(0,229,255,.8))"/>
-            <circle cx="95" cy="100" r="6" fill="#0a1836" stroke="#7fe9ff" stroke-width="2"/>
+          <g id="needle" data-v="52" style="transform-origin:95px 100px;transform:rotate(-90deg);transition:transform 1.4s cubic-bezier(.2,.8,.25,1)">
+            <path id="ndl" d="M95 100 L91 96 L95 32 L99 96 Z" fill="#7fe9ff"/>
+            <circle id="ndlc" cx="95" cy="100" r="6" fill="#0a1836" stroke="#7fe9ff" stroke-width="2"/>
           </g>
         </svg>
-        <div class="gval"><b>52</b><span>综合健康分 · 双平台均值</span></div>
+        <div class="gval"><b class="hv" data-v="52">52</b><span>综合健康分 · 双平台均值</span></div>
       </div>
       <div class="glegend">
-        <div><span class="dy">■ 抖音</span> 健康 <b class="dy">45</b> ｜ 数据不可信·只发不听</div>
-        <div><span class="sp">■ 视频号</span> 健康 <b class="sp">58</b> ｜ 爆量在·涨粉断层</div>
+        <div><span class="dy">■ 抖音</span> 健康 <b class="hv" data-v="45">45</b> ｜ 数据不可信·只发不听</div>
+        <div><span class="sp">■ 视频号</span> 健康 <b class="hv" data-v="58">58</b> ｜ 爆量在·涨粉断层</div>
         <div style="color:rgba(251,191,36,.85)">▲ 退潮进行中 · 定位v2 剥壳引擎已上线</div>
       </div>
     </div>
@@ -289,27 +310,43 @@
   <section class="panel a-por">
     <i class="cn tl"></i><i class="cn tr"></i><i class="cn bl"></i><i class="cn br"></i>
     <div class="ph"><h2>视频号 · 粉丝画像</h2><span class="mt">共 1,220 人 ｜ 年龄/性别为最近捕获(07-19)</span></div>
-    <div class="prow">
+    <div class="pgrid">
       <div class="ring">
-        <svg viewBox="0 0 92 92"><circle cx="46" cy="46" r="38" fill="none" stroke="rgba(8,24,58,.9)" stroke-width="10"/><circle cx="46" cy="46" r="38" fill="none" stroke="#a855f7" stroke-width="10" stroke-dasharray="188.2 238.8" stroke-linecap="round"/></svg>
+        <svg viewBox="0 0 92 92"><circle cx="46" cy="46" r="38" fill="none" stroke="rgba(8,24,58,.9)" stroke-width="10"/><circle class="rarc" data-v="78.8" data-hue="168,85,247" cx="46" cy="46" r="38" fill="none" stroke-width="10" stroke-linecap="round" stroke-dasharray="0 238.8"/></svg>
         <div class="c"><b>78.8%</b><span>50岁+</span></div>
       </div>
-      <div class="plist">
-        <div><i style="background:#a855f7"></i>50岁+ <b>78.8%</b></div>
-        <div><i style="background:#7c5cd6"></i>40-49 岁 8.1%</div>
-        <div><i style="background:#5a48b0"></i>30-39 岁 7.9%</div>
-        <div><i style="background:#3d3680"></i>其他 5.2%</div>
-      </div>
-    </div>
-    <div class="prow" style="margin-top:2px">
+      <ul class="plist">
+        <li><i style="background:#a855f7"></i><span>50岁+</span><b>78.8%</b></li>
+        <li><i style="background:#7c5cd6"></i><span>40-49 岁</span><b>8.1%</b></li>
+        <li><i style="background:#5a48b0"></i><span>30-39 岁</span><b>7.9%</b></li>
+        <li><i style="background:#3d3680"></i><span>其他</span><b>5.2%</b></li>
+      </ul>
       <div class="ring">
-        <svg viewBox="0 0 92 92"><circle cx="46" cy="46" r="38" fill="none" stroke="rgba(236,72,153,.35)" stroke-width="10"/><circle cx="46" cy="46" r="38" fill="none" stroke="#25d6e6" stroke-width="10" stroke-dasharray="135.6 238.8" stroke-linecap="round"/></svg>
+        <svg viewBox="0 0 92 92"><circle cx="46" cy="46" r="38" fill="none" stroke="rgba(236,72,153,.35)" stroke-width="10"/><circle class="rarc" data-v="56.8" data-hue="37,214,230" cx="46" cy="46" r="38" fill="none" stroke-width="10" stroke-linecap="round" stroke-dasharray="0 238.8"/></svg>
         <div class="c"><b>56.8%</b><span>男性</span></div>
       </div>
-      <div class="plist">
-        <div><i style="background:#25d6e6"></i>男 56.8% ｜ <i style="background:rgba(236,72,153,.7)"></i>女 39.6%</div>
-        <div>粉丝来源：推荐 <b style="color:#7fe9ff">92.5%</b></div>
-        <div style="color:rgba(150,190,230,.6)">1,129 推荐 / 46 其他 / 34 分享 / 5 朋友♡ / 3 主页</div>
+      <ul class="plist">
+        <li><i style="background:#25d6e6"></i><span>男</span><b>56.8%</b></li>
+        <li><i style="background:rgba(236,72,153,.7)"></i><span>女</span><b>39.6%</b></li>
+        <li><i style="background:#7fe9ff"></i><span>粉丝来源 · 推荐</span><b>92.5%</b></li>
+        <li class="wk"><i style="background:#3d3680"></i><span>主页+朋友♡ · 关注流入口</span><b>0.7%</b></li>
+      </ul>
+    </div>
+    <div class="srcwrap">
+      <div class="fx-t"><span>粉丝来源构成 · 1,217 人</span><em>推荐一家独大</em></div>
+      <div class="stack">
+        <div class="sg" data-w="92.8" data-hue="126,58,242" title="推荐 1,129"></div>
+        <div class="sg" data-w="3.8" data-hue="90,72,176" title="其他 46"></div>
+        <div class="sg" data-w="2.8" data-hue="37,214,230" title="分享 34"></div>
+        <div class="sg" data-w="0.4" data-hue="236,72,153" title="朋友♡ 5"></div>
+        <div class="sg" data-w="0.2" data-hue="251,191,36" title="主页 3"></div>
+      </div>
+      <div class="slgd">
+        <span><i style="background:#7e3af2"></i>推荐 <b>1,129</b></span>
+        <span><i style="background:#5a48b0"></i>其他 <b>46</b></span>
+        <span><i style="background:#25d6e6"></i>分享 <b>34</b></span>
+        <span><i style="background:#ec4899"></i>朋友♡ <b>5</b></span>
+        <span><i style="background:#fbbf24"></i>主页 <b>3</b></span>
       </div>
     </div>
     <div class="fill"></div>
@@ -365,16 +402,87 @@
   function pad(n){return (n<10?"0":"")+n}
   function tick(){var d=new Date();el.textContent=pad(d.getHours())+":"+pad(d.getMinutes())+":"+pad(d.getSeconds())}
   tick();setInterval(tick,1000);
+  /* ───────── v4.2 动态化渲染 ─────────
+     原来:罗盘弧与画像环的 dasharray 写死在 HTML 里、完全静止;柱体只有尺寸动画,
+          颜色是硬编码 class,和数值没有关系。
+     现在:①所有罗盘/环从 0 扫到目标值 ②柱体与环的颜色由数值驱动
+          (保留各自的语义色相,用数值决定亮度/不透明度/辉光强度,大的更亮、小的更暗)
+          ③健康分数字与指针的颜色走 红→琥珀→绿 健康刻度。
+     JS 失败时 CSS 里的静态配色仍在,只是不再动——不会白板。 */
+  var HUE={dy:"37,214,230",sp:"168,85,247",gold:"251,191,36",dim:"120,150,190",
+           c1:"251,191,36",c2:"168,85,247",c3:"37,214,230",c4:"168,85,247",c5:"37,214,230",c6:"168,85,247",
+           win:"37,214,230",lose:"248,113,113"};
+  function hueOf(el,def){
+    if(el.dataset.hue) return el.dataset.hue;
+    for(var k in HUE){ if(el.classList.contains(k)) return HUE[k]; }
+    return def||"37,214,230";
+  }
+  /* 健康刻度:0=红 50=琥珀 100=绿 */
+  function healthColor(v){
+    var a=[248,113,113],b=[251,191,36],c=[52,211,153],lo,hi,t;
+    v=Math.max(0,Math.min(100,v));
+    if(v<=50){lo=a;hi=b;t=v/50}else{lo=b;hi=c;t=(v-50)/50}
+    return "rgb("+lo.map(function(x,i){return Math.round(x+(hi[i]-x)*t)}).join(",")+")";
+  }
+  /* 数值→亮度:v 越大,主色越实、辉光越强 */
+  function paint(el,v,dir){
+    var h=hueOf(el), i=Math.max(0,Math.min(1,v/100));
+    var strong="rgba("+h+","+(0.5+0.5*i).toFixed(3)+")", weak="rgba("+h+",0.2)";
+    el.style.background="linear-gradient("+dir+","+(dir==="90deg"?weak+","+strong:strong+","+weak)+")";
+    el.style.boxShadow="0 0 "+(3+13*i).toFixed(1)+"px rgba("+h+","+(0.08+0.37*i).toFixed(3)+")";
+  }
+
+  /* 横向柱(TOP榜/平台对比) */
   document.querySelectorAll(".bf[data-w]").forEach(function(b,i){
+    var v=parseFloat(b.dataset.w)||0;
+    paint(b,v,"90deg");
     b.style.transitionDelay=(0.1+i*0.04)+"s";
-    requestAnimationFrame(function(){requestAnimationFrame(function(){b.style.width=b.dataset.w+"%"})});
+    requestAnimationFrame(function(){requestAnimationFrame(function(){b.style.width=v+"%"})});
   });
+  /* 纵向柱(流量来源/涨粉断层) */
   document.querySelectorAll(".bar[data-h]").forEach(function(b,i){
+    var v=parseFloat(b.dataset.h)||0;
+    paint(b,v,"180deg");
     b.style.transitionDelay=(0.15+i*0.06)+"s";
-    requestAnimationFrame(function(){requestAnimationFrame(function(){b.style.height=b.dataset.h+"%"})});
+    requestAnimationFrame(function(){requestAnimationFrame(function(){b.style.height=v+"%"})});
+  });
+  /* 堆叠条(粉丝来源构成) */
+  document.querySelectorAll(".stack .sg[data-w]").forEach(function(s,i){
+    var v=parseFloat(s.dataset.w)||0, h=hueOf(s);
+    s.style.background="rgba("+h+","+(0.45+0.5*Math.min(1,v/60)).toFixed(3)+")";
+    s.style.transitionDelay=(0.3+i*0.07)+"s";
+    requestAnimationFrame(function(){requestAnimationFrame(function(){s.style.width=v+"%"})});
+  });
+  /* 罗盘弧:半圆 r=80 → 全长 π*80 = 251.3 */
+  document.querySelectorAll(".garc[data-v]").forEach(function(p){
+    var v=parseFloat(p.dataset.v)||0, L=251.3;
+    requestAnimationFrame(function(){requestAnimationFrame(function(){
+      p.setAttribute("stroke-dasharray",(L*v/100).toFixed(1)+" "+L);
+    })});
+  });
+  /* 画像环:整圆 r=38 → 全长 2π*38 = 238.8 */
+  document.querySelectorAll(".rarc[data-v]").forEach(function(c,i){
+    var v=parseFloat(c.dataset.v)||0, L=238.8, h=hueOf(c);
+    c.setAttribute("stroke","rgba("+h+","+(0.55+0.45*Math.min(1,v/100)).toFixed(3)+")");
+    c.style.filter="drop-shadow(0 0 "+(2+6*v/100).toFixed(1)+"px rgba("+h+",.55))";
+    c.style.transitionDelay=(0.2+i*0.15)+"s";
+    requestAnimationFrame(function(){requestAnimationFrame(function(){
+      c.setAttribute("stroke-dasharray",(L*v/100).toFixed(1)+" "+L);
+    })});
+  });
+  /* 健康分数字 + 指针:颜色走健康刻度 */
+  document.querySelectorAll(".hv[data-v]").forEach(function(b){
+    var col=healthColor(parseFloat(b.dataset.v)||0);
+    b.style.color=col; b.style.textShadow="0 0 14px "+col.replace("rgb(","rgba(").replace(")",",.55)");
   });
   var needle=document.getElementById("needle");
-  setTimeout(function(){needle.style.transform="rotate(3.6deg)"},300);
+  if(needle){
+    var nv=parseFloat(needle.dataset.v)||0, ncol=healthColor(nv);
+    var np=document.getElementById("ndl"), nc=document.getElementById("ndlc");
+    if(np){np.setAttribute("fill",ncol);np.style.filter="drop-shadow(0 0 6px "+ncol.replace("rgb(","rgba(").replace(")",",.85)")+")"}
+    if(nc){nc.setAttribute("stroke",ncol)}
+    setTimeout(function(){needle.style.transform="rotate("+(nv*1.8-90).toFixed(1)+"deg)"},300);
+  }
   document.querySelectorAll("#tabs .tab").forEach(function(t){
     t.addEventListener("click",function(){
       document.querySelectorAll("#tabs .tab").forEach(function(x){x.classList.remove("on")});
