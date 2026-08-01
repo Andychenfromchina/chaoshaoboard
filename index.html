@@ -10,7 +10,21 @@
   .wrap{max-width:1320px;margin:0 auto;display:grid;grid-template-columns:3fr 6fr 3fr;gap:12px;
     grid-template-areas:"hd hd hd" "cmp gau top" "por gau top" "por flw top" "str str str";align-items:stretch}
   .a-hd{grid-area:hd}.a-cmp{grid-area:cmp}.a-gau{grid-area:gau}.a-top{grid-area:top}.a-por{grid-area:por}.a-flw{grid-area:flw}.a-str{grid-area:str}
-  @media (max-width:980px){.wrap{grid-template-columns:1fr;grid-template-areas:"hd" "cmp" "gau" "top" "por" "flw" "str"}}
+  @media (max-width:980px){
+    body{padding:8px}
+    .wrap{width:100%;min-width:0;grid-template-columns:minmax(0,1fr);grid-template-areas:"hd" "cmp" "gau" "top" "por" "flw" "str"}
+    .wrap>*{width:100%;min-width:0}
+    .band{height:auto;min-height:0;display:flex;flex-direction:column;gap:6px;padding:10px 12px}
+    .btitle{order:-1;width:100%;min-width:0;padding:0}
+    .btitle h1{font-size:18px;white-space:normal}
+    .wing{display:none}
+    .side,.side.r{width:100%;justify-content:center;flex-wrap:wrap}
+    .gwrap{flex-direction:column;align-items:center}
+    .glegend{width:100%;line-height:1.8;text-align:center}
+    .kpis{grid-template-columns:repeat(2,minmax(0,1fr))}
+    .grp-t{gap:8px;flex-wrap:wrap}
+    .note,.diag,.rc,.vfoot,.stripe{overflow-wrap:anywhere}
+  }
   .panel{position:relative;display:flex;flex-direction:column;background:linear-gradient(165deg,rgba(13,26,62,.97),rgba(7,14,38,.98));border:1px solid rgba(0,229,255,.26);border-radius:10px;box-shadow:0 12px 34px rgba(2,10,40,.5),inset 0 0 30px rgba(0,90,220,.08);padding:12px 14px}
   .panel .fill{flex:1}
   .cn{position:absolute;width:11px;height:11px;border:2px solid rgba(0,229,255,.7);pointer-events:none}
@@ -183,6 +197,18 @@
     .live i,.arc-run,.stack::after{animation:none}
     .arc-run{display:none}
   }
+  @media (max-width:980px){
+    .band{height:auto;min-height:0;display:flex;flex-direction:column;gap:6px;padding:10px 12px}
+    .btitle{order:-1;width:100%;min-width:0;padding:0}
+    .btitle h1{font-size:18px;white-space:normal}
+    .wing{display:none}
+    .side,.side.r{width:100%;justify-content:center;flex-wrap:wrap}
+    .gwrap{flex-direction:column;align-items:center}
+    .glegend{width:100%;line-height:1.8;text-align:center}
+    .kpis{grid-template-columns:repeat(2,minmax(0,1fr))}
+    .grp-t{gap:8px;flex-wrap:wrap}
+    .note,.diag,.rc,.vfoot,.stripe{overflow-wrap:anywhere}
+  }
 </style>
 </head>
 <body>
@@ -191,7 +217,7 @@
   <header class="band a-hd">
     <div class="side">
       <span class="pill">统计周期 2026-07-25 ~ 07-31</span>
-      <span class="pill">更新 07-31 · 定位v2.3</span>
+      <span class="pill">更新 08-01 · 定位v2.3</span>
     </div>
     <div class="btitle">
       <span class="wing l"><i></i><i></i><i></i></span>
@@ -209,51 +235,51 @@
   <section class="panel a-cmp">
     <i class="cn tl"></i><i class="cn tr"></i><i class="cn bl"></i><i class="cn br"></i>
     <div class="ph"><h2>双平台 · 数据对比</h2><span class="mt">组内最大值归一 · 互动率绝对刻度</span></div>
-    <div class="grp"><div class="grp-t"><span>7日播放</span><em>★主战场反转 抖音 ≈ 视频号 3.8×</em></div>
-      <div class="brow"><span class="bn"><i class="dot dy"></i>抖音</span><div class="bt"><div class="bf dy" data-w="100"></div></div><span class="bv">43,100</span></div>
-      <div class="brow"><span class="bn"><i class="dot sp"></i>视频号</span><div class="bt"><div class="bf sp" data-w="26.0"></div></div><span class="bv">11,219</span></div>
+    <div class="grp"><div class="grp-t"><span>7日播放</span><em>★视频号回到主战场 · 1.17×抖音</em></div>
+      <div class="brow"><span class="bn"><i class="dot dy"></i>抖音</span><div class="bt"><div class="bf dy" data-w="85.4"></div></div><span class="bv">41,300</span></div>
+      <div class="brow"><span class="bn"><i class="dot sp"></i>视频号</span><div class="bt"><div class="bf sp" data-w="100"></div></div><span class="bv">48,351</span></div>
     </div>
     <div class="grp"><div class="grp-t"><span>粉丝总量</span></div>
-      <div class="brow"><span class="bn"><i class="dot dy"></i>抖音</span><div class="bt"><div class="bf dy" data-w="100"></div></div><span class="bv">1,240*</span></div>
-      <div class="brow"><span class="bn"><i class="dot sp"></i>视频号</span><div class="bt"><div class="bf sp" data-w="98.6"></div></div><span class="bv">1,223</span></div>
+      <div class="brow"><span class="bn"><i class="dot dy"></i>抖音</span><div class="bt"><div class="bf dy" data-w="100"></div></div><span class="bv">1,241*</span></div>
+      <div class="brow"><span class="bn"><i class="dot sp"></i>视频号</span><div class="bt"><div class="bf sp" data-w="98.5"></div></div><span class="bv">1,223</span></div>
     </div>
-    <div class="grp"><div class="grp-t"><span>7日净增粉</span><em>双双趋零</em></div>
-      <div class="brow"><span class="bn"><i class="dot dy"></i>抖音</span><div class="bt"><div class="bf dim" data-w="100"></div></div><span class="bv">+6*</span></div>
-      <div class="brow"><span class="bn"><i class="dot sp"></i>视频号</span><div class="bt"><div class="bf sp" data-w="50"></div></div><span class="bv">+3</span></div>
+    <div class="grp"><div class="grp-t"><span>7日净增粉</span><em>视频号重新领先</em></div>
+      <div class="brow"><span class="bn"><i class="dot dy"></i>抖音</span><div class="bt"><div class="bf dim" data-w="60"></div></div><span class="bv">+6*</span></div>
+      <div class="brow"><span class="bn"><i class="dot sp"></i>视频号</span><div class="bt"><div class="bf sp" data-w="100"></div></div><span class="bv">+10</span></div>
     </div>
     <div class="grp"><div class="grp-t"><span>互动率 · 绝对刻度 0~2.5%</span><em>均未过线</em></div>
-      <div class="brow"><span class="bn"><i class="dot dy"></i>抖音</span><div class="bt"><div class="bf dy" data-w="18.0"></div><span class="baseline" style="left:80%"><em>健康线 2%</em></span></div><span class="bv">0.45%</span></div>
-      <div class="brow"><span class="bn"><i class="dot sp"></i>视频号</span><div class="bt"><div class="bf sp" data-w="11.6"></div></div><span class="bv">0.29%</span></div>
+      <div class="brow"><span class="bn"><i class="dot dy"></i>抖音</span><div class="bt"><div class="bf dy" data-w="19.2"></div><span class="baseline" style="left:80%"><em>健康线 2%</em></span></div><span class="bv">0.48%</span></div>
+      <div class="brow"><span class="bn"><i class="dot sp"></i>视频号</span><div class="bt"><div class="bf sp" data-w="6.4"></div></div><span class="bv">0.16%*</span></div>
     </div>
     <div class="fill"></div>
-    <p class="note"><b>读法</b>：前三组按组内最大值归一（组间不可比）；互动率为绝对刻度并标 2% 健康线。<b>★本期主战场反转</b>：视频号 7 日播放从 120,692 掉到 11,219（<b>−91%</b>，世界杯尾巴滚出窗口），抖音反因老片被置顶回升到 43,100。<b>*抖音 1,240 粉含大量回关粉</b>（账号关注 1,623 人）——抖音粉丝数仍不作内容效果读数。</p>
+    <p class="note"><b>读法</b>：前三组按组内最大值归一（组间不可比）；互动率为绝对刻度并标 2% 健康线。<b>★主战场再次反转</b>：视频号 7 日播放从 11,219 回升到 48,351（<b>+331%</b>），重新超过抖音 1.17 倍；抖音稳定在 41,300。<b>*视频号 0.16% 仅按可见赞评 78 次计算</b>；抖音 1,241 粉仍含较多回关粉，不单独作为内容效果读数。</p>
   </section>
 
   <!-- 健康罗盘 -->
   <section class="panel a-gau">
     <i class="cn tl"></i><i class="cn tr"></i><i class="cn bl"></i><i class="cn br"></i>
-    <div class="ph"><h2>运营健康罗盘 · 平台下钻</h2><span class="mt">综合 39 = (抖音42 + 视频号36) / 2</span></div>
+    <div class="ph"><h2>运营健康罗盘 · 平台下钻</h2><span class="mt">综合 47 = (抖音44 + 视频号50) / 2</span></div>
     <div class="gwrap">
       <div class="gauge">
         <svg viewBox="0 0 190 110">
           <path d="M15 100 A80 80 0 0 1 175 100" fill="none" stroke="rgba(8,24,58,.9)" stroke-width="12" stroke-linecap="round"/>
-          <path class="garc" data-v="39" d="M15 100 A80 80 0 0 1 175 100" fill="none" stroke="url(#gg)" stroke-width="12" stroke-linecap="round" stroke-dasharray="0 251.3"/>
+          <path class="garc" data-v="47" d="M15 100 A80 80 0 0 1 175 100" fill="none" stroke="url(#gg)" stroke-width="12" stroke-linecap="round" stroke-dasharray="0 251.3"/>
           <defs><linearGradient id="gg" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#f87171"/><stop offset=".5" stop-color="#fbbf24"/><stop offset="1" stop-color="#34d399"/></linearGradient></defs>
-          <g id="needle" data-v="39" style="transform-origin:95px 100px;transform:rotate(-90deg);transition:transform 1.4s cubic-bezier(.2,.8,.25,1)">
+          <g id="needle" data-v="47" style="transform-origin:95px 100px;transform:rotate(-90deg);transition:transform 1.4s cubic-bezier(.2,.8,.25,1)">
             <path id="ndl" d="M95 100 L91 96 L95 32 L99 96 Z" fill="#7fe9ff"/>
             <circle id="ndlc" cx="95" cy="100" r="6" fill="#0a1836" stroke="#7fe9ff" stroke-width="2"/>
           </g>
         </svg>
-        <div class="gval"><b class="hv" data-v="39">39</b><span>综合健康分 · 双平台均值</span></div>
+        <div class="gval"><b class="hv" data-v="47">47</b><span>综合健康分 · 双平台均值</span></div>
       </div>
       <div class="glegend">
-        <div><span class="dy">■ 抖音</span> 健康 <b class="hv" data-v="42">42</b> ｜ 播放回升·AI域首条零分发</div>
-        <div><span class="sp">■ 视频号</span> 健康 <b class="hv" data-v="36">36</b> ｜ 播放−91%·转发跌到 7</div>
-        <div style="color:rgba(251,191,36,.85)">▲ 退潮见底 · 定位v2.3 选题域改 AI（第1条已翻车）</div>
+        <div><span class="dy">■ 抖音</span> 健康 <b class="hv" data-v="44">44</b> ｜ 账号分发正常·AI单条异常</div>
+        <div><span class="sp">■ 视频号</span> 健康 <b class="hv" data-v="50">50</b> ｜ 播放回升331%·净增+10</div>
+        <div style="color:rgba(251,191,36,.85)">▲ AI 第二观测点已上线 · 进入 2h / 24h / 48h 复盘</div>
       </div>
     </div>
-    <div class="digits" id="digits"><i>5</i><i>4</i><i>3</i><i>1</i><i>9</i></div>
-    <div class="dsub">7日总播放 · 双平台 ｜ 合计粉丝 2,463 · 净增 <b>+9*</b> · 本期投稿 7 条</div>
+    <div class="digits" id="digits"><i>8</i><i>9</i><i>6</i><i>5</i><i>1</i></div>
+    <div class="dsub">7日总播放 · 双平台 ｜ 合计粉丝 2,464 · 净增 <b>+16*</b> · 抖音投稿 9 条</div>
     <div class="tabs" id="tabs">
       <div class="tab on" data-t="t0">总览</div>
       <div class="tab" data-t="t1">抖音</div>
@@ -261,32 +287,32 @@
     </div>
     <div class="tp on" id="t0">
       <div class="kpis">
-        <div class="kpi"><div class="v">54.3k</div><div class="l">双平台7日播放</div></div>
-        <div class="kpi"><div class="v">2,463</div><div class="l">双平台粉丝</div></div>
-        <div class="kpi"><div class="v warn">0.015%</div><div class="l">7日播放→关注</div></div>
-        <div class="kpi"><div class="v warn">7/0</div><div class="l">★转发/收藏(7条窗)</div></div>
+        <div class="kpi"><div class="v">89.7k</div><div class="l">双平台7日播放</div></div>
+        <div class="kpi"><div class="v">2,464</div><div class="l">双平台粉丝</div></div>
+        <div class="kpi"><div class="v warn">0.018%</div><div class="l">7日播放→净增</div></div>
+        <div class="kpi"><div class="v warn">0/5</div><div class="l">★转发/收藏(7条窗)</div></div>
       </div>
-      <div class="diag"><b>总览诊断</b>：世界杯尾巴彻底滚出窗口，视频号播放 <b>−91%</b>，北极星（7条窗转发+收藏）从 <b>17/98 塌到 7/0</b>。剥壳引擎已连发 8 条、8 条轴不重复，但<b>没有一条把转发拉起来</b>——「两半话能被转进微信群」这个假设至今<b>零验证</b>。07-30 选题域改 AI，<b>首条在抖音 17 小时仅 3 播放</b>（同期体育条 2,113）。</div>
+      <div class="diag"><b>总览诊断</b>：账号整体分发没有失速。抖音近 7 日 41,300，最新体育条 5,635，贴近作品中位数 5,832；视频号回升到 48,351，但当前 7 条可见作品只贡献 10,093，说明<b>约 79% 播放来自历史内容长尾</b>。07-30 品牌 AI 条在抖音 18.6 小时仅 3 播放且现已不在列表，属于<b>单条异常强信号</b>，不能外推为账号整体限流。</div>
     </div>
     <div class="tp" id="t1">
       <div class="kpis">
-        <div class="kpi"><div class="v">43.1k</div><div class="l">7日播放(↑9.5k)</div></div>
-        <div class="kpi"><div class="v good">48.95%</div><div class="l">5s完播</div></div>
-        <div class="kpi"><div class="v good">25.61%</div><div class="l">2s跳出</div></div>
-        <div class="kpi"><div class="v">11.4s</div><div class="l">条均时长</div></div>
+        <div class="kpi"><div class="v">41.3k</div><div class="l">7日播放</div></div>
+        <div class="kpi"><div class="v good">49.07%</div><div class="l">5s完播</div></div>
+        <div class="kpi"><div class="v good">25.37%</div><div class="l">2s跳出</div></div>
+        <div class="kpi"><div class="v">11.46s</div><div class="l">平均观看</div></div>
       </div>
-      <div class="diag"><b>★AI域首条零分发</b>：07-30《Kimi 开源》发布 17 小时 <b>仅 3 播放</b>，状态「已发布」、审核中/未通过均为 0 条；同账号前一条体育内容（丁俊晖）同期 <b>2,113</b>。同一条内容在视频号拿到 362 播放 → <b>不是内容问题，是抖音侧没给分发</b>。可能是标签断裂或隐性限流，<b>n=1、需再观察 48h 才能定性</b>。7日播放回升到 43.1k 主要来自老片被置顶（07-08 凯恩 2.4万），不是新内容的功劳。</div>
+      <div class="diag"><b>★先拆账号与单条</b>：近 7 日作品中位数 <b>5,832</b>，07-31《差那么点》现为 <b>5,635</b>，账号分发基线正常。07-30《Kimi 开源》18.6 小时仅 3 播放且现已不在作品管理页，具体是删除、审核未通过还是其他状态无法确认。08-01 第二条 AI 内容已主动<b>去掉产品品牌词</b>，用通用版权议题做控制变量实验。</div>
     </div>
     <div class="tp" id="t2">
       <div class="kpis">
-        <div class="kpi"><div class="v">11.2k</div><div class="l">7日播放(↓109.5k)</div></div>
-        <div class="kpi"><div class="v warn">+3</div><div class="l">7日净增粉</div></div>
-        <div class="kpi"><div class="v">8/17</div><div class="l">7日赞/评</div></div>
-        <div class="kpi"><div class="v warn">7/0</div><div class="l">★转发/收藏(7条窗)</div></div>
+        <div class="kpi"><div class="v">48.4k</div><div class="l">7日播放(↑37.1k)</div></div>
+        <div class="kpi"><div class="v good">+10</div><div class="l">7日净增粉</div></div>
+        <div class="kpi"><div class="v">26/52</div><div class="l">7日赞/评</div></div>
+        <div class="kpi"><div class="v warn">0/5</div><div class="l">★转发/收藏(7条窗)</div></div>
       </div>
-      <div class="diag sp"><b>根因</b>：赛事驱动一停，量级直接掉一个数量级——世界杯期单条 5.9 万/1.7 万，退潮后 7 条合计只有 11,219。<b>0.67% vs 0.014% 的 48 倍涨粉断层</b>结论不变：决定涨粉的不是内容类型，是<b>有没有正在进行的赛事在驱动关注意图</b>。<b>8 月中五大联赛重启是唯一确定的回归窗口</b>，届时赛事型内容必须加回主力。<b>警告</b>：北极星 7 条窗转发已跌到 <b>7</b>、收藏 <b>0</b>，剥壳引擎在这个量级下<b>测不出分辨率</b>。</div>
+      <div class="diag sp"><b>根因修正</b>：视频号 7 日播放回升到 48,351，但当前 7 条可见作品合计只有 10,093，<b>历史内容长尾贡献约 38,258（79%）</b>。恢复的首先是内容库分发，不是新作爆发；新增仍只有 +10。当前 7 条转发为 0、收藏 5，说明「两半话被转进微信群」仍未得到验证。8 月中赛事回归可作为下一轮关注意图对照，但本周先完成 AI 去品牌实验。</div>
     </div>
-    <div class="diag" style="border-left-color:#34d399;margin-top:8px"><b>策略 · v2.3 现行</b>：选题必须来自<b>抖音实时热点 TOP10</b>（不再自选题），优先域 <b>07-30 起从体育改 AI</b>。引擎不变：当日确定事实 → 剥壳成 50+ 处境 → 两半话 → 「你站哪半句，转给该听的人」。<b>北极星分平台</b>：抖音看播放+点赞，视频号看 7 条窗转发+收藏。</div>
+    <div class="diag" style="border-left-color:#34d399;margin-top:8px"><b>策略 · v2.3 现行</b>：实时热点 TOP10 有 AI 就取；没有则查飙升榜；再没有才回退原规则。引擎不变：当日确定事实 → 剥壳成 50+ 处境 → 两半话 → 「你站哪半句，转给该听的人」。<b>北极星分平台</b>：抖音看播放+点赞，视频号看 7 条窗转发+收藏。</div>
     <div class="fill"></div>
   </section>
 
@@ -295,18 +321,18 @@
     <i class="cn tl"></i><i class="cn tr"></i><i class="cn bl"></i><i class="cn br"></i>
     <div class="ph"><h2>视频号 · 7日 TOP 视频</h2><span class="mt">条宽 = √(播放/榜首) 压缩刻度</span></div>
     <div class="tkpis">
-      <div class="tkpi"><div class="l">视频号 · 7日播放</div><div class="v">11,219<em>▲ +3 关注</em></div></div>
-      <div class="tkpi dy"><div class="l">抖音 · 7日播放</div><div class="v">43,100<em>▲ +6* 粉丝</em></div></div>
+      <div class="tkpi"><div class="l">视频号 · 7日播放</div><div class="v">48,351<em>▲ +10 净增</em></div></div>
+      <div class="tkpi dy"><div class="l">抖音 · 7日播放</div><div class="v">41,300<em>▲ +6* 粉丝</em></div></div>
     </div>
-    <div class="trow hot1"><span class="trank g">1</span><div class="tmain"><div class="tname">该撑还是该退 · ①时机轴<span class="badge">v2</span></div><div class="tbar"><div class="bf gold" data-w="100"></div></div><div class="tmeta"><b>3,560</b> 赞6 <b>评16</b> 藏0 转2<span class="d">07-25</span></div></div></div>
-    <div class="trow"><span class="trank s">2</span><div class="tmain"><div class="tname">张继科重逢 · ⑥重逢轴<span class="badge">热点</span></div><div class="tbar"><div class="bf sp" data-w="85.1"></div></div><div class="tmeta"><b>2,580</b> 赞1 评0 藏0 转2<span class="d">07-29</span></div></div></div>
-    <div class="trow"><span class="trank b">3</span><div class="tmain"><div class="tname">卡布拉尔 · ④出身轴<span class="badge">v2</span></div><div class="tbar"><div class="bf sp" data-w="63.0"></div></div><div class="tmeta"><b>1,412</b> 赞0 评0 藏0 转2<span class="d">07-28</span></div></div></div>
-    <div class="trow"><span class="trank">4</span><div class="tmain"><div class="tname">丁俊晖 · ⑦开路轴<span class="badge">热点TOP1</span></div><div class="tbar"><div class="bf sp" data-w="60.8"></div></div><div class="tmeta"><b>1,317</b> 赞0 评1 藏0 转0<span class="d">07-29</span></div></div></div>
-    <div class="trow"><span class="trank">5</span><div class="tmain"><div class="tname">少年足球 · ③放手轴<span class="badge">v2</span></div><div class="tbar"><div class="bf sp" data-w="59.4"></div></div><div class="tmeta"><b>1,256</b> 赞1 评0 藏0 转1<span class="d">07-27</span></div></div></div>
-    <div class="trow"><span class="trank">6</span><div class="tmain"><div class="tname">改规矩 · ⑤改规矩轴（★被移除后补发）</div><div class="tbar"><div class="bf dim" data-w="45.3"></div></div><div class="tmeta"><b>732</b> 赞0 评0 藏0 转0<span class="d">07-30</span></div></div></div>
-    <div class="trow"><span class="trank">7</span><div class="tmain"><div class="tname">Kimi开源 · ⑧藏手轴<span class="badge">AI域首条</span></div><div class="tbar"><div class="bf dim" data-w="31.9"></div></div><div class="tmeta"><b>362</b> 抖音端仅 <b>3</b> 播放<span class="d">07-30</span></div></div></div>
+    <div class="trow hot1"><span class="trank g">1</span><div class="tmain"><div class="tname">差那么点 · ⑨差一点轴<span class="badge">热点</span></div><div class="tbar"><div class="bf gold" data-w="100"></div></div><div class="tmeta"><b>2,787</b> 赞0 评0 藏0 转0<span class="d">07-31</span></div></div></div>
+    <div class="trow"><span class="trank s">2</span><div class="tmain"><div class="tname">张继科重逢 · ⑥重逢轴<span class="badge">热点</span></div><div class="tbar"><div class="bf sp" data-w="96.2"></div></div><div class="tmeta"><b>2,580</b> 赞1 评0 藏2 转0<span class="d">07-29</span></div></div></div>
+    <div class="trow"><span class="trank b">3</span><div class="tmain"><div class="tname">卡布拉尔 · ④出身轴<span class="badge">v2</span></div><div class="tbar"><div class="bf sp" data-w="71.2"></div></div><div class="tmeta"><b>1,412</b> 赞0 评0 藏2 转0<span class="d">07-28</span></div></div></div>
+    <div class="trow"><span class="trank">4</span><div class="tmain"><div class="tname">丁俊晖 · ⑦开路轴<span class="badge">热点TOP1</span></div><div class="tbar"><div class="bf sp" data-w="68.7"></div></div><div class="tmeta"><b>1,317</b> 赞0 评1 藏0 转0<span class="d">07-29</span></div></div></div>
+    <div class="trow"><span class="trank">5</span><div class="tmain"><div class="tname">少年足球 · ③放手轴<span class="badge">v2</span></div><div class="tbar"><div class="bf sp" data-w="67.2"></div></div><div class="tmeta"><b>1,259</b> 赞1 评0 藏1 转0<span class="d">07-27</span></div></div></div>
+    <div class="trow"><span class="trank">6</span><div class="tmain"><div class="tname">改规矩 · ⑤改规矩轴（补发）</div><div class="tbar"><div class="bf dim" data-w="51.4"></div></div><div class="tmeta"><b>737</b> 赞0 评0 藏0 转0<span class="d">07-30</span></div></div></div>
+    <div class="trow"><span class="trank">7</span><div class="tmain"><div class="tname">功劳算谁 · ⑩功劳轴<span class="badge">AI去品牌</span></div><div class="tbar"><div class="bf dim" data-w="1.9"></div></div><div class="tmeta"><b>1</b> 刚发布·等待首轮分发<span class="d">08-01</span></div></div></div>
     <div class="fill"></div>
-    <div class="note"><b>历史峰值</b>(已滚出7日窗)：1/16收官 <b>211,000</b> ｜ 梅罗时代落幕 <b>59,139</b> ｜ 四强出炉 <b>78,000</b>。<b>★榜首 3,560 已不足上期榜首的 1/16</b>——整榜落到四位数，单条互动进入噪声区，任何「哪条更好」的结论都不成立。<b>抖音端另一套排序</b>：改规矩 1万 &gt; 张继科重逢 6,200 &gt; 姆巴佩 6,474 &gt; 丁俊晖 2,113 &gt; Kimi 3。</div>
+    <div class="note"><b>长尾信号</b>：当前 7 条可见作品合计 <b>10,093</b>，只占视频号 7 日总播放的 <b>20.9%</b>；其余约 <b>38,258</b> 来自历史内容库。新 AI 条刚发布仅 1 播放，不能与成熟作品横比。<b>抖音近期排序</b>：改规矩 1万 &gt; 重逢 6,243 &gt; 差那么点 5,635 &gt; 卡布拉尔 4,040；账号中位数 5,832。</div>
     <div class="ph" style="margin-top:10px"><h2>带货战报 · 养粉期暂停</h2><span class="mt">累计 · 微信小店成交分析</span></div>
     <div class="cargo">
       <div class="kpi"><div class="v good">¥7.9</div><div class="l">累计成交</div></div>
@@ -320,71 +346,73 @@
   <!-- 粉丝画像 -->
   <section class="panel a-por">
     <i class="cn tl"></i><i class="cn tr"></i><i class="cn bl"></i><i class="cn br"></i>
-    <div class="ph"><h2>视频号 · 粉丝画像</h2><span class="mt">共 1,223 人 ｜ 年龄/性别为最近捕获(07-19)</span></div>
+    <div class="ph"><h2>视频号 · 粉丝画像</h2><span class="mt">共 1,223 粉丝 ｜ 画像样本 1,220</span></div>
     <div class="pgrid">
       <div class="ring">
-        <svg viewBox="0 0 92 92"><circle cx="46" cy="46" r="38" fill="none" stroke="rgba(8,24,58,.9)" stroke-width="10"/><circle class="rarc" data-v="78.8" data-hue="168,85,247" cx="46" cy="46" r="38" fill="none" stroke-width="10" stroke-linecap="round" stroke-dasharray="0 238.8"/></svg>
-        <div class="c"><b>78.8%</b><span>50岁+</span></div>
+        <svg viewBox="0 0 92 92"><circle cx="46" cy="46" r="38" fill="none" stroke="rgba(8,24,58,.9)" stroke-width="10"/><circle class="rarc" data-v="78.9" data-hue="168,85,247" cx="46" cy="46" r="38" fill="none" stroke-width="10" stroke-linecap="round" stroke-dasharray="0 238.8"/></svg>
+        <div class="c"><b>78.9%</b><span>50岁+</span></div>
       </div>
       <ul class="plist">
-        <li><i style="background:#a855f7"></i><span>50岁+</span><b>78.8%</b></li>
-        <li><i style="background:#7c5cd6"></i><span>40-49 岁</span><b>8.1%</b></li>
-        <li><i style="background:#5a48b0"></i><span>30-39 岁</span><b>7.9%</b></li>
-        <li><i style="background:#3d3680"></i><span>其他</span><b>5.2%</b></li>
+        <li><i style="background:#a855f7"></i><span>50岁+</span><b>78.9%</b></li>
+        <li><i style="background:#7c5cd6"></i><span>40-49 岁</span><b>8.2%</b></li>
+        <li><i style="background:#5a48b0"></i><span>30-39 岁</span><b>7.8%</b></li>
+        <li><i style="background:#3d3680"></i><span>其他</span><b>5.1%</b></li>
       </ul>
       <div class="ring">
-        <svg viewBox="0 0 92 92"><circle cx="46" cy="46" r="38" fill="none" stroke="rgba(236,72,153,.35)" stroke-width="10"/><circle class="rarc" data-v="56.8" data-hue="37,214,230" cx="46" cy="46" r="38" fill="none" stroke-width="10" stroke-linecap="round" stroke-dasharray="0 238.8"/></svg>
-        <div class="c"><b>56.8%</b><span>男性</span></div>
+        <svg viewBox="0 0 92 92"><circle cx="46" cy="46" r="38" fill="none" stroke="rgba(236,72,153,.35)" stroke-width="10"/><circle class="rarc" data-v="56.7" data-hue="37,214,230" cx="46" cy="46" r="38" fill="none" stroke-width="10" stroke-linecap="round" stroke-dasharray="0 238.8"/></svg>
+        <div class="c"><b>56.7%</b><span>男性</span></div>
       </div>
       <ul class="plist">
-        <li><i style="background:#25d6e6"></i><span>男</span><b>56.8%</b></li>
-        <li><i style="background:rgba(236,72,153,.7)"></i><span>女</span><b>39.6%</b></li>
-        <li><i style="background:#7fe9ff"></i><span>粉丝来源 · 推荐</span><b>92.5%</b></li>
+        <li><i style="background:#25d6e6"></i><span>男</span><b>56.7%</b></li>
+        <li><i style="background:rgba(236,72,153,.7)"></i><span>女</span><b>39.8%</b></li>
+        <li><i style="background:#7fe9ff"></i><span>粉丝来源 · 推荐</span><b>92.6%</b></li>
         <li class="wk"><i style="background:#3d3680"></i><span>主页+朋友♡ · 关注流入口</span><b>0.7%</b></li>
       </ul>
     </div>
     <div class="srcwrap">
-      <div class="fx-t"><span>粉丝来源构成 · 1,217 人</span><em>推荐一家独大</em></div>
+      <div class="fx-t"><span>粉丝来源构成 · 1,223 人</span><em>推荐一家独大</em></div>
       <div class="stack">
-        <div class="sg" data-w="92.8" data-hue="126,58,242" title="推荐 1,129"></div>
-        <div class="sg" data-w="3.8" data-hue="90,72,176" title="其他 46"></div>
+        <div class="sg" data-w="92.6" data-hue="126,58,242" title="推荐 1,133"></div>
+        <div class="sg" data-w="3.7" data-hue="90,72,176" title="其他 45"></div>
         <div class="sg" data-w="2.8" data-hue="37,214,230" title="分享 34"></div>
         <div class="sg" data-w="0.4" data-hue="236,72,153" title="朋友♡ 5"></div>
-        <div class="sg" data-w="0.2" data-hue="251,191,36" title="主页 3"></div>
+        <div class="sg" data-w="0.25" data-hue="251,191,36" title="主页 3"></div>
+        <div class="sg" data-w="0.25" data-hue="52,211,153" title="订阅号消息 3"></div>
       </div>
       <div class="slgd">
-        <span><i style="background:#7e3af2"></i>推荐 <b>1,129</b></span>
-        <span><i style="background:#5a48b0"></i>其他 <b>46</b></span>
+        <span><i style="background:#7e3af2"></i>推荐 <b>1,133</b></span>
+        <span><i style="background:#5a48b0"></i>其他 <b>45</b></span>
         <span><i style="background:#25d6e6"></i>分享 <b>34</b></span>
         <span><i style="background:#ec4899"></i>朋友♡ <b>5</b></span>
         <span><i style="background:#fbbf24"></i>主页 <b>3</b></span>
+        <span><i style="background:#34d399"></i>订阅号 <b>3</b></span>
       </div>
     </div>
     <div class="fill"></div>
-    <p class="note"><b>结论</b>：50 岁+男性老球迷盘<b>无需改</b>——这是实测不是假设。但<b>他们在视频号几乎不点关注</b>，高频动作是转发和收藏，关注流本身就是弱入口。→ 不设计「逼关注」，改设计转发。<b>粉丝来源为本次实抓；年龄/性别本次未返回，沿用最近一次捕获值。</b></p>
+    <p class="note"><b>结论</b>：50 岁+男性老球迷盘<b>没有结构性变化</b>，推荐仍占粉丝来源 92.6%。但本期 7 条作品转发为 0、收藏 5，说明「设计转发」还没有形成稳定动作。<b>粉丝来源、年龄和性别均为 08-01 本次实抓。</b></p>
   </section>
 
   <!-- ▼ 选题域实验 · 热点驱动复核 -->
   <section class="panel a-flw">
     <i class="cn tl"></i><i class="cn tr"></i><i class="cn bl"></i><i class="cn br"></i>
-    <div class="ph"><h2>选题域实验 · 热点驱动复核</h2><span class="mt">抖音单条播放 ｜ √刻度 ｜ ★上期「2.6×」结论已被推翻</span></div>
+    <div class="ph"><h2>选题域实验 · AI 去品牌对照</h2><span class="mt">抖音单条播放 ｜ √刻度 ｜ 第二观测点刚上线</span></div>
     <div class="fx">
       <div>
         <div class="fx-t"><span>热点驱动 vs 自选题 · 抖音均值</span><em>1.60× · 非上期的 2.6×</em></div>
         <div class="duo">
-          <div class="vb"><span class="val">6,104</span><div class="bar win" data-h="100"></div><span class="nm">热点驱动 · 体育 (n=3)</span></div>
+          <div class="vb"><span class="val">6,122</span><div class="bar win" data-h="100"></div><span class="nm">热点驱动 · 体育 (n=3)</span></div>
           <div class="vb"><span class="val">3,815</span><div class="bar lose" data-h="79.1"></div><span class="nm">自选题 (n=5)</span></div>
         </div>
         <div class="vfoot">★<b>纠正</b>：上期用 <b>n=2</b> 算出「热点驱动＝2.6×」并据此把选题法固化。补齐到 <b>n=3</b>（丁俊晖 2,113 拉低均值）后<b>只剩 1.60×</b>，且样本量下置信极低。<b>热点驱动仍占优，但「2.6 倍」这个数字作废</b>——n&lt;5 的均值比不能当结论用。</div>
       </div>
       <div>
-        <div class="fx-t"><span>★AI 域首条 · 冷启动翻车</span><em>17 小时 · 同一条内容</em></div>
+        <div class="fx-t"><span>★AI 域第二条 · 去品牌对照</span><em>08-01 首发时点 · 不作成熟横比</em></div>
         <div class="vchart">
-          <div class="vb hot"><span class="val">2,113</span><div class="bar c3" data-h="100"></div><span class="nm">抖音 · 体育前一条</span></div>
-          <div class="vb lose"><span class="val">3</span><div class="bar lose" data-h="3.8"></div><span class="nm">抖音 · AI首条</span></div>
-          <div class="vb"><span class="val">362</span><div class="bar c2" data-h="41.4"></div><span class="nm">视频号 · AI首条</span></div>
+          <div class="vb hot"><span class="val">5,635</span><div class="bar c3" data-h="100"></div><span class="nm">抖音 · 最新体育基线</span></div>
+          <div class="vb lose"><span class="val">0</span><div class="bar lose" data-h="0"></div><span class="nm">抖音 · 新AI初始</span></div>
+          <div class="vb"><span class="val">1</span><div class="bar c2" data-h="1.3"></div><span class="nm">视频号 · 新AI初始</span></div>
         </div>
-        <div class="vfoot">同一条《Kimi 开源》，<b>视频号照常分发 362，抖音只给了 3</b> —— 不是内容问题，是<b>抖音侧没给分发</b>。状态「已发布」，审核中/未通过均 0 条。可能是标签断裂，也可能是隐性限流。<b>n=1，需再观察 48h 才能定性</b>；若 48h 仍在个位数，v2.3 换域必须回滚或改为体育/AI 交替。</div>
+        <div class="vfoot">第二条《AI做的作品 功劳到底算谁的》已<b>移除具体产品品牌词</b>，保留真人口播、职场映射和两半话，只检验通用 AI 题材。当前抖音 0、视频号 1 都是刚发布初始值，<b>没有解释力</b>。固定在 <b>2h / 24h / 48h</b> 记录播放、完播和互动，再与抖音中位数 5,832 比较。</div>
       </div>
     </div>
   </section>
@@ -392,16 +420,15 @@
   <!-- 策略·风险·下一条 -->
   <section class="panel a-str">
     <i class="cn tl"></i><i class="cn tr"></i><i class="cn bl"></i><i class="cn br"></i>
-    <div class="stripe">🎯 <span><b>一句话策略</b>：选题只从<b>抖音实时热点 TOP10</b> 取（优先 AI 域），剥壳成 50+ 处境 → 两半话 →「你站哪半句，转给该听的人」。北极星<b>分平台</b>：抖音看播放+点赞，视频号看 7 条窗转发+收藏。（信心 <b>48</b>，较上期 62 下调）</span></div>
+    <div class="stripe">🎯 <span><b>一句话策略</b>：实时 TOP10 有 AI 就取，没有查飙升榜，再没有回退原规则；剥壳成 50+ 处境 → 两半话 →「你站哪半句，转给该听的人」。北极星<b>分平台</b>：抖音看播放+点赞，视频号看 7 条窗转发+收藏。（信心 <b>56</b>，账号分发已排除整体失速）</span></div>
     <div class="cards3">
-      <div class="rc risk"><h3>⚠ 四大风险</h3>① <b>★AI 域首条在抖音只有 3 播放</b>——48h 内不回升就得回滚 v2.3 或改体育/AI 交替；② <b>北极星塌到 7/0</b>，剥壳引擎在四位数量级下<b>测不出分辨率</b>，两周判据实际已无法执行；③ <b>「两半话能被转进微信群」仍是零验证</b>，连发 8 条、8 轴不重复，转发没有一条被拉起来；④ <b>视频号已有 3 条被平台事后移除</b>（发刊词/奥乔亚/改规矩，result.json 均为发布成功），原因未知，须查后台通知。</div>
-      <div class="rc win"><h3>★ 本周期战果</h3><b>工程侧全部落地</b>：五查上线（ASR 词级质检，普通话不再人工听）；<b>字幕 ASR 时间轴对齐</b>取代死均分；<b>横封面改 Seedream 原生 4:3</b>（废掉 720×540 窄带 2 倍放大＝抖音「主要人/物展示不全」死法）；评论回复链路修复（shadow DOM+坐标点击）；CDP 空壳自愈。<b>内容侧</b>：轴台账推到 8 轴不重复，「人在场景里」两跑均一次成片。</div>
-      <div class="rc act"><h3>▶ 下一条 · 行动卡</h3><b>先等 48h 看 AI 首条能不能回升</b>，再决定 v2.3 去留——这比再发一条更重要。若回滚：改「体育为主、AI 每周 1-2 条对照组」。<b>8 月中五大联赛重启＝全年最重要的关注意图回归窗口</b>，赛事型内容届时必须加回主力。★另需用户处理：查视频号后台通知（3 条被移除）、手删 07-23 马拉多纳重复条。</div>
-    </div>
+      <div class="rc risk"><h3>⚠ 四大风险</h3>① 07-30 品牌 AI 条在抖音仅 3 播放且已不在列表，<b>原因仍未知</b>；② 视频号 7 日回升中约 <b>79% 来自历史长尾</b>，不能误判为新作恢复；③ 当前 7 条窗<b>转发 0、收藏 5</b>，「两半话能被转进微信群」仍未验证；④ 新 AI 条刚发布，初始 0/1 播放没有解释力，过早下结论会污染实验。</div>
+      <div class="rc win"><h3>★ 本周期战果</h3><b>账号层诊断已完成</b>：抖音最新体育条 5,635，贴近中位数 5,832，排除整体分发失速；视频号 7 日播放回升 331%、净增 +10。<b>工程侧</b>：路径硬编码修复、双平台数据重抓、ASR 97.6%、双封面与 AI 声明核验。<b>内容侧</b>：轴台账推进到 ⑩功劳轴，第二条 AI 去品牌对照已双平台发布。</div>
+      <div class="rc act"><h3>▶ 当前 · 行动卡</h3><b>暂停追加新变量</b>，只在新 AI 条发布后 2h / 24h / 48h 回收播放、完播和互动。若抖音恢复到中位数附近，优先归因上一条品牌词或单条审核路径；若仍异常，再测试体育/AI 交替。8 月中赛事回归时补一组关注意图对照。另需查平台通知确认 Kimi 条消失原因。</div>
     </div>
   </section>
 
-  <div class="foot">广州潮少 · 百商AI新媒体运营飞轮 ｜ 数据源：抖音创作者中心 + 视频号助手 + 微信小店成交分析 ｜ 仅运营指标，不含账号凭证 ｜ 设计参考大陈 V4 运营飞轮规格 ｜ v4.3</div>
+  <div class="foot">广州潮少 · 百商AI新媒体运营飞轮 ｜ 数据源：抖音创作者中心 + 视频号助手 + 微信小店成交分析 ｜ 仅运营指标，不含账号凭证 ｜ 设计参考大陈 V4 运营飞轮规格 ｜ v4.4</div>
 </div>
 
 
