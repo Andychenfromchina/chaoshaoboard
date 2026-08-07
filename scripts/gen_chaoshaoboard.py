@@ -202,7 +202,6 @@ button{font:inherit;letter-spacing:0}
   .layout{display:flex;flex-direction:column}
   .center-col{order:1}.left-col{order:2}.right-col{order:3}
   .right-col{display:flex}
-  .tab,.source-tab{min-height:44px}
   .health-content{grid-template-columns:1fr}
   .gauge-box{border-right:0;border-bottom:1px solid var(--line);padding-bottom:14px}
   .works-panel{min-height:0}
