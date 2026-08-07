@@ -2,575 +2,563 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="color-scheme" content="dark">
-<meta name="theme-color" content="#0b0e12">
-<title>潮少 · 运营大数据看板</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>百商AI新媒体运营飞轮 · 潮少大数据看板</title>
 <style>
-:root{
-  --bg:#0b0e12;
-  --surface:#11161c;
-  --surface-2:#161d24;
-  --line:#2b3540;
-  --line-strong:#3a4754;
-  --text:#eef3f6;
-  --muted:#91a0ab;
-  --cyan:#52d7e8;
-  --green:#67d391;
-  --amber:#f3b853;
-  --magenta:#e36ea4;
-  --red:#ff7a7a;
-  --blue:#7aa2ff;
-  --panel-radius:8px;
-}
-*{box-sizing:border-box}
-html{background:var(--bg);color-scheme:dark;-webkit-text-size-adjust:100%;text-size-adjust:100%}
-body{margin:0;min-width:320px;min-height:100vh;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;font-size:13px;line-height:1.55;overflow-x:hidden}
-button{font:inherit;letter-spacing:0}
-.skip-link{position:fixed;left:10px;top:10px;z-index:50;padding:8px 12px;background:var(--text);color:var(--bg);transform:translateY(-150%);border-radius:4px}
-.skip-link:focus{transform:translateY(0)}
-.shell{width:min(1460px,100%);margin:0 auto;padding:14px}
-.topbar{min-height:74px;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:18px;align-items:center;padding:14px 18px;border:1px solid var(--line-strong);border-top:3px solid var(--cyan);border-radius:var(--panel-radius);background:var(--surface)}
-.brand h1{margin:0;font-size:23px;line-height:1.2;font-weight:780;letter-spacing:0}
-.brand p{margin:5px 0 0;color:var(--muted);font-size:12px}
-.top-meta{display:grid;grid-template-columns:auto auto;gap:7px 16px;align-items:center;text-align:right;color:var(--muted);font-size:11px}
-.top-meta strong{color:var(--text);font-size:12px}
-.freshness{display:inline-flex;align-items:center;justify-content:flex-end;gap:7px}
-.freshness::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 0 3px rgba(103,211,145,.13)}
-.clock{font-variant-numeric:tabular-nums;color:var(--cyan)}
-.layout{display:grid;grid-template-columns:minmax(260px,3fr) minmax(500px,6fr) minmax(270px,3fr);gap:10px;margin-top:10px;align-items:start}
-.column{display:flex;min-width:0;flex-direction:column;gap:10px}
-.panel{min-width:0;border:1px solid var(--line);border-radius:var(--panel-radius);background:var(--surface);overflow:hidden}
-.panel-head{min-height:48px;display:flex;align-items:flex-start;justify-content:space-between;gap:12px;padding:12px 14px;border-bottom:1px solid var(--line)}
-.panel-head h2{margin:0;font-size:14px;line-height:1.35;font-weight:730;letter-spacing:0}
-.panel-head p{margin:2px 0 0;color:var(--muted);font-size:10px;text-align:right;white-space:nowrap}
-.panel-body{padding:14px}
-.panel-foot{padding:10px 14px;border-top:1px solid var(--line);color:var(--muted);font-size:10px;line-height:1.6}
-.panel-foot strong{color:var(--text)}
-.section-label{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:0 0 8px;color:var(--muted);font-size:10px}
-.section-label strong{color:var(--text);font-size:11px}
-.compare-group+.compare-group{margin-top:17px}
-.compare-row{display:grid;grid-template-columns:58px minmax(0,1fr) 66px;gap:8px;align-items:center;margin-top:7px}
-.compare-name{color:var(--muted);font-size:10px}
-.bar-track{position:relative;height:7px;border-radius:3px;background:#202832;overflow:hidden}
-.bar-fill{position:absolute;inset:0 auto 0 0;width:0;border-radius:3px;background:var(--cyan);transition:width .7s ease}
-.bar-fill.wechat{background:var(--magenta)}
-.bar-fill.green{background:var(--green)}
-.bar-fill.amber{background:var(--amber)}
-.bar-fill.red{background:var(--red)}
-.bar-value{text-align:right;font-variant-numeric:tabular-nums;font-size:11px;font-weight:700}
-.target-marker{position:absolute;top:-2px;bottom:-2px;width:1px;background:rgba(255,255,255,.7)}
-.comparison-callout{margin-top:16px;padding:10px 11px;border-left:3px solid var(--amber);background:rgba(243,184,83,.07);color:#d6dee4;font-size:11px}
-.profile-rings{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px}
-.ring-wrap{text-align:center}
-.ring{--p:50;--ring-color:var(--cyan);position:relative;width:94px;height:94px;margin:0 auto;border-radius:50%;background:conic-gradient(var(--ring-color) calc(var(--p)*1%),#26303a 0)}
-.ring::after{content:"";position:absolute;inset:10px;border-radius:50%;background:var(--surface)}
-.ring-value{position:absolute;inset:0;z-index:1;display:grid;place-items:center;font-size:17px;font-weight:800;font-variant-numeric:tabular-nums}
-.ring-label{margin-top:6px;color:var(--muted);font-size:10px}
-.dist-list{display:grid;gap:7px}
-.dist-row{display:grid;grid-template-columns:68px minmax(0,1fr) 48px;gap:7px;align-items:center}
-.dist-label{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--muted);font-size:10px}
-.dist-value{text-align:right;font-size:10px;font-variant-numeric:tabular-nums}
-.stack{display:flex;width:100%;height:10px;margin:11px 0 7px;border-radius:3px;overflow:hidden;background:#202832}
-.stack span{min-width:1px;height:100%}
-.stack-legend{display:flex;flex-wrap:wrap;gap:5px 10px;color:var(--muted);font-size:9px}
-.stack-legend i{display:inline-block;width:6px;height:6px;margin-right:4px;border-radius:1px}
-.health-panel{min-height:500px}
-.tabs{display:flex;gap:4px;padding:10px 14px 0;border-bottom:0}
-.tab{min-height:36px;padding:7px 12px;border:1px solid transparent;border-radius:5px;background:transparent;color:var(--muted);cursor:pointer}
-.tab:hover{color:var(--text);background:var(--surface-2)}
-.tab[aria-selected="true"]{border-color:var(--line-strong);background:var(--surface-2);color:var(--text);box-shadow:inset 0 -2px 0 var(--cyan)}
-.tab:focus-visible,summary:focus-visible{outline:2px solid var(--cyan);outline-offset:2px}
-.health-content{display:grid;grid-template-columns:230px minmax(0,1fr);gap:18px;padding:14px}
-.gauge-box{display:flex;min-height:218px;flex-direction:column;align-items:center;justify-content:center;border-right:1px solid var(--line)}
-.gauge{width:210px;height:125px;overflow:visible}
-.gauge-base{fill:none;stroke:#26303a;stroke-width:12;stroke-linecap:round}
-.gauge-arc{fill:none;stroke:var(--cyan);stroke-width:12;stroke-linecap:round;stroke-dasharray:0 251.2;transition:stroke-dasharray .7s ease,stroke .25s ease}
-.gauge-needle{stroke:var(--text);stroke-width:2;stroke-linecap:round;transform-origin:100px 105px;transform:rotate(-90deg);transition:transform .7s ease}
-.gauge-pin{fill:var(--text)}
-.gauge-score{margin-top:-14px;font-size:34px;line-height:1;font-weight:850;font-variant-numeric:tabular-nums}
-.gauge-label{margin-top:7px;text-align:center;color:var(--muted);font-size:10px}
-.gauge-formula{margin-top:5px;max-width:210px;text-align:center;color:#6f7d87;font-size:9px}
-.kpi-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.kpi{position:relative;min-height:93px;padding:12px;border:1px solid var(--line);border-radius:6px;background:var(--surface-2);overflow:hidden}
-.kpi::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--cyan)}
-.kpi[data-tone="green"]::before{background:var(--green)}
-.kpi[data-tone="amber"]::before{background:var(--amber)}
-.kpi[data-tone="magenta"]::before{background:var(--magenta)}
-.kpi[data-tone="red"]::before{background:var(--red)}
-.kpi-label{color:var(--muted);font-size:10px}
-.kpi-value{margin-top:6px;font-size:21px;line-height:1;font-weight:800;font-variant-numeric:tabular-nums}
-.kpi-detail{margin-top:8px;color:#aab5bd;font-size:9px;line-height:1.45}
-.diagnosis{grid-column:1/-1;margin-top:3px;padding:10px 11px;border-left:3px solid var(--cyan);background:rgba(82,215,232,.07);font-size:11px;color:#d7e0e5}
-.chart-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.chart-box{min-width:0;padding:10px;border:1px solid var(--line);border-radius:6px;background:var(--surface-2)}
-.chart-title{display:flex;align-items:baseline;justify-content:space-between;gap:8px;margin-bottom:6px;color:var(--muted);font-size:9px}
-.chart-title strong{color:var(--text);font-size:11px}
-.line-chart{width:100%;height:150px;display:block}
-.chart-gridline{stroke:#2b3540;stroke-width:1}
-.chart-line{fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
-.chart-area{opacity:.08}
-.chart-dot{stroke:var(--surface-2);stroke-width:2}
-.chart-axis-label{fill:#77858f;font-size:9px}
-.retention-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}
-.signal{padding:10px;border:1px solid var(--line);border-radius:6px;background:var(--surface-2)}
-.signal-head{display:flex;justify-content:space-between;gap:8px;margin-bottom:8px;font-size:10px}
-.signal-head span{color:var(--muted)}
-.signal-head b{font-variant-numeric:tabular-nums}
-.signal small{display:block;margin-top:6px;color:#77858f;font-size:9px}
-.source-tabs{display:flex;gap:4px;margin-bottom:12px}
-.source-tab{min-height:34px;flex:1;border:1px solid var(--line);border-radius:5px;background:transparent;color:var(--muted);cursor:pointer}
-.source-tab[aria-pressed="true"]{background:var(--surface-2);color:var(--text);border-color:var(--magenta)}
-.source-note{margin-top:12px;color:var(--muted);font-size:10px;line-height:1.6}
-.works-panel{min-height:1010px}
-.works-summary{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px}
-.works-summary div{padding:9px;border:1px solid var(--line);border-radius:6px;background:var(--surface-2)}
-.works-summary span{display:block;color:var(--muted);font-size:9px}
-.works-summary strong{display:block;margin-top:3px;font-size:16px;font-variant-numeric:tabular-nums}
-.works-list{display:grid;gap:8px}
-.work-row{display:grid;grid-template-columns:23px minmax(0,1fr);gap:8px;align-items:start;padding-bottom:8px;border-bottom:1px solid rgba(43,53,64,.75)}
-.work-row:last-child{border-bottom:0}
-.rank{width:23px;height:23px;display:grid;place-items:center;border-radius:4px;background:#222b34;color:var(--muted);font-size:9px;font-weight:800}
-.work-row:nth-child(1) .rank{background:rgba(243,184,83,.15);color:var(--amber)}
-.work-title{display:flex;align-items:flex-start;justify-content:space-between;gap:6px;color:#dce4e9;font-size:10px;line-height:1.45}
-.work-title span:first-child{min-width:0}
-.status{flex:0 0 auto;padding:1px 5px;border:1px solid var(--line);border-radius:4px;color:var(--muted);font-size:8px}
-.status.pending{border-color:rgba(243,184,83,.5);color:var(--amber)}
-.work-bar{height:5px;margin-top:5px;border-radius:2px;background:#202832;overflow:hidden}
-.work-bar span{display:block;width:0;height:100%;border-radius:2px;background:var(--magenta);transition:width .7s ease}
-.work-meta{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:5px;color:#78858e;font-size:8px}
-.work-meta b{color:var(--text);font-size:10px;font-variant-numeric:tabular-nums}
-.full-width{margin-top:10px}
-.experiment-body{padding:14px}
-.experiment-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
-.experiment-row{display:grid;grid-template-columns:92px minmax(0,1fr) 70px;gap:8px;align-items:center;padding:9px 10px;border:1px solid var(--line);border-radius:6px;background:var(--surface-2)}
-.experiment-row.latest{border-color:rgba(243,184,83,.65);background:rgba(243,184,83,.06)}
-.experiment-label strong{display:block;font-size:10px}
-.experiment-label span{display:block;margin-top:2px;color:var(--muted);font-size:8px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.dual-bars{display:grid;gap:5px}
-.dual-bar{display:grid;grid-template-columns:14px minmax(0,1fr);gap:5px;align-items:center}
-.dual-bar em{font-style:normal;color:var(--muted);font-size:8px}
-.dual-bar div{height:5px;border-radius:2px;background:#202832;overflow:hidden}
-.dual-bar span{display:block;width:0;height:100%;background:var(--cyan);transition:width .7s ease}
-.dual-bar.wechat span{background:var(--magenta)}
-.experiment-result{text-align:right;color:var(--muted);font-size:8px;line-height:1.45}
-.experiment-result b{display:block;color:var(--text);font-size:9px;font-variant-numeric:tabular-nums}
-.strategy-band{margin-top:10px;border-top:3px solid var(--amber)}
-.strategy-line{padding:13px 15px;border-bottom:1px solid var(--line);font-size:12px;line-height:1.65}
-.strategy-line strong{color:var(--amber)}
-.strategy-grid{display:grid;grid-template-columns:repeat(3,1fr)}
-.strategy-col{min-width:0;padding:14px 15px;border-right:1px solid var(--line)}
-.strategy-col:last-child{border-right:0}
-.strategy-col h3{margin:0 0 9px;font-size:11px}
-.strategy-col ul{margin:0;padding-left:17px;color:#c6d0d6;font-size:10px;line-height:1.65}
-.strategy-col li+li{margin-top:5px}
-.strategy-col.wins h3{color:var(--green)}
-.strategy-col.risks h3{color:var(--red)}
-.strategy-col.actions h3{color:var(--cyan)}
-.method{border-top:1px solid var(--line)}
-.method summary{padding:11px 15px;cursor:pointer;color:var(--muted);font-size:10px}
-.method-content{display:grid;grid-template-columns:1fr 1fr;gap:16px;padding:0 15px 14px;color:var(--muted);font-size:9px}
-.method-content h4{margin:0 0 5px;color:var(--text);font-size:10px}
-.method-content dl{margin:0}
-.method-content dt{margin-top:6px;color:#c3cdd3}
-.method-content dd{margin:1px 0 0}
-.sources{display:grid;gap:5px}
-.footer{padding:13px 4px 4px;text-align:center;color:#66747e;font-size:9px}
-.noscript{margin:10px;padding:14px;border:1px solid var(--red);color:var(--text)}
-@media (max-width:1180px){
-  .layout{grid-template-columns:minmax(250px,4fr) minmax(430px,8fr)}
-  .right-col{grid-column:1/-1;display:grid;grid-template-columns:1fr 1fr;align-items:start}
-  .works-panel{min-height:0}
-}
-@media (max-width:820px){
-  .shell{padding:max(8px,env(safe-area-inset-top)) max(8px,env(safe-area-inset-right)) max(12px,env(safe-area-inset-bottom)) max(8px,env(safe-area-inset-left))}
-  .topbar{grid-template-columns:1fr;padding:13px 14px}
-  .top-meta{grid-template-columns:1fr auto;text-align:left}
-  .freshness{justify-content:flex-start}
-  .layout{display:flex;flex-direction:column}
-  .center-col{order:1}.left-col{order:2}.right-col{order:3}
-  .right-col{display:flex}
-  .health-content{grid-template-columns:1fr}
-  .gauge-box{border-right:0;border-bottom:1px solid var(--line);padding-bottom:14px}
-  .works-panel{min-height:0}
-  .experiment-grid{grid-template-columns:1fr}
-  .strategy-grid{grid-template-columns:1fr}
-  .strategy-col{border-right:0;border-bottom:1px solid var(--line)}
-  .strategy-col:last-child{border-bottom:0}
-  .method-content{grid-template-columns:1fr}
-}
-@media (max-width:520px){
-  .brand h1{font-size:19px}
-  .panel-head{align-items:flex-start}
-  .panel-head p{white-space:normal;max-width:120px}
-  .tabs{display:grid;grid-template-columns:repeat(3,1fr)}
-  .tab{padding:7px 4px}
-  .kpi-grid,.chart-grid,.retention-grid,.profile-rings{grid-template-columns:1fr 1fr}
-  .kpi{min-height:103px}
-  .ring{width:86px;height:86px}
-  .experiment-row{grid-template-columns:82px minmax(0,1fr) 60px}
-  .works-summary{grid-template-columns:1fr 1fr}
-}
-@media (prefers-reduced-motion:reduce){
-  *,*::before,*::after{scroll-behavior:auto!important;transition:none!important;animation:none!important}
-}
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:radial-gradient(1200px 700px at 50% -10%,#0e2050 0%,#060d24 55%,#04081a 100%) fixed;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;color:#eaf6ff;font-variant-numeric:tabular-nums;line-height:1.6;padding:14px}
+  .wrap{max-width:1320px;margin:0 auto;display:grid;grid-template-columns:3fr 6fr 3fr;gap:12px;
+    grid-template-areas:"hd hd hd" "cmp gau top" "por gau top" "por flw top" "str str str";align-items:stretch}
+  .a-hd{grid-area:hd}.a-cmp{grid-area:cmp}.a-gau{grid-area:gau}.a-top{grid-area:top}.a-por{grid-area:por}.a-flw{grid-area:flw}.a-str{grid-area:str}
+  @media (max-width:980px){
+    body{padding:8px}
+    .wrap{width:100%;min-width:0;grid-template-columns:minmax(0,1fr);grid-template-areas:"hd" "cmp" "gau" "top" "por" "flw" "str"}
+    .wrap>*{width:100%;min-width:0}
+    .band{height:auto;min-height:0;display:flex;flex-direction:column;gap:6px;padding:10px 12px}
+    .btitle{order:-1;width:100%;min-width:0;padding:0}
+    .btitle h1{font-size:18px;white-space:normal}
+    .wing{display:none}
+    .side,.side.r{width:100%;justify-content:center;flex-wrap:wrap}
+    .gwrap{flex-direction:column;align-items:center}
+    .glegend{width:100%;line-height:1.8;text-align:center}
+    .kpis{grid-template-columns:repeat(2,minmax(0,1fr))}
+    .grp-t{gap:8px;flex-wrap:wrap}
+    .note,.diag,.rc,.vfoot,.stripe{overflow-wrap:anywhere}
+  }
+  .panel{position:relative;display:flex;flex-direction:column;background:linear-gradient(165deg,rgba(13,26,62,.97),rgba(7,14,38,.98));border:1px solid rgba(0,229,255,.26);border-radius:10px;box-shadow:0 12px 34px rgba(2,10,40,.5),inset 0 0 30px rgba(0,90,220,.08);padding:12px 14px}
+  .panel .fill{flex:1}
+  .cn{position:absolute;width:11px;height:11px;border:2px solid rgba(0,229,255,.7);pointer-events:none}
+  .tl{top:-1px;left:-1px;border-right:none;border-bottom:none;border-radius:8px 0 0 0}
+  .tr{top:-1px;right:-1px;border-left:none;border-bottom:none;border-radius:0 8px 0 0}
+  .bl{bottom:-1px;left:-1px;border-right:none;border-top:none;border-radius:0 0 0 8px}
+  .br{bottom:-1px;right:-1px;border-left:none;border-top:none;border-radius:0 0 8px 0}
+  .ph{text-align:center;margin:-2px 0 10px;padding-bottom:7px;border-bottom:1px solid rgba(0,229,255,.22)}
+  .ph h2{display:inline-block;font-size:13.5px;font-weight:800;color:#bfefff;text-shadow:0 0 10px rgba(0,229,255,.45);position:relative;padding:0 14px;white-space:nowrap}
+  .ph h2::before,.ph h2::after{content:"";position:absolute;top:50%;width:26px;height:1px;background:linear-gradient(90deg,transparent,#00e5ff);box-shadow:0 0 6px rgba(0,229,255,.7)}
+  .ph h2::before{right:100%}.ph h2::after{left:100%;transform:scaleX(-1)}
+  .ph .mt{font-size:8.5px;color:rgba(150,190,230,.55);display:block;margin-top:1px}
+  /* header band */
+  .band{position:relative;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:10px;height:64px;padding:0 16px;background:linear-gradient(180deg,rgba(14,32,76,.9),rgba(8,17,44,.85));border:1px solid rgba(0,229,255,.3);border-radius:10px;box-shadow:0 8px 26px rgba(2,10,40,.5),inset 0 0 26px rgba(0,90,220,.12)}
+  .band::before{content:"";position:absolute;top:0;left:6%;right:6%;height:1px;background:linear-gradient(90deg,transparent,rgba(140,225,255,.7),transparent)}
+  .side{display:flex;align-items:center;gap:8px;font-size:10px;color:rgba(150,200,240,.75)}
+  .side.r{justify-content:flex-end}
+  .pill{border:1px solid rgba(0,229,255,.35);border-radius:999px;padding:3px 10px;background:rgba(0,90,180,.18);white-space:nowrap}
+  .live i{display:inline-block;width:7px;height:7px;border-radius:50%;background:#34d399;box-shadow:0 0 8px #34d399;margin-right:5px;animation:p 1.8s ease-in-out infinite}
+  @keyframes p{50%{opacity:.3}}
+  .clock{color:#7fe9ff;font-weight:800;font-size:13px;text-shadow:0 0 12px rgba(0,229,255,.55)}
+  .btitle{position:relative;text-align:center;padding:0 16px}
+  .btitle h1{font-size:22px;font-weight:800;white-space:nowrap;background:linear-gradient(180deg,#fff 15%,#9deeff 50%,#3f9dff 90%);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 0 14px rgba(0,200,255,.4))}
+  .btitle .sub{font-size:9px;color:rgba(150,200,240,.6);margin-top:1px}
+  .wing{position:absolute;top:50%;transform:translateY(-50%);width:120px;height:16px}
+  .wing.l{right:100%}.wing.r{left:100%;transform:translateY(-50%) scaleX(-1)}
+  .wing i{display:block;height:2px;margin:3.5px 0;background:linear-gradient(90deg,transparent,#00e5ff);box-shadow:0 0 7px rgba(0,229,255,.7)}
+  .wing i:nth-child(1){width:100%}.wing i:nth-child(2){width:70%;margin-left:30%;opacity:.7}.wing i:nth-child(3){width:42%;margin-left:58%;opacity:.45}
+  /* bars */
+  .grp{margin-bottom:9px}
+  .grp-t{font-size:9px;color:rgba(168,208,240,.72);margin-bottom:4px;display:flex;justify-content:space-between}
+  .grp-t em{font-style:normal;color:rgba(251,191,36,.9)}
+  .brow{display:flex;align-items:center;gap:6px;height:20px}
+  .bn{width:46px;flex:none;font-size:9.5px;display:flex;align-items:center;gap:4px;white-space:nowrap}
+  .dot{width:6px;height:6px;border-radius:2px;flex:none}
+  .dot.dy{background:#25d6e6}.dot.sp{background:#a855f7}
+  .bt{flex:1;height:10px;border-radius:5px;background:rgba(8,24,58,.85);border:1px solid rgba(96,170,255,.12);position:relative;min-width:0}
+  .bf{position:absolute;left:0;top:0;bottom:0;width:0;min-width:2px;border-radius:5px;transition:width 1.1s cubic-bezier(.2,.8,.25,1)}
+  .bf.dy{background:linear-gradient(90deg,rgba(37,214,230,.3),#25d6e6)}
+  .bf.sp{background:linear-gradient(90deg,rgba(168,85,247,.3),#a855f7)}
+  .bf.gold{background:linear-gradient(90deg,rgba(251,191,36,.3),#fbbf24)}
+  .bf.dim{background:rgba(120,150,190,.4)}
+  .bv{width:64px;flex:none;text-align:right;font-size:9px;color:#22d3ee;white-space:nowrap}
+  .baseline{position:absolute;top:-3px;bottom:-3px;width:2px;background:#fbbf24;box-shadow:0 0 6px #fbbf24;border-radius:1px}
+  .baseline em{position:absolute;top:-14px;right:-6px;font-style:normal;font-size:8px;color:#fbbf24;white-space:nowrap}
+  .note{margin-top:8px;padding-top:7px;border-top:1px dashed rgba(96,170,255,.18);font-size:9px;color:rgba(150,190,230,.6);line-height:1.65}
+  .note b{color:rgba(200,225,250,.85)}
+  /* gauge card */
+  .gwrap{display:flex;align-items:center;gap:14px;justify-content:center;padding:4px 0 2px}
+  /* v4.2:表盘与读数分层——原来 gval 压在指针轴心上,数字被指针穿过;
+     指针改为数值色后两者同色、几乎读不出来。把读数移到表盘下方,彻底不重叠。 */
+  .gauge{position:relative;width:190px;height:134px;flex:none}
+  .gauge svg{width:100%;height:110px;display:block}
+  .gval{position:absolute;left:0;right:0;bottom:0;text-align:center}
+  .gval b{font-size:26px;line-height:1;text-shadow:0 0 16px rgba(0,229,255,.5)}
+  .gval span{display:block;font-size:8.5px;color:rgba(150,190,230,.6)}
+  .glegend{font-size:9.5px;color:rgba(168,208,240,.85);line-height:2}
+  .glegend b{font-size:12px}
+  .glegend .dy{color:#25d6e6}.glegend .sp{color:#a855f7}
+  .digits{display:flex;gap:6px;justify-content:center;margin:8px 0 2px}
+  .digits i{font-style:normal;width:30px;height:38px;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:800;color:#7fe9ff;background:rgba(6,18,46,.9);border:1px solid rgba(0,229,255,.4);border-radius:6px;box-shadow:inset 0 0 12px rgba(0,120,255,.2),0 0 8px rgba(0,229,255,.15);text-shadow:0 0 10px rgba(0,229,255,.7)}
+  .dsub{text-align:center;font-size:9px;color:rgba(150,190,230,.6)}
+  .dsub b{color:#34d399}
+  .tabs{display:flex;gap:6px;margin:10px 0 8px}
+  .tab{flex:1;text-align:center;font-size:10.5px;padding:5px 0;border:1px solid rgba(0,229,255,.25);border-radius:6px;background:rgba(8,24,58,.6);cursor:pointer;color:rgba(168,208,240,.8);user-select:none}
+  .tab.on{background:linear-gradient(180deg,rgba(0,120,220,.35),rgba(0,60,140,.25));color:#bfefff;border-color:rgba(0,229,255,.55);box-shadow:0 0 12px rgba(0,150,255,.25)}
+  .tp{display:none}.tp.on{display:block}
+  .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:8px}
+  .kpi{background:rgba(8,24,58,.55);border:1px solid rgba(96,170,255,.15);border-radius:8px;padding:7px 8px;text-align:center}
+  .kpi .v{font-size:15px;font-weight:800;color:#7fe9ff}
+  .kpi .v.good{color:#34d399}.kpi .v.warn{color:#fbbf24}
+  .kpi .l{font-size:8.5px;color:rgba(150,190,230,.6);margin-top:1px}
+  .diag{font-size:10px;color:rgba(190,220,245,.85);background:rgba(8,24,58,.45);border-left:2px solid #25d6e6;border-radius:0 6px 6px 0;padding:6px 9px;margin-top:6px;line-height:1.7}
+  .diag.sp{border-left-color:#a855f7}
+  .diag b{color:#ffd54a}
+  /* top list */
+  .tkpis{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:9px}
+  .tkpi{border:1px solid rgba(0,229,255,.3);border-left:3px solid #a855f7;border-radius:8px;background:rgba(8,24,58,.55);padding:6px 9px}
+  .tkpi.dy{border-left-color:#25d6e6}
+  .tkpi .l{font-size:8.5px;color:rgba(150,190,230,.6)}
+  .tkpi .v{font-size:16px;font-weight:800;color:#eaf6ff}
+  .tkpi .v em{font-style:normal;font-size:9px;color:#34d399;margin-left:4px;vertical-align:2px}
+  .trow{display:flex;align-items:flex-start;gap:7px;margin:7px 0;padding:5px 6px;border-radius:7px}
+  .trow.hot1{border:1px solid rgba(251,191,36,.55);background:rgba(251,191,36,.06)}
+  .trank{width:17px;height:17px;flex:none;font-size:9.5px;color:#0a1836;background:rgba(150,190,230,.55);border-radius:4px;display:flex;align-items:center;justify-content:center;font-weight:800;margin-top:1px}
+  .trank.g{background:#fbbf24}.trank.s{background:#c8d8ea}.trank.b{background:#fb923c}
+  .tmain{flex:1;min-width:0}
+  .tname{font-size:9.5px;color:#dcefff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .tbar{height:6px;border-radius:4px;background:rgba(8,24,58,.85);border:1px solid rgba(96,170,255,.12);position:relative;margin:3px 0 2px}
+  .tmeta{font-size:8.5px;color:rgba(150,190,230,.65)}
+  .tmeta b{color:#22d3ee;font-size:9.5px}
+  .tmeta .d{float:right;color:rgba(150,190,230,.45)}
+  .badge{display:inline-block;font-size:8px;border:1px solid rgba(251,191,36,.5);color:#fbbf24;border-radius:4px;padding:0 4px;margin-left:4px;vertical-align:1px}
+  /* portrait —— v4.2 工整对齐:双列网格,两环同列、两图例同起点、行高与环等高 */
+  .pgrid{display:grid;grid-template-columns:92px 1fr;column-gap:14px;row-gap:12px;align-items:center;padding:2px 0 6px}
+  .ring{position:relative;width:92px;height:92px;flex:none}
+  .ring svg{transform:rotate(-90deg)}
+  .ring .c{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+  .ring .c b{font-size:16px;color:#7fe9ff}
+  .ring .c span{font-size:8px;color:rgba(150,190,230,.6)}
+  .plist{list-style:none;font-size:9.5px;color:rgba(190,220,245,.85)}
+  .plist li{display:flex;align-items:center;gap:6px;height:23px;border-bottom:1px dashed rgba(96,170,255,.10)}
+  .plist li:last-child{border-bottom:0}
+  .plist li>span{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .plist li>b{font-size:11px;color:#dcefff;font-variant-numeric:tabular-nums;letter-spacing:.2px}
+  .plist li.wk>b{color:rgba(150,190,230,.75)}
+  .plist i{width:7px;height:7px;border-radius:2px;flex:none}
+  /* 粉丝来源构成条(v4.2 新增:补上卡片中部空档,并参与动态渲染) */
+  .srcwrap{margin-top:2px}
+  .srcwrap .fx-t{margin-bottom:5px}
+  .stack{display:flex;height:12px;border-radius:6px;overflow:hidden;background:rgba(8,24,58,.85);border:1px solid rgba(96,170,255,.12)}
+  .stack .sg{width:0;transition:width 1.1s cubic-bezier(.2,.8,.25,1);min-width:0}
+  .slgd{display:flex;flex-wrap:wrap;gap:4px 12px;margin-top:6px;font-size:8.5px;color:rgba(168,208,240,.75)}
+  .slgd span{display:flex;align-items:center;gap:4px;white-space:nowrap}
+  .slgd i{width:7px;height:7px;border-radius:2px;flex:none}
+  .slgd b{color:#dcefff;font-variant-numeric:tabular-nums}
+  .cargo{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:6px}
+  .cargo .kpi .v{font-size:14px}
+  .flow{display:flex;align-items:center;justify-content:center;gap:5px;font-size:9.5px;color:#bfefff;background:rgba(8,24,58,.5);border:1px dashed rgba(251,191,36,.4);border-radius:8px;padding:6px;margin-top:2px}
+  .flow b{color:#fbbf24}
+  /* ▼ 流量来源 · 母题反差 (图二版式) */
+  .fx{display:grid;grid-template-columns:6fr 5fr;gap:16px;flex:1}
+  @media (max-width:980px){.fx{grid-template-columns:1fr}}
+  .fx-t{display:flex;justify-content:space-between;align-items:baseline;font-size:10.5px;font-weight:700;color:#dcefff;margin-bottom:6px}
+  .fx-t em{font-style:normal;font-size:9px;font-weight:400;color:#fbbf24}
+  .vchart{display:flex;align-items:flex-end;gap:10px;height:158px;padding:0 2px}
+  .vb{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;min-width:0}
+  .vb .val{font-size:10px;font-weight:800;color:#7fe9ff;margin-bottom:3px;white-space:nowrap}
+  .vb.hot .val{color:#fbbf24;text-shadow:0 0 10px rgba(251,191,36,.5)}
+  .vb .bar{width:70%;max-width:44px;height:0;border-radius:6px 6px 2px 2px;transition:height 1.1s cubic-bezier(.2,.8,.25,1)}
+  .vb .bar.c1{background:linear-gradient(180deg,#fbbf24,rgba(251,191,36,.35));box-shadow:0 0 14px rgba(251,191,36,.35)}
+  .vb .bar.c2{background:linear-gradient(180deg,#a855f7,rgba(168,85,247,.3))}
+  .vb .bar.c3{background:linear-gradient(180deg,#25d6e6,rgba(37,214,230,.3))}
+  .vb .bar.c4{background:linear-gradient(180deg,#a855f7,rgba(168,85,247,.25))}
+  .vb .bar.c5{background:linear-gradient(180deg,#25d6e6,rgba(37,214,230,.25))}
+  .vb .bar.c6{background:linear-gradient(180deg,#a855f7,rgba(168,85,247,.2))}
+  .vb .nm{font-size:9px;color:rgba(168,208,240,.75);margin-top:5px;white-space:nowrap}
+  .vchart .vb .nm{min-height:22px;line-height:1.2;text-align:center;white-space:normal}
+  .vfoot{font-size:9px;color:rgba(150,190,230,.6);margin-top:8px;border-top:1px dashed rgba(96,170,255,.18);padding-top:6px;line-height:1.65}
+  .vfoot b{color:rgba(200,225,250,.85)}
+  .duo{display:flex;align-items:flex-end;justify-content:space-around;gap:18px;height:158px;padding:0 8px}
+  .duo .vb .bar.win{background:linear-gradient(180deg,#25d6e6,rgba(37,214,230,.35));box-shadow:0 0 16px rgba(37,214,230,.35);width:78%;max-width:78px}
+  .duo .vb .bar.lose{background:linear-gradient(180deg,#f87171,rgba(248,113,113,.3));width:78%;max-width:78px}
+  .duo .vb .val{font-size:13px}
+  .duo .vb.lose .val{color:#f87171;text-shadow:0 0 10px rgba(248,113,113,.5)}
+  .duo .vb .nm{font-size:9.5px}
+  /* strategy footer */
+  .stripe{display:flex;align-items:center;gap:10px;background:linear-gradient(90deg,rgba(0,120,220,.25),rgba(168,85,247,.18));border:1px solid rgba(0,229,255,.3);border-radius:8px;padding:8px 12px;font-size:11px;margin-bottom:10px}
+  .stripe b{color:#ffd54a}
+  .cards3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+  @media (max-width:980px){.cards3{grid-template-columns:1fr}}
+  .rc{background:rgba(8,24,58,.5);border:1px solid rgba(96,170,255,.16);border-radius:8px;padding:9px 11px;font-size:10px;line-height:1.7;color:rgba(190,220,245,.88)}
+  .rc h3{font-size:11px;margin-bottom:4px}
+  .rc.risk h3{color:#f87171}.rc.act h3{color:#34d399}.rc.win h3{color:#fbbf24}
+  .foot{grid-column:1/-1;text-align:center;font-size:9px;color:rgba(150,190,230,.45);padding:6px 0 2px}
+  /* v4.2 动态渲染:罗盘弧/画像环原来是写死的 dasharray、完全不动,现在从 0 扫到目标值 */
+  .garc,.rarc{transition:stroke-dasharray 1.5s cubic-bezier(.2,.8,.25,1),stroke 1.5s ease}
+  .bf,.vb .bar,.stack .sg{transition-property:width,height,background,box-shadow}
+  /* ★v4.3 持续动效:让罗盘弧/两个画像环/堆叠条看起来一直在实时跑,不是加载完就定死。
+     铁律——只动装饰层(流光、呼吸辉光),弧长/环长/段宽这些**数值本身绝不动**,动了就是篡改数据。 */
+  @keyframes runDash{from{stroke-dashoffset:0}to{stroke-dashoffset:var(--run,-100)}}
+  @keyframes haze{0%,100%{opacity:.35}50%{opacity:1}}
+  @keyframes shine{0%{transform:translateX(-130%)}100%{transform:translateX(360%)}}
+  .arc-run{pointer-events:none;animation:runDash var(--dur,3s) linear infinite,haze var(--dur,3s) ease-in-out infinite}
+  .stack{position:relative;isolation:isolate}
+  .stack::after{content:"";position:absolute;top:0;bottom:0;left:0;width:26%;pointer-events:none;z-index:2;
+    background:linear-gradient(100deg,transparent 8%,rgba(255,255,255,.45) 50%,transparent 92%);
+    animation:shine 3.8s ease-in-out infinite}
+  @media (prefers-reduced-motion:reduce){
+    .bf,.vb .bar,.stack .sg,#needle,.garc,.rarc{transition:none}
+    .live i,.arc-run,.stack::after{animation:none}
+    .arc-run{display:none}
+  }
+  @media (max-width:980px){
+    .band{height:auto;min-height:0;display:flex;flex-direction:column;gap:6px;padding:10px 12px}
+    .btitle{order:-1;width:100%;min-width:0;padding:0}
+    .btitle h1{font-size:18px;white-space:normal}
+    .wing{display:none}
+    .side,.side.r{width:100%;justify-content:center;flex-wrap:wrap}
+    .gwrap{flex-direction:column;align-items:center}
+    .glegend{width:100%;line-height:1.8;text-align:center}
+    .kpis{grid-template-columns:repeat(2,minmax(0,1fr))}
+    .grp-t{gap:8px;flex-wrap:wrap}
+    .note,.diag,.rc,.vfoot,.stripe{overflow-wrap:anywhere}
+  }
 </style>
 </head>
 <body>
-<a class="skip-link" href="#dashboard">跳到数据总览</a>
-<div class="shell">
-  <header class="topbar">
-    <div class="brand">
-      <h1 id="brandTitle">百商AI新媒体运营飞轮</h1>
-      <p id="brandSubtitle">广州潮少 · 抖音 / 视频号 · 运营大数据看板</p>
+<div class="wrap">
+
+  <header class="band a-hd">
+    <div class="side">
+      <span class="pill">统计周期 2026-07-30 ~ 08-05</span>
+      <span class="pill">更新 08-06 23:52 · 定位v2.13</span>
     </div>
-    <div class="top-meta" aria-label="数据状态">
-      <span>统计周期</span><strong id="period">--</strong>
-      <span class="freshness">静态快照</span><strong id="freshness">--</strong>
-      <span>版本</span><strong id="version">--</strong>
-      <span>本地时间</span><strong class="clock" id="clock">--:--:--</strong>
+    <div class="btitle">
+      <span class="wing l"><i></i><i></i><i></i></span>
+      <span class="wing r"><i></i><i></i><i></i></span>
+      <h1>百商AI新媒体运营飞轮</h1>
+      <div class="sub">广州潮少 · 抖音 / 视频号 · 大数据看板</div>
+    </div>
+    <div class="side r">
+      <span class="live"><i></i>数据已同步</span>
+      <span class="clock" id="clock">--:--:--</span>
     </div>
   </header>
 
-  <main id="dashboard" class="layout">
-    <div class="column left-col">
-      <section class="panel" aria-labelledby="compareTitle">
-        <div class="panel-head">
-          <div><h2 id="compareTitle">双平台 · 数据对比</h2></div>
-          <p>账号层 7 日快照</p>
-        </div>
-        <div class="panel-body" id="comparison"></div>
-        <div class="panel-foot"><strong>读法：</strong>播放、粉丝、净增按组内最大值归一；互动率使用 0–2% 工作刻度，平台口径不同，不做简单合并。</div>
-      </section>
-
-      <section class="panel" aria-labelledby="audienceTitle">
-        <div class="panel-head">
-          <div><h2 id="audienceTitle">视频号 · 核心受众</h2></div>
-          <p id="audienceSample">画像样本 --</p>
-        </div>
-        <div class="panel-body">
-          <div class="profile-rings" id="profileRings"></div>
-          <div class="section-label"><strong>年龄分布</strong><span>占画像样本</span></div>
-          <div class="dist-list" id="ageDistribution"></div>
-          <div class="section-label" style="margin-top:16px"><strong>关注来源</strong><span>共 1,223 人</span></div>
-          <div class="stack" id="fanSourceStack" aria-label="视频号关注来源构成"></div>
-          <div class="stack-legend" id="fanSourceLegend"></div>
-        </div>
-        <div class="panel-foot"><strong>受众判断：</strong>50 岁以上占 78.9%，男性占 56.7%。题材需要熟悉的体育事件、清楚的动作因果和直接选择题。</div>
-      </section>
+  <!-- 双平台对比 -->
+  <section class="panel a-cmp">
+    <i class="cn tl"></i><i class="cn tr"></i><i class="cn bl"></i><i class="cn br"></i>
+    <div class="ph"><h2>双平台 · 数据对比</h2><span class="mt">组内最大值归一 · 互动率绝对刻度</span></div>
+    <div class="grp"><div class="grp-t"><span>7日播放</span><em>抖音领先 · 1.81×视频号</em></div>
+      <div class="brow"><span class="bn"><i class="dot dy"></i>抖音</span><div class="bt"><div class="bf dy" data-w="100"></div></div><span class="bv">40,200</span></div>
+      <div class="brow"><span class="bn"><i class="dot sp"></i>视频号</span><div class="bt"><div class="bf sp" data-w="55.1"></div></div><span class="bv">22,161</span></div>
     </div>
-
-    <div class="column center-col">
-      <section class="panel health-panel" aria-labelledby="healthTitle">
-        <div class="panel-head">
-          <div><h2 id="healthTitle">运营健康罗盘 · 平台下钻</h2></div>
-          <p>内部工作指数，非平台评分</p>
-        </div>
-        <div class="tabs" role="tablist" aria-label="平台切换">
-          <button class="tab" id="tab-overview" role="tab" aria-selected="true" aria-controls="healthView" data-health="overview">总览</button>
-          <button class="tab" id="tab-douyin" role="tab" aria-selected="false" aria-controls="healthView" data-health="douyin">抖音</button>
-          <button class="tab" id="tab-wechat" role="tab" aria-selected="false" aria-controls="healthView" data-health="wechat">视频号</button>
-        </div>
-        <div class="health-content" id="healthView" role="tabpanel" aria-live="polite">
-          <div class="gauge-box">
-            <svg class="gauge" viewBox="0 0 200 120" role="img" aria-labelledby="gaugeSvgTitle gaugeSvgDesc">
-              <title id="gaugeSvgTitle">飞轮健康指数</title>
-              <desc id="gaugeSvgDesc">当前指数 53 分</desc>
-              <path class="gauge-base" d="M20 105 A80 80 0 0 1 180 105"></path>
-              <path class="gauge-arc" id="gaugeArc" d="M20 105 A80 80 0 0 1 180 105"></path>
-              <line class="gauge-needle" id="gaugeNeedle" x1="100" y1="105" x2="100" y2="47"></line>
-              <circle class="gauge-pin" cx="100" cy="105" r="5"></circle>
-            </svg>
-            <div class="gauge-score" id="gaugeScore">53</div>
-            <div class="gauge-label" id="gaugeLabel">双平台飞轮健康指数</div>
-            <div class="gauge-formula" id="gaugeFormula"></div>
-          </div>
-          <div class="kpi-grid" id="healthKpis"></div>
-          <div class="diagnosis" id="healthDiagnosis"></div>
-        </div>
-      </section>
-
-      <section class="panel" aria-labelledby="trendTitle">
-        <div class="panel-head">
-          <div><h2 id="trendTitle">抖音 · 触达与留存趋势</h2></div>
-          <p>每日滚动 7 日口径</p>
-        </div>
-        <div class="panel-body">
-          <div class="chart-grid">
-            <div class="chart-box">
-              <div class="chart-title"><strong>7 日播放</strong><span>41.3k → 39.3k</span></div>
-              <svg class="line-chart" id="playsChart" role="img" aria-label="抖音七日播放趋势"></svg>
-            </div>
-            <div class="chart-box">
-              <div class="chart-title"><strong>粉丝总量</strong><span>1,241 → 1,302</span></div>
-              <svg class="line-chart" id="followersChart" role="img" aria-label="抖音粉丝趋势"></svg>
-            </div>
-          </div>
-          <div class="retention-grid" id="retentionSignals"></div>
-        </div>
-        <div class="panel-foot"><strong>关键变化：</strong>08-06 起互动率升至 1.7% 以上，但完播率从 17.90% 降到 14.26%。增长与互动改善没有同步修复留存。</div>
-      </section>
-
-      <section class="panel" aria-labelledby="sourceTitle">
-        <div class="panel-head">
-          <div><h2 id="sourceTitle">分发来源 · 内容画像</h2></div>
-          <p>平台差异诊断</p>
-        </div>
-        <div class="panel-body">
-          <div class="source-tabs" aria-label="来源视图">
-            <button class="source-tab" data-source-view="wechat" aria-pressed="true">视频号流量来源</button>
-            <button class="source-tab" data-source-view="douyin" aria-pressed="false">抖音兴趣分布</button>
-          </div>
-          <div class="dist-list" id="sourceDistribution"></div>
-          <p class="source-note" id="sourceNote"></p>
-        </div>
-      </section>
+    <div class="grp"><div class="grp-t"><span>粉丝总量</span></div>
+      <div class="brow"><span class="bn"><i class="dot dy"></i>抖音</span><div class="bt"><div class="bf dy" data-w="100"></div></div><span class="bv">1,304*</span></div>
+      <div class="brow"><span class="bn"><i class="dot sp"></i>视频号</span><div class="bt"><div class="bf sp" data-w="93.8"></div></div><span class="bv">1,223</span></div>
     </div>
-
-    <div class="column right-col">
-      <section class="panel works-panel" aria-labelledby="worksTitle">
-        <div class="panel-head">
-          <div><h2 id="worksTitle">近 10 条作品 · 平台榜</h2></div>
-          <p>条宽使用平方根刻度</p>
-        </div>
-        <div class="tabs" role="tablist" aria-label="作品平台切换">
-          <button class="tab works-tab" role="tab" aria-selected="true" data-works="wechat">视频号</button>
-          <button class="tab works-tab" role="tab" aria-selected="false" data-works="douyin">抖音</button>
-        </div>
-        <div class="panel-body">
-          <div class="works-summary" id="worksSummary"></div>
-          <div class="works-list" id="worksList" aria-live="polite"></div>
-        </div>
-        <div class="panel-foot" id="worksNote"></div>
-      </section>
+    <div class="grp"><div class="grp-t"><span>7日净增粉</span><em>增长集中在抖音</em></div>
+      <div class="brow"><span class="bn"><i class="dot dy"></i>抖音</span><div class="bt"><div class="bf dy" data-w="100"></div></div><span class="bv">+65*</span></div>
+      <div class="brow"><span class="bn"><i class="dot sp"></i>视频号</span><div class="bt"><div class="bf sp" data-w="1.5"></div></div><span class="bv">+1</span></div>
     </div>
-  </main>
-
-  <section class="panel full-width" aria-labelledby="experimentTitle">
-    <div class="panel-head">
-      <div><h2 id="experimentTitle">运营飞轮 · 第 13 至 22 轴连续实验</h2></div>
-      <p>双平台播放，平方根刻度</p>
+    <div class="grp"><div class="grp-t"><span>互动率 · 绝对刻度 0~2.5%</span><em>均未过线</em></div>
+      <div class="brow"><span class="bn"><i class="dot dy"></i>抖音</span><div class="bt"><div class="bf dy" data-w="69.6"></div><span class="baseline" style="left:80%"><em>健康线 2%</em></span></div><span class="bv">1.74%</span></div>
+      <div class="brow"><span class="bn"><i class="dot sp"></i>视频号</span><div class="bt"><div class="bf sp" data-w="1.6"></div></div><span class="bv">0.04%*</span></div>
     </div>
-    <div class="experiment-body">
-      <div class="experiment-grid" id="experimentGrid"></div>
-    </div>
-    <div class="panel-foot"><strong>当前判断：</strong>即时事件在抖音侧更容易获得点击，但无法保证视频号同步放量；小白动作是叙事条件，不是独立的分发充分条件。第 22 轴只记录上线，不提前写效果结论。</div>
+    <div class="fill"></div>
+    <p class="note"><b>读法</b>：前三组按组内最大值归一（组间不可比）；互动率为绝对刻度并标 2% 健康线。双平台 7 日播放合计 <b>62,361</b>，抖音领先视频号 1.81 倍；净增粉合计 <b>+66</b>。<b>*视频号 0.04% 按 7 日赞 6 + 评论 3 计算</b>；抖音粉丝仍含较多回关粉，不单独作为内容效果读数。</p>
   </section>
 
-  <section class="panel strategy-band" aria-labelledby="strategyTitle">
-    <div class="strategy-line"><strong id="strategyTitle">一句话策略：</strong><span id="strategyLine"></span></div>
-    <div class="strategy-grid">
-      <div class="strategy-col wins"><h3>本周期有效信号</h3><ul id="wins"></ul></div>
-      <div class="strategy-col risks"><h3>当前风险</h3><ul id="risks"></ul></div>
-      <div class="strategy-col actions"><h3>下一步行动</h3><ul id="actions"></ul></div>
-    </div>
-    <details class="method">
-      <summary>数据来源与指标口径</summary>
-      <div class="method-content">
-        <div><h4>指标定义</h4><dl id="definitions"></dl></div>
-        <div><h4>来源与新鲜度</h4><div class="sources" id="sources"></div></div>
+  <!-- 健康罗盘 -->
+  <section class="panel a-gau">
+    <i class="cn tl"></i><i class="cn tr"></i><i class="cn bl"></i><i class="cn br"></i>
+    <div class="ph"><h2>运营健康罗盘 · 平台下钻</h2><span class="mt">综合 55 = (抖音57 + 视频号53) / 2</span></div>
+    <div class="gwrap">
+      <div class="gauge">
+        <svg viewBox="0 0 190 110">
+          <path d="M15 100 A80 80 0 0 1 175 100" fill="none" stroke="rgba(8,24,58,.9)" stroke-width="12" stroke-linecap="round"/>
+          <path class="garc" data-v="55" d="M15 100 A80 80 0 0 1 175 100" fill="none" stroke="url(#gg)" stroke-width="12" stroke-linecap="round" stroke-dasharray="0 251.3"/>
+          <defs><linearGradient id="gg" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#f87171"/><stop offset=".5" stop-color="#fbbf24"/><stop offset="1" stop-color="#34d399"/></linearGradient></defs>
+          <g id="needle" data-v="55" style="transform-origin:95px 100px;transform:rotate(-90deg);transition:transform 1.4s cubic-bezier(.2,.8,.25,1)">
+            <path id="ndl" d="M95 100 L91 96 L95 32 L99 96 Z" fill="#7fe9ff"/>
+            <circle id="ndlc" cx="95" cy="100" r="6" fill="#0a1836" stroke="#7fe9ff" stroke-width="2"/>
+          </g>
+        </svg>
+        <div class="gval"><b class="hv" data-v="55">55</b><span>综合健康分 · 双平台均值</span></div>
       </div>
-    </details>
+      <div class="glegend">
+        <div><span class="dy">■ 抖音</span> 健康 <b class="hv" data-v="57">57</b> ｜ ⑱ 1万+·361赞·12评·2转</div>
+        <div><span class="sp">■ 视频号</span> 健康 <b class="hv" data-v="53">53</b> ｜ 第⑭轴完播 41.48%·快划 15.28%</div>
+        <div style="color:rgba(251,191,36,.85)">▲ 第㉑留洋行李轴 · 双平台唯一发布完成，等待冷启动回收</div>
+      </div>
+    </div>
+    <div class="digits" id="digits"><i>6</i><i>2</i><i>3</i><i>6</i><i>1</i></div>
+    <div class="dsub">7日总播放 · 双平台 ｜ 合计粉丝 2,527 · 净增 <b>+66*</b> · 抖音投稿 11 条</div>
+    <div class="tabs" id="tabs">
+      <div class="tab on" data-t="t0">总览</div>
+      <div class="tab" data-t="t1">抖音</div>
+      <div class="tab" data-t="t2">视频号</div>
+    </div>
+    <div class="tp on" id="t0">
+      <div class="kpis">
+        <div class="kpi"><div class="v">62.4k</div><div class="l">双平台7日播放</div></div>
+        <div class="kpi"><div class="v">2,527</div><div class="l">双平台粉丝</div></div>
+        <div class="kpi"><div class="v good">0.106%</div><div class="l">7日播放→净增</div></div>
+        <div class="kpi"><div class="v warn">0/1</div><div class="l">★转发/收藏(10条窗)</div></div>
+      </div>
+      <div class="diag"><b>总览诊断 · 23:50作品实抓</b>：第⑱轴抖音仍为 <b>1万+ / 361赞 / 12评 / 2转</b>，视频号 189；第⑳轴约 6 小时仅抖音 <b>236 / 0赞</b>、视频号 213 / 0互动。具体机器人动作没有单独复现峰值，第㉑轴回到即时 U17 事件，改测“是否马上留洋”。</div>
+    </div>
+    <div class="tp" id="t1">
+      <div class="kpis">
+        <div class="kpi"><div class="v">40.2k</div><div class="l">7日播放</div></div>
+        <div class="kpi"><div class="v good">46.82%</div><div class="l">5s完播</div></div>
+        <div class="kpi"><div class="v warn">26.46%</div><div class="l">2s跳出</div></div>
+        <div class="kpi"><div class="v">11.26s</div><div class="l">平均观看</div></div>
+      </div>
+      <div class="diag"><b>★互动与涨粉升，留存承压</b>：近 7 日作品播放中位数 <b>5,559</b>，互动率由前一日 0.54% 升至 1.74%，净增粉由 13 升至 65；但完播率由 17.90% 降至 14.61%。下一条不只追情绪互动，还要把冲突在前 3 秒讲清。</div>
+    </div>
+    <div class="tp" id="t2">
+      <div class="kpis">
+        <div class="kpi"><div class="v">22.2k</div><div class="l">7日播放</div></div>
+        <div class="kpi"><div class="v warn">+1</div><div class="l">7日净增粉</div></div>
+        <div class="kpi"><div class="v">6/3</div><div class="l">7日赞/评</div></div>
+        <div class="kpi"><div class="v warn">0/1</div><div class="l">★转发/收藏(10条窗)</div></div>
+      </div>
+      <div class="diag sp"><b>视频号仍靠推荐流但新作冷启动弱</b>：7 日播放 22,161，推荐播放约占 <b>97.0%</b>。第⑭轴 3,318 仍是近期基准；第⑱至⑳轴当前为 189 / 172 / 213，不能把抖音强互动直接迁移为视频号结论。</div>
+    </div>
+    <div class="diag" style="border-left-color:#34d399;margin-top:8px"><b>策略 · v2.13</b>：保留大陈画内真实开口与前 3 秒小白主动动作，但把点击理由重新绑回即时体育事件。第㉑轴用“小白替孩子收留洋行李”把 U17 胜欧洲青训转成明确决策题；正文只留现场声音和真实场景，不生成字幕。</div>
+    <div class="fill"></div>
   </section>
 
-  <footer class="footer" id="footerText"></footer>
+  <!-- TOP 榜 (通高) -->
+  <section class="panel a-top">
+    <i class="cn tl"></i><i class="cn tr"></i><i class="cn bl"></i><i class="cn br"></i>
+    <div class="ph"><h2>视频号 · 近 10 条作品</h2><span class="mt">23:50 实抓 · 条宽 = √(播放/榜首)</span></div>
+    <div class="tkpis">
+      <div class="tkpi"><div class="l">视频号 · 7日播放</div><div class="v">22,161<em>▲ +1 净增</em></div></div>
+      <div class="tkpi dy"><div class="l">抖音 · 7日播放</div><div class="v">40,200<em>▲ +65* 粉丝</em></div></div>
+    </div>
+    <div class="trow hot1"><span class="trank g">1</span><div class="tmain"><div class="tname">该不该停 · ⑭会停轴<span class="badge">留存第一</span></div><div class="tbar"><div class="bf gold" data-w="100"></div></div><div class="tmeta"><b>3,318</b> 赞1 评0 藏0 转0<span class="d">08-03</span></div></div></div>
+    <div class="trow"><span class="trank s">2</span><div class="tmain"><div class="tname">往上还是回来 · ⑬老活轴<span class="badge">钩子改版</span></div><div class="tbar"><div class="bf sp" data-w="49.7"></div></div><div class="tmeta"><b>819</b> 赞0 评0 藏1 转0<span class="d">08-02</span></div></div></div>
+    <div class="trow"><span class="trank b">3</span><div class="tmain"><div class="tname">巨幕观赛 · ⑮远方主场轴<span class="badge">纯奇观</span></div><div class="tbar"><div class="bf sp" data-w="42.7"></div></div><div class="tmeta"><b>604</b> 赞1 评0 藏0 转0<span class="d">08-03</span></div></div></div>
+    <div class="trow"><span class="trank">4</span><div class="tmain"><div class="tname">学赢还是学输 · ⑫输得起轴<span class="badge">双角色首测</span></div><div class="tbar"><div class="bf dim" data-w="38.8"></div></div><div class="tmeta"><b>500</b> 赞0 评0 藏0 转0<span class="d">08-02</span></div></div></div>
+    <div class="trow"><span class="trank">5</span><div class="tmain"><div class="tname">帮追还是劝 · ⑰圆梦轴<span class="badge">双平台偏弱</span></div><div class="tbar"><div class="bf dim" data-w="28.9"></div></div><div class="tmeta"><b>277</b> 赞0 评0 藏0 转0<span class="d">08-04</span></div></div></div>
+    <div class="trow"><span class="trank">6</span><div class="tmain"><div class="tname">先夸还是劝 · ⑯先夸轴<span class="badge">平台分化</span></div><div class="tbar"><div class="bf dim" data-w="26.0"></div></div><div class="tmeta"><b>225</b> 赞0 评0 藏0 转0<span class="d">08-04</span></div></div></div>
+    <div class="trow"><span class="trank">7</span><div class="tmain"><div class="tname">旧球台该不该换 · ⑳旧球台轴<span class="badge">具体但弱</span></div><div class="tbar"><div class="bf dim" data-w="25.3"></div></div><div class="tmeta"><b>213</b> 赞0 评0 藏0 转0<span class="d">08-06</span></div></div></div>
+    <div class="trow"><span class="trank">8</span><div class="tmain"><div class="tname">场场守还是关键场 · ⑱赛程轴<span class="badge">抖强号弱</span></div><div class="tbar"><div class="bf dim" data-w="23.9"></div></div><div class="tmeta"><b>189</b> 赞0 评0 藏0 转0<span class="d">08-05</span></div></div></div>
+    <div class="trow"><span class="trank">9</span><div class="tmain"><div class="tname">机器还是老球友 · ⑲陪练轴<span class="badge">未延续</span></div><div class="tbar"><div class="bf dim" data-w="22.8"></div></div><div class="tmeta"><b>172</b> 赞0 评0 藏0 转0<span class="d">08-06</span></div></div></div>
+    <div class="trow"><span class="trank">10</span><div class="tmain"><div class="tname">赢了欧洲青训 · ㉑留洋行李轴<span class="badge">刚发布</span></div><div class="tbar"><div class="bf dim" data-w="0"></div></div><div class="tmeta"><b>0</b> 赞0 评0 藏0 转0<span class="d">08-06</span></div></div></div>
+    <div class="fill"></div>
+    <div class="note"><b>窗口换挡</b>：最新 10 条作品合计 <b>6,317</b>，占视频号 7 日总播放的 <b>28.5%</b>；其余历史内容约贡献 <b>15,844</b>。占比骤降主要因 6,954 播放的第⑪轴自然滑出“最新 10 条”窗口，不代表账号播放突然腰斩。<b>口径</b>：总览为 07-30 至 08-05、23:25 抓取，作品榜补到 08-06 23:50；第㉑轴为刚发布初始值。</div>
+    <div class="ph" style="margin-top:10px"><h2>带货战报 · 养粉期暂停</h2><span class="mt">累计 · 微信小店成交分析</span></div>
+    <div class="cargo">
+      <div class="kpi"><div class="v good">¥7.9</div><div class="l">累计成交</div></div>
+      <div class="kpi"><div class="v">1单</div><div class="l">零退款</div></div>
+      <div class="kpi"><div class="v warn">0单</div><div class="l">本周期(未挂车)</div></div>
+    </div>
+    <div class="flow">短视频挂车 <b>→</b> 推荐流路人 <b>→</b> 数小时成交</div>
+    <p class="note">场景 <b>100% 短视频</b>、购买者 <b>100% 非粉丝新客</b> → <b>挂车是成交的开关</b>。<b>本周期养粉不挂车，故 GMV=0（预期内，非异常）</b>。扩品闸口＝连续两周同时满足 转发中位≥2×S0、净增粉≥1.5×F0、GMV 有单。</p>
+  </section>
+
+  <!-- 粉丝画像 -->
+  <section class="panel a-por">
+    <i class="cn tl"></i><i class="cn tr"></i><i class="cn bl"></i><i class="cn br"></i>
+    <div class="ph"><h2>视频号 · 粉丝画像</h2><span class="mt">共 1,223 粉丝 ｜ 画像样本 1,220</span></div>
+    <div class="pgrid">
+      <div class="ring">
+        <svg viewBox="0 0 92 92"><circle cx="46" cy="46" r="38" fill="none" stroke="rgba(8,24,58,.9)" stroke-width="10"/><circle class="rarc" data-v="78.9" data-hue="168,85,247" cx="46" cy="46" r="38" fill="none" stroke-width="10" stroke-linecap="round" stroke-dasharray="0 238.8"/></svg>
+        <div class="c"><b>78.9%</b><span>50岁+</span></div>
+      </div>
+      <ul class="plist">
+        <li><i style="background:#a855f7"></i><span>50岁+</span><b>78.9%</b></li>
+        <li><i style="background:#7c5cd6"></i><span>40-49 岁</span><b>8.2%</b></li>
+        <li><i style="background:#5a48b0"></i><span>30-39 岁</span><b>7.9%</b></li>
+        <li><i style="background:#3d3680"></i><span>其他</span><b>5.0%</b></li>
+      </ul>
+      <div class="ring">
+        <svg viewBox="0 0 92 92"><circle cx="46" cy="46" r="38" fill="none" stroke="rgba(236,72,153,.35)" stroke-width="10"/><circle class="rarc" data-v="56.7" data-hue="37,214,230" cx="46" cy="46" r="38" fill="none" stroke-width="10" stroke-linecap="round" stroke-dasharray="0 238.8"/></svg>
+        <div class="c"><b>56.7%</b><span>男性</span></div>
+      </div>
+      <ul class="plist">
+        <li><i style="background:#25d6e6"></i><span>男</span><b>56.7%</b></li>
+        <li><i style="background:rgba(236,72,153,.7)"></i><span>女</span><b>39.9%</b></li>
+        <li><i style="background:#7fe9ff"></i><span>粉丝来源 · 推荐</span><b>92.7%</b></li>
+        <li class="wk"><i style="background:#3d3680"></i><span>主页+朋友♡ · 关注流入口</span><b>0.7%</b></li>
+      </ul>
+    </div>
+    <div class="srcwrap">
+      <div class="fx-t"><span>粉丝来源构成 · 1,223 人</span><em>推荐一家独大</em></div>
+      <div class="stack">
+        <div class="sg" data-w="92.7" data-hue="126,58,242" title="推荐 1,134"></div>
+        <div class="sg" data-w="3.6" data-hue="90,72,176" title="其他 44"></div>
+        <div class="sg" data-w="2.8" data-hue="37,214,230" title="分享 34"></div>
+        <div class="sg" data-w="0.4" data-hue="236,72,153" title="朋友♡ 5"></div>
+        <div class="sg" data-w="0.25" data-hue="251,191,36" title="主页 3"></div>
+        <div class="sg" data-w="0.25" data-hue="52,211,153" title="订阅号消息 3"></div>
+      </div>
+      <div class="slgd">
+        <span><i style="background:#7e3af2"></i>推荐 <b>1,134</b></span>
+        <span><i style="background:#5a48b0"></i>其他 <b>44</b></span>
+        <span><i style="background:#25d6e6"></i>分享 <b>34</b></span>
+        <span><i style="background:#ec4899"></i>朋友♡ <b>5</b></span>
+        <span><i style="background:#fbbf24"></i>主页 <b>3</b></span>
+        <span><i style="background:#34d399"></i>订阅号 <b>3</b></span>
+      </div>
+    </div>
+    <div class="fill"></div>
+    <p class="note"><b>结论</b>：50 岁+男性老球迷盘<b>没有结构性变化</b>，粉丝来源推荐占 92.7%，7 日播放来源推荐约占 97.0%。当前 10 条窗转发仍为 0、收藏合计 8，说明社交扩散尚未启动。<b>粉丝来源、年龄和性别为 08-06 最新完整实抓。</b></p>
+  </section>
+
+  <!-- ▼ 选题域实验 · 具体动作与画内对白 -->
+  <section class="panel a-flw">
+    <i class="cn tl"></i><i class="cn tr"></i><i class="cn bl"></i><i class="cn br"></i>
+    <div class="ph"><h2>选题域实验 · 即时事件与机器人动作</h2><span class="mt">第⑯~㉑轴 ｜ 分平台判断</span></div>
+    <div class="fx">
+      <div>
+        <div class="fx-t"><span>确定体育事件 vs 视觉奇观 · 抖音</span><em>3.66× · 同日配对</em></div>
+        <div class="duo">
+          <div class="vb"><span class="val">2,701</span><div class="bar win" data-h="100"></div><span class="nm">⑭确定事件 · 会停轴</span></div>
+          <div class="vb"><span class="val">739</span><div class="bar lose" data-h="52.3"></div><span class="nm">⑮纯奇观 · 巨幕轴</span></div>
+        </div>
+        <div class="vfoot">第⑭轴抖音播放是第⑮轴的 <b>3.66×</b>，点赞是 4.5×。两条同日发布会竞争冷启动，因此不把倍率当稳定规律；第⑯轴随后升到 6,741 / 32赞，赛果型确定事件在抖音侧得到第二次支持。</div>
+      </div>
+      <div>
+        <div class="fx-t"><span>★第⑯ → ㉑ · 连续实验</span><em>08-06 23:50 · 留洋行李轴上线</em></div>
+        <div class="vchart">
+          <div class="vb"><span class="val">5,559</span><div class="bar c3" data-h="74.6"></div><span class="nm">抖音中位</span></div>
+          <div class="vb hot"><span class="val">6,741</span><div class="bar c4" data-h="82.1"></div><span class="nm">⑯先夸轴</span></div>
+          <div class="vb lose"><span class="val">722</span><div class="bar lose" data-h="26.9"></div><span class="nm">⑰圆梦轴</span></div>
+          <div class="vb hot"><span class="val">1万+</span><div class="bar c5" data-h="100"></div><span class="nm">⑱赛程轴</span></div>
+          <div class="vb lose"><span class="val">1,136</span><div class="bar lose" data-h="33.7"></div><span class="nm">⑲陪练轴</span></div>
+          <div class="vb lose"><span class="val">236</span><div class="bar lose" data-h="15.4"></div><span class="nm">⑳旧球台轴</span></div>
+          <div class="vb hot"><span class="val">上线</span><div class="bar c1" data-h="8"></div><span class="nm">㉑留洋轴</span></div>
+        </div>
+        <div class="vfoot">第⑱轴抖音 1万+ / 361赞 / 12评 / 2转，第⑲轴回落到 1,137 / 10赞，第⑳轴约 6 小时仅 236 / 0赞。具体动作不是充分条件；第㉑轴回到正在发生的 U17 赛事，同时用小白收行李测试“马上留洋”决策。<b>第㉑轴当前只记录上线，不提前写效果结论</b>。</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 策略·风险·下一条 -->
+  <section class="panel a-str">
+    <i class="cn tl"></i><i class="cn tr"></i><i class="cn bl"></i><i class="cn br"></i>
+    <div class="stripe">🎯 <span><b>一句话策略</b>：即时体育事件给点击理由，小白用连续实体动作把热点变成生活决策，大陈在画面内自然开口；前 3 秒让观众看懂“它在替孩子收留洋行李”。北极星<b>分平台</b>：抖音看播放+互动+留存，视频号先看推荐池准入。（信心 <b>82</b>，㉑待回收）</span></div>
+    <div class="cards3">
+      <div class="rc risk"><h3>⚠ 四大风险</h3>① 第⑱轴放量与账号涨粉同期，仍不能单条归因；② 完播率降至 14.61%，互动增长未同步改善留存；③ 第⑳轴证明具体动作也可能冷启动弱；④ 视频号最新 10 条转发仍为 0，收藏仅 1，社交扩散尚未启动。</div>
+      <div class="rc win"><h3>★ 本周期战果</h3><b>账号层</b>：双平台 7 日播放 62,361、净增粉 66，抖音互动率 1.74%。<b>内容侧</b>：第⑱轴抖音 1万+ / 361赞 / 12评 / 2转。<b>工程侧</b>：第㉑轴写实场景、四段电影机位、单机器人与大陈现场对白 ASR 90.2% 均通过，双平台作品数 63→64、69→70。</div>
+      <div class="rc act"><h3>▶ 当前 · 行动卡</h3><b>回收第㉑轴冷启动</b>：2 小时先看抖音是否明显越过第⑳轴、视频号是否越过 213；24 / 48 小时补完播、平均观看和快划。若即时事件仍弱，下一轮优先排查同日发布竞争与 1.5 秒海报前缀。</div>
+    </div>
+  </section>
+
+  <div class="foot">广州潮少 · 百商AI新媒体运营飞轮 ｜ 数据源：抖音创作者中心 + 视频号助手 + 微信小店成交分析 ｜ 仅运营指标，不含账号凭证 ｜ 设计参考大陈 V4 运营飞轮规格 ｜ v4.17</div>
 </div>
-<noscript><p class="noscript">看板需要 JavaScript 渲染图表；账号快照：双平台 7 日播放 56,416，粉丝 2,525，近 7 日净增 62。</p></noscript>
+
+
 <script>
-"use strict";
-const DATA = {"meta":{"brand":"百商AI新媒体运营飞轮","account":"广州潮少","subtitle":"抖音 / 视频号 · 运营大数据看板","version":"5.0","generatedAt":"2026-08-07T15:24:58+08:00","period":"2026-07-31 至 2026-08-06","snapshot":true},"summary":{"plays7d":56416,"followers":2525,"netFollowers7d":62,"douyinToWechatPlayRatio":2.3,"latestAxis":22,"latestStatus":"双平台已提交，冷启动监测中"},"health":{"overview":{"score":53,"label":"双平台飞轮健康指数","formula":"抖音 70 与视频号 35 的等权均值，四舍五入","diagnosis":"抖音互动与涨粉回升，但留存继续承压；视频号推荐依赖高、净增为零。","kpis":[{"label":"双平台 7 日播放","value":"56.4k","detail":"抖音占 69.7%","tone":"cyan"},{"label":"合计粉丝","value":"2,525","detail":"近 7 日净增 +62","tone":"green"},{"label":"抖音互动率","value":"1.76%","detail":"距工作目标 2% 差 0.24pp","tone":"amber"},{"label":"视频号推荐占比","value":"96.9%","detail":"分发来源高度集中","tone":"magenta"}]},"douyin":{"score":70,"label":"抖音飞轮健康指数","formula":"触达、互动、留存、增长与复制性五项工作信号","diagnosis":"第 18 轴仍是强样本；第 21 轴播放起量但互动偏弱，第 22 轴待审核回收。","kpis":[{"label":"7 日播放","value":"39.3k","detail":"较 08-06 快照 -2.2%","tone":"cyan"},{"label":"粉丝","value":"1,302","detail":"近 7 日净增 +62","tone":"green"},{"label":"完播率","value":"14.26%","detail":"较 08-06 再降 0.35pp","tone":"red"},{"label":"平均观看","value":"11.14s","detail":"2 秒跳出 26.72%","tone":"amber"}]},"wechat":{"score":35,"label":"视频号飞轮健康指数","formula":"触达、互动、增长、分发韧性与复制性五项工作信号","diagnosis":"7 日播放仍主要来自推荐池，新增与流失相抵；近期作品尚未复现第 14 轴。","kpis":[{"label":"7 日播放","value":"17.1k","detail":"可归因来源覆盖 99.9%","tone":"magenta"},{"label":"关注者","value":"1,223","detail":"新增 1，流失 1","tone":"cyan"},{"label":"7 日互动","value":"6","detail":"5 赞 / 1 评论","tone":"red"},{"label":"推荐流播放","value":"16.6k","detail":"占 7 日播放 96.9%","tone":"amber"}]}},"platforms":{"douyin":{"name":"抖音","plays7d":39300,"followers":1302,"netFollowers7d":62,"interactionRate":1.76,"finishRate":14.26,"posts7d":13,"works":65,"content":{"clickRate":6.63,"finish5s":46.07,"bounce2s":26.72,"averageWatchSeconds":11.14,"playsMedian":5421,"playsAverage":6065.48,"sampleWorks":64},"interest":[{"label":"随拍","value":37},{"label":"剧情","value":20},{"label":"亲子","value":15},{"label":"颜值","value":6},{"label":"三农","value":6},{"label":"社会时政","value":5}],"regions":[{"label":"四川","value":11},{"label":"湖南","value":7},{"label":"山东","value":7},{"label":"河南","value":6},{"label":"湖北","value":6},{"label":"江苏","value":6}]},"wechat":{"name":"视频号","plays7d":17116,"followers":1223,"netFollowers7d":0,"fansAdded7d":1,"fansLost7d":1,"interactionRate":0.04,"likes7d":5,"comments7d":1,"works":71,"playSources":[{"label":"推荐","value":16583},{"label":"分享","value":271},{"label":"其他","value":103},{"label":"朋友喜欢","value":74},{"label":"主页","value":47},{"label":"订阅号消息","value":24}],"fanSources":[{"label":"推荐","value":1134},{"label":"其他","value":44},{"label":"分享","value":34},{"label":"朋友喜欢","value":5},{"label":"主页","value":3},{"label":"订阅号消息","value":3}],"audience":{"sample":1220,"male":56.7,"female":39.9,"ages":[{"label":"50岁+","value":78.9},{"label":"40-49","value":8.2},{"label":"30-39","value":7.9},{"label":"17岁及以下","value":1.6},{"label":"25-29","value":1.2},{"label":"18-24","value":1.0}],"regions":[{"label":"广东","value":182},{"label":"福建","value":65},{"label":"四川","value":62},{"label":"江苏","value":57},{"label":"辽宁","value":55},{"label":"上海","value":53}]}}},"trends":{"labels":["08-01","08-02","08-03","08-04","08-05","08-06","08-07"],"douyinPlays7d":[41300,38100,41500,40800,41700,40200,39300],"douyinFollowers":[1241,1240,1246,1249,1249,1304,1302],"douyinFinishRate":[18.07,17.49,17.46,18.06,17.9,14.61,14.26],"douyinInteractionRate":[0.48,0.49,0.52,0.53,0.54,1.74,1.76]},"works":{"douyin":[{"axis":18,"title":"横滨赛程 · 场场守还是关键场","date":"08-05","plays":10000,"likes":360,"comments":12,"shares":2,"status":"已发布"},{"axis":16,"title":"U17 绝杀 · 先夸还是提醒","date":"08-04","plays":6753,"likes":31,"comments":0,"shares":0,"status":"已发布"},{"axis":21,"title":"赢了欧洲青训 · 马上留洋吗","date":"08-06","plays":3444,"likes":9,"comments":0,"shares":0,"status":"已发布"},{"axis":14,"title":"孙颖莎退赛 · 该不该停","date":"08-03","plays":2794,"likes":14,"comments":3,"shares":0,"status":"已发布"},{"axis":13,"title":"世界杯裁判 · 回来干老活","date":"08-02","plays":1676,"likes":7,"comments":0,"shares":0,"status":"已发布"},{"axis":19,"title":"机器陪练 · 能替代老球友吗","date":"08-06","plays":1140,"likes":10,"comments":0,"shares":0,"status":"已发布"},{"axis":15,"title":"巨幕观赛 · 远方能否变主场","date":"08-03","plays":871,"likes":9,"comments":0,"shares":0,"status":"已发布"},{"axis":17,"title":"孩子追星 · 大人该不该帮","date":"08-04","plays":726,"likes":15,"comments":0,"shares":0,"status":"已发布"},{"axis":20,"title":"旧球台 · 该不该换新","date":"08-06","plays":273,"likes":0,"comments":0,"shares":0,"status":"已发布"},{"axis":22,"title":"功夫女足 · 为情怀还是女足","date":"08-07","plays":0,"likes":0,"comments":0,"shares":0,"status":"审核中"}],"wechat":[{"axis":14,"title":"孙颖莎退赛 · 该不该停","date":"08-03","plays":3318,"likes":1,"comments":0,"favorites":0,"shares":0,"status":"已发布"},{"axis":13,"title":"世界杯裁判 · 回来干老活","date":"08-02","plays":819,"likes":0,"comments":0,"favorites":1,"shares":0,"status":"已发布"},{"axis":15,"title":"巨幕观赛 · 远方能否变主场","date":"08-03","plays":604,"likes":1,"comments":0,"favorites":0,"shares":0,"status":"已发布"},{"axis":17,"title":"孩子追星 · 大人该不该帮","date":"08-04","plays":278,"likes":0,"comments":0,"favorites":0,"shares":0,"status":"已发布"},{"axis":16,"title":"U17 绝杀 · 先夸还是提醒","date":"08-04","plays":225,"likes":0,"comments":0,"favorites":0,"shares":0,"status":"已发布"},{"axis":20,"title":"旧球台 · 该不该换新","date":"08-06","plays":214,"likes":0,"comments":0,"favorites":0,"shares":0,"status":"已发布"},{"axis":19,"title":"机器陪练 · 能替代老球友吗","date":"08-06","plays":214,"likes":0,"comments":0,"favorites":0,"shares":0,"status":"已发布"},{"axis":21,"title":"赢了欧洲青训 · 马上留洋吗","date":"08-06","plays":203,"likes":0,"comments":0,"favorites":0,"shares":0,"status":"已发布"},{"axis":18,"title":"横滨赛程 · 场场守还是关键场","date":"08-05","plays":191,"likes":0,"comments":0,"favorites":0,"shares":0,"status":"已发布"},{"axis":22,"title":"功夫女足 · 为情怀还是女足","date":"08-07","plays":0,"likes":0,"comments":0,"favorites":0,"shares":0,"status":"处理中"}]},"experiments":[{"axis":13,"name":"老活轴","topic":"世界杯裁判回归中超","douyin":1676,"wechat":819,"type":"即时事件","result":"中等"},{"axis":14,"name":"会停轴","topic":"孙颖莎退赛","douyin":2794,"wechat":3318,"type":"即时事件","result":"视频号基准"},{"axis":15,"name":"巨幕轴","topic":"拉斯维加斯巨型球","douyin":871,"wechat":604,"type":"视觉奇观","result":"偏弱"},{"axis":16,"name":"先夸轴","topic":"U17 绝杀阿森纳","douyin":6753,"wechat":225,"type":"即时事件","result":"平台分化"},{"axis":17,"name":"圆梦轴","topic":"电动车男孩见偶像","douyin":726,"wechat":278,"type":"人物事件","result":"双平台偏弱"},{"axis":18,"name":"赛程轴","topic":"WTT 横滨赛程","douyin":10000,"wechat":191,"type":"即时事件","result":"抖音强样本"},{"axis":19,"name":"陪练轴","topic":"机器人乒乓陪练","douyin":1140,"wechat":214,"type":"抽象决策","result":"未延续"},{"axis":20,"name":"旧球台轴","topic":"童年经典场景","douyin":273,"wechat":214,"type":"怀旧物件","result":"具体但弱"},{"axis":21,"name":"留洋轴","topic":"U17 赢欧洲青训","douyin":3444,"wechat":203,"type":"即时事件","result":"播放起量，互动弱"},{"axis":22,"name":"功夫女足轴","topic":"电影热议 × 女足","douyin":0,"wechat":0,"type":"电影热点","result":"冷启动监测中"}],"strategy":{"oneLine":"即时体育话题负责点击，小白用连续实体动作负责叙事，大陈用画内真实对白完成判断；字幕必须烧录，电影热点只做原创情境。","confidence":78,"wins":["第 18 轴抖音 1 万播放、360 赞、12 评论、2 分享，仍是当前强样本。","近 7 日抖音净增 62、互动率升至 1.76%，增长与互动信号仍在。","第 22 轴完成 30 秒、烧录字幕、双平台唯一发布，制作链路已补齐。"],"risks":["抖音完播率降至 14.26%，2 秒跳出升至 26.72%，留存是第一风险。","视频号推荐流占 96.9%，7 日净增为 0，分发韧性不足。","同日高频发布可能竞争冷启动，不能把单条峰值直接解释为稳定因果。","第 22 轴时长增至 30 秒，必须单独验证字幕与长时长对完播的影响。"],"actions":["2 小时回收第 22 轴：抖音先看能否越过 273，视频号先看能否越过 214。","24 / 48 小时补播放、互动、完播、平均观看和 2 秒跳出，并对照第 14、18、21 轴。","下一条只保留一个新变量；发布前强制检查 burnedSubtitles=true 与成片抽帧。"]},"definitions":[{"metric":"抖音互动率","definition":"平台创作者中心口径，统计周期内互动行为占播放的比例。"},{"metric":"视频号互动率","definition":"本看板以 7 日点赞加评论除以 7 日播放估算，非平台官方复合指标。"},{"metric":"飞轮健康指数","definition":"内部运营优先级信号，不是平台官方评分；用于比较同一账号的触达、互动、留存、增长与跨平台复制性。"},{"metric":"作品榜","definition":"发布后台作品列表快照；处理中或审核中作品显示为 0，不代表最终分发。"}],"sources":[{"id":"platform-analytics","label":"抖音创作者中心 + 视频号助手","freshness":"2026-08-07 15:24 CST","coverage":"账号层 2026-07-31 至 2026-08-06"},{"id":"works-list","label":"双平台作品管理页","freshness":"2026-08-07 15:24 CST","coverage":"作品榜与发布状态"},{"id":"axis-22-run","label":"chaoshao-20260807-kungfu-womens-football","freshness":"2026-08-07 15:12 CST","coverage":"第 22 轴生成、字幕质检与发布结果"}]};
-const COLORS = ["#52d7e8","#e36ea4","#f3b853","#67d391","#7aa2ff","#ff7a7a"];
-const $ = (selector, root=document) => root.querySelector(selector);
-const $$ = (selector, root=document) => Array.from(root.querySelectorAll(selector));
-const el = (tag, className, text) => {
-  const node = document.createElement(tag);
-  if (className) node.className = className;
-  if (text !== undefined) node.textContent = text;
-  return node;
-};
-const fmt = (value) => Number(value).toLocaleString("zh-CN");
+(function(){
+  var el=document.getElementById("clock");
+  function pad(n){return (n<10?"0":"")+n}
+  function tick(){var d=new Date();el.textContent=pad(d.getHours())+":"+pad(d.getMinutes())+":"+pad(d.getSeconds())}
+  tick();setInterval(tick,1000);
+  /* ───────── v4.2 动态化渲染 ─────────
+     原来:罗盘弧与画像环的 dasharray 写死在 HTML 里、完全静止;柱体只有尺寸动画,
+          颜色是硬编码 class,和数值没有关系。
+     现在:①所有罗盘/环从 0 扫到目标值 ②柱体与环的颜色由数值驱动
+          (保留各自的语义色相,用数值决定亮度/不透明度/辉光强度,大的更亮、小的更暗)
+          ③健康分数字与指针的颜色走 红→琥珀→绿 健康刻度。
+     JS 失败时 CSS 里的静态配色仍在,只是不再动——不会白板。 */
+  var HUE={dy:"37,214,230",sp:"168,85,247",gold:"251,191,36",dim:"120,150,190",
+           c1:"251,191,36",c2:"168,85,247",c3:"37,214,230",c4:"168,85,247",c5:"37,214,230",c6:"168,85,247",
+           win:"37,214,230",lose:"248,113,113"};
+  function hueOf(el,def){
+    if(el.dataset.hue) return el.dataset.hue;
+    for(var k in HUE){ if(el.classList.contains(k)) return HUE[k]; }
+    return def||"37,214,230";
+  }
+  /* 健康刻度:0=红 50=琥珀 100=绿 */
+  function healthColor(v){
+    var a=[248,113,113],b=[251,191,36],c=[52,211,153],lo,hi,t;
+    v=Math.max(0,Math.min(100,v));
+    if(v<=50){lo=a;hi=b;t=v/50}else{lo=b;hi=c;t=(v-50)/50}
+    return "rgb("+lo.map(function(x,i){return Math.round(x+(hi[i]-x)*t)}).join(",")+")";
+  }
+  /* 数值→亮度:v 越大,主色越实、辉光越强 */
+  function paint(el,v,dir){
+    var h=hueOf(el), i=Math.max(0,Math.min(1,v/100));
+    var strong="rgba("+h+","+(0.5+0.5*i).toFixed(3)+")", weak="rgba("+h+",0.2)";
+    el.style.background="linear-gradient("+dir+","+(dir==="90deg"?weak+","+strong:strong+","+weak)+")";
+    el.style.boxShadow="0 0 "+(3+13*i).toFixed(1)+"px rgba("+h+","+(0.08+0.37*i).toFixed(3)+")";
+  }
 
-function setMeta(){
-  $("#brandTitle").textContent = DATA.meta.brand;
-  $("#brandSubtitle").textContent = `${DATA.meta.account} · ${DATA.meta.subtitle}`;
-  $("#period").textContent = DATA.meta.period;
-  $("#freshness").textContent = DATA.meta.generatedAt.slice(5,16).replace("T"," ");
-  $("#version").textContent = `v${DATA.meta.version}`;
-  $("#footerText").textContent = `${DATA.meta.account} · ${DATA.meta.subtitle} · ${DATA.meta.period} · 静态快照，无账号凭证`;
-  const tick = () => $("#clock").textContent = new Date().toLocaleTimeString("zh-CN",{hour12:false});
-  tick(); setInterval(tick,1000);
-}
-
-function addBarRow(root, label, value, width, className="", marker=null){
-  const row = el("div","compare-row");
-  row.append(el("span","compare-name",label));
-  const track = el("div","bar-track");
-  const fill = el("span",`bar-fill ${className}`.trim());
-  fill.dataset.width = Math.max(0,Math.min(100,width));
-  track.append(fill);
-  if(marker !== null){const m=el("i","target-marker");m.style.left=`${marker}%`;track.append(m)}
-  row.append(track,el("span","bar-value",value));
-  root.append(row);
-}
-
-function renderComparison(){
-  const root = $("#comparison");
-  const dy = DATA.platforms.douyin, wx = DATA.platforms.wechat;
-  const groups = [
-    {title:"7 日播放",note:`抖音为视频号 ${DATA.summary.douyinToWechatPlayRatio.toFixed(2)}×`,rows:[["抖音",fmt(dy.plays7d),100,""],["视频号",fmt(wx.plays7d),wx.plays7d/dy.plays7d*100,"wechat"]]},
-    {title:"粉丝规模",note:`合计 ${fmt(DATA.summary.followers)}`,rows:[["抖音",fmt(dy.followers),100,""],["视频号",fmt(wx.followers),wx.followers/dy.followers*100,"wechat"]]},
-    {title:"7 日净增粉",note:"增长集中在抖音",rows:[["抖音",`+${dy.netFollowers7d}`,100,"green"],["视频号",String(wx.netFollowers7d),0,"wechat"]]},
-    {title:"互动率",note:"工作健康线 2%",marker:100,rows:[["抖音",`${dy.interactionRate}%`,dy.interactionRate/2*100,"amber"],["视频号",`${wx.interactionRate}%`,wx.interactionRate/2*100,"wechat"]]}
-  ];
-  groups.forEach(group=>{
-    const section=el("div","compare-group");
-    const head=el("div","section-label");head.append(el("strong","",group.title),el("span","",group.note));section.append(head);
-    group.rows.forEach(row=>addBarRow(section,...row,group.marker ?? null));root.append(section);
+  /* 横向柱(TOP榜/平台对比) */
+  document.querySelectorAll(".bf[data-w]").forEach(function(b,i){
+    var v=parseFloat(b.dataset.w)||0;
+    paint(b,v,"90deg");
+    b.style.transitionDelay=(0.1+i*0.04)+"s";
+    requestAnimationFrame(function(){requestAnimationFrame(function(){b.style.width=v+"%"})});
   });
-  const callout=el("div","comparison-callout",`双平台 7 日播放 ${fmt(DATA.summary.plays7d)}，抖音占 69.7%；净增粉合计 +${DATA.summary.netFollowers7d}。当前首要矛盾不是触达规模，而是留存与跨平台复制。`);
-  root.append(callout);
-}
-
-function renderAudience(){
-  const audience=DATA.platforms.wechat.audience;
-  $("#audienceSample").textContent=`画像样本 ${fmt(audience.sample)}`;
-  const rings=$("#profileRings");
-  [["50 岁以上",audience.ages[0].value,"var(--magenta)"],["男性",audience.male,"var(--cyan)"]].forEach(item=>{
-    const wrap=el("div","ring-wrap");
-    const ring=el("div","ring");ring.style.setProperty("--p",item[1]);ring.style.setProperty("--ring-color",item[2]);
-    ring.append(el("span","ring-value",`${item[1]}%`));wrap.append(ring,el("div","ring-label",item[0]));rings.append(wrap);
+  /* 纵向柱(流量来源/涨粉断层) */
+  document.querySelectorAll(".bar[data-h]").forEach(function(b,i){
+    var v=parseFloat(b.dataset.h)||0;
+    paint(b,v,"180deg");
+    b.style.transitionDelay=(0.15+i*0.06)+"s";
+    requestAnimationFrame(function(){requestAnimationFrame(function(){b.style.height=v+"%"})});
   });
-  const ages=$("#ageDistribution"), max=audience.ages[0].value;
-  audience.ages.forEach((item,index)=>{
-    const row=el("div","dist-row");row.append(el("span","dist-label",item.label));
-    const track=el("div","bar-track");const fill=el("span",`bar-fill ${index===0?"wechat":""}`);fill.dataset.width=item.value/max*100;track.append(fill);
-    row.append(track,el("span","dist-value",`${item.value}%`));ages.append(row);
+  /* 堆叠条(粉丝来源构成) */
+  document.querySelectorAll(".stack .sg[data-w]").forEach(function(s,i){
+    var v=parseFloat(s.dataset.w)||0, h=hueOf(s);
+    s.style.background="rgba("+h+","+(0.45+0.5*Math.min(1,v/60)).toFixed(3)+")";
+    s.style.transitionDelay=(0.3+i*0.07)+"s";
+    requestAnimationFrame(function(){requestAnimationFrame(function(){s.style.width=v+"%"})});
   });
-  const source=DATA.platforms.wechat.fanSources,total=source.reduce((sum,item)=>sum+item.value,0);
-  source.forEach((item,index)=>{
-    const seg=el("span");seg.style.width=`${item.value/total*100}%`;seg.style.background=COLORS[index%COLORS.length];seg.title=`${item.label} ${fmt(item.value)}`;$("#fanSourceStack").append(seg);
-    const lab=el("span");const dot=el("i");dot.style.background=COLORS[index%COLORS.length];lab.append(dot,document.createTextNode(`${item.label} ${Math.round(item.value/total*1000)/10}%`));$("#fanSourceLegend").append(lab);
+  /* 罗盘弧:半圆 r=80 → 全长 π*80 = 251.3 */
+  document.querySelectorAll(".garc[data-v]").forEach(function(p){
+    var v=parseFloat(p.dataset.v)||0, L=251.3;
+    requestAnimationFrame(function(){requestAnimationFrame(function(){
+      p.setAttribute("stroke-dasharray",(L*v/100).toFixed(1)+" "+L);
+    })});
   });
-}
+  /* 画像环:整圆 r=38 → 全长 2π*38 = 238.8 */
+  document.querySelectorAll(".rarc[data-v]").forEach(function(c,i){
+    var v=parseFloat(c.dataset.v)||0, L=238.8, h=hueOf(c);
+    c.setAttribute("stroke","rgba("+h+","+(0.55+0.45*Math.min(1,v/100)).toFixed(3)+")");
+    c.style.filter="drop-shadow(0 0 "+(2+6*v/100).toFixed(1)+"px rgba("+h+",.55))";
+    c.style.transitionDelay=(0.2+i*0.15)+"s";
+    requestAnimationFrame(function(){requestAnimationFrame(function(){
+      c.setAttribute("stroke-dasharray",(L*v/100).toFixed(1)+" "+L);
+    })});
+  });
+  /* 健康分数字 + 指针:颜色走健康刻度 */
+  document.querySelectorAll(".hv[data-v]").forEach(function(b){
+    var col=healthColor(parseFloat(b.dataset.v)||0);
+    b.style.color=col; b.style.textShadow="0 0 14px "+col.replace("rgb(","rgba(").replace(")",",.55)");
+  });
+  var needle=document.getElementById("needle");
+  if(needle){
+    var nv=parseFloat(needle.dataset.v)||0, ncol=healthColor(nv);
+    var np=document.getElementById("ndl"), nc=document.getElementById("ndlc");
+    if(np){np.setAttribute("fill",ncol);np.style.filter="drop-shadow(0 0 6px "+ncol.replace("rgb(","rgba(").replace(")",",.85)")+")"}
+    if(nc){nc.setAttribute("stroke",ncol)}
+    var base=nv*1.8-90;
+    setTimeout(function(){needle.style.transform="rotate("+base.toFixed(1)+"deg)"},300);
+    /* 仪表"活着"的轻微游动:±0.3°(=±0.17 分),配合已有的 1.4s 缓动 → 缓慢呼吸。
+       幅度刻意压到读数分辨率以下,不会被误读成数值在变。 */
+    var sw=0;
+    setInterval(function(){sw=sw?0:1;needle.style.transform="rotate("+(base+(sw?0.3:-0.3)).toFixed(2)+"deg)"},2600);
+  }
 
-function renderHealth(key){
-  const data=DATA.health[key],score=data.score;
-  $$("[data-health]").forEach(tab=>tab.setAttribute("aria-selected",String(tab.dataset.health===key)));
-  $("#healthView").setAttribute("aria-labelledby",`tab-${key}`);
-  $("#gaugeScore").textContent=score;
-  $("#gaugeLabel").textContent=data.label;
-  $("#gaugeFormula").textContent=data.formula;
-  $("#gaugeSvgDesc").textContent=`当前指数 ${score} 分`;
-  $("#gaugeArc").style.strokeDasharray=`${score*2.512} 251.2`;
-  $("#gaugeArc").style.stroke=score>=65?"var(--green)":score>=45?"var(--amber)":"var(--red)";
-  $("#gaugeNeedle").style.transform=`rotate(${-90+score*1.8}deg)`;
-  const root=$("#healthKpis");root.textContent="";
-  data.kpis.forEach(item=>{const card=el("div","kpi");card.dataset.tone=item.tone;card.append(el("div","kpi-label",item.label),el("div","kpi-value",item.value),el("div","kpi-detail",item.detail));root.append(card)});
-  $("#healthDiagnosis").textContent=data.diagnosis;
-}
-
-function enableArrowTabs(selector,attribute,callback){
-  const tabs=$$(selector);
-  tabs.forEach((tab,index)=>{
-    tab.addEventListener("click",()=>callback(tab.dataset[attribute]));
-    tab.addEventListener("keydown",event=>{
-      if(!["ArrowLeft","ArrowRight"].includes(event.key))return;
-      event.preventDefault();const next=(index+(event.key==="ArrowRight"?1:-1)+tabs.length)%tabs.length;tabs[next].focus();tabs[next].click();
+  /* ★持续动效:给罗盘弧与两个画像环各叠一条"流光",沿已填充的那段来回跑。
+     流光是独立的装饰元素,原弧/原环一点没动——数值不受影响。 */
+  function addRunner(el,total,dashLen,dur){
+    var v=parseFloat(el.dataset.v)||0, filled=total*v/100;
+    if(filled<dashLen*1.5) return;                    // 太短就不加,免得看着像卡住
+    var run=el.cloneNode(false);
+    run.removeAttribute("data-v");
+    run.setAttribute("class","arc-run");
+    run.setAttribute("stroke-dasharray",dashLen+" "+total);
+    run.setAttribute("stroke",el.dataset.hue?"rgba("+el.dataset.hue+",1)":"#bff4ff");
+    run.setAttribute("stroke-width",(parseFloat(el.getAttribute("stroke-width"))||10)-2);
+    run.style.setProperty("--run",(-filled).toFixed(1));
+    run.style.setProperty("--dur",dur+"s");
+    run.style.filter="drop-shadow(0 0 5px currentColor)";
+    el.parentNode.insertBefore(run,el.nextSibling);
+  }
+  document.querySelectorAll(".garc[data-v]").forEach(function(p){addRunner(p,251.3,6,2.8)});
+  document.querySelectorAll(".rarc[data-v]").forEach(function(c,i){addRunner(c,238.8,5,3.2+i*0.5)});
+  document.querySelectorAll("#tabs .tab").forEach(function(t){
+    t.addEventListener("click",function(){
+      document.querySelectorAll("#tabs .tab").forEach(function(x){x.classList.remove("on")});
+      document.querySelectorAll(".tp").forEach(function(x){x.classList.remove("on")});
+      t.classList.add("on");document.getElementById(t.dataset.t).classList.add("on");
     });
   });
-}
-
-function renderLineChart(id,values,labels,color,formatter){
-  const svg=$(id),NS="http://www.w3.org/2000/svg",W=420,H=150,pad={l:12,r:12,t:12,b:24};
-  svg.setAttribute("viewBox",`0 0 ${W} ${H}`);svg.textContent="";
-  const min=Math.min(...values),max=Math.max(...values),range=Math.max(1,max-min);
-  const x=i=>pad.l+i*(W-pad.l-pad.r)/(values.length-1),y=v=>pad.t+(max-v)/range*(H-pad.t-pad.b);
-  [0,.5,1].forEach(f=>{const line=document.createElementNS(NS,"line");line.setAttribute("x1",pad.l);line.setAttribute("x2",W-pad.r);line.setAttribute("y1",pad.t+f*(H-pad.t-pad.b));line.setAttribute("y2",pad.t+f*(H-pad.t-pad.b));line.setAttribute("class","chart-gridline");svg.append(line)});
-  const points=values.map((v,i)=>`${x(i)},${y(v)}`).join(" ");
-  const area=document.createElementNS(NS,"polygon");area.setAttribute("points",`${pad.l},${H-pad.b} ${points} ${W-pad.r},${H-pad.b}`);area.setAttribute("fill",color);area.setAttribute("class","chart-area");svg.append(area);
-  const line=document.createElementNS(NS,"polyline");line.setAttribute("points",points);line.setAttribute("stroke",color);line.setAttribute("class","chart-line");svg.append(line);
-  values.forEach((value,index)=>{const circle=document.createElementNS(NS,"circle");circle.setAttribute("cx",x(index));circle.setAttribute("cy",y(value));circle.setAttribute("r",3.5);circle.setAttribute("fill",color);circle.setAttribute("class","chart-dot");const title=document.createElementNS(NS,"title");title.textContent=`${labels[index]} ${formatter(value)}`;circle.append(title);svg.append(circle)});
-  [0,labels.length-1].forEach(index=>{const text=document.createElementNS(NS,"text");text.setAttribute("x",x(index));text.setAttribute("y",H-6);text.setAttribute("text-anchor",index===0?"start":"end");text.setAttribute("class","chart-axis-label");text.textContent=labels[index];svg.append(text)});
-  const top=document.createElementNS(NS,"text");top.setAttribute("x",W-pad.r);top.setAttribute("y",10);top.setAttribute("text-anchor","end");top.setAttribute("class","chart-axis-label");top.textContent=formatter(max);svg.append(top);
-}
-
-function renderSignals(){
-  const ct=DATA.platforms.douyin.content;
-  const signals=[
-    {label:"整体完播率",value:DATA.platforms.douyin.finishRate,target:25,unit:"%",tone:"red",note:"工作目标 25%"},
-    {label:"5 秒完播率",value:ct.finish5s,target:55,unit:"%",tone:"amber",note:"工作目标 55%"},
-    {label:"互动率",value:DATA.platforms.douyin.interactionRate,target:2,unit:"%",tone:"green",note:"距目标 0.24pp"},
-    {label:"2 秒跳出率",value:ct.bounce2s,target:20,unit:"%",tone:"red",note:"低于 20% 为工作目标"}
-  ];
-  const root=$("#retentionSignals");
-  signals.forEach(s=>{const box=el("div","signal");const head=el("div","signal-head");head.append(el("span","",s.label),el("b","",`${s.value}${s.unit}`));const track=el("div","bar-track");const fill=el("span",`bar-fill ${s.tone}`);fill.dataset.width=Math.min(100,s.value/s.target*100);track.append(fill);box.append(head,track,el("small","",s.note));root.append(box)});
-}
-
-function renderSourceView(key){
-  $$("[data-source-view]").forEach(btn=>btn.setAttribute("aria-pressed",String(btn.dataset.sourceView===key)));
-  const root=$("#sourceDistribution");root.textContent="";
-  const isWechat=key==="wechat";
-  const items=isWechat?DATA.platforms.wechat.playSources:DATA.platforms.douyin.interest;
-  const max=Math.max(...items.map(i=>i.value));
-  items.forEach((item,index)=>{const row=el("div","dist-row");row.append(el("span","dist-label",item.label));const track=el("div","bar-track");const fill=el("span",`bar-fill ${isWechat?"wechat":index===0?"amber":""}`.trim());fill.dataset.width=item.value/max*100;track.append(fill);row.append(track,el("span","dist-value",isWechat?fmt(item.value):`${item.value}%`));root.append(row)});
-  $("#sourceNote").textContent=isWechat?"视频号可归因播放 17,102，占总播放 99.9%；推荐流 16,583，占总播放 96.9%。":"抖音兴趣前三为随拍、剧情、亲子，合计 72%；体育热点通过生活判断进入泛兴趣流量池。";
-  requestAnimationFrame(animateBars);
-}
-
-function renderWorks(platform){
-  $$("[data-works]").forEach(tab=>tab.setAttribute("aria-selected",String(tab.dataset.works===platform)));
-  const works=DATA.works[platform],max=Math.max(...works.map(w=>w.plays),1),total=works.reduce((sum,w)=>sum+w.plays,0);
-  const summary=$("#worksSummary");summary.textContent="";
-  const platformData=DATA.platforms[platform];
-  [["近 10 条播放",fmt(total)],["账号 7 日播放",fmt(platformData.plays7d)]].forEach(item=>{const box=el("div");box.append(el("span","",item[0]),el("strong","",item[1]));summary.append(box)});
-  const root=$("#worksList");root.textContent="";
-  works.forEach((work,index)=>{
-    const row=el("div","work-row");row.append(el("span","rank",String(index+1)));
-    const body=el("div");const title=el("div","work-title");title.append(el("span","",`第 ${work.axis} 轴 · ${work.title}`));
-    const status=el("span",`status ${/中|审核/.test(work.status)?"pending":""}`.trim(),work.status);title.append(status);
-    const bar=el("div","work-bar");const fill=el("span");fill.dataset.width=Math.sqrt(work.plays/max)*100;bar.append(fill);
-    const meta=el("div","work-meta");const interactions=(work.likes||0)+(work.comments||0)+(work.shares||0)+(work.favorites||0);meta.append(el("span","",`${work.date} · 互动 ${fmt(interactions)}`),el("b","",`${fmt(work.plays)} 播放`));
-    body.append(title,bar,meta);row.append(body);root.append(row);
-  });
-  const share=platformData.plays7d?total/platformData.plays7d*100:0;
-  $("#worksNote").textContent=`近 10 条合计 ${fmt(total)} 播放，占账号 7 日播放 ${share.toFixed(1)}%。审核中或处理中作品按 0 记录，不参与效果判断。`;
-  requestAnimationFrame(animateBars);
-}
-
-function renderExperiments(){
-  const root=$("#experimentGrid"),max=Math.max(...DATA.experiments.flatMap(item=>[item.douyin,item.wechat]),1);
-  DATA.experiments.forEach(item=>{
-    const row=el("div",`experiment-row ${item.axis===DATA.summary.latestAxis?"latest":""}`.trim());
-    const label=el("div","experiment-label");label.append(el("strong","",`第 ${item.axis} 轴 · ${item.name}`),el("span","",item.topic));
-    const bars=el("div","dual-bars");
-    [["抖",item.douyin,""],["号",item.wechat,"wechat"]].forEach(b=>{const line=el("div",`dual-bar ${b[2]}`.trim());line.append(el("em","",b[0]));const track=el("div");const fill=el("span");fill.dataset.width=Math.sqrt(b[1]/max)*100;track.append(fill);line.append(track);bars.append(line)});
-    const result=el("div","experiment-result");result.append(el("b","",`${fmt(item.douyin)} / ${fmt(item.wechat)}`),document.createTextNode(item.result));
-    row.append(label,bars,result);root.append(row);
-  });
-}
-
-function renderStrategy(){
-  $("#strategyLine").textContent=`${DATA.strategy.oneLine}（当前信心 ${DATA.strategy.confidence}）`;
-  [["wins",DATA.strategy.wins],["risks",DATA.strategy.risks],["actions",DATA.strategy.actions]].forEach(([id,items])=>{const root=$(`#${id}`);items.forEach(item=>root.append(el("li","",item)))});
-  const defs=$("#definitions");DATA.definitions.forEach(item=>{defs.append(el("dt","",item.metric),el("dd","",item.definition))});
-  const sources=$("#sources");DATA.sources.forEach(item=>{const row=el("div");row.append(el("strong","",item.label),document.createTextNode(` · ${item.freshness} · ${item.coverage}`));sources.append(row)});
-}
-
-function animateBars(){
-  $$('[data-width]').forEach(node=>{const target=node.dataset.width;node.style.width="0";requestAnimationFrame(()=>node.style.width=`${target}%`)});
-}
-
-function init(){
-  setMeta();renderComparison();renderAudience();renderHealth("overview");
-  renderLineChart("#playsChart",DATA.trends.douyinPlays7d,DATA.trends.labels,"#52d7e8",v=>`${(v/1000).toFixed(1)}k`);
-  renderLineChart("#followersChart",DATA.trends.douyinFollowers,DATA.trends.labels,"#67d391",v=>fmt(v));
-  renderSignals();renderSourceView("wechat");renderWorks("wechat");renderExperiments();renderStrategy();
-  enableArrowTabs("[data-health]","health",renderHealth);
-  enableArrowTabs("[data-works]","works",renderWorks);
-  $$("[data-source-view]").forEach(btn=>btn.addEventListener("click",()=>renderSourceView(btn.dataset.sourceView)));
-  requestAnimationFrame(animateBars);
-}
-init();
+})();
 </script>
 </body>
 </html>
