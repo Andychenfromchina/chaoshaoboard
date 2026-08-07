@@ -1,0 +1,94 @@
+{
+  "meta": {
+    "title": "百商AI新媒体运营飞轮",
+    "subtitle": "广州潮少 · 抖音 / 视频号",
+    "period": "2026-07-31 ~ 08-06",
+    "updated": "08-07 15:24",
+    "version": "v4.18"
+  },
+  "summary": {
+    "plays7d": 56416,
+    "followers": 2525,
+    "netFollowers7d": 62,
+    "douyinHealth": 70,
+    "wechatHealth": 35,
+    "flywheelHealth": 53
+  },
+  "douyin": {
+    "followers": 1302,
+    "plays7d": 39300,
+    "netFollowers7d": 62,
+    "posts7d": 13,
+    "interactionRate": 1.76,
+    "finishRate": 14.26,
+    "finish5s": 46.07,
+    "bounce2s": 26.72,
+    "averageWatch": "11.14秒",
+    "clickRate": 6.63,
+    "playsMedian": 5421,
+    "interests": [
+      ["随拍", 37],
+      ["剧情", 20],
+      ["亲子", 15],
+      ["颜值", 6],
+      ["三农", 6],
+      ["社会时政", 5],
+      ["其他", 11]
+    ]
+  },
+  "wechat": {
+    "followers": 1223,
+    "plays7d": 17116,
+    "netFollowers7d": 0,
+    "fansAdded7d": 1,
+    "fansLost7d": 1,
+    "likes7d": 5,
+    "comments7d": 1,
+    "interactionRate": 0.04,
+    "recommendPlays": 16583,
+    "sharePlays": 271,
+    "otherPlays": 103,
+    "friendPlays": 74,
+    "homePlays": 47,
+    "subscriptionPlays": 24,
+    "recommendShare": 96.9,
+    "audienceSample": 1220,
+    "male": 56.7,
+    "female": 39.9,
+    "ages": [
+      ["50岁+", 78.9],
+      ["40-49", 8.2],
+      ["30-39", 7.9],
+      ["17岁-", 1.6],
+      ["25-29", 1.2],
+      ["18-24", 1.0]
+    ]
+  },
+  "works": [
+    {"axis": 14, "title": "该不该停 · 孙颖莎退赛", "date": "08-03", "plays": 3318, "likes": 1, "comments": 0, "favorites": 0},
+    {"axis": 13, "title": "见过大场面 · 回来干老活", "date": "08-02", "plays": 819, "likes": 0, "comments": 0, "favorites": 1},
+    {"axis": 15, "title": "巨幕观赛 · 远方能否变主场", "date": "08-03", "plays": 604, "likes": 1, "comments": 0, "favorites": 0},
+    {"axis": 17, "title": "孩子追星 · 大人该不该帮", "date": "08-04", "plays": 278, "likes": 0, "comments": 0, "favorites": 0},
+    {"axis": 16, "title": "赢了强队 · 先夸还是提醒", "date": "08-04", "plays": 225, "likes": 0, "comments": 0, "favorites": 0},
+    {"axis": 20, "title": "旧球台 · 该不该换新", "date": "08-06", "plays": 214, "likes": 0, "comments": 0, "favorites": 0},
+    {"axis": 19, "title": "机器陪练 · 能否替代老球友", "date": "08-06", "plays": 214, "likes": 0, "comments": 0, "favorites": 0},
+    {"axis": 21, "title": "赢了欧洲青训 · 马上留洋吗", "date": "08-06", "plays": 203, "likes": 0, "comments": 0, "favorites": 0}
+  ],
+  "experiments": {
+    "eventAverage": 4933,
+    "lifeAverage": 753,
+    "ratio": 6.55,
+    "strongAxis": "第18轴 · 横滨赛程",
+    "strongResult": "抖音1万 / 360赞 / 12评 / 2转",
+    "latestAxis": "第22轴 · 功夫女足",
+    "latestStatus": "双平台已发布，冷启动监测中"
+  },
+  "strategy": {
+    "confidence": 78,
+    "oneLine": "即时体育事件给点击理由，小白用连续实体动作把热点变成生活决策，大陈用画内真实对白完成判断；字幕必须烧录。",
+    "riskOne": "抖音完播率 14.26%，2 秒跳出 26.72%，增长和互动改善尚未修复留存。",
+    "riskTwo": "视频号推荐流占 96.9%，7 日新增 1、流失 1，分发韧性不足。",
+    "win": "第18轴抖音 1 万播放、360赞、12评、2转；第21轴 3,444 播放但互动偏弱。",
+    "next": "先回收第22轴的 2h / 24h / 48h 数据，单独验证 30 秒时长与烧录字幕对完播的影响。"
+  }
+}

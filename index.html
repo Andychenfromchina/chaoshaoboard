@@ -3,561 +3,771 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>百商AI新媒体运营飞轮 · 潮少大数据看板</title>
+<title>广州潮少 · 运营大数据看板</title>
 <style>
   *{margin:0;padding:0;box-sizing:border-box}
-  body{background:radial-gradient(1200px 700px at 50% -10%,#0e2050 0%,#060d24 55%,#04081a 100%) fixed;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;color:#eaf6ff;font-variant-numeric:tabular-nums;line-height:1.6;padding:14px}
-  .wrap{max-width:1320px;margin:0 auto;display:grid;grid-template-columns:3fr 6fr 3fr;gap:12px;
-    grid-template-areas:"hd hd hd" "cmp gau top" "por gau top" "por flw top" "str str str";align-items:stretch}
-  .a-hd{grid-area:hd}.a-cmp{grid-area:cmp}.a-gau{grid-area:gau}.a-top{grid-area:top}.a-por{grid-area:por}.a-flw{grid-area:flw}.a-str{grid-area:str}
-  @media (max-width:980px){
-    body{padding:8px}
-    .wrap{width:100%;min-width:0;grid-template-columns:minmax(0,1fr);grid-template-areas:"hd" "cmp" "gau" "top" "por" "flw" "str"}
-    .wrap>*{width:100%;min-width:0}
-    .band{height:auto;min-height:0;display:flex;flex-direction:column;gap:6px;padding:10px 12px}
-    .btitle{order:-1;width:100%;min-width:0;padding:0}
-    .btitle h1{font-size:18px;white-space:normal}
-    .wing{display:none}
-    .side,.side.r{width:100%;justify-content:center;flex-wrap:wrap}
-    .gwrap{flex-direction:column;align-items:center}
-    .glegend{width:100%;line-height:1.8;text-align:center}
-    .kpis{grid-template-columns:repeat(2,minmax(0,1fr))}
-    .grp-t{gap:8px;flex-wrap:wrap}
-    .note,.diag,.rc,.vfoot,.stripe{overflow-wrap:anywhere}
-  }
-  .panel{position:relative;display:flex;flex-direction:column;background:linear-gradient(165deg,rgba(13,26,62,.97),rgba(7,14,38,.98));border:1px solid rgba(0,229,255,.26);border-radius:10px;box-shadow:0 12px 34px rgba(2,10,40,.5),inset 0 0 30px rgba(0,90,220,.08);padding:12px 14px}
-  .panel .fill{flex:1}
-  .cn{position:absolute;width:11px;height:11px;border:2px solid rgba(0,229,255,.7);pointer-events:none}
-  .tl{top:-1px;left:-1px;border-right:none;border-bottom:none;border-radius:8px 0 0 0}
-  .tr{top:-1px;right:-1px;border-left:none;border-bottom:none;border-radius:0 8px 0 0}
-  .bl{bottom:-1px;left:-1px;border-right:none;border-top:none;border-radius:0 0 0 8px}
-  .br{bottom:-1px;right:-1px;border-left:none;border-top:none;border-radius:0 0 8px 0}
-  .ph{text-align:center;margin:-2px 0 10px;padding-bottom:7px;border-bottom:1px solid rgba(0,229,255,.22)}
-  .ph h2{display:inline-block;font-size:13.5px;font-weight:800;color:#bfefff;text-shadow:0 0 10px rgba(0,229,255,.45);position:relative;padding:0 14px;white-space:nowrap}
-  .ph h2::before,.ph h2::after{content:"";position:absolute;top:50%;width:26px;height:1px;background:linear-gradient(90deg,transparent,#00e5ff);box-shadow:0 0 6px rgba(0,229,255,.7)}
-  .ph h2::before{right:100%}.ph h2::after{left:100%;transform:scaleX(-1)}
-  .ph .mt{font-size:8.5px;color:rgba(150,190,230,.55);display:block;margin-top:1px}
-  /* header band */
-  .band{position:relative;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:10px;height:64px;padding:0 16px;background:linear-gradient(180deg,rgba(14,32,76,.9),rgba(8,17,44,.85));border:1px solid rgba(0,229,255,.3);border-radius:10px;box-shadow:0 8px 26px rgba(2,10,40,.5),inset 0 0 26px rgba(0,90,220,.12)}
-  .band::before{content:"";position:absolute;top:0;left:6%;right:6%;height:1px;background:linear-gradient(90deg,transparent,rgba(140,225,255,.7),transparent)}
-  .side{display:flex;align-items:center;gap:8px;font-size:10px;color:rgba(150,200,240,.75)}
-  .side.r{justify-content:flex-end}
-  .pill{border:1px solid rgba(0,229,255,.35);border-radius:999px;padding:3px 10px;background:rgba(0,90,180,.18);white-space:nowrap}
-  .live i{display:inline-block;width:7px;height:7px;border-radius:50%;background:#34d399;box-shadow:0 0 8px #34d399;margin-right:5px;animation:p 1.8s ease-in-out infinite}
-  @keyframes p{50%{opacity:.3}}
-  .clock{color:#7fe9ff;font-weight:800;font-size:13px;text-shadow:0 0 12px rgba(0,229,255,.55)}
-  .btitle{position:relative;text-align:center;padding:0 16px}
-  .btitle h1{font-size:22px;font-weight:800;white-space:nowrap;background:linear-gradient(180deg,#fff 15%,#9deeff 50%,#3f9dff 90%);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 0 14px rgba(0,200,255,.4))}
-  .btitle .sub{font-size:9px;color:rgba(150,200,240,.6);margin-top:1px}
-  .wing{position:absolute;top:50%;transform:translateY(-50%);width:120px;height:16px}
-  .wing.l{right:100%}.wing.r{left:100%;transform:translateY(-50%) scaleX(-1)}
-  .wing i{display:block;height:2px;margin:3.5px 0;background:linear-gradient(90deg,transparent,#00e5ff);box-shadow:0 0 7px rgba(0,229,255,.7)}
-  .wing i:nth-child(1){width:100%}.wing i:nth-child(2){width:70%;margin-left:30%;opacity:.7}.wing i:nth-child(3){width:42%;margin-left:58%;opacity:.45}
-  /* bars */
-  .grp{margin-bottom:9px}
-  .grp-t{font-size:9px;color:rgba(168,208,240,.72);margin-bottom:4px;display:flex;justify-content:space-between}
-  .grp-t em{font-style:normal;color:rgba(251,191,36,.9)}
-  .brow{display:flex;align-items:center;gap:6px;height:20px}
-  .bn{width:46px;flex:none;font-size:9.5px;display:flex;align-items:center;gap:4px;white-space:nowrap}
-  .dot{width:6px;height:6px;border-radius:2px;flex:none}
-  .dot.dy{background:#25d6e6}.dot.sp{background:#a855f7}
-  .bt{flex:1;height:10px;border-radius:5px;background:rgba(8,24,58,.85);border:1px solid rgba(96,170,255,.12);position:relative;min-width:0}
-  .bf{position:absolute;left:0;top:0;bottom:0;width:0;min-width:2px;border-radius:5px;transition:width 1.1s cubic-bezier(.2,.8,.25,1)}
-  .bf.dy{background:linear-gradient(90deg,rgba(37,214,230,.3),#25d6e6)}
-  .bf.sp{background:linear-gradient(90deg,rgba(168,85,247,.3),#a855f7)}
-  .bf.gold{background:linear-gradient(90deg,rgba(251,191,36,.3),#fbbf24)}
-  .bf.dim{background:rgba(120,150,190,.4)}
-  .bv{width:64px;flex:none;text-align:right;font-size:9px;color:#22d3ee;white-space:nowrap}
-  .baseline{position:absolute;top:-3px;bottom:-3px;width:2px;background:#fbbf24;box-shadow:0 0 6px #fbbf24;border-radius:1px}
-  .baseline em{position:absolute;top:-14px;right:-6px;font-style:normal;font-size:8px;color:#fbbf24;white-space:nowrap}
-  .note{margin-top:8px;padding-top:7px;border-top:1px dashed rgba(96,170,255,.18);font-size:9px;color:rgba(150,190,230,.6);line-height:1.65}
-  .note b{color:rgba(200,225,250,.85)}
-  /* gauge card */
-  .gwrap{display:flex;align-items:center;gap:14px;justify-content:center;padding:4px 0 2px}
-  /* v4.2:表盘与读数分层——原来 gval 压在指针轴心上,数字被指针穿过;
-     指针改为数值色后两者同色、几乎读不出来。把读数移到表盘下方,彻底不重叠。 */
-  .gauge{position:relative;width:190px;height:134px;flex:none}
-  .gauge svg{width:100%;height:110px;display:block}
-  .gval{position:absolute;left:0;right:0;bottom:0;text-align:center}
-  .gval b{font-size:26px;line-height:1;text-shadow:0 0 16px rgba(0,229,255,.5)}
-  .gval span{display:block;font-size:8.5px;color:rgba(150,190,230,.6)}
-  .glegend{font-size:9.5px;color:rgba(168,208,240,.85);line-height:2}
-  .glegend b{font-size:12px}
-  .glegend .dy{color:#25d6e6}.glegend .sp{color:#a855f7}
-  .digits{display:flex;gap:6px;justify-content:center;margin:8px 0 2px}
-  .digits i{font-style:normal;width:30px;height:38px;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:800;color:#7fe9ff;background:rgba(6,18,46,.9);border:1px solid rgba(0,229,255,.4);border-radius:6px;box-shadow:inset 0 0 12px rgba(0,120,255,.2),0 0 8px rgba(0,229,255,.15);text-shadow:0 0 10px rgba(0,229,255,.7)}
-  .dsub{text-align:center;font-size:9px;color:rgba(150,190,230,.6)}
-  .dsub b{color:#34d399}
-  .tabs{display:flex;gap:6px;margin:10px 0 8px}
-  .tab{flex:1;text-align:center;font-size:10.5px;padding:5px 0;border:1px solid rgba(0,229,255,.25);border-radius:6px;background:rgba(8,24,58,.6);cursor:pointer;color:rgba(168,208,240,.8);user-select:none}
-  .tab.on{background:linear-gradient(180deg,rgba(0,120,220,.35),rgba(0,60,140,.25));color:#bfefff;border-color:rgba(0,229,255,.55);box-shadow:0 0 12px rgba(0,150,255,.25)}
-  .tp{display:none}.tp.on{display:block}
-  .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:8px}
-  .kpi{background:rgba(8,24,58,.55);border:1px solid rgba(96,170,255,.15);border-radius:8px;padding:7px 8px;text-align:center}
-  .kpi .v{font-size:15px;font-weight:800;color:#7fe9ff}
-  .kpi .v.good{color:#34d399}.kpi .v.warn{color:#fbbf24}
-  .kpi .l{font-size:8.5px;color:rgba(150,190,230,.6);margin-top:1px}
-  .diag{font-size:10px;color:rgba(190,220,245,.85);background:rgba(8,24,58,.45);border-left:2px solid #25d6e6;border-radius:0 6px 6px 0;padding:6px 9px;margin-top:6px;line-height:1.7}
-  .diag.sp{border-left-color:#a855f7}
-  .diag b{color:#ffd54a}
-  /* top list */
-  .tkpis{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:9px}
-  .tkpi{border:1px solid rgba(0,229,255,.3);border-left:3px solid #a855f7;border-radius:8px;background:rgba(8,24,58,.55);padding:6px 9px}
-  .tkpi.dy{border-left-color:#25d6e6}
-  .tkpi .l{font-size:8.5px;color:rgba(150,190,230,.6)}
-  .tkpi .v{font-size:16px;font-weight:800;color:#eaf6ff}
-  .tkpi .v em{font-style:normal;font-size:9px;color:#34d399;margin-left:4px;vertical-align:2px}
-  .trow{display:flex;align-items:flex-start;gap:7px;margin:7px 0;padding:5px 6px;border-radius:7px}
-  .trow.hot1{border:1px solid rgba(251,191,36,.55);background:rgba(251,191,36,.06)}
-  .trank{width:17px;height:17px;flex:none;font-size:9.5px;color:#0a1836;background:rgba(150,190,230,.55);border-radius:4px;display:flex;align-items:center;justify-content:center;font-weight:800;margin-top:1px}
-  .trank.g{background:#fbbf24}.trank.s{background:#c8d8ea}.trank.b{background:#fb923c}
-  .tmain{flex:1;min-width:0}
-  .tname{font-size:9.5px;color:#dcefff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-  .tbar{height:6px;border-radius:4px;background:rgba(8,24,58,.85);border:1px solid rgba(96,170,255,.12);position:relative;margin:3px 0 2px}
-  .tmeta{font-size:8.5px;color:rgba(150,190,230,.65)}
-  .tmeta b{color:#22d3ee;font-size:9.5px}
-  .tmeta .d{float:right;color:rgba(150,190,230,.45)}
-  .badge{display:inline-block;font-size:8px;border:1px solid rgba(251,191,36,.5);color:#fbbf24;border-radius:4px;padding:0 4px;margin-left:4px;vertical-align:1px}
-  /* portrait —— v4.2 工整对齐:双列网格,两环同列、两图例同起点、行高与环等高 */
-  .pgrid{display:grid;grid-template-columns:92px 1fr;column-gap:14px;row-gap:12px;align-items:center;padding:2px 0 6px}
-  .ring{position:relative;width:92px;height:92px;flex:none}
-  .ring svg{transform:rotate(-90deg)}
-  .ring .c{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
-  .ring .c b{font-size:16px;color:#7fe9ff}
-  .ring .c span{font-size:8px;color:rgba(150,190,230,.6)}
-  .plist{list-style:none;font-size:9.5px;color:rgba(190,220,245,.85)}
-  .plist li{display:flex;align-items:center;gap:6px;height:23px;border-bottom:1px dashed rgba(96,170,255,.10)}
-  .plist li:last-child{border-bottom:0}
-  .plist li>span{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-  .plist li>b{font-size:11px;color:#dcefff;font-variant-numeric:tabular-nums;letter-spacing:.2px}
-  .plist li.wk>b{color:rgba(150,190,230,.75)}
-  .plist i{width:7px;height:7px;border-radius:2px;flex:none}
-  /* 粉丝来源构成条(v4.2 新增:补上卡片中部空档,并参与动态渲染) */
-  .srcwrap{margin-top:2px}
-  .srcwrap .fx-t{margin-bottom:5px}
-  .stack{display:flex;height:12px;border-radius:6px;overflow:hidden;background:rgba(8,24,58,.85);border:1px solid rgba(96,170,255,.12)}
-  .stack .sg{width:0;transition:width 1.1s cubic-bezier(.2,.8,.25,1);min-width:0}
-  .slgd{display:flex;flex-wrap:wrap;gap:4px 12px;margin-top:6px;font-size:8.5px;color:rgba(168,208,240,.75)}
-  .slgd span{display:flex;align-items:center;gap:4px;white-space:nowrap}
-  .slgd i{width:7px;height:7px;border-radius:2px;flex:none}
-  .slgd b{color:#dcefff;font-variant-numeric:tabular-nums}
-  .cargo{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:6px}
-  .cargo .kpi .v{font-size:14px}
-  .flow{display:flex;align-items:center;justify-content:center;gap:5px;font-size:9.5px;color:#bfefff;background:rgba(8,24,58,.5);border:1px dashed rgba(251,191,36,.4);border-radius:8px;padding:6px;margin-top:2px}
-  .flow b{color:#fbbf24}
-  /* ▼ 流量来源 · 母题反差 (图二版式) */
-  .fx{display:grid;grid-template-columns:6fr 5fr;gap:16px;flex:1}
-  @media (max-width:980px){.fx{grid-template-columns:1fr}}
-  .fx-t{display:flex;justify-content:space-between;align-items:baseline;font-size:10.5px;font-weight:700;color:#dcefff;margin-bottom:6px}
-  .fx-t em{font-style:normal;font-size:9px;font-weight:400;color:#fbbf24}
-  .vchart{display:flex;align-items:flex-end;gap:10px;height:158px;padding:0 2px}
-  .vb{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;min-width:0}
-  .vb .val{font-size:10px;font-weight:800;color:#7fe9ff;margin-bottom:3px;white-space:nowrap}
-  .vb.hot .val{color:#fbbf24;text-shadow:0 0 10px rgba(251,191,36,.5)}
-  .vb .bar{width:70%;max-width:44px;height:0;border-radius:6px 6px 2px 2px;transition:height 1.1s cubic-bezier(.2,.8,.25,1)}
-  .vb .bar.c1{background:linear-gradient(180deg,#fbbf24,rgba(251,191,36,.35));box-shadow:0 0 14px rgba(251,191,36,.35)}
-  .vb .bar.c2{background:linear-gradient(180deg,#a855f7,rgba(168,85,247,.3))}
-  .vb .bar.c3{background:linear-gradient(180deg,#25d6e6,rgba(37,214,230,.3))}
-  .vb .bar.c4{background:linear-gradient(180deg,#a855f7,rgba(168,85,247,.25))}
-  .vb .bar.c5{background:linear-gradient(180deg,#25d6e6,rgba(37,214,230,.25))}
-  .vb .bar.c6{background:linear-gradient(180deg,#a855f7,rgba(168,85,247,.2))}
-  .vb .nm{font-size:9px;color:rgba(168,208,240,.75);margin-top:5px;white-space:nowrap}
-  .vchart .vb .nm{min-height:22px;line-height:1.2;text-align:center;white-space:normal}
-  .vfoot{font-size:9px;color:rgba(150,190,230,.6);margin-top:8px;border-top:1px dashed rgba(96,170,255,.18);padding-top:6px;line-height:1.65}
-  .vfoot b{color:rgba(200,225,250,.85)}
-  .duo{display:flex;align-items:flex-end;justify-content:space-around;gap:18px;height:158px;padding:0 8px}
-  .duo .vb .bar.win{background:linear-gradient(180deg,#25d6e6,rgba(37,214,230,.35));box-shadow:0 0 16px rgba(37,214,230,.35);width:78%;max-width:78px}
-  .duo .vb .bar.lose{background:linear-gradient(180deg,#f87171,rgba(248,113,113,.3));width:78%;max-width:78px}
-  .duo .vb .val{font-size:13px}
-  .duo .vb.lose .val{color:#f87171;text-shadow:0 0 10px rgba(248,113,113,.5)}
-  .duo .vb .nm{font-size:9.5px}
-  /* strategy footer */
-  .stripe{display:flex;align-items:center;gap:10px;background:linear-gradient(90deg,rgba(0,120,220,.25),rgba(168,85,247,.18));border:1px solid rgba(0,229,255,.3);border-radius:8px;padding:8px 12px;font-size:11px;margin-bottom:10px}
-  .stripe b{color:#ffd54a}
-  .cards3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
-  @media (max-width:980px){.cards3{grid-template-columns:1fr}}
-  .rc{background:rgba(8,24,58,.5);border:1px solid rgba(96,170,255,.16);border-radius:8px;padding:9px 11px;font-size:10px;line-height:1.7;color:rgba(190,220,245,.88)}
-  .rc h3{font-size:11px;margin-bottom:4px}
-  .rc.risk h3{color:#f87171}.rc.act h3{color:#34d399}.rc.win h3{color:#fbbf24}
-  .foot{grid-column:1/-1;text-align:center;font-size:9px;color:rgba(150,190,230,.45);padding:6px 0 2px}
-  /* v4.2 动态渲染:罗盘弧/画像环原来是写死的 dasharray、完全不动,现在从 0 扫到目标值 */
-  .garc,.rarc{transition:stroke-dasharray 1.5s cubic-bezier(.2,.8,.25,1),stroke 1.5s ease}
-  .bf,.vb .bar,.stack .sg{transition-property:width,height,background,box-shadow}
-  /* ★v4.3 持续动效:让罗盘弧/两个画像环/堆叠条看起来一直在实时跑,不是加载完就定死。
-     铁律——只动装饰层(流光、呼吸辉光),弧长/环长/段宽这些**数值本身绝不动**,动了就是篡改数据。 */
-  @keyframes runDash{from{stroke-dashoffset:0}to{stroke-dashoffset:var(--run,-100)}}
-  @keyframes haze{0%,100%{opacity:.35}50%{opacity:1}}
-  @keyframes shine{0%{transform:translateX(-130%)}100%{transform:translateX(360%)}}
-  .arc-run{pointer-events:none;animation:runDash var(--dur,3s) linear infinite,haze var(--dur,3s) ease-in-out infinite}
-  .stack{position:relative;isolation:isolate}
-  .stack::after{content:"";position:absolute;top:0;bottom:0;left:0;width:26%;pointer-events:none;z-index:2;
-    background:linear-gradient(100deg,transparent 8%,rgba(255,255,255,.45) 50%,transparent 92%);
-    animation:shine 3.8s ease-in-out infinite}
-  @media (prefers-reduced-motion:reduce){
-    .bf,.vb .bar,.stack .sg,#needle,.garc,.rarc{transition:none}
-    .live i,.arc-run,.stack::after{animation:none}
-    .arc-run{display:none}
-  }
-  @media (max-width:980px){
-    .band{height:auto;min-height:0;display:flex;flex-direction:column;gap:6px;padding:10px 12px}
-    .btitle{order:-1;width:100%;min-width:0;padding:0}
-    .btitle h1{font-size:18px;white-space:normal}
-    .wing{display:none}
-    .side,.side.r{width:100%;justify-content:center;flex-wrap:wrap}
-    .gwrap{flex-direction:column;align-items:center}
-    .glegend{width:100%;line-height:1.8;text-align:center}
-    .kpis{grid-template-columns:repeat(2,minmax(0,1fr))}
-    .grp-t{gap:8px;flex-wrap:wrap}
-    .note,.diag,.rc,.vfoot,.stripe{overflow-wrap:anywhere}
+  html{background:#04081a;color-scheme:dark;-webkit-text-size-adjust:100%;text-size-adjust:100%}
+  body{background:radial-gradient(1200px 700px at 50% -10%, #0d1f4c 0%, #060d24 55%, #04081a 100%);min-height:100vh;min-height:100svh;padding:14px;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;overflow-x:hidden}
+  .wrap{max-width:1440px;margin:0 auto;display:flex;flex-direction:column;gap:10px}
+  .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:10px;align-items:stretch}
+  .col{display:flex;flex-direction:column;gap:10px;min-width:0}
+  .cell{position:relative;min-width:0}
+  .cell iframe{width:100%;height:100%;border:0;display:block;background:transparent}
+  .trow{height:68px}
+  .brow{height:265px}
+  .foot{text-align:center;font-size:10px;color:rgba(150,190,230,.45)}
+  @media (max-width:1180px){
+    body{padding:max(8px,env(safe-area-inset-top)) max(8px,env(safe-area-inset-right)) max(12px,env(safe-area-inset-bottom)) max(8px,env(safe-area-inset-left))}
+    .wrap{gap:8px}
+    .grid{display:flex;flex-direction:column}
+    .col{gap:8px}
+    .cell{height:auto!important;min-height:0!important;flex:none!important}
+    .cell iframe{height:150px;overflow:hidden}
+    .trow,.brow{height:auto}
+    .foot{font-size:9px;line-height:1.6;padding:2px 4px}
   }
 </style>
 </head>
 <body>
 <div class="wrap">
+<div class="cell trow" style="--nh:68px"><iframe title="标题栏 · 运营数据驾驶舱" srcdoc="&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;zh-CN&quot;&gt;
+&lt;head&gt;
+&lt;meta charset=&quot;UTF-8&quot;&gt;
+&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+&lt;title&gt;标题栏 · 运营数据驾驶舱&lt;/title&gt;
+&lt;style&gt;
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{background:transparent}
+  body{font-family:var(--kimi-font-sans,-apple-system,BlinkMacSystemFont,&quot;PingFang SC&quot;,&quot;Microsoft YaHei&quot;,sans-serif);color:#eaf6ff;padding:4px 6px;font-variant-numeric:tabular-nums}
+  .band{
+    position:relative;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:10px;
+    height:60px;padding:0 calc(var(--daimon-widget-host-safe-inline-end,82px) + 6px) 0 14px;
+    background:linear-gradient(180deg,rgba(14,32,76,.9),rgba(8,17,44,.85));
+    border:1px solid rgba(0,229,255,.3);border-radius:8px;
+    box-shadow:0 8px 26px rgba(2,10,40,.5), inset 0 0 26px rgba(0,90,220,.12);
+  }
+  .band::before{content:&quot;&quot;;position:absolute;top:0;left:6%;right:6%;height:1px;background:linear-gradient(90deg,transparent,rgba(140,225,255,.7),transparent)}
+  .side{display:flex;align-items:center;gap:8px;font-size:10px;color:rgba(150,200,240,.75);min-width:0}
+  .side.r{justify-content:flex-end}
+  .pill{border:1px solid rgba(0,229,255,.35);border-radius:999px;padding:3px 10px;background:rgba(0,90,180,.18);white-space:nowrap}
+  .live i{display:inline-block;width:7px;height:7px;border-radius:50%;background:#34d399;box-shadow:0 0 8px #34d399;margin-right:5px;animation:p 1.8s ease-in-out infinite;vertical-align:0}
+  @keyframes p{50%{opacity:.3}}
+  .clock{color:#7fe9ff;font-weight:800;font-size:13px;text-shadow:0 0 12px rgba(0,229,255,.55);white-space:nowrap}
+  .dots{display:flex;gap:5px}
+  .dots i{width:6px;height:6px;border-radius:50%;background:rgba(0,229,255,.5);box-shadow:0 0 6px rgba(0,229,255,.7)}
+  .dots i:nth-child(2){background:rgba(168,85,247,.55);box-shadow:0 0 6px rgba(168,85,247,.7)}
+  .dots i:nth-child(3){background:rgba(251,191,36,.55);box-shadow:0 0 6px rgba(251,191,36,.7)}
 
-  <header class="band a-hd">
-    <div class="side">
-      <span class="pill">统计周期 2026-07-30 ~ 08-05</span>
-      <span class="pill">更新 08-06 23:52 · 定位v2.13</span>
-    </div>
-    <div class="btitle">
-      <span class="wing l"><i></i><i></i><i></i></span>
-      <span class="wing r"><i></i><i></i><i></i></span>
-      <h1>百商AI新媒体运营飞轮</h1>
-      <div class="sub">广州潮少 · 抖音 / 视频号 · 大数据看板</div>
-    </div>
-    <div class="side r">
-      <span class="live"><i></i>数据已同步</span>
-      <span class="clock" id="clock">--:--:--</span>
-    </div>
-  </header>
-
-  <!-- 双平台对比 -->
-  <section class="panel a-cmp">
-    <i class="cn tl"></i><i class="cn tr"></i><i class="cn bl"></i><i class="cn br"></i>
-    <div class="ph"><h2>双平台 · 数据对比</h2><span class="mt">组内最大值归一 · 互动率绝对刻度</span></div>
-    <div class="grp"><div class="grp-t"><span>7日播放</span><em>抖音领先 · 1.81×视频号</em></div>
-      <div class="brow"><span class="bn"><i class="dot dy"></i>抖音</span><div class="bt"><div class="bf dy" data-w="100"></div></div><span class="bv">40,200</span></div>
-      <div class="brow"><span class="bn"><i class="dot sp"></i>视频号</span><div class="bt"><div class="bf sp" data-w="55.1"></div></div><span class="bv">22,161</span></div>
-    </div>
-    <div class="grp"><div class="grp-t"><span>粉丝总量</span></div>
-      <div class="brow"><span class="bn"><i class="dot dy"></i>抖音</span><div class="bt"><div class="bf dy" data-w="100"></div></div><span class="bv">1,304*</span></div>
-      <div class="brow"><span class="bn"><i class="dot sp"></i>视频号</span><div class="bt"><div class="bf sp" data-w="93.8"></div></div><span class="bv">1,223</span></div>
-    </div>
-    <div class="grp"><div class="grp-t"><span>7日净增粉</span><em>增长集中在抖音</em></div>
-      <div class="brow"><span class="bn"><i class="dot dy"></i>抖音</span><div class="bt"><div class="bf dy" data-w="100"></div></div><span class="bv">+65*</span></div>
-      <div class="brow"><span class="bn"><i class="dot sp"></i>视频号</span><div class="bt"><div class="bf sp" data-w="1.5"></div></div><span class="bv">+1</span></div>
-    </div>
-    <div class="grp"><div class="grp-t"><span>互动率 · 绝对刻度 0~2.5%</span><em>均未过线</em></div>
-      <div class="brow"><span class="bn"><i class="dot dy"></i>抖音</span><div class="bt"><div class="bf dy" data-w="69.6"></div><span class="baseline" style="left:80%"><em>健康线 2%</em></span></div><span class="bv">1.74%</span></div>
-      <div class="brow"><span class="bn"><i class="dot sp"></i>视频号</span><div class="bt"><div class="bf sp" data-w="1.6"></div></div><span class="bv">0.04%*</span></div>
-    </div>
-    <div class="fill"></div>
-    <p class="note"><b>读法</b>：前三组按组内最大值归一（组间不可比）；互动率为绝对刻度并标 2% 健康线。双平台 7 日播放合计 <b>62,361</b>，抖音领先视频号 1.81 倍；净增粉合计 <b>+66</b>。<b>*视频号 0.04% 按 7 日赞 6 + 评论 3 计算</b>；抖音粉丝仍含较多回关粉，不单独作为内容效果读数。</p>
-  </section>
-
-  <!-- 健康罗盘 -->
-  <section class="panel a-gau">
-    <i class="cn tl"></i><i class="cn tr"></i><i class="cn bl"></i><i class="cn br"></i>
-    <div class="ph"><h2>运营健康罗盘 · 平台下钻</h2><span class="mt">综合 55 = (抖音57 + 视频号53) / 2</span></div>
-    <div class="gwrap">
-      <div class="gauge">
-        <svg viewBox="0 0 190 110">
-          <path d="M15 100 A80 80 0 0 1 175 100" fill="none" stroke="rgba(8,24,58,.9)" stroke-width="12" stroke-linecap="round"/>
-          <path class="garc" data-v="55" d="M15 100 A80 80 0 0 1 175 100" fill="none" stroke="url(#gg)" stroke-width="12" stroke-linecap="round" stroke-dasharray="0 251.3"/>
-          <defs><linearGradient id="gg" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#f87171"/><stop offset=".5" stop-color="#fbbf24"/><stop offset="1" stop-color="#34d399"/></linearGradient></defs>
-          <g id="needle" data-v="55" style="transform-origin:95px 100px;transform:rotate(-90deg);transition:transform 1.4s cubic-bezier(.2,.8,.25,1)">
-            <path id="ndl" d="M95 100 L91 96 L95 32 L99 96 Z" fill="#7fe9ff"/>
-            <circle id="ndlc" cx="95" cy="100" r="6" fill="#0a1836" stroke="#7fe9ff" stroke-width="2"/>
-          </g>
-        </svg>
-        <div class="gval"><b class="hv" data-v="55">55</b><span>综合健康分 · 双平台均值</span></div>
-      </div>
-      <div class="glegend">
-        <div><span class="dy">■ 抖音</span> 健康 <b class="hv" data-v="57">57</b> ｜ ⑱ 1万+·361赞·12评·2转</div>
-        <div><span class="sp">■ 视频号</span> 健康 <b class="hv" data-v="53">53</b> ｜ 第⑭轴完播 41.48%·快划 15.28%</div>
-        <div style="color:rgba(251,191,36,.85)">▲ 第㉑留洋行李轴 · 双平台唯一发布完成，等待冷启动回收</div>
-      </div>
-    </div>
-    <div class="digits" id="digits"><i>6</i><i>2</i><i>3</i><i>6</i><i>1</i></div>
-    <div class="dsub">7日总播放 · 双平台 ｜ 合计粉丝 2,527 · 净增 <b>+66*</b> · 抖音投稿 11 条</div>
-    <div class="tabs" id="tabs">
-      <div class="tab on" data-t="t0">总览</div>
-      <div class="tab" data-t="t1">抖音</div>
-      <div class="tab" data-t="t2">视频号</div>
-    </div>
-    <div class="tp on" id="t0">
-      <div class="kpis">
-        <div class="kpi"><div class="v">62.4k</div><div class="l">双平台7日播放</div></div>
-        <div class="kpi"><div class="v">2,527</div><div class="l">双平台粉丝</div></div>
-        <div class="kpi"><div class="v good">0.106%</div><div class="l">7日播放→净增</div></div>
-        <div class="kpi"><div class="v warn">0/1</div><div class="l">★转发/收藏(10条窗)</div></div>
-      </div>
-      <div class="diag"><b>总览诊断 · 23:50作品实抓</b>：第⑱轴抖音仍为 <b>1万+ / 361赞 / 12评 / 2转</b>，视频号 189；第⑳轴约 6 小时仅抖音 <b>236 / 0赞</b>、视频号 213 / 0互动。具体机器人动作没有单独复现峰值，第㉑轴回到即时 U17 事件，改测“是否马上留洋”。</div>
-    </div>
-    <div class="tp" id="t1">
-      <div class="kpis">
-        <div class="kpi"><div class="v">40.2k</div><div class="l">7日播放</div></div>
-        <div class="kpi"><div class="v good">46.82%</div><div class="l">5s完播</div></div>
-        <div class="kpi"><div class="v warn">26.46%</div><div class="l">2s跳出</div></div>
-        <div class="kpi"><div class="v">11.26s</div><div class="l">平均观看</div></div>
-      </div>
-      <div class="diag"><b>★互动与涨粉升，留存承压</b>：近 7 日作品播放中位数 <b>5,559</b>，互动率由前一日 0.54% 升至 1.74%，净增粉由 13 升至 65；但完播率由 17.90% 降至 14.61%。下一条不只追情绪互动，还要把冲突在前 3 秒讲清。</div>
-    </div>
-    <div class="tp" id="t2">
-      <div class="kpis">
-        <div class="kpi"><div class="v">22.2k</div><div class="l">7日播放</div></div>
-        <div class="kpi"><div class="v warn">+1</div><div class="l">7日净增粉</div></div>
-        <div class="kpi"><div class="v">6/3</div><div class="l">7日赞/评</div></div>
-        <div class="kpi"><div class="v warn">0/1</div><div class="l">★转发/收藏(10条窗)</div></div>
-      </div>
-      <div class="diag sp"><b>视频号仍靠推荐流但新作冷启动弱</b>：7 日播放 22,161，推荐播放约占 <b>97.0%</b>。第⑭轴 3,318 仍是近期基准；第⑱至⑳轴当前为 189 / 172 / 213，不能把抖音强互动直接迁移为视频号结论。</div>
-    </div>
-    <div class="diag" style="border-left-color:#34d399;margin-top:8px"><b>策略 · v2.13</b>：保留大陈画内真实开口与前 3 秒小白主动动作，但把点击理由重新绑回即时体育事件。第㉑轴用“小白替孩子收留洋行李”把 U17 胜欧洲青训转成明确决策题；正文只留现场声音和真实场景，不生成字幕。</div>
-    <div class="fill"></div>
-  </section>
-
-  <!-- TOP 榜 (通高) -->
-  <section class="panel a-top">
-    <i class="cn tl"></i><i class="cn tr"></i><i class="cn bl"></i><i class="cn br"></i>
-    <div class="ph"><h2>视频号 · 近 10 条作品</h2><span class="mt">23:50 实抓 · 条宽 = √(播放/榜首)</span></div>
-    <div class="tkpis">
-      <div class="tkpi"><div class="l">视频号 · 7日播放</div><div class="v">22,161<em>▲ +1 净增</em></div></div>
-      <div class="tkpi dy"><div class="l">抖音 · 7日播放</div><div class="v">40,200<em>▲ +65* 粉丝</em></div></div>
-    </div>
-    <div class="trow hot1"><span class="trank g">1</span><div class="tmain"><div class="tname">该不该停 · ⑭会停轴<span class="badge">留存第一</span></div><div class="tbar"><div class="bf gold" data-w="100"></div></div><div class="tmeta"><b>3,318</b> 赞1 评0 藏0 转0<span class="d">08-03</span></div></div></div>
-    <div class="trow"><span class="trank s">2</span><div class="tmain"><div class="tname">往上还是回来 · ⑬老活轴<span class="badge">钩子改版</span></div><div class="tbar"><div class="bf sp" data-w="49.7"></div></div><div class="tmeta"><b>819</b> 赞0 评0 藏1 转0<span class="d">08-02</span></div></div></div>
-    <div class="trow"><span class="trank b">3</span><div class="tmain"><div class="tname">巨幕观赛 · ⑮远方主场轴<span class="badge">纯奇观</span></div><div class="tbar"><div class="bf sp" data-w="42.7"></div></div><div class="tmeta"><b>604</b> 赞1 评0 藏0 转0<span class="d">08-03</span></div></div></div>
-    <div class="trow"><span class="trank">4</span><div class="tmain"><div class="tname">学赢还是学输 · ⑫输得起轴<span class="badge">双角色首测</span></div><div class="tbar"><div class="bf dim" data-w="38.8"></div></div><div class="tmeta"><b>500</b> 赞0 评0 藏0 转0<span class="d">08-02</span></div></div></div>
-    <div class="trow"><span class="trank">5</span><div class="tmain"><div class="tname">帮追还是劝 · ⑰圆梦轴<span class="badge">双平台偏弱</span></div><div class="tbar"><div class="bf dim" data-w="28.9"></div></div><div class="tmeta"><b>277</b> 赞0 评0 藏0 转0<span class="d">08-04</span></div></div></div>
-    <div class="trow"><span class="trank">6</span><div class="tmain"><div class="tname">先夸还是劝 · ⑯先夸轴<span class="badge">平台分化</span></div><div class="tbar"><div class="bf dim" data-w="26.0"></div></div><div class="tmeta"><b>225</b> 赞0 评0 藏0 转0<span class="d">08-04</span></div></div></div>
-    <div class="trow"><span class="trank">7</span><div class="tmain"><div class="tname">旧球台该不该换 · ⑳旧球台轴<span class="badge">具体但弱</span></div><div class="tbar"><div class="bf dim" data-w="25.3"></div></div><div class="tmeta"><b>213</b> 赞0 评0 藏0 转0<span class="d">08-06</span></div></div></div>
-    <div class="trow"><span class="trank">8</span><div class="tmain"><div class="tname">场场守还是关键场 · ⑱赛程轴<span class="badge">抖强号弱</span></div><div class="tbar"><div class="bf dim" data-w="23.9"></div></div><div class="tmeta"><b>189</b> 赞0 评0 藏0 转0<span class="d">08-05</span></div></div></div>
-    <div class="trow"><span class="trank">9</span><div class="tmain"><div class="tname">机器还是老球友 · ⑲陪练轴<span class="badge">未延续</span></div><div class="tbar"><div class="bf dim" data-w="22.8"></div></div><div class="tmeta"><b>172</b> 赞0 评0 藏0 转0<span class="d">08-06</span></div></div></div>
-    <div class="trow"><span class="trank">10</span><div class="tmain"><div class="tname">赢了欧洲青训 · ㉑留洋行李轴<span class="badge">刚发布</span></div><div class="tbar"><div class="bf dim" data-w="0"></div></div><div class="tmeta"><b>0</b> 赞0 评0 藏0 转0<span class="d">08-06</span></div></div></div>
-    <div class="fill"></div>
-    <div class="note"><b>窗口换挡</b>：最新 10 条作品合计 <b>6,317</b>，占视频号 7 日总播放的 <b>28.5%</b>；其余历史内容约贡献 <b>15,844</b>。占比骤降主要因 6,954 播放的第⑪轴自然滑出“最新 10 条”窗口，不代表账号播放突然腰斩。<b>口径</b>：总览为 07-30 至 08-05、23:25 抓取，作品榜补到 08-06 23:50；第㉑轴为刚发布初始值。</div>
-    <div class="ph" style="margin-top:10px"><h2>带货战报 · 养粉期暂停</h2><span class="mt">累计 · 微信小店成交分析</span></div>
-    <div class="cargo">
-      <div class="kpi"><div class="v good">¥7.9</div><div class="l">累计成交</div></div>
-      <div class="kpi"><div class="v">1单</div><div class="l">零退款</div></div>
-      <div class="kpi"><div class="v warn">0单</div><div class="l">本周期(未挂车)</div></div>
-    </div>
-    <div class="flow">短视频挂车 <b>→</b> 推荐流路人 <b>→</b> 数小时成交</div>
-    <p class="note">场景 <b>100% 短视频</b>、购买者 <b>100% 非粉丝新客</b> → <b>挂车是成交的开关</b>。<b>本周期养粉不挂车，故 GMV=0（预期内，非异常）</b>。扩品闸口＝连续两周同时满足 转发中位≥2×S0、净增粉≥1.5×F0、GMV 有单。</p>
-  </section>
-
-  <!-- 粉丝画像 -->
-  <section class="panel a-por">
-    <i class="cn tl"></i><i class="cn tr"></i><i class="cn bl"></i><i class="cn br"></i>
-    <div class="ph"><h2>视频号 · 粉丝画像</h2><span class="mt">共 1,223 粉丝 ｜ 画像样本 1,220</span></div>
-    <div class="pgrid">
-      <div class="ring">
-        <svg viewBox="0 0 92 92"><circle cx="46" cy="46" r="38" fill="none" stroke="rgba(8,24,58,.9)" stroke-width="10"/><circle class="rarc" data-v="78.9" data-hue="168,85,247" cx="46" cy="46" r="38" fill="none" stroke-width="10" stroke-linecap="round" stroke-dasharray="0 238.8"/></svg>
-        <div class="c"><b>78.9%</b><span>50岁+</span></div>
-      </div>
-      <ul class="plist">
-        <li><i style="background:#a855f7"></i><span>50岁+</span><b>78.9%</b></li>
-        <li><i style="background:#7c5cd6"></i><span>40-49 岁</span><b>8.2%</b></li>
-        <li><i style="background:#5a48b0"></i><span>30-39 岁</span><b>7.9%</b></li>
-        <li><i style="background:#3d3680"></i><span>其他</span><b>5.0%</b></li>
-      </ul>
-      <div class="ring">
-        <svg viewBox="0 0 92 92"><circle cx="46" cy="46" r="38" fill="none" stroke="rgba(236,72,153,.35)" stroke-width="10"/><circle class="rarc" data-v="56.7" data-hue="37,214,230" cx="46" cy="46" r="38" fill="none" stroke-width="10" stroke-linecap="round" stroke-dasharray="0 238.8"/></svg>
-        <div class="c"><b>56.7%</b><span>男性</span></div>
-      </div>
-      <ul class="plist">
-        <li><i style="background:#25d6e6"></i><span>男</span><b>56.7%</b></li>
-        <li><i style="background:rgba(236,72,153,.7)"></i><span>女</span><b>39.9%</b></li>
-        <li><i style="background:#7fe9ff"></i><span>粉丝来源 · 推荐</span><b>92.7%</b></li>
-        <li class="wk"><i style="background:#3d3680"></i><span>主页+朋友♡ · 关注流入口</span><b>0.7%</b></li>
-      </ul>
-    </div>
-    <div class="srcwrap">
-      <div class="fx-t"><span>粉丝来源构成 · 1,223 人</span><em>推荐一家独大</em></div>
-      <div class="stack">
-        <div class="sg" data-w="92.7" data-hue="126,58,242" title="推荐 1,134"></div>
-        <div class="sg" data-w="3.6" data-hue="90,72,176" title="其他 44"></div>
-        <div class="sg" data-w="2.8" data-hue="37,214,230" title="分享 34"></div>
-        <div class="sg" data-w="0.4" data-hue="236,72,153" title="朋友♡ 5"></div>
-        <div class="sg" data-w="0.25" data-hue="251,191,36" title="主页 3"></div>
-        <div class="sg" data-w="0.25" data-hue="52,211,153" title="订阅号消息 3"></div>
-      </div>
-      <div class="slgd">
-        <span><i style="background:#7e3af2"></i>推荐 <b>1,134</b></span>
-        <span><i style="background:#5a48b0"></i>其他 <b>44</b></span>
-        <span><i style="background:#25d6e6"></i>分享 <b>34</b></span>
-        <span><i style="background:#ec4899"></i>朋友♡ <b>5</b></span>
-        <span><i style="background:#fbbf24"></i>主页 <b>3</b></span>
-        <span><i style="background:#34d399"></i>订阅号 <b>3</b></span>
-      </div>
-    </div>
-    <div class="fill"></div>
-    <p class="note"><b>结论</b>：50 岁+男性老球迷盘<b>没有结构性变化</b>，粉丝来源推荐占 92.7%，7 日播放来源推荐约占 97.0%。当前 10 条窗转发仍为 0、收藏合计 8，说明社交扩散尚未启动。<b>粉丝来源、年龄和性别为 08-06 最新完整实抓。</b></p>
-  </section>
-
-  <!-- ▼ 选题域实验 · 具体动作与画内对白 -->
-  <section class="panel a-flw">
-    <i class="cn tl"></i><i class="cn tr"></i><i class="cn bl"></i><i class="cn br"></i>
-    <div class="ph"><h2>选题域实验 · 即时事件与机器人动作</h2><span class="mt">第⑯~㉑轴 ｜ 分平台判断</span></div>
-    <div class="fx">
-      <div>
-        <div class="fx-t"><span>确定体育事件 vs 视觉奇观 · 抖音</span><em>3.66× · 同日配对</em></div>
-        <div class="duo">
-          <div class="vb"><span class="val">2,701</span><div class="bar win" data-h="100"></div><span class="nm">⑭确定事件 · 会停轴</span></div>
-          <div class="vb"><span class="val">739</span><div class="bar lose" data-h="52.3"></div><span class="nm">⑮纯奇观 · 巨幕轴</span></div>
-        </div>
-        <div class="vfoot">第⑭轴抖音播放是第⑮轴的 <b>3.66×</b>，点赞是 4.5×。两条同日发布会竞争冷启动，因此不把倍率当稳定规律；第⑯轴随后升到 6,741 / 32赞，赛果型确定事件在抖音侧得到第二次支持。</div>
-      </div>
-      <div>
-        <div class="fx-t"><span>★第⑯ → ㉑ · 连续实验</span><em>08-06 23:50 · 留洋行李轴上线</em></div>
-        <div class="vchart">
-          <div class="vb"><span class="val">5,559</span><div class="bar c3" data-h="74.6"></div><span class="nm">抖音中位</span></div>
-          <div class="vb hot"><span class="val">6,741</span><div class="bar c4" data-h="82.1"></div><span class="nm">⑯先夸轴</span></div>
-          <div class="vb lose"><span class="val">722</span><div class="bar lose" data-h="26.9"></div><span class="nm">⑰圆梦轴</span></div>
-          <div class="vb hot"><span class="val">1万+</span><div class="bar c5" data-h="100"></div><span class="nm">⑱赛程轴</span></div>
-          <div class="vb lose"><span class="val">1,136</span><div class="bar lose" data-h="33.7"></div><span class="nm">⑲陪练轴</span></div>
-          <div class="vb lose"><span class="val">236</span><div class="bar lose" data-h="15.4"></div><span class="nm">⑳旧球台轴</span></div>
-          <div class="vb hot"><span class="val">上线</span><div class="bar c1" data-h="8"></div><span class="nm">㉑留洋轴</span></div>
-        </div>
-        <div class="vfoot">第⑱轴抖音 1万+ / 361赞 / 12评 / 2转，第⑲轴回落到 1,137 / 10赞，第⑳轴约 6 小时仅 236 / 0赞。具体动作不是充分条件；第㉑轴回到正在发生的 U17 赛事，同时用小白收行李测试“马上留洋”决策。<b>第㉑轴当前只记录上线，不提前写效果结论</b>。</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 策略·风险·下一条 -->
-  <section class="panel a-str">
-    <i class="cn tl"></i><i class="cn tr"></i><i class="cn bl"></i><i class="cn br"></i>
-    <div class="stripe">🎯 <span><b>一句话策略</b>：即时体育事件给点击理由，小白用连续实体动作把热点变成生活决策，大陈在画面内自然开口；前 3 秒让观众看懂“它在替孩子收留洋行李”。北极星<b>分平台</b>：抖音看播放+互动+留存，视频号先看推荐池准入。（信心 <b>82</b>，㉑待回收）</span></div>
-    <div class="cards3">
-      <div class="rc risk"><h3>⚠ 四大风险</h3>① 第⑱轴放量与账号涨粉同期，仍不能单条归因；② 完播率降至 14.61%，互动增长未同步改善留存；③ 第⑳轴证明具体动作也可能冷启动弱；④ 视频号最新 10 条转发仍为 0，收藏仅 1，社交扩散尚未启动。</div>
-      <div class="rc win"><h3>★ 本周期战果</h3><b>账号层</b>：双平台 7 日播放 62,361、净增粉 66，抖音互动率 1.74%。<b>内容侧</b>：第⑱轴抖音 1万+ / 361赞 / 12评 / 2转。<b>工程侧</b>：第㉑轴写实场景、四段电影机位、单机器人与大陈现场对白 ASR 90.2% 均通过，双平台作品数 63→64、69→70。</div>
-      <div class="rc act"><h3>▶ 当前 · 行动卡</h3><b>回收第㉑轴冷启动</b>：2 小时先看抖音是否明显越过第⑳轴、视频号是否越过 213；24 / 48 小时补完播、平均观看和快划。若即时事件仍弱，下一轮优先排查同日发布竞争与 1.5 秒海报前缀。</div>
-    </div>
-  </section>
-
-  <div class="foot">广州潮少 · 百商AI新媒体运营飞轮 ｜ 数据源：抖音创作者中心 + 视频号助手 + 微信小店成交分析 ｜ 仅运营指标，不含账号凭证 ｜ 设计参考大陈 V4 运营飞轮规格 ｜ v4.17</div>
+  .title{position:relative;text-align:center;padding:0 16px}
+  .title h1{font-size:21px;font-weight:800;line-height:1.2;white-space:nowrap;
+    background:linear-gradient(180deg,#fff 15%,#9deeff 50%,#3f9dff 90%);-webkit-background-clip:text;background-clip:text;color:transparent;
+    filter:drop-shadow(0 0 14px rgba(0,200,255,.4))}
+  .title .sub{font-size:8.5px;color:rgba(150,200,240,.6);margin-top:1px}
+  .wing{position:absolute;top:50%;transform:translateY(-50%);width:130px;height:16px}
+  .wing.l{right:100%}.wing.r{left:100%;transform:translateY(-50%) scaleX(-1)}
+  .wing i{display:block;height:2px;margin:3.5px 0;background:linear-gradient(90deg,transparent,#00e5ff);box-shadow:0 0 7px rgba(0,229,255,.7)}
+  .wing i:nth-child(1){width:100%}.wing i:nth-child(2){width:70%;margin-left:30%;opacity:.7}.wing i:nth-child(3){width:42%;margin-left:58%;opacity:.45}
+  @media (max-width:760px){.side .pill.long{display:none}.wing{display:none}.title h1{font-size:16px}}
+  @media (prefers-reduced-motion:reduce){.live i{animation:none}}
+&lt;/style&gt;
+&lt;style&gt;@media(max-width:760px){body{padding:3px 0!important}.band{height:auto!important;min-height:92px;grid-template-columns:1fr auto!important;grid-template-areas:&quot;title title&quot; &quot;left right&quot;;gap:8px 10px!important;padding:11px 13px!important}.title{grid-area:title;padding:0 4px!important}.title h1{font-size:18px!important;line-height:1.25!important;white-space:normal!important}.title .sub{font-size:9px!important;margin-top:3px!important}.side:first-child{grid-area:left}.side.r{grid-area:right}.side{font-size:10px!important}.pill{padding:3px 8px!important}.side .pill.long,.live,.dots{display:none!important}.clock{font-size:12px!important}.wing{display:none!important}}&lt;/style&gt;&lt;style&gt;@media (prefers-reduced-motion:no-preference){.wing i{animation:wingP 3.2s ease-in-out infinite}.wing i:nth-child(2){animation-delay:.4s}.wing i:nth-child(3){animation-delay:.8s}@keyframes wingP{0%,100%{opacity:.45}50%{opacity:1}}.dots i{animation:dotP 2.2s ease-in-out infinite}.dots i:nth-child(2){animation-delay:.4s}.dots i:nth-child(3){animation-delay:.8s}@keyframes dotP{0%,100%{opacity:.4}50%{opacity:1}}}&lt;/style&gt;&lt;/head&gt;
+&lt;body&gt;
+&lt;header class=&quot;band&quot;&gt;
+  &lt;div class=&quot;side&quot;&gt;
+    &lt;span class=&quot;pill long&quot;&gt;统计周期 2026-07-31 ~ 08-06&lt;/span&gt;
+    &lt;span class=&quot;pill&quot;&gt;更新 08-07 15:24&lt;/span&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;title&quot;&gt;
+    &lt;span class=&quot;wing l&quot; aria-hidden=&quot;true&quot;&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;/span&gt;
+    &lt;span class=&quot;wing r&quot; aria-hidden=&quot;true&quot;&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;/span&gt;
+    &lt;h1&gt;百商AI新媒体运营飞轮&lt;/h1&gt;
+    &lt;div class=&quot;sub&quot;&gt;广州潮少 · 抖音 / 视频号&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;side r&quot;&gt;
+    &lt;span class=&quot;live&quot;&gt;&lt;i&gt;&lt;/i&gt;数据已同步&lt;/span&gt;
+    &lt;span class=&quot;clock&quot; id=&quot;clock&quot;&gt;--:--:--&lt;/span&gt;
+    &lt;span class=&quot;dots&quot; aria-hidden=&quot;true&quot;&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;/span&gt;
+  &lt;/div&gt;
+&lt;/header&gt;
+&lt;script&gt;
+(function(){
+  var el = document.getElementById(&quot;clock&quot;);
+  function pad(n){ return (n&lt;10?&quot;0&quot;:&quot;&quot;)+n; }
+  function tick(){ var d=new Date(); el.textContent = pad(d.getHours())+&quot;:&quot;+pad(d.getMinutes())+&quot;:&quot;+pad(d.getSeconds()); }
+  tick(); setInterval(tick,1000);
+})();
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+" scrolling="no"></iframe></div>
+<main class="grid">
+<div class="col" style="grid-column:span 3">
+<div class="cell" style="flex:0 0 492px;height:492px;--nh:492px"><iframe title="双平台 · 数据对比" srcdoc="&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;zh-CN&quot;&gt;
+&lt;head&gt;
+&lt;meta charset=&quot;UTF-8&quot;&gt;
+&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+&lt;title&gt;三平台 · 数据对比 V3&lt;/title&gt;
+&lt;style&gt;
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{background:transparent}
+  body{font-family:var(--kimi-font-sans,-apple-system,BlinkMacSystemFont,&quot;PingFang SC&quot;,&quot;Microsoft YaHei&quot;,sans-serif);color:#eaf6ff;padding:8px;font-variant-numeric:tabular-nums;line-height:1.6}
+  .panel{position:relative;background:linear-gradient(165deg,rgba(13,26,62,.97),rgba(7,14,38,.98));border:1px solid rgba(0,229,255,.26);border-radius:8px;box-shadow:0 12px 34px rgba(2,10,40,.5),inset 0 0 30px rgba(0,90,220,.08);padding:10px 12px 12px}
+  .cn{position:absolute;width:11px;height:11px;border:2px solid rgba(0,229,255,.7);z-index:2;pointer-events:none}
+  .tl{top:-1px;left:-1px;border-right:none;border-bottom:none;border-radius:6px 0 0 0}
+  .tr{top:-1px;right:-1px;border-left:none;border-bottom:none;border-radius:0 6px 0 0}
+  .bl{bottom:-1px;left:-1px;border-right:none;border-top:none;border-radius:0 0 0 6px}
+  .br{bottom:-1px;right:-1px;border-left:none;border-top:none;border-radius:0 0 6px 0}
+  .hd{position:relative;text-align:center;margin:0 0 9px;padding:5px 10px 7px;background:linear-gradient(180deg,rgba(18,44,96,.55),rgba(10,22,56,.1));border-bottom:1px solid rgba(0,229,255,.22)}
+  .hd h1{display:inline-block;font-size:13.5px;font-weight:800;color:#bfefff;text-shadow:0 0 10px rgba(0,229,255,.45);padding:0 12px;position:relative;white-space:nowrap}
+  .hd h1::before,.hd h1::after{content:&quot;&quot;;position:absolute;top:50%;width:26px;height:1px;background:linear-gradient(90deg,transparent,#00e5ff);box-shadow:0 0 6px rgba(0,229,255,.7)}
+  .hd h1::before{right:100%}.hd h1::after{left:100%;transform:scaleX(-1)}
+  .hd .mt{position:absolute;right:calc(var(--daimon-widget-host-safe-inline-end,82px) + 2px);top:8px;font-size:8.5px;color:rgba(150,190,230,.55)}
+  .grp{margin-bottom:8px}
+  .grp-t{font-size:9px;color:rgba(168,208,240,.72);margin-bottom:4px;display:flex;justify-content:space-between;gap:6px}
+  .grp-t em{font-style:normal;color:rgba(251,191,36,.9)}
+  .brow{display:flex;align-items:center;gap:6px;height:19px}
+  .bn{width:44px;flex:none;font-size:9.5px;color:#eaf6ff;display:flex;align-items:center;gap:4px;white-space:nowrap}
+  .dot{width:6px;height:6px;border-radius:2px;flex:none}
+  .dot.dy{background:#25d6e6}.dot.sp{background:#a855f7}.dot.ks{background:#fb923c}
+  .bt{flex:1;height:10px;border-radius:5px;background:rgba(8,24,58,.85);border:1px solid rgba(96,170,255,.12);position:relative;overflow:visible;min-width:0}
+  .bf{position:absolute;left:0;top:0;bottom:0;width:0;min-width:2px;border-radius:5px;transition:width 1.1s cubic-bezier(.2,.8,.25,1)}
+  .bf.dy{background:linear-gradient(90deg,rgba(37,214,230,.3),#25d6e6)}
+  .bf.sp{background:linear-gradient(90deg,rgba(168,85,247,.3),#a855f7)}
+  .bf.ks{background:linear-gradient(90deg,rgba(251,146,60,.3),#fb923c)}
+  .bf.dim{background:rgba(120,150,190,.4)}
+  .bv{width:66px;flex:none;text-align:right;font-size:9px;color:#22d3ee;white-space:nowrap}
+  .bv.dim{color:rgba(150,190,230,.55)}
+  .baseline{position:absolute;top:-3px;bottom:-3px;width:2px;background:#fbbf24;box-shadow:0 0 6px #fbbf24;border-radius:1px}
+  .baseline em{position:absolute;top:-15px;right:-6px;font-style:normal;font-size:8px;color:#fbbf24;white-space:nowrap}
+  .note{margin-top:9px;padding-top:8px;border-top:1px dashed rgba(96,170,255,.18);font-size:9px;color:rgba(150,190,230,.6);line-height:1.65}
+  .note b{color:rgba(200,225,250,.85)}
+  @media (prefers-reduced-motion:reduce){.bf{transition:none}}
+&lt;/style&gt;
+&lt;style&gt;.hd .mt,.mt{display:none!important}&lt;/style&gt;&lt;style&gt;@media (prefers-reduced-motion:no-preference){.cn{animation:cnP 3s ease-in-out infinite}@keyframes cnP{0%,100%{opacity:.6}50%{opacity:1}}.hd{overflow:hidden}.hd::after{content:&quot;&quot;;position:absolute;top:0;bottom:0;left:0;width:30%;background:linear-gradient(105deg,transparent,rgba(140,225,255,.15),transparent);transform:translateX(-140%);animation:hdSweep 5.5s ease-in-out infinite;pointer-events:none}@keyframes hdSweep{0%{transform:translateX(-140%)}55%,100%{transform:translateX(440%)}}.bf{overflow:hidden}.bf::after{content:&quot;&quot;;position:absolute;top:0;bottom:0;left:0;width:55%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.30),transparent);transform:translateX(-110%);animation:bfX 2.8s linear infinite;pointer-events:none}@keyframes bfX{0%{transform:translateX(-110%)}100%{transform:translateX(300%)}}.vbar,.dbar{position:relative;overflow:hidden}.vbar::after,.dbar::after{content:&quot;&quot;;position:absolute;left:0;right:0;bottom:0;height:45%;background:linear-gradient(0deg,transparent,rgba(255,255,255,.26),transparent);transform:translateY(120%);animation:vbY 3.2s linear infinite;pointer-events:none}@keyframes vbY{0%{transform:translateY(120%)}100%{transform:translateY(-330%)}}.tab,.scard{position:relative;overflow:hidden}.tab::after,.scard::after{content:&quot;&quot;;position:absolute;top:-40%;bottom:-40%;left:0;width:24%;background:linear-gradient(90deg,transparent,rgba(180,235,255,.2),transparent);transform:translateX(-160%) skewX(-18deg);animation:sheenX 4.8s ease-in-out infinite;pointer-events:none}@keyframes sheenX{0%{transform:translateX(-160%) skewX(-18deg)}60%,100%{transform:translateX(560%) skewX(-18deg)}}.tab:nth-child(2)::after{animation-delay:.6s}.tab:nth-child(3)::after{animation-delay:1.2s}.tab:nth-child(4)::after{animation-delay:1.8s}.scard:nth-child(2)::after{animation-delay:.8s}.scard:nth-child(3)::after{animation-delay:1.6s}.box{position:relative}.box::after{content:&quot;&quot;;position:absolute;inset:-2px;border-radius:6px;pointer-events:none;box-shadow:0 0 12px rgba(0,229,255,.6);opacity:.15;animation:oP 2.6s ease-in-out infinite}.box:nth-child(2)::after{animation-delay:.2s}.box:nth-child(3)::after{animation-delay:.4s}.box:nth-child(4)::after{animation-delay:.6s}.box:nth-child(5)::after{animation-delay:.8s}.box:nth-child(6)::after{animation-delay:1s}@keyframes oP{0%,100%{opacity:.15}50%{opacity:1}}.compass{filter:drop-shadow(0 0 8px rgba(34,211,238,.35))}.donut{position:relative}.donut::after{content:&quot;&quot;;position:absolute;inset:0;border-radius:50%;pointer-events:none;background:conic-gradient(from 0deg,transparent 0 72%,rgba(255,255,255,.28) 84%,transparent 96%);-webkit-mask:radial-gradient(circle,transparent 54%,#000 56% 90%,transparent 92%);mask:radial-gradient(circle,transparent 54%,#000 56% 90%,transparent 92%);animation:ringSpin 5.5s linear infinite}@keyframes ringSpin{to{transform:rotate(360deg)}}}&lt;/style&gt;&lt;style&gt;html,body{height:100%!important;-webkit-text-size-adjust:100%;text-size-adjust:100%}body{display:flex!important;flex-direction:column!important}body&gt;:first-child{flex:1 0 auto;display:flow-root}html.host-mobile,html.host-mobile body{height:auto!important;min-height:0!important;overflow-x:hidden!important}html.host-mobile body{display:block!important}html.host-mobile body&gt;:first-child{height:auto!important;min-height:0!important;flex:none!important}html.host-mobile .panel{height:auto!important;min-height:0!important}html.host-mobile .tab,html.host-mobile button{min-height:44px}html.host-mobile .hd h1{white-space:normal!important;line-height:1.35}html.host-mobile .grp-t{flex-wrap:wrap}html.host-mobile .strategy{align-items:flex-start!important;flex-wrap:wrap!important}&lt;/style&gt;&lt;/head&gt;
+&lt;body&gt;
+&lt;div class=&quot;panel&quot;&gt;
+  &lt;i class=&quot;cn tl&quot;&gt;&lt;/i&gt;&lt;i class=&quot;cn tr&quot;&gt;&lt;/i&gt;&lt;i class=&quot;cn bl&quot;&gt;&lt;/i&gt;&lt;i class=&quot;cn br&quot;&gt;&lt;/i&gt;
+  &lt;header class=&quot;hd&quot;&gt;&lt;h1&gt;双平台 · 数据对比&lt;/h1&gt;&lt;span class=&quot;mt&quot;&gt;2026-07-31 ~ 08-06&lt;/span&gt;&lt;/header&gt;
+  &lt;section class=&quot;grp&quot; aria-label=&quot;7日播放对比&quot;&gt;
+    &lt;div class=&quot;grp-t&quot;&gt;&lt;span&gt;7日播放 · 双平台占比&lt;/span&gt;&lt;span&gt;抖音是视频号 2.30×&lt;/span&gt;&lt;/div&gt;
+    &lt;div class=&quot;brow&quot;&gt;&lt;span class=&quot;bn&quot;&gt;&lt;i class=&quot;dot dy&quot;&gt;&lt;/i&gt;抖音&lt;/span&gt;&lt;div class=&quot;bt&quot;&gt;&lt;div class=&quot;bf dy&quot; data-w=&quot;69.7&quot;&gt;&lt;/div&gt;&lt;/div&gt;&lt;span class=&quot;bv&quot;&gt;39,300&lt;/span&gt;&lt;/div&gt;
+    &lt;div class=&quot;brow&quot;&gt;&lt;span class=&quot;bn&quot;&gt;&lt;i class=&quot;dot sp&quot;&gt;&lt;/i&gt;视频号&lt;/span&gt;&lt;div class=&quot;bt&quot;&gt;&lt;div class=&quot;bf sp&quot; data-w=&quot;30.3&quot;&gt;&lt;/div&gt;&lt;/div&gt;&lt;span class=&quot;bv&quot;&gt;17,116&lt;/span&gt;&lt;/div&gt;
+    &lt;div class=&quot;brow&quot;&gt;&lt;span class=&quot;bn&quot;&gt;&lt;i class=&quot;dot ks&quot;&gt;&lt;/i&gt;合计&lt;/span&gt;&lt;div class=&quot;bt&quot;&gt;&lt;div class=&quot;bf ks&quot; data-w=&quot;100&quot;&gt;&lt;/div&gt;&lt;/div&gt;&lt;span class=&quot;bv&quot;&gt;56,416&lt;/span&gt;&lt;/div&gt;
+  &lt;/section&gt;
+  &lt;section class=&quot;grp&quot; aria-label=&quot;粉丝总量对比&quot;&gt;
+    &lt;div class=&quot;grp-t&quot;&gt;&lt;span&gt;粉丝总量 · 双平台占比&lt;/span&gt;&lt;/div&gt;
+    &lt;div class=&quot;brow&quot;&gt;&lt;span class=&quot;bn&quot;&gt;&lt;i class=&quot;dot dy&quot;&gt;&lt;/i&gt;抖音&lt;/span&gt;&lt;div class=&quot;bt&quot;&gt;&lt;div class=&quot;bf dy&quot; data-w=&quot;51.6&quot;&gt;&lt;/div&gt;&lt;/div&gt;&lt;span class=&quot;bv&quot;&gt;1,302&lt;/span&gt;&lt;/div&gt;
+    &lt;div class=&quot;brow&quot;&gt;&lt;span class=&quot;bn&quot;&gt;&lt;i class=&quot;dot sp&quot;&gt;&lt;/i&gt;视频号&lt;/span&gt;&lt;div class=&quot;bt&quot;&gt;&lt;div class=&quot;bf sp&quot; data-w=&quot;48.4&quot;&gt;&lt;/div&gt;&lt;/div&gt;&lt;span class=&quot;bv&quot;&gt;1,223&lt;/span&gt;&lt;/div&gt;
+    &lt;div class=&quot;brow&quot;&gt;&lt;span class=&quot;bn&quot;&gt;&lt;i class=&quot;dot ks&quot;&gt;&lt;/i&gt;合计&lt;/span&gt;&lt;div class=&quot;bt&quot;&gt;&lt;div class=&quot;bf ks&quot; data-w=&quot;100&quot;&gt;&lt;/div&gt;&lt;/div&gt;&lt;span class=&quot;bv&quot;&gt;2,525&lt;/span&gt;&lt;/div&gt;
+  &lt;/section&gt;
+  &lt;section class=&quot;grp&quot; aria-label=&quot;7日净增粉对比&quot;&gt;
+    &lt;div class=&quot;grp-t&quot;&gt;&lt;span&gt;7日净增粉&lt;/span&gt;&lt;em&gt;增长集中在抖音&lt;/em&gt;&lt;/div&gt;
+    &lt;div class=&quot;brow&quot;&gt;&lt;span class=&quot;bn&quot;&gt;&lt;i class=&quot;dot dy&quot;&gt;&lt;/i&gt;抖音&lt;/span&gt;&lt;div class=&quot;bt&quot;&gt;&lt;div class=&quot;bf dy&quot; data-w=&quot;100&quot;&gt;&lt;/div&gt;&lt;/div&gt;&lt;span class=&quot;bv&quot;&gt;+62&lt;/span&gt;&lt;/div&gt;
+    &lt;div class=&quot;brow&quot;&gt;&lt;span class=&quot;bn&quot;&gt;&lt;i class=&quot;dot sp&quot;&gt;&lt;/i&gt;视频号&lt;/span&gt;&lt;div class=&quot;bt&quot;&gt;&lt;div class=&quot;bf sp&quot; data-w=&quot;1&quot;&gt;&lt;/div&gt;&lt;/div&gt;&lt;span class=&quot;bv&quot;&gt;0&lt;/span&gt;&lt;/div&gt;
+    &lt;div class=&quot;brow&quot;&gt;&lt;span class=&quot;bn&quot;&gt;&lt;i class=&quot;dot ks&quot;&gt;&lt;/i&gt;合计&lt;/span&gt;&lt;div class=&quot;bt&quot;&gt;&lt;div class=&quot;bf ks&quot; data-w=&quot;100&quot;&gt;&lt;/div&gt;&lt;/div&gt;&lt;span class=&quot;bv&quot;&gt;+62&lt;/span&gt;&lt;/div&gt;
+  &lt;/section&gt;
+  &lt;section class=&quot;grp&quot; aria-label=&quot;互动率对比&quot;&gt;
+    &lt;div class=&quot;grp-t&quot;&gt;&lt;span&gt;互动率 · 绝对刻度 0~2%&lt;/span&gt;&lt;em&gt;健康线 2%&lt;/em&gt;&lt;/div&gt;
+    &lt;div class=&quot;brow&quot;&gt;&lt;span class=&quot;bn&quot;&gt;&lt;i class=&quot;dot dy&quot;&gt;&lt;/i&gt;抖音&lt;/span&gt;&lt;div class=&quot;bt&quot;&gt;&lt;div class=&quot;bf dy&quot; data-w=&quot;88&quot;&gt;&lt;/div&gt;&lt;span class=&quot;baseline&quot; style=&quot;left:100%&quot;&gt;&lt;em&gt;2%&lt;/em&gt;&lt;/span&gt;&lt;/div&gt;&lt;span class=&quot;bv&quot;&gt;1.76%&lt;/span&gt;&lt;/div&gt;
+    &lt;div class=&quot;brow&quot;&gt;&lt;span class=&quot;bn&quot;&gt;&lt;i class=&quot;dot sp&quot;&gt;&lt;/i&gt;视频号&lt;/span&gt;&lt;div class=&quot;bt&quot;&gt;&lt;div class=&quot;bf sp&quot; data-w=&quot;2&quot;&gt;&lt;/div&gt;&lt;/div&gt;&lt;span class=&quot;bv&quot;&gt;0.04%*&lt;/span&gt;&lt;/div&gt;
+    &lt;div class=&quot;brow&quot;&gt;&lt;span class=&quot;bn&quot;&gt;&lt;i class=&quot;dot ks&quot;&gt;&lt;/i&gt;目标&lt;/span&gt;&lt;div class=&quot;bt&quot;&gt;&lt;div class=&quot;bf ks&quot; data-w=&quot;100&quot;&gt;&lt;/div&gt;&lt;/div&gt;&lt;span class=&quot;bv&quot;&gt;2.00%&lt;/span&gt;&lt;/div&gt;
+  &lt;/section&gt;
+  &lt;p class=&quot;note&quot;&gt;&lt;b&gt;读法&lt;/b&gt;：前三组按双平台占比展示；互动率按 0~2% 绝对刻度。视频号互动率以 5 赞 + 1 评除以 17,116 播放估算。&lt;b&gt;最大事件：抖音互动升至 1.76%，但完播降至 14.26%。&lt;/b&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;script&gt;
+(function(){
+  var els = document.querySelectorAll(&quot;.bf[data-w]&quot;);
+  els.forEach(function(el,i){
+    el.style.transitionDelay = (0.1 + i*0.05) + &quot;s&quot;;
+    requestAnimationFrame(function(){ requestAnimationFrame(function(){ el.style.width = el.dataset.w + &quot;%&quot;; }); });
+  });
+})();
+&lt;/script&gt;
+&lt;script&gt;setTimeout(function(){document.querySelectorAll(&quot;[data-w]&quot;).forEach(function(el){el.style.transition=&quot;none&quot;;el.style.width=parseFloat(el.dataset.w)+&quot;%&quot;;});document.querySelectorAll(&quot;.vchart,.duo&quot;).forEach(function(ch){var H=ch.clientHeight;ch.querySelectorAll(&quot;[data-h]&quot;).forEach(function(el){var lab=el.parentElement.querySelector(&quot;.vval&quot;);var max=H-(lab?lab.offsetHeight+8:8);el.style.transition=&quot;none&quot;;el.style.height=Math.max(2,max*parseFloat(el.dataset.h)/100)+&quot;px&quot;;});});},1600);&lt;/script&gt;&lt;/body&gt;
+&lt;/html&gt;
+" scrolling="no"></iframe></div>
+<div class="cell" style="flex:1 1 476px;min-height:476px;--nh:476px"><iframe title="粉丝画像 · 闭环版" srcdoc="&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;zh-CN&quot;&gt;
+&lt;head&gt;
+&lt;meta charset=&quot;UTF-8&quot;&gt;
+&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+&lt;title&gt;粉丝画像 · 闭环版&lt;/title&gt;
+&lt;style&gt;
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{background:transparent}
+  body{font-family:var(--kimi-font-sans,-apple-system,BlinkMacSystemFont,&quot;PingFang SC&quot;,&quot;Microsoft YaHei&quot;,sans-serif);color:#eaf6ff;padding:8px;font-variant-numeric:tabular-nums;line-height:1.6}
+  .panel{position:relative;background:linear-gradient(165deg,rgba(13,26,62,.97),rgba(7,14,38,.98));border:1px solid rgba(0,229,255,.26);border-radius:8px;box-shadow:0 12px 34px rgba(2,10,40,.5),inset 0 0 30px rgba(0,90,220,.08);padding:10px 12px 12px}
+  .cn{position:absolute;width:11px;height:11px;border:2px solid rgba(0,229,255,.7);z-index:2;pointer-events:none}
+  .tl{top:-1px;left:-1px;border-right:none;border-bottom:none;border-radius:6px 0 0 0}
+  .tr{top:-1px;right:-1px;border-left:none;border-bottom:none;border-radius:0 6px 0 0}
+  .bl{bottom:-1px;left:-1px;border-right:none;border-top:none;border-radius:0 0 0 6px}
+  .br{bottom:-1px;right:-1px;border-left:none;border-top:none;border-radius:0 0 6px 0}
+  .hd{position:relative;text-align:center;margin:0 0 8px;padding:5px 10px 7px;background:linear-gradient(180deg,rgba(18,44,96,.55),rgba(10,22,56,.1));border-bottom:1px solid rgba(0,229,255,.22)}
+  .hd h1{display:inline-block;font-size:13.5px;font-weight:800;color:#bfefff;text-shadow:0 0 10px rgba(0,229,255,.45);padding:0 12px;position:relative;white-space:nowrap}
+  .hd h1::before,.hd h1::after{content:&quot;&quot;;position:absolute;top:50%;width:26px;height:1px;background:linear-gradient(90deg,transparent,#00e5ff);box-shadow:0 0 6px rgba(0,229,255,.7)}
+  .hd h1::before{right:100%}.hd h1::after{left:100%;transform:scaleX(-1)}
+  .hd .mt{position:absolute;right:calc(var(--daimon-widget-host-safe-inline-end,82px) + 2px);top:8px;font-size:8.5px;color:rgba(150,190,230,.55)}
+  .sec-t{font-size:9.5px;color:rgba(168,208,240,.72);margin:9px 0 6px;display:flex;justify-content:space-between;align-items:baseline}
+  .sec-t b{color:#eaf6ff;font-weight:700}
+  .sec-t span{font-size:8.5px;color:rgba(150,190,230,.55)}
+  .donut-row{display:flex;align-items:center;gap:10px}
+  .donut{position:relative;width:112px;height:112px;flex:none}
+  .donut svg{width:100%;height:100%;display:block}
+  .dc{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+  .dc b{font-size:17px;text-shadow:0 0 12px rgba(34,211,238,.6);line-height:1.1}
+  .dc span{font-size:8px;color:rgba(150,190,230,.6);margin-top:2px}
+  .leg{flex:1;min-width:0;display:grid;grid-template-columns:1fr 1fr;gap:4px 8px}
+  .leg div{display:flex;align-items:center;gap:5px;font-size:9px;color:rgba(234,246,255,.9)}
+  .leg i{width:7px;height:7px;border-radius:2px;flex:none}
+  .leg b{margin-left:auto;color:#22d3ee}
+  .brow{display:flex;align-items:center;gap:6px;height:18px}
+  .bn{width:38px;flex:none;font-size:9px;color:rgba(234,246,255,.9);white-space:nowrap}
+  .bt{flex:1;height:9px;border-radius:5px;background:rgba(8,24,58,.85);border:1px solid rgba(96,170,255,.12);position:relative;overflow:hidden;min-width:0}
+  .bf{position:absolute;left:0;top:0;bottom:0;width:0;min-width:2px;border-radius:5px;transition:width 1.1s cubic-bezier(.2,.8,.25,1)}
+  .bf.gd{background:linear-gradient(90deg,rgba(251,191,36,.3),#fbbf24)}
+  .bf.sp{background:linear-gradient(90deg,rgba(168,85,247,.3),#a855f7)}
+  .bv{width:40px;flex:none;text-align:right;font-size:9px;color:#d9baff}
+  .lead .bv{color:#fbbf24;font-weight:700}
+  .gbar{display:flex;height:12px;border-radius:6px;overflow:hidden;border:1px solid rgba(96,170,255,.16)}
+  .gbar .m{background:linear-gradient(90deg,#3b82f6,#22d3ee)}
+  .gbar .f{background:linear-gradient(90deg,#a855f7,#ec4899)}
+  .glab{display:flex;justify-content:space-between;font-size:8.5px;color:rgba(168,208,240,.68);margin-top:4px}
+  .warnbox{margin-top:10px;padding:8px 10px;border-radius:10px;font-size:9.5px;line-height:1.65;border:1px solid rgba(251,191,36,.4);background:rgba(251,191,36,.07);color:#ffe9c0}
+  .warnbox b{color:#fbbf24}
+  @media (prefers-reduced-motion:reduce){.bf{transition:none}}
+&lt;/style&gt;
+&lt;style&gt;.hd .mt,.mt{display:none!important}&lt;/style&gt;&lt;style&gt;@media (prefers-reduced-motion:no-preference){.cn{animation:cnP 3s ease-in-out infinite}@keyframes cnP{0%,100%{opacity:.6}50%{opacity:1}}.hd{overflow:hidden}.hd::after{content:&quot;&quot;;position:absolute;top:0;bottom:0;left:0;width:30%;background:linear-gradient(105deg,transparent,rgba(140,225,255,.15),transparent);transform:translateX(-140%);animation:hdSweep 5.5s ease-in-out infinite;pointer-events:none}@keyframes hdSweep{0%{transform:translateX(-140%)}55%,100%{transform:translateX(440%)}}.bf{overflow:hidden}.bf::after{content:&quot;&quot;;position:absolute;top:0;bottom:0;left:0;width:55%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.30),transparent);transform:translateX(-110%);animation:bfX 2.8s linear infinite;pointer-events:none}@keyframes bfX{0%{transform:translateX(-110%)}100%{transform:translateX(300%)}}.vbar,.dbar{position:relative;overflow:hidden}.vbar::after,.dbar::after{content:&quot;&quot;;position:absolute;left:0;right:0;bottom:0;height:45%;background:linear-gradient(0deg,transparent,rgba(255,255,255,.26),transparent);transform:translateY(120%);animation:vbY 3.2s linear infinite;pointer-events:none}@keyframes vbY{0%{transform:translateY(120%)}100%{transform:translateY(-330%)}}.tab,.scard{position:relative;overflow:hidden}.tab::after,.scard::after{content:&quot;&quot;;position:absolute;top:-40%;bottom:-40%;left:0;width:24%;background:linear-gradient(90deg,transparent,rgba(180,235,255,.2),transparent);transform:translateX(-160%) skewX(-18deg);animation:sheenX 4.8s ease-in-out infinite;pointer-events:none}@keyframes sheenX{0%{transform:translateX(-160%) skewX(-18deg)}60%,100%{transform:translateX(560%) skewX(-18deg)}}.tab:nth-child(2)::after{animation-delay:.6s}.tab:nth-child(3)::after{animation-delay:1.2s}.tab:nth-child(4)::after{animation-delay:1.8s}.scard:nth-child(2)::after{animation-delay:.8s}.scard:nth-child(3)::after{animation-delay:1.6s}.box{position:relative}.box::after{content:&quot;&quot;;position:absolute;inset:-2px;border-radius:6px;pointer-events:none;box-shadow:0 0 12px rgba(0,229,255,.6);opacity:.15;animation:oP 2.6s ease-in-out infinite}.box:nth-child(2)::after{animation-delay:.2s}.box:nth-child(3)::after{animation-delay:.4s}.box:nth-child(4)::after{animation-delay:.6s}.box:nth-child(5)::after{animation-delay:.8s}.box:nth-child(6)::after{animation-delay:1s}@keyframes oP{0%,100%{opacity:.15}50%{opacity:1}}.compass{filter:drop-shadow(0 0 8px rgba(34,211,238,.35))}.donut{position:relative}.donut::after{content:&quot;&quot;;position:absolute;inset:0;border-radius:50%;pointer-events:none;background:conic-gradient(from 0deg,transparent 0 72%,rgba(255,255,255,.28) 84%,transparent 96%);-webkit-mask:radial-gradient(circle,transparent 54%,#000 56% 90%,transparent 92%);mask:radial-gradient(circle,transparent 54%,#000 56% 90%,transparent 92%);animation:ringSpin 5.5s linear infinite}@keyframes ringSpin{to{transform:rotate(360deg)}}}&lt;/style&gt;&lt;style&gt;html,body{height:100%!important;-webkit-text-size-adjust:100%;text-size-adjust:100%}body{display:flex!important;flex-direction:column!important}body&gt;:first-child{flex:1 0 auto;display:flow-root}html.host-mobile,html.host-mobile body{height:auto!important;min-height:0!important;overflow-x:hidden!important}html.host-mobile body{display:block!important}html.host-mobile body&gt;:first-child{height:auto!important;min-height:0!important;flex:none!important}html.host-mobile .panel{height:auto!important;min-height:0!important}html.host-mobile .tab,html.host-mobile button{min-height:44px}html.host-mobile .hd h1{white-space:normal!important;line-height:1.35}html.host-mobile .grp-t{flex-wrap:wrap}html.host-mobile .strategy{align-items:flex-start!important;flex-wrap:wrap!important}&lt;/style&gt;&lt;/head&gt;
+&lt;body&gt;
+&lt;div class=&quot;panel&quot;&gt;
+  &lt;i class=&quot;cn tl&quot;&gt;&lt;/i&gt;&lt;i class=&quot;cn tr&quot;&gt;&lt;/i&gt;&lt;i class=&quot;cn bl&quot;&gt;&lt;/i&gt;&lt;i class=&quot;cn br&quot;&gt;&lt;/i&gt;
+  &lt;header class=&quot;hd&quot;&gt;&lt;h1&gt;粉丝画像 · 双平台&lt;/h1&gt;&lt;span class=&quot;mt&quot;&gt;2026-07-31 ~ 08-06&lt;/span&gt;&lt;/header&gt;
+  &lt;div class=&quot;sec-t&quot;&gt;&lt;b&gt;抖音 · 兴趣分布&lt;/b&gt;&lt;span&gt;合计 100% · 粉丝 1,302&lt;/span&gt;&lt;/div&gt;
+  &lt;section class=&quot;donut-row&quot; aria-label=&quot;抖音兴趣分布&quot;&gt;
+    &lt;div class=&quot;donut&quot;&gt;&lt;svg viewBox=&quot;0 0 120 120&quot;&gt;&lt;circle cx=&quot;60&quot; cy=&quot;60&quot; r=&quot;44&quot; fill=&quot;none&quot; stroke=&quot;rgba(20,44,96,.9)&quot; stroke-width=&quot;15&quot;/&gt;&lt;circle cx=&quot;60&quot; cy=&quot;60&quot; r=&quot;44&quot; fill=&quot;none&quot; stroke=&quot;#22d3ee&quot; stroke-width=&quot;15&quot; stroke-dasharray=&quot;102.3 276.5&quot; stroke-dashoffset=&quot;-0.0&quot; transform=&quot;rotate(-90 60 60)&quot;/&gt;&lt;circle cx=&quot;60&quot; cy=&quot;60&quot; r=&quot;44&quot; fill=&quot;none&quot; stroke=&quot;#3b82f6&quot; stroke-width=&quot;15&quot; stroke-dasharray=&quot;55.3 276.5&quot; stroke-dashoffset=&quot;-102.3&quot; transform=&quot;rotate(-90 60 60)&quot;/&gt;&lt;circle cx=&quot;60&quot; cy=&quot;60&quot; r=&quot;44&quot; fill=&quot;none&quot; stroke=&quot;#a855f7&quot; stroke-width=&quot;15&quot; stroke-dasharray=&quot;41.5 276.5&quot; stroke-dashoffset=&quot;-157.6&quot; transform=&quot;rotate(-90 60 60)&quot;/&gt;&lt;circle cx=&quot;60&quot; cy=&quot;60&quot; r=&quot;44&quot; fill=&quot;none&quot; stroke=&quot;#ec4899&quot; stroke-width=&quot;15&quot; stroke-dasharray=&quot;16.6 276.5&quot; stroke-dashoffset=&quot;-199.1&quot; transform=&quot;rotate(-90 60 60)&quot;/&gt;&lt;circle cx=&quot;60&quot; cy=&quot;60&quot; r=&quot;44&quot; fill=&quot;none&quot; stroke=&quot;#fbbf24&quot; stroke-width=&quot;15&quot; stroke-dasharray=&quot;16.6 276.5&quot; stroke-dashoffset=&quot;-215.7&quot; transform=&quot;rotate(-90 60 60)&quot;/&gt;&lt;circle cx=&quot;60&quot; cy=&quot;60&quot; r=&quot;44&quot; fill=&quot;none&quot; stroke=&quot;#34d399&quot; stroke-width=&quot;15&quot; stroke-dasharray=&quot;13.8 276.5&quot; stroke-dashoffset=&quot;-232.3&quot; transform=&quot;rotate(-90 60 60)&quot;/&gt;&lt;circle cx=&quot;60&quot; cy=&quot;60&quot; r=&quot;44&quot; fill=&quot;none&quot; stroke=&quot;#64748b&quot; stroke-width=&quot;15&quot; stroke-dasharray=&quot;30.4 276.5&quot; stroke-dashoffset=&quot;-246.1&quot; transform=&quot;rotate(-90 60 60)&quot;/&gt;&lt;/svg&gt;&lt;div class=&quot;dc&quot;&gt;&lt;b&gt;72%&lt;/b&gt;&lt;span&gt;兴趣前三&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;
+    &lt;div class=&quot;leg&quot;&gt;&lt;div&gt;&lt;i style=&quot;background:#22d3ee&quot;&gt;&lt;/i&gt;随拍&lt;b&gt;37%&lt;/b&gt;&lt;/div&gt;&lt;div&gt;&lt;i style=&quot;background:#3b82f6&quot;&gt;&lt;/i&gt;剧情&lt;b&gt;20%&lt;/b&gt;&lt;/div&gt;&lt;div&gt;&lt;i style=&quot;background:#a855f7&quot;&gt;&lt;/i&gt;亲子&lt;b&gt;15%&lt;/b&gt;&lt;/div&gt;&lt;div&gt;&lt;i style=&quot;background:#ec4899&quot;&gt;&lt;/i&gt;颜值&lt;b&gt;6%&lt;/b&gt;&lt;/div&gt;&lt;div&gt;&lt;i style=&quot;background:#fbbf24&quot;&gt;&lt;/i&gt;三农&lt;b&gt;6%&lt;/b&gt;&lt;/div&gt;&lt;div&gt;&lt;i style=&quot;background:#34d399&quot;&gt;&lt;/i&gt;社会时政&lt;b&gt;5%&lt;/b&gt;&lt;/div&gt;&lt;div&gt;&lt;i style=&quot;background:#64748b&quot;&gt;&lt;/i&gt;其他&lt;b&gt;11%&lt;/b&gt;&lt;/div&gt;&lt;/div&gt;
+  &lt;/section&gt;
+  &lt;div class=&quot;sec-t&quot;&gt;&lt;b&gt;视频号 · 年龄分布&lt;/b&gt;&lt;span&gt;画像样本 1,220&lt;/span&gt;&lt;/div&gt;
+  &lt;section aria-label=&quot;视频号年龄分布&quot;&gt;&lt;div class=&quot;brow lead&quot;&gt;&lt;span class=&quot;bn&quot;&gt;50岁+&lt;/span&gt;&lt;div class=&quot;bt&quot;&gt;&lt;div class=&quot;bf gd&quot; data-w=&quot;100.0&quot;&gt;&lt;/div&gt;&lt;/div&gt;&lt;span class=&quot;bv&quot;&gt;78.9%&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;brow&quot;&gt;&lt;span class=&quot;bn&quot;&gt;40-49&lt;/span&gt;&lt;div class=&quot;bt&quot;&gt;&lt;div class=&quot;bf sp&quot; data-w=&quot;10.4&quot;&gt;&lt;/div&gt;&lt;/div&gt;&lt;span class=&quot;bv&quot;&gt;8.2%&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;brow&quot;&gt;&lt;span class=&quot;bn&quot;&gt;30-39&lt;/span&gt;&lt;div class=&quot;bt&quot;&gt;&lt;div class=&quot;bf sp&quot; data-w=&quot;10.0&quot;&gt;&lt;/div&gt;&lt;/div&gt;&lt;span class=&quot;bv&quot;&gt;7.9%&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;brow&quot;&gt;&lt;span class=&quot;bn&quot;&gt;17岁-&lt;/span&gt;&lt;div class=&quot;bt&quot;&gt;&lt;div class=&quot;bf sp&quot; data-w=&quot;2.0&quot;&gt;&lt;/div&gt;&lt;/div&gt;&lt;span class=&quot;bv&quot;&gt;1.6%&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;brow&quot;&gt;&lt;span class=&quot;bn&quot;&gt;25-29&lt;/span&gt;&lt;div class=&quot;bt&quot;&gt;&lt;div class=&quot;bf sp&quot; data-w=&quot;1.5&quot;&gt;&lt;/div&gt;&lt;/div&gt;&lt;span class=&quot;bv&quot;&gt;1.2%&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;brow&quot;&gt;&lt;span class=&quot;bn&quot;&gt;18-24&lt;/span&gt;&lt;div class=&quot;bt&quot;&gt;&lt;div class=&quot;bf sp&quot; data-w=&quot;1.3&quot;&gt;&lt;/div&gt;&lt;/div&gt;&lt;span class=&quot;bv&quot;&gt;1.0%&lt;/span&gt;&lt;/div&gt;&lt;/section&gt;
+  &lt;div class=&quot;sec-t&quot;&gt;&lt;b&gt;视频号 · 性别&lt;/b&gt;&lt;/div&gt;
+  &lt;section aria-label=&quot;视频号性别：男56.7，女39.9&quot;&gt;&lt;div class=&quot;gbar&quot;&gt;&lt;div class=&quot;m&quot; style=&quot;width:56.7%&quot;&gt;&lt;/div&gt;&lt;div class=&quot;f&quot; style=&quot;width:39.9%&quot;&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;glab&quot;&gt;&lt;span&gt;男 56.7%&lt;/span&gt;&lt;span&gt;女 39.9%&lt;/span&gt;&lt;/div&gt;&lt;/section&gt;
+  &lt;p class=&quot;warnbox&quot;&gt;&lt;b&gt;受众结论：&lt;/b&gt;视频号 50 岁+占 78.9%，男性占 56.7%；抖音兴趣前三为随拍、剧情、亲子。选题继续使用熟悉体育事件、清楚动作因果和直接选择题。&lt;/p&gt;
+&lt;/div&gt;
+&lt;script&gt;
+(function(){
+  var els = document.querySelectorAll(&quot;.bf[data-w]&quot;);
+  els.forEach(function(el,i){
+    el.style.transitionDelay = (0.1 + i*0.06) + &quot;s&quot;;
+    requestAnimationFrame(function(){ requestAnimationFrame(function(){ el.style.width = el.dataset.w + &quot;%&quot;; }); });
+  });
+})();
+&lt;/script&gt;
+&lt;script&gt;setTimeout(function(){document.querySelectorAll(&quot;[data-w]&quot;).forEach(function(el){el.style.transition=&quot;none&quot;;el.style.width=parseFloat(el.dataset.w)+&quot;%&quot;;});document.querySelectorAll(&quot;.vchart,.duo&quot;).forEach(function(ch){var H=ch.clientHeight;ch.querySelectorAll(&quot;[data-h]&quot;).forEach(function(el){var lab=el.parentElement.querySelector(&quot;.vval&quot;);var max=H-(lab?lab.offsetHeight+8:8);el.style.transition=&quot;none&quot;;el.style.height=Math.max(2,max*parseFloat(el.dataset.h)/100)+&quot;px&quot;;});});},1600);&lt;/script&gt;&lt;/body&gt;
+&lt;/html&gt;
+" scrolling="no"></iframe></div>
 </div>
+<div class="col" style="grid-column:span 6">
+<div class="cell" style="flex:0 0 578px;height:578px;--nh:578px"><iframe title="运营健康罗盘 · 平台下钻" srcdoc="&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;zh-CN&quot;&gt;
+&lt;head&gt;
+&lt;meta charset=&quot;UTF-8&quot;&gt;
+&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+&lt;title&gt;健康罗盘 · 平台下钻&lt;/title&gt;
+&lt;style&gt;
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{background:transparent}
+  body{font-family:var(--kimi-font-sans,-apple-system,BlinkMacSystemFont,&quot;PingFang SC&quot;,&quot;Microsoft YaHei&quot;,sans-serif);color:#eaf6ff;padding:8px;font-variant-numeric:tabular-nums;line-height:1.6}
+  .panel{position:relative;background:linear-gradient(165deg,rgba(13,26,62,.97),rgba(7,14,38,.98));border:1px solid rgba(0,229,255,.26);border-radius:8px;box-shadow:0 12px 34px rgba(2,10,40,.5),inset 0 0 30px rgba(0,90,220,.08);padding:10px 12px 12px}
+  .cn{position:absolute;width:11px;height:11px;border:2px solid rgba(0,229,255,.7);z-index:2;pointer-events:none}
+  .tl{top:-1px;left:-1px;border-right:none;border-bottom:none;border-radius:6px 0 0 0}
+  .tr{top:-1px;right:-1px;border-left:none;border-bottom:none;border-radius:0 6px 0 0}
+  .bl{bottom:-1px;left:-1px;border-right:none;border-top:none;border-radius:0 0 0 6px}
+  .br{bottom:-1px;right:-1px;border-left:none;border-top:none;border-radius:0 0 6px 0}
 
+  .hd{position:relative;text-align:center;margin:0 0 9px;padding:5px 10px 7px;background:linear-gradient(180deg,rgba(18,44,96,.55),rgba(10,22,56,.1));border-bottom:1px solid rgba(0,229,255,.22)}
+  .hd h1{display:inline-block;font-size:13.5px;font-weight:800;color:#bfefff;text-shadow:0 0 10px rgba(0,229,255,.45);padding:0 12px;position:relative}
+  .hd h1::before,.hd h1::after{content:&quot;&quot;;position:absolute;top:50%;width:26px;height:1px;background:linear-gradient(90deg,transparent,#00e5ff);box-shadow:0 0 6px rgba(0,229,255,.7)}
+  .hd h1::before{right:100%}.hd h1::after{left:100%;transform:scaleX(-1)}
+  .hd .mt{position:absolute;right:calc(var(--daimon-widget-host-safe-inline-end,82px) + 2px);top:8px;font-size:8.5px;color:rgba(150,190,230,.55)}
 
+  .tabs{display:flex;gap:6px;margin-bottom:9px}
+  .tab{flex:1;appearance:none;border:1px solid rgba(96,170,255,.16);background:rgba(9,20,48,.5);color:rgba(168,208,240,.75);
+    font:inherit;font-size:11px;font-weight:700;border-radius:8px;padding:6px 4px;cursor:pointer;
+    display:flex;align-items:center;justify-content:center;gap:5px;transition:background .18s,color .18s,transform .12s,border-color .18s}
+  .tab i{width:7px;height:7px;border-radius:2px;background:currentColor;opacity:.8}
+  .tab:hover{border-color:rgba(96,190,255,.4);color:#eaf6ff}
+  .tab:active{transform:scale(.96)}
+  .tab:focus-visible{outline:2px solid #22d3ee;outline-offset:2px}
+  .tab[aria-selected=&quot;true&quot;]{color:#04122e;border-color:transparent;box-shadow:0 4px 16px rgba(34,211,238,.3)}
+  .tab[data-p=&quot;overview&quot;][aria-selected=&quot;true&quot;]{background:linear-gradient(150deg,#9deeff,#38bdf8)}
+  .tab[data-p=&quot;douyin&quot;][aria-selected=&quot;true&quot;]{background:linear-gradient(150deg,#a5f3fc,#25d6e6)}
+  .tab[data-p=&quot;shipinhao&quot;][aria-selected=&quot;true&quot;]{background:linear-gradient(150deg,#e9d5ff,#a855f7);color:#1c0b33}
+  .tab[data-p=&quot;flywheel&quot;][aria-selected=&quot;true&quot;]{background:linear-gradient(150deg,#fed7aa,#fb923c);color:#331303}
+
+  .datebar{display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:10px;font-size:10px;color:#9deeff}
+  .datebar::before,.datebar::after{content:&quot;&quot;;flex:1;height:1px;background:linear-gradient(90deg,transparent,rgba(0,229,255,.4))}
+  .datebar::after{transform:scaleX(-1)}
+  .datebar span{border:1px solid rgba(0,229,255,.35);border-radius:6px;padding:2px 12px;background:rgba(0,90,180,.15);white-space:nowrap}
+
+  .mid{display:grid;grid-template-columns:1fr auto 1fr;gap:10px;align-items:center;margin-bottom:10px}
+  .stack{display:flex;flex-direction:column;gap:7px}
+  .scard{border:1px solid rgba(0,229,255,.2);border-radius:7px;background:linear-gradient(160deg,rgba(0,80,170,.22),rgba(0,40,100,.12));padding:6px 9px 5px;position:relative}
+  .scard::after{content:&quot;&quot;;position:absolute;left:0;top:0;bottom:0;width:2px;background:linear-gradient(#00e5ff,transparent);border-radius:2px}
+  .scard .sl{font-size:8.5px;color:rgba(168,208,240,.68);white-space:nowrap}
+  .scard .sv{font-size:15px;font-weight:800;color:#eafcff;line-height:1.2;display:block;text-shadow:0 0 10px rgba(0,229,255,.35);white-space:nowrap}
+  .scard .sv small{font-size:8.5px;font-weight:400;color:rgba(168,208,240,.6)}
+  .scard .sv.warn{color:#fbbf24}.scard .sv.bad{color:#f87171}.scard .sv.gd{color:#fbbf24}
+
+  .gauge{text-align:center}
+  .compass{width:198px;height:auto;display:block}
+  #needleG{transition:transform 1.1s cubic-bezier(.34,1.56,.64,1);transform-origin:160px 168px}
+  .gval{font-size:30px;font-weight:800;line-height:1.1;text-shadow:0 0 18px rgba(34,211,238,.55);display:block;margin-top:-6px}
+  .glab{font-size:9px;color:rgba(168,208,240,.7)}
+  .gformula{display:inline-block;margin-top:5px;font-size:8px;color:rgba(150,190,230,.6);border:1px dashed rgba(96,190,255,.3);border-radius:999px;padding:2px 9px;white-space:nowrap}
+
+  .digi{text-align:center;margin-bottom:10px}
+  .digi .dlab{font-size:9px;color:rgba(168,208,240,.65);margin-bottom:5px}
+  .boxes{display:flex;gap:6px;justify-content:center}
+  .box{width:32px;height:42px;display:flex;align-items:center;justify-content:center;font-size:23px;font-weight:800;color:#00e5ff;
+    background:linear-gradient(180deg,rgba(0,60,140,.55),rgba(0,30,80,.55));border:1px solid rgba(0,229,255,.55);border-radius:5px;
+    box-shadow:inset 0 0 10px rgba(0,229,255,.25),0 0 9px rgba(0,229,255,.22);text-shadow:0 0 10px rgba(0,229,255,.9);position:relative}
+  .box::after{content:&quot;&quot;;position:absolute;left:3px;right:3px;top:50%;height:1px;background:rgba(0,229,255,.3)}
+  .digi .dsub{font-size:9px;color:rgba(168,208,240,.6);margin-top:5px}
+  .digi .dsub b{color:#34d399}
+
+  .diag{border:1px solid rgba(96,170,255,.15);border-radius:8px;padding:8px 11px;background:rgba(9,20,48,.45)}
+  .diag .row{margin-bottom:6px}.diag .row:last-child{margin-bottom:0}
+  .diag .k{font-size:9px;font-weight:800;color:#fbbf24;margin-bottom:1px}
+  .diag .k.g{color:#34d399}
+  .diag p{font-size:10.5px;line-height:1.55;color:rgba(234,246,255,.92)}
+
+  .skel{display:none}
+  .loading .skel{display:block}
+  .loading .real{visibility:hidden}
+  .skel .b{height:12px;border-radius:6px;margin:8px 0;background:linear-gradient(90deg,rgba(96,170,255,.08) 25%,rgba(150,210,255,.22) 50%,rgba(96,170,255,.08) 75%);background-size:200% 100%;animation:shm 1s linear infinite}
+  @keyframes shm{from{background-position:160% 0}to{background-position:-40% 0}}
+
+  @media (max-width:520px){.mid{grid-template-columns:1fr}.gauge{order:-1}}
+  @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+&lt;/style&gt;
+&lt;style&gt;.hd .mt,.mt{display:none!important}&lt;/style&gt;&lt;style&gt;@media (prefers-reduced-motion:no-preference){.cn{animation:cnP 3s ease-in-out infinite}@keyframes cnP{0%,100%{opacity:.6}50%{opacity:1}}.hd{overflow:hidden}.hd::after{content:&quot;&quot;;position:absolute;top:0;bottom:0;left:0;width:30%;background:linear-gradient(105deg,transparent,rgba(140,225,255,.15),transparent);transform:translateX(-140%);animation:hdSweep 5.5s ease-in-out infinite;pointer-events:none}@keyframes hdSweep{0%{transform:translateX(-140%)}55%,100%{transform:translateX(440%)}}.bf{overflow:hidden}.bf::after{content:&quot;&quot;;position:absolute;top:0;bottom:0;left:0;width:55%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.30),transparent);transform:translateX(-110%);animation:bfX 2.8s linear infinite;pointer-events:none}@keyframes bfX{0%{transform:translateX(-110%)}100%{transform:translateX(300%)}}.vbar,.dbar{position:relative;overflow:hidden}.vbar::after,.dbar::after{content:&quot;&quot;;position:absolute;left:0;right:0;bottom:0;height:45%;background:linear-gradient(0deg,transparent,rgba(255,255,255,.26),transparent);transform:translateY(120%);animation:vbY 3.2s linear infinite;pointer-events:none}@keyframes vbY{0%{transform:translateY(120%)}100%{transform:translateY(-330%)}}.tab,.scard{position:relative;overflow:hidden}.tab::after,.scard::after{content:&quot;&quot;;position:absolute;top:-40%;bottom:-40%;left:0;width:24%;background:linear-gradient(90deg,transparent,rgba(180,235,255,.2),transparent);transform:translateX(-160%) skewX(-18deg);animation:sheenX 4.8s ease-in-out infinite;pointer-events:none}@keyframes sheenX{0%{transform:translateX(-160%) skewX(-18deg)}60%,100%{transform:translateX(560%) skewX(-18deg)}}.tab:nth-child(2)::after{animation-delay:.6s}.tab:nth-child(3)::after{animation-delay:1.2s}.tab:nth-child(4)::after{animation-delay:1.8s}.scard:nth-child(2)::after{animation-delay:.8s}.scard:nth-child(3)::after{animation-delay:1.6s}.box{position:relative}.box::after{content:&quot;&quot;;position:absolute;inset:-2px;border-radius:6px;pointer-events:none;box-shadow:0 0 12px rgba(0,229,255,.6);opacity:.15;animation:oP 2.6s ease-in-out infinite}.box:nth-child(2)::after{animation-delay:.2s}.box:nth-child(3)::after{animation-delay:.4s}.box:nth-child(4)::after{animation-delay:.6s}.box:nth-child(5)::after{animation-delay:.8s}.box:nth-child(6)::after{animation-delay:1s}@keyframes oP{0%,100%{opacity:.15}50%{opacity:1}}.compass{filter:drop-shadow(0 0 8px rgba(34,211,238,.35))}.donut{position:relative}.donut::after{content:&quot;&quot;;position:absolute;inset:0;border-radius:50%;pointer-events:none;background:conic-gradient(from 0deg,transparent 0 72%,rgba(255,255,255,.28) 84%,transparent 96%);-webkit-mask:radial-gradient(circle,transparent 54%,#000 56% 90%,transparent 92%);mask:radial-gradient(circle,transparent 54%,#000 56% 90%,transparent 92%);animation:ringSpin 5.5s linear infinite}@keyframes ringSpin{to{transform:rotate(360deg)}}}&lt;/style&gt;&lt;style&gt;@media(max-width:520px){.gauge{width:100%;justify-self:stretch}.compass{margin-inline:auto}}&lt;/style&gt;&lt;style&gt;.scard{text-align:center;padding:8px 10px 7px;border:1px solid rgba(0,229,255,.3);border-radius:9px;overflow:hidden;background:radial-gradient(62% 100% at 50% 0%,rgba(0,229,255,.12),transparent 70%),linear-gradient(180deg,rgba(0,80,170,.26),rgba(0,40,100,.10));box-shadow:inset 0 0 14px rgba(0,90,220,.10)}.scard::before{content:&quot;&quot;;position:absolute;top:0;left:50%;transform:translateX(-50%);width:56%;height:2px;border-radius:2px;background:linear-gradient(90deg,transparent,#00e5ff,transparent);box-shadow:0 0 8px rgba(0,229,255,.8)}.scard::after{content:none}.sl{display:block;margin:2px 0 1px;letter-spacing:.06em;color:rgba(168,208,240,.78)}.sv{font-size:16px}&lt;/style&gt;&lt;style&gt;html,body{height:100%!important;-webkit-text-size-adjust:100%;text-size-adjust:100%}body{display:flex!important;flex-direction:column!important}body&gt;:first-child{flex:1 0 auto;display:flow-root}html.host-mobile,html.host-mobile body{height:auto!important;min-height:0!important;overflow-x:hidden!important}html.host-mobile body{display:block!important}html.host-mobile body&gt;:first-child{height:auto!important;min-height:0!important;flex:none!important}html.host-mobile .panel{height:auto!important;min-height:0!important}html.host-mobile .tab,html.host-mobile button{min-height:44px}html.host-mobile .hd h1{white-space:normal!important;line-height:1.35}html.host-mobile .grp-t{flex-wrap:wrap}html.host-mobile .strategy{align-items:flex-start!important;flex-wrap:wrap!important}&lt;/style&gt;&lt;/head&gt;
+&lt;body&gt;
+&lt;div class=&quot;panel&quot;&gt;
+  &lt;i class=&quot;cn tl&quot;&gt;&lt;/i&gt;&lt;i class=&quot;cn tr&quot;&gt;&lt;/i&gt;&lt;i class=&quot;cn bl&quot;&gt;&lt;/i&gt;&lt;i class=&quot;cn br&quot;&gt;&lt;/i&gt;
+  &lt;header class=&quot;hd&quot;&gt;&lt;h1&gt;运营健康罗盘&lt;/h1&gt;&lt;span class=&quot;mt&quot;&gt;Tab 下钻&lt;/span&gt;&lt;/header&gt;
+
+  &lt;nav class=&quot;tabs&quot; role=&quot;tablist&quot; aria-label=&quot;平台切换&quot;&gt;
+    &lt;button class=&quot;tab&quot; role=&quot;tab&quot; aria-selected=&quot;true&quot; data-p=&quot;overview&quot; type=&quot;button&quot;&gt;&lt;i style=&quot;color:#38bdf8&quot;&gt;&lt;/i&gt;总览&lt;/button&gt;
+    &lt;button class=&quot;tab&quot; role=&quot;tab&quot; aria-selected=&quot;false&quot; data-p=&quot;douyin&quot; type=&quot;button&quot;&gt;&lt;i style=&quot;color:#25d6e6&quot;&gt;&lt;/i&gt;抖音&lt;/button&gt;
+    &lt;button class=&quot;tab&quot; role=&quot;tab&quot; aria-selected=&quot;false&quot; data-p=&quot;shipinhao&quot; type=&quot;button&quot;&gt;&lt;i style=&quot;color:#a855f7&quot;&gt;&lt;/i&gt;视频号&lt;/button&gt;
+    &lt;button class=&quot;tab&quot; role=&quot;tab&quot; aria-selected=&quot;false&quot; data-p=&quot;flywheel&quot; type=&quot;button&quot;&gt;&lt;i style=&quot;color:#fb923c&quot;&gt;&lt;/i&gt;飞轮&lt;/button&gt;
+  &lt;/nav&gt;
+
+  &lt;div class=&quot;datebar&quot;&gt;&lt;span id=&quot;dateRange&quot;&gt;统计周期 2026-07-31 ~ 08-06&lt;/span&gt;&lt;/div&gt;
+
+  &lt;div id=&quot;zone&quot;&gt;
+    &lt;div class=&quot;skel&quot; aria-hidden=&quot;true&quot;&gt;&lt;div class=&quot;b&quot; style=&quot;width:60%&quot;&gt;&lt;/div&gt;&lt;div class=&quot;b&quot; style=&quot;width:85%&quot;&gt;&lt;/div&gt;&lt;div class=&quot;b&quot; style=&quot;width:45%&quot;&gt;&lt;/div&gt;&lt;/div&gt;
+    &lt;div class=&quot;real&quot;&gt;
+      &lt;div class=&quot;mid&quot;&gt;
+        &lt;div class=&quot;stack&quot; id=&quot;stackL&quot;&gt;&lt;/div&gt;
+        &lt;div class=&quot;gauge&quot; role=&quot;img&quot; aria-label=&quot;健康分罗盘&quot;&gt;
+          &lt;svg class=&quot;compass&quot; viewBox=&quot;0 0 320 200&quot;&gt;
+            &lt;defs&gt;&lt;linearGradient id=&quot;ndl&quot; x1=&quot;0&quot; y1=&quot;0&quot; x2=&quot;0&quot; y2=&quot;1&quot;&gt;&lt;stop offset=&quot;0%&quot; stop-color=&quot;#fff&quot;/&gt;&lt;stop offset=&quot;100%&quot; stop-color=&quot;#22d3ee&quot;/&gt;&lt;/linearGradient&gt;&lt;/defs&gt;
+            &lt;path d=&quot;M 42 168 A 118 118 0 0 1 160 50&quot; fill=&quot;none&quot; stroke=&quot;#f87171&quot; stroke-width=&quot;10&quot; stroke-linecap=&quot;round&quot; opacity=&quot;.85&quot;/&gt;
+            &lt;path d=&quot;M 160 50 A 118 118 0 0 1 229.4 72.5&quot; fill=&quot;none&quot; stroke=&quot;#fbbf24&quot; stroke-width=&quot;10&quot; stroke-linecap=&quot;round&quot; opacity=&quot;.85&quot;/&gt;
+            &lt;path d=&quot;M 229.4 72.5 A 118 118 0 0 1 278 168&quot; fill=&quot;none&quot; stroke=&quot;#34d399&quot; stroke-width=&quot;10&quot; stroke-linecap=&quot;round&quot; opacity=&quot;.85&quot;/&gt;
+            &lt;g stroke=&quot;rgba(168,208,240,.55)&quot; stroke-width=&quot;1.6&quot;&gt;
+              &lt;line x1=&quot;54&quot; y1=&quot;168&quot; x2=&quot;42&quot; y2=&quot;168&quot;/&gt;&lt;line x1=&quot;59.2&quot; y1=&quot;135.2&quot; x2=&quot;47.8&quot; y2=&quot;131.5&quot;/&gt;
+              &lt;line x1=&quot;74.2&quot; y1=&quot;105.6&quot; x2=&quot;64.5&quot; y2=&quot;98.6&quot;/&gt;&lt;line x1=&quot;98.2&quot; y1=&quot;80.4&quot; x2=&quot;90.6&quot; y2=&quot;72.5&quot;/&gt;
+              &lt;line x1=&quot;127.2&quot; y1=&quot;62.6&quot; x2=&quot;123.5&quot; y2=&quot;55.8&quot;/&gt;&lt;line x1=&quot;160&quot; y1=&quot;62&quot; x2=&quot;160&quot; y2=&quot;50&quot;/&gt;
+              &lt;line x1=&quot;192.8&quot; y1=&quot;62.6&quot; x2=&quot;196.5&quot; y2=&quot;55.8&quot;/&gt;&lt;line x1=&quot;221.8&quot; y1=&quot;80.4&quot; x2=&quot;229.4&quot; y2=&quot;72.5&quot;/&gt;
+              &lt;line x1=&quot;245.8&quot; y1=&quot;105.6&quot; x2=&quot;255.5&quot; y2=&quot;98.6&quot;/&gt;&lt;line x1=&quot;260.8&quot; y1=&quot;135.2&quot; x2=&quot;272.2&quot; y2=&quot;131.5&quot;/&gt;
+              &lt;line x1=&quot;258&quot; y1=&quot;168&quot; x2=&quot;278&quot; y2=&quot;168&quot;/&gt;
+            &lt;/g&gt;
+            &lt;g fill=&quot;rgba(168,208,240,.7)&quot; font-size=&quot;12&quot; text-anchor=&quot;middle&quot; font-weight=&quot;700&quot;&gt;
+              &lt;text x=&quot;80&quot; y=&quot;173&quot;&gt;0&lt;/text&gt;&lt;text x=&quot;160&quot; y=&quot;88&quot;&gt;50&lt;/text&gt;&lt;text x=&quot;240&quot; y=&quot;173&quot;&gt;100&lt;/text&gt;
+            &lt;/g&gt;
+            &lt;g id=&quot;needleG&quot;&gt;
+              &lt;polygon points=&quot;160,168 156.6,162 160,70 163.4,162&quot; fill=&quot;url(#ndl)&quot; style=&quot;filter:drop-shadow(0 0 6px rgba(34,211,238,.9))&quot;/&gt;
+              &lt;circle cx=&quot;160&quot; cy=&quot;168&quot; r=&quot;8.5&quot; fill=&quot;#0d1a3a&quot; stroke=&quot;#22d3ee&quot; stroke-width=&quot;2&quot;/&gt;
+              &lt;circle cx=&quot;160&quot; cy=&quot;168&quot; r=&quot;3&quot; fill=&quot;#9deeff&quot;/&gt;
+            &lt;/g&gt;
+          &lt;/svg&gt;
+          &lt;output class=&quot;gval&quot; id=&quot;gVal&quot;&gt;--&lt;/output&gt;
+          &lt;div class=&quot;glab&quot; id=&quot;gLab&quot;&gt;综合健康分&lt;/div&gt;&lt;br&gt;
+          &lt;span class=&quot;gformula&quot; id=&quot;gFormula&quot;&gt;（46+42+36）/ 3 = 41&lt;/span&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;stack&quot; id=&quot;stackR&quot;&gt;&lt;/div&gt;
+      &lt;/div&gt;
+
+      &lt;div class=&quot;digi&quot;&gt;
+        &lt;div class=&quot;dlab&quot; id=&quot;dLab&quot;&gt;7日总播放 · 三平台&lt;/div&gt;
+        &lt;div class=&quot;boxes&quot; id=&quot;boxes&quot;&gt;&lt;/div&gt;
+        &lt;div class=&quot;dsub&quot; id=&quot;dSub&quot;&gt;&lt;/div&gt;
+      &lt;/div&gt;
+
+      &lt;div class=&quot;diag&quot; id=&quot;diagBox&quot;&gt;&lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+(function(){
+  var reduced = matchMedia(&quot;(prefers-reduced-motion: reduce)&quot;).matches;
+  var $ = function(s){ return document.querySelector(s); };
+
+  var DATA = {&quot;overview&quot;:{&quot;health&quot;:53,&quot;glab&quot;:&quot;综合健康分 · 双平台均值&quot;,&quot;formula&quot;:&quot;（70+35）/ 2 ≈ 53&quot;,&quot;left&quot;:[[&quot;抖音 · 粉丝&quot;,&quot;1,302&quot;],[&quot;视频号 · 关注&quot;,&quot;1,223&quot;],[&quot;当前实验轴&quot;,&quot;第22轴&quot;]],&quot;right&quot;:[[&quot;抖音互动率&quot;,&quot;1.76%&quot;,&quot;gd&quot;],[&quot;视频号推荐占比&quot;,&quot;96.9%&quot;,&quot;warn&quot;],[&quot;抖音完播率&quot;,&quot;14.26%&quot;,&quot;bad&quot;]],&quot;dlab&quot;:&quot;7日总播放 · 双平台&quot;,&quot;digits&quot;:&quot;56416&quot;,&quot;dsub&quot;:&quot;合计粉丝 2,525 · &lt;b&gt;净增 +62&lt;/b&gt; · 第22轴监测中&quot;,&quot;diag&quot;:[[&quot;策略 · 事件带点击&quot;,&quot;即时体育事件负责点击，小白连续实体动作负责叙事，大陈画内真实对白完成判断；烧录字幕成为发布硬门。&quot;,&quot;g&quot;],[&quot;当前 · 功夫女足轴&quot;,&quot;30秒双平台已发布，先回收2h/24h/48h留存，不提前写效果结论。&quot;,&quot;g&quot;]]},&quot;douyin&quot;:{&quot;health&quot;:70,&quot;glab&quot;:&quot;平台健康分 · 抖音&quot;,&quot;formula&quot;:&quot;粉丝 1,302 · 7日 +62&quot;,&quot;left&quot;:[[&quot;粉丝&quot;,&quot;1,302&quot;],[&quot;7日播放&quot;,&quot;39,300&quot;],[&quot;播放中位&quot;,&quot;5,421&quot;]],&quot;right&quot;:[[&quot;5s完播率&quot;,&quot;46.07%&quot;],[&quot;2s跳出率&quot;,&quot;26.72%&quot;,&quot;warn&quot;],[&quot;整体完播率&quot;,&quot;14.26%&quot;,&quot;bad&quot;]],&quot;dlab&quot;:&quot;7日播放 · 抖音&quot;,&quot;digits&quot;:&quot;39300&quot;,&quot;dsub&quot;:&quot;互动率 &lt;b&gt;1.76%&lt;/b&gt; · 平均观看 11.14秒&quot;,&quot;diag&quot;:[[&quot;现象&quot;,&quot;互动率与涨粉改善，但完播连续下滑；增长信号和留存风险同时存在，不能只读总播放。&quot;,&quot;&quot;],[&quot;杠杆&quot;,&quot;保留即时体育事件与小白动作，下一条只改前2秒和信息密度，避免同时叠加多个新变量。&quot;,&quot;g&quot;]]},&quot;shipinhao&quot;:{&quot;health&quot;:35,&quot;glab&quot;:&quot;平台健康分 · 视频号&quot;,&quot;formula&quot;:&quot;关注 1,223 · 净增 0&quot;,&quot;left&quot;:[[&quot;关注者&quot;,&quot;1,223&quot;],[&quot;7日播放&quot;,&quot;17,116&quot;],[&quot;7日赞/评&quot;,&quot;5/1&quot;]],&quot;right&quot;:[[&quot;推荐占比&quot;,&quot;96.9%&quot;,&quot;warn&quot;],[&quot;新增/流失&quot;,&quot;1/1&quot;,&quot;warn&quot;],[&quot;互动率估算&quot;,&quot;0.04%&quot;,&quot;bad&quot;]],&quot;dlab&quot;:&quot;7日播放 · 视频号&quot;,&quot;digits&quot;:&quot;17116&quot;,&quot;dsub&quot;:&quot;推荐 16,583 · 分享 271&quot;,&quot;diag&quot;:[[&quot;根因&quot;,&quot;推荐池仍贡献96.9%播放，但近期作品没有复现第14轴；新增与流失相抵，社交扩散尚未启动。&quot;,&quot;&quot;],[&quot;杠杆&quot;,&quot;按50岁以上男性受众重写开头，把事件、动作和选择题在前3秒说清，独立判断视频号冷启动。&quot;,&quot;g&quot;]]},&quot;flywheel&quot;:{&quot;health&quot;:50,&quot;glab&quot;:&quot;实验健康分 · 第22轴&quot;,&quot;formula&quot;:&quot;已发布 · 等待2h/24h/48h回收&quot;,&quot;left&quot;:[[&quot;强样本&quot;,&quot;第18轴&quot;],[&quot;上条播放 · 抖&quot;,&quot;3,444&quot;],[&quot;当前实验&quot;,&quot;第22轴&quot;]],&quot;right&quot;:[[&quot;烧录字幕&quot;,&quot;已通过&quot;,&quot;gd&quot;],[&quot;成片时长&quot;,&quot;30.19s&quot;,&quot;warn&quot;],[&quot;双平台&quot;,&quot;已发布&quot;,&quot;gd&quot;]],&quot;dlab&quot;:&quot;当前运营实验轴&quot;,&quot;digits&quot;:&quot;00022&quot;,&quot;dsub&quot;:&quot;功夫女足 · &lt;b&gt;冷启动监测中&lt;/b&gt;&quot;,&quot;diag&quot;:[[&quot;已验证&quot;,&quot;抖音1万 / 360赞 / 12评 / 2转，即时事件是当前最强点击理由。&quot;,&quot;g&quot;],[&quot;待验证&quot;,&quot;30秒时长与烧录字幕能否提升理解而不牺牲完播；本轴只记录上线，不提前写效果结论。&quot;,&quot;&quot;]]}};
+
+  var needle = $(&quot;#needleG&quot;), gVal = $(&quot;#gVal&quot;), gLab = $(&quot;#gLab&quot;), gFormula = $(&quot;#gFormula&quot;),
+      stackL = $(&quot;#stackL&quot;), stackR = $(&quot;#stackR&quot;), boxes = $(&quot;#boxes&quot;), dLab = $(&quot;#dLab&quot;), dSub = $(&quot;#dSub&quot;),
+      diagBox = $(&quot;#diagBox&quot;), zone = $(&quot;#zone&quot;),
+      tabs = Array.prototype.slice.call(document.querySelectorAll(&quot;.tab&quot;));
+  var current = null, timer = null;
+
+  function el(tag, cls, html){ var e = document.createElement(tag); if(cls) e.className = cls; if(html != null) e.innerHTML = html; return e; }
+
+  function countUp(target, final){
+    var n = parseInt(String(final).replace(/[^\d]/g,&quot;&quot;),10);
+    if (reduced || !n || n &lt; 30){ target.textContent = final; return; }
+    var t0 = null, dur = 700;
+    function step(ts){
+      if(!t0) t0 = ts;
+      var k = Math.min(1,(ts-t0)/dur), e = 1-Math.pow(1-k,3);
+      target.textContent = Math.round(n*e).toString().replace(/\B(?=(\d{3})+(?!\d))/g,&quot;,&quot;);
+      if(k&lt;1) requestAnimationFrame(step); else target.textContent = final;
+    }
+    requestAnimationFrame(step);
+  }
+
+  function card(c){
+    var box = el(&quot;div&quot;,&quot;scard&quot;), l = el(&quot;span&quot;,&quot;sl&quot;,c[0]), v = el(&quot;span&quot;,&quot;sv&quot;+(c[2]?&quot; &quot;+c[2]:&quot;&quot;),c[1]);
+    box.appendChild(l); box.appendChild(v);
+    return box;
+  }
+
+  function render(key){
+    var d = DATA[key];
+    needle.style.transform = &quot;rotate(&quot; + (-90 + d.health*1.8) + &quot;deg)&quot;;
+    countUp(gVal, String(d.health));
+    gLab.textContent = d.glab;
+    gFormula.textContent = d.formula;
+    stackL.replaceChildren.apply(stackL, d.left.map(card));
+    stackR.replaceChildren.apply(stackR, d.right.map(card));
+    dLab.textContent = d.dlab;
+    boxes.replaceChildren.apply(boxes, d.digits.split(&quot;&quot;).map(function(ch){ return el(&quot;span&quot;,&quot;box&quot;,ch); }));
+    dSub.innerHTML = d.dsub;
+    diagBox.replaceChildren.apply(diagBox, d.diag.map(function(r){
+      var row = el(&quot;div&quot;,&quot;row&quot;), k = el(&quot;div&quot;,&quot;k&quot;+(r[2]===&quot;g&quot;?&quot; g&quot;:&quot;&quot;),r[0]), p = el(&quot;p&quot;,null,r[1]);
+      row.appendChild(k); row.appendChild(p);
+      return row;
+    }));
+  }
+
+  function select(key){
+    if(key === current) return;
+    current = key;
+    tabs.forEach(function(t){ t.setAttribute(&quot;aria-selected&quot;, String(t.dataset.p === key)); });
+    zone.classList.add(&quot;loading&quot;);
+    clearTimeout(timer);
+    timer = setTimeout(function(){ render(key); zone.classList.remove(&quot;loading&quot;); }, reduced ? 0 : 240);
+  }
+  tabs.forEach(function(t){ t.addEventListener(&quot;click&quot;, function(){ select(t.dataset.p); }); });
+
+  select(&quot;overview&quot;);
+})();
+&lt;/script&gt;
+&lt;script&gt;setTimeout(function(){document.querySelectorAll(&quot;[data-w]&quot;).forEach(function(el){el.style.transition=&quot;none&quot;;el.style.width=parseFloat(el.dataset.w)+&quot;%&quot;;});document.querySelectorAll(&quot;.vchart,.duo&quot;).forEach(function(ch){var H=ch.clientHeight;ch.querySelectorAll(&quot;[data-h]&quot;).forEach(function(el){var lab=el.parentElement.querySelector(&quot;.vval&quot;);var max=H-(lab?lab.offsetHeight+8:8);el.style.transition=&quot;none&quot;;el.style.height=Math.max(2,max*parseFloat(el.dataset.h)/100)+&quot;px&quot;;});});},1600);&lt;/script&gt;&lt;/body&gt;
+&lt;/html&gt;
+" scrolling="no"></iframe></div>
+<div class="cell" style="flex:1 1 290px;min-height:290px;--nh:290px"><iframe title="流量来源 · 母题反差" srcdoc="&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;zh-CN&quot;&gt;
+&lt;head&gt;
+&lt;meta charset=&quot;UTF-8&quot;&gt;
+&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+&lt;title&gt;流量来源 · 母题反差&lt;/title&gt;
+&lt;style&gt;
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{background:transparent}
+  body{font-family:var(--kimi-font-sans,-apple-system,BlinkMacSystemFont,&quot;PingFang SC&quot;,&quot;Microsoft YaHei&quot;,sans-serif);color:#eaf6ff;padding:8px;font-variant-numeric:tabular-nums;line-height:1.6}
+  .panel{position:relative;background:linear-gradient(165deg,rgba(13,26,62,.97),rgba(7,14,38,.98));border:1px solid rgba(0,229,255,.26);border-radius:8px;box-shadow:0 12px 34px rgba(2,10,40,.5),inset 0 0 30px rgba(0,90,220,.08);padding:10px 14px 12px}
+  .cn{position:absolute;width:11px;height:11px;border:2px solid rgba(0,229,255,.7);z-index:2;pointer-events:none}
+  .tl{top:-1px;left:-1px;border-right:none;border-bottom:none;border-radius:6px 0 0 0}
+  .tr{top:-1px;right:-1px;border-left:none;border-bottom:none;border-radius:0 6px 0 0}
+  .bl{bottom:-1px;left:-1px;border-right:none;border-top:none;border-radius:0 0 0 6px}
+  .br{bottom:-1px;right:-1px;border-left:none;border-top:none;border-radius:0 0 6px 0}
+  .hd{position:relative;text-align:center;margin:0 0 10px;padding:5px 10px 7px;background:linear-gradient(180deg,rgba(18,44,96,.55),rgba(10,22,56,.1));border-bottom:1px solid rgba(0,229,255,.22)}
+  .hd h1{display:inline-block;font-size:13.5px;font-weight:800;color:#bfefff;text-shadow:0 0 10px rgba(0,229,255,.45);padding:0 12px;position:relative}
+  .hd h1::before,.hd h1::after{content:&quot;&quot;;position:absolute;top:50%;width:26px;height:1px;background:linear-gradient(90deg,transparent,#00e5ff);box-shadow:0 0 6px rgba(0,229,255,.7)}
+  .hd h1::before{right:100%}.hd h1::after{left:100%;transform:scaleX(-1)}
+  .hd .mt{position:absolute;right:calc(var(--daimon-widget-host-safe-inline-end,82px) + 2px);top:8px;font-size:8.5px;color:rgba(150,190,230,.55)}
+
+  .cols{display:grid;grid-template-columns:1.25fr 1fr;gap:14px}
+  .sec-t{font-size:9.5px;color:rgba(168,208,240,.72);margin-bottom:6px;display:flex;justify-content:space-between;align-items:baseline}
+  .sec-t b{color:#eaf6ff;font-weight:700}
+  .sec-t span{font-size:8.5px;color:rgba(251,191,36,.88)}
+
+  .vchart{display:flex;align-items:flex-end;gap:6px;height:128px;border-bottom:1px solid rgba(96,170,255,.2);padding:0 2px}
+  .vcol{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:3px;height:100%;min-width:0}
+  .vval{font-size:8px;color:#9deeff;white-space:nowrap}
+  .vbar{width:68%;height:0;border-radius:4px 4px 0 0;background:linear-gradient(180deg,#22d3ee,rgba(34,211,238,.25));box-shadow:0 0 10px rgba(34,211,238,.3);transition:height 1.1s cubic-bezier(.2,.8,.25,1)}
+  .vcol:nth-child(2n) .vbar{background:linear-gradient(180deg,#a855f7,rgba(168,85,247,.25));box-shadow:0 0 10px rgba(168,85,247,.3)}
+  .vcol.hot .vbar{background:linear-gradient(180deg,#fbbf24,rgba(251,191,36,.25));box-shadow:0 0 12px rgba(251,191,36,.45)}
+  .vcol.hot .vval{color:#fbbf24;font-weight:700}
+  .vcats{display:flex;gap:6px;padding:4px 2px 0}
+  .vcats span{flex:1;text-align:center;font-size:8px;color:rgba(150,190,230,.6);white-space:nowrap;overflow:hidden}
+
+  .duo{display:flex;align-items:flex-end;gap:16px;height:128px;border-bottom:1px solid rgba(96,170,255,.2);padding:0 10px}
+  .dcol{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:3px;height:100%}
+  .dcol .vval{font-size:11px;font-weight:800}
+  .dbar{width:60%;height:0;border-radius:5px 5px 0 0;transition:height 1.1s cubic-bezier(.2,.8,.25,1)}
+  .dbar.a{background:linear-gradient(180deg,#22d3ee,rgba(34,211,238,.25));box-shadow:0 0 12px rgba(34,211,238,.35)}
+  .dbar.b{background:linear-gradient(180deg,#f87171,rgba(248,113,113,.25));box-shadow:0 0 12px rgba(248,113,113,.35)}
+  .dcats{display:flex;gap:16px;padding:4px 10px 0}
+  .dcats span{flex:1;text-align:center;font-size:8.5px;color:rgba(150,190,230,.65);white-space:nowrap}
+
+  .foot{font-size:8.5px;color:rgba(150,190,230,.58);line-height:1.6;margin-top:7px}
+  .foot b{color:rgba(200,225,250,.85)}
+  @media (max-width:520px){.cols{grid-template-columns:1fr}}
+  @media (prefers-reduced-motion:reduce){.vbar,.dbar{transition:none}}
+&lt;/style&gt;
+&lt;style&gt;.hd .mt,.mt{display:none!important}&lt;/style&gt;&lt;style&gt;@media (prefers-reduced-motion:no-preference){.cn{animation:cnP 3s ease-in-out infinite}@keyframes cnP{0%,100%{opacity:.6}50%{opacity:1}}.hd{overflow:hidden}.hd::after{content:&quot;&quot;;position:absolute;top:0;bottom:0;left:0;width:30%;background:linear-gradient(105deg,transparent,rgba(140,225,255,.15),transparent);transform:translateX(-140%);animation:hdSweep 5.5s ease-in-out infinite;pointer-events:none}@keyframes hdSweep{0%{transform:translateX(-140%)}55%,100%{transform:translateX(440%)}}.bf{overflow:hidden}.bf::after{content:&quot;&quot;;position:absolute;top:0;bottom:0;left:0;width:55%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.30),transparent);transform:translateX(-110%);animation:bfX 2.8s linear infinite;pointer-events:none}@keyframes bfX{0%{transform:translateX(-110%)}100%{transform:translateX(300%)}}.vbar,.dbar{position:relative;overflow:hidden}.vbar::after,.dbar::after{content:&quot;&quot;;position:absolute;left:0;right:0;bottom:0;height:45%;background:linear-gradient(0deg,transparent,rgba(255,255,255,.26),transparent);transform:translateY(120%);animation:vbY 3.2s linear infinite;pointer-events:none}@keyframes vbY{0%{transform:translateY(120%)}100%{transform:translateY(-330%)}}.tab,.scard{position:relative;overflow:hidden}.tab::after,.scard::after{content:&quot;&quot;;position:absolute;top:-40%;bottom:-40%;left:0;width:24%;background:linear-gradient(90deg,transparent,rgba(180,235,255,.2),transparent);transform:translateX(-160%) skewX(-18deg);animation:sheenX 4.8s ease-in-out infinite;pointer-events:none}@keyframes sheenX{0%{transform:translateX(-160%) skewX(-18deg)}60%,100%{transform:translateX(560%) skewX(-18deg)}}.tab:nth-child(2)::after{animation-delay:.6s}.tab:nth-child(3)::after{animation-delay:1.2s}.tab:nth-child(4)::after{animation-delay:1.8s}.scard:nth-child(2)::after{animation-delay:.8s}.scard:nth-child(3)::after{animation-delay:1.6s}.box{position:relative}.box::after{content:&quot;&quot;;position:absolute;inset:-2px;border-radius:6px;pointer-events:none;box-shadow:0 0 12px rgba(0,229,255,.6);opacity:.15;animation:oP 2.6s ease-in-out infinite}.box:nth-child(2)::after{animation-delay:.2s}.box:nth-child(3)::after{animation-delay:.4s}.box:nth-child(4)::after{animation-delay:.6s}.box:nth-child(5)::after{animation-delay:.8s}.box:nth-child(6)::after{animation-delay:1s}@keyframes oP{0%,100%{opacity:.15}50%{opacity:1}}.compass{filter:drop-shadow(0 0 8px rgba(34,211,238,.35))}.donut{position:relative}.donut::after{content:&quot;&quot;;position:absolute;inset:0;border-radius:50%;pointer-events:none;background:conic-gradient(from 0deg,transparent 0 72%,rgba(255,255,255,.28) 84%,transparent 96%);-webkit-mask:radial-gradient(circle,transparent 54%,#000 56% 90%,transparent 92%);mask:radial-gradient(circle,transparent 54%,#000 56% 90%,transparent 92%);animation:ringSpin 5.5s linear infinite}@keyframes ringSpin{to{transform:rotate(360deg)}}}&lt;/style&gt;&lt;style&gt;.panel{display:flex!important;flex-direction:column!important;height:100%}.cols{flex:1;align-items:stretch}.cols&gt;section{display:flex;flex-direction:column;min-height:0}.vchart,.duo{flex:1;height:auto;min-height:128px}.foot{margin-top:auto;padding-top:8px;font-size:9px}.vval{font-size:9px}.vcats span,.dcats span{font-size:9px}&lt;/style&gt;&lt;style&gt;html,body{height:100%!important;-webkit-text-size-adjust:100%;text-size-adjust:100%}body{display:flex!important;flex-direction:column!important}body&gt;:first-child{flex:1 0 auto;display:flow-root}html.host-mobile,html.host-mobile body{height:auto!important;min-height:0!important;overflow-x:hidden!important}html.host-mobile body{display:block!important}html.host-mobile body&gt;:first-child{height:auto!important;min-height:0!important;flex:none!important}html.host-mobile .panel{height:auto!important;min-height:0!important}html.host-mobile .tab,html.host-mobile button{min-height:44px}html.host-mobile .hd h1{white-space:normal!important;line-height:1.35}html.host-mobile .grp-t{flex-wrap:wrap}html.host-mobile .strategy{align-items:flex-start!important;flex-wrap:wrap!important}&lt;/style&gt;&lt;/head&gt;
+&lt;body&gt;
+&lt;div class=&quot;panel&quot;&gt;
+  &lt;i class=&quot;cn tl&quot;&gt;&lt;/i&gt;&lt;i class=&quot;cn tr&quot;&gt;&lt;/i&gt;&lt;i class=&quot;cn bl&quot;&gt;&lt;/i&gt;&lt;i class=&quot;cn br&quot;&gt;&lt;/i&gt;
+  &lt;header class=&quot;hd&quot;&gt;&lt;h1&gt;流量来源 · 母题反差&lt;/h1&gt;&lt;span class=&quot;mt&quot;&gt;2026-07-31 ~ 08-06&lt;/span&gt;&lt;/header&gt;
+  &lt;div class=&quot;cols&quot;&gt;
+    &lt;section aria-label=&quot;视频号7日流量来源柱状图&quot;&gt;
+      &lt;div class=&quot;sec-t&quot;&gt;&lt;b&gt;视频号 · 7日流量来源&lt;/b&gt;&lt;span&gt;推荐占 96.9% · √刻度&lt;/span&gt;&lt;/div&gt;
+      &lt;div class=&quot;vchart&quot;&gt;&lt;div class=&quot;vcol hot&quot;&gt;&lt;span class=&quot;vval&quot;&gt;16,583&lt;/span&gt;&lt;div class=&quot;vbar&quot; data-h=&quot;100.0&quot;&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;vcol&quot;&gt;&lt;span class=&quot;vval&quot;&gt;271&lt;/span&gt;&lt;div class=&quot;vbar&quot; data-h=&quot;12.8&quot;&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;vcol&quot;&gt;&lt;span class=&quot;vval&quot;&gt;24&lt;/span&gt;&lt;div class=&quot;vbar&quot; data-h=&quot;3.8&quot;&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;vcol&quot;&gt;&lt;span class=&quot;vval&quot;&gt;74&lt;/span&gt;&lt;div class=&quot;vbar&quot; data-h=&quot;6.7&quot;&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;vcol&quot;&gt;&lt;span class=&quot;vval&quot;&gt;103&lt;/span&gt;&lt;div class=&quot;vbar&quot; data-h=&quot;7.9&quot;&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;vcol&quot;&gt;&lt;span class=&quot;vval&quot;&gt;47&lt;/span&gt;&lt;div class=&quot;vbar&quot; data-h=&quot;5.3&quot;&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;vcats&quot;&gt;&lt;span&gt;推荐&lt;/span&gt;&lt;span&gt;分享&lt;/span&gt;&lt;span&gt;订阅号&lt;/span&gt;&lt;span&gt;朋友♡&lt;/span&gt;&lt;span&gt;其他&lt;/span&gt;&lt;span&gt;主页&lt;/span&gt;&lt;/div&gt;
+      &lt;p class=&quot;foot&quot;&gt;推荐播放 16,583，占总播放 &lt;b&gt;96.9%&lt;/b&gt;；推荐池仍是绝对主场，也是当前最大单点依赖。&lt;/p&gt;
+    &lt;/section&gt;
+    &lt;section aria-label=&quot;母题支柱均播放对比柱状图&quot;&gt;
+      &lt;div class=&quot;sec-t&quot;&gt;&lt;b&gt;抖音母题 · 均播放&lt;/b&gt;&lt;span&gt;反差 6.55×&lt;/span&gt;&lt;/div&gt;
+      &lt;div class=&quot;duo&quot;&gt;&lt;div class=&quot;dcol&quot;&gt;&lt;span class=&quot;vval&quot; style=&quot;color:#22d3ee&quot;&gt;4,933&lt;/span&gt;&lt;div class=&quot;dbar a&quot; data-h=&quot;100&quot;&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;dcol&quot;&gt;&lt;span class=&quot;vval&quot; style=&quot;color:#f87171&quot;&gt;753&lt;/span&gt;&lt;div class=&quot;dbar b&quot; data-h=&quot;39.1&quot;&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;
+      &lt;div class=&quot;dcats&quot;&gt;&lt;span&gt;即时体育 · 5条&lt;/span&gt;&lt;span&gt;奇观/生活 · 4条&lt;/span&gt;&lt;/div&gt;
+      &lt;p class=&quot;foot&quot;&gt;第 13、14、16、18、21 轴即时体育均播 4,933，其余奇观/生活决策轴均播 753。&lt;b&gt;即时事件提供点击理由&lt;/b&gt;，小白动作负责把事件变成生活决策。&lt;/p&gt;
+    &lt;/section&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+&lt;script&gt;
+(function(){
+  var els = document.querySelectorAll(&quot;[data-h]&quot;);
+  els.forEach(function(el,i){
+    el.style.transitionDelay = (0.1 + i*0.06) + &quot;s&quot;;
+    requestAnimationFrame(function(){ requestAnimationFrame(function(){ el.style.height = el.dataset.h + &quot;%&quot;; }); });
+  });
+})();
+&lt;/script&gt;
+&lt;script&gt;setTimeout(function(){document.querySelectorAll(&quot;[data-w]&quot;).forEach(function(el){el.style.transition=&quot;none&quot;;el.style.width=parseFloat(el.dataset.w)+&quot;%&quot;;});document.querySelectorAll(&quot;.vchart,.duo&quot;).forEach(function(ch){var H=ch.clientHeight;ch.querySelectorAll(&quot;[data-h]&quot;).forEach(function(el){var lab=el.parentElement.querySelector(&quot;.vval&quot;);var max=H-(lab?lab.offsetHeight+8:8);el.style.transition=&quot;none&quot;;el.style.height=Math.max(2,max*parseFloat(el.dataset.h)/100)+&quot;px&quot;;});});},1600);&lt;/script&gt;&lt;/body&gt;
+&lt;/html&gt;
+" scrolling="no"></iframe></div>
+</div>
+<div class="col" style="grid-column:span 3">
+<div class="cell" style="flex:1 1 931px;min-height:931px;--nh:931px"><iframe title="视频号 · 近10条 TOP8" srcdoc="&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;zh-CN&quot;&gt;
+&lt;head&gt;
+&lt;meta charset=&quot;UTF-8&quot;&gt;
+&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+&lt;title&gt;视频号 · TOP 视频榜（√刻度）&lt;/title&gt;
+&lt;style&gt;
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{background:transparent}
+  body{font-family:var(--kimi-font-sans,-apple-system,BlinkMacSystemFont,&quot;PingFang SC&quot;,&quot;Microsoft YaHei&quot;,sans-serif);color:#eaf6ff;padding:8px;font-variant-numeric:tabular-nums;line-height:1.6}
+  .panel{position:relative;background:linear-gradient(165deg,rgba(13,26,62,.97),rgba(7,14,38,.98));border:1px solid rgba(0,229,255,.26);border-radius:8px;box-shadow:0 12px 34px rgba(2,10,40,.5),inset 0 0 30px rgba(0,90,220,.08);padding:10px 12px 12px}
+  .cn{position:absolute;width:11px;height:11px;border:2px solid rgba(0,229,255,.7);z-index:2;pointer-events:none}
+  .tl{top:-1px;left:-1px;border-right:none;border-bottom:none;border-radius:6px 0 0 0}
+  .tr{top:-1px;right:-1px;border-left:none;border-bottom:none;border-radius:0 6px 0 0}
+  .bl{bottom:-1px;left:-1px;border-right:none;border-top:none;border-radius:0 0 0 6px}
+  .br{bottom:-1px;right:-1px;border-left:none;border-top:none;border-radius:0 0 6px 0}
+  .hd{position:relative;text-align:center;margin:0 0 9px;padding:5px 10px 7px;background:linear-gradient(180deg,rgba(18,44,96,.55),rgba(10,22,56,.1));border-bottom:1px solid rgba(0,229,255,.22)}
+  .hd h1{display:inline-block;font-size:13.5px;font-weight:800;color:#bfefff;text-shadow:0 0 10px rgba(0,229,255,.45);padding:0 12px;position:relative}
+  .hd h1::before,.hd h1::after{content:&quot;&quot;;position:absolute;top:50%;width:26px;height:1px;background:linear-gradient(90deg,transparent,#00e5ff);box-shadow:0 0 6px rgba(0,229,255,.7)}
+  .hd h1::before{right:100%}.hd h1::after{left:100%;transform:scaleX(-1)}
+  .hd .mt{position:absolute;right:calc(var(--daimon-widget-host-safe-inline-end,82px) + 2px);top:8px;font-size:8.5px;color:rgba(150,190,230,.55)}
+
+  .trend{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-bottom:10px}
+  .tcard{border:1px solid rgba(0,229,255,.22);border-radius:8px;background:linear-gradient(160deg,rgba(0,80,170,.22),rgba(0,40,100,.1));padding:7px 10px 6px;position:relative}
+  .tcard::after{content:&quot;&quot;;position:absolute;left:0;top:0;bottom:0;width:2px;background:linear-gradient(#00e5ff,transparent);border-radius:2px}
+  .tcard .tl2{font-size:8.5px;color:rgba(168,208,240,.68)}
+  .tcard .tv2{font-size:16px;font-weight:800;color:#eafcff;line-height:1.2;display:block;text-shadow:0 0 10px rgba(0,229,255,.35);white-space:nowrap}
+  .tcard .tv2 small{font-size:9px;font-weight:700;color:#34d399}
+
+  .item{display:flex;gap:9px;padding:8px 8px;border:1px solid rgba(96,170,255,.12);border-radius:9px;margin-bottom:7px;background:rgba(9,20,48,.45);transition:transform .15s,border-color .15s}
+  .item:hover{transform:translateX(2px);border-color:rgba(96,190,255,.35)}
+  .item.hot{border-color:rgba(251,191,36,.5);background:rgba(251,191,36,.06)}
+  .rank{flex:none;width:21px;height:21px;border-radius:6px;display:grid;place-items:center;font-size:11px;font-weight:800;color:#0a1230;background:#3d5a80}
+  .r1{background:linear-gradient(160deg,#fde68a,#f59e0b);box-shadow:0 0 10px rgba(251,191,36,.55)}
+  .r2{background:linear-gradient(160deg,#e2e8f0,#94a3b8)}
+  .r3{background:linear-gradient(160deg,#fdba74,#ea580c)}
+  .ib{flex:1;min-width:0}
+  .t{font-size:10.5px;line-height:1.5;margin-bottom:5px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+  .hot .t{color:#fef3c7}
+  .bt{height:6px;border-radius:3px;background:rgba(8,24,58,.85);border:1px solid rgba(96,170,255,.1);position:relative;overflow:hidden}
+  .bf{position:absolute;left:0;top:0;bottom:0;width:0;min-width:2px;border-radius:3px;background:linear-gradient(90deg,rgba(34,211,238,.3),#22d3ee);transition:width 1.1s cubic-bezier(.2,.8,.25,1)}
+  .hot .bf{background:linear-gradient(90deg,rgba(251,191,36,.35),#fbbf24)}
+  .stats{display:flex;gap:8px;font-size:8.5px;color:rgba(150,190,230,.65);margin-top:5px;flex-wrap:wrap}
+  .stats .play{color:#22d3ee;font-weight:800}
+  .hot .stats .play{color:#fbbf24}
+  .stats .dt{margin-left:auto}
+  .foot{margin-top:9px;padding-top:8px;border-top:1px dashed rgba(96,170,255,.18);font-size:9px;color:rgba(150,190,230,.6);line-height:1.65}
+  .foot b{color:#fbbf24}
+  @media (prefers-reduced-motion:reduce){.bf{transition:none}}
+&lt;/style&gt;
+&lt;style&gt;.hd .mt,.mt{display:none!important}&lt;/style&gt;&lt;style&gt;@media (prefers-reduced-motion:no-preference){.cn{animation:cnP 3s ease-in-out infinite}@keyframes cnP{0%,100%{opacity:.6}50%{opacity:1}}.hd{overflow:hidden}.hd::after{content:&quot;&quot;;position:absolute;top:0;bottom:0;left:0;width:30%;background:linear-gradient(105deg,transparent,rgba(140,225,255,.15),transparent);transform:translateX(-140%);animation:hdSweep 5.5s ease-in-out infinite;pointer-events:none}@keyframes hdSweep{0%{transform:translateX(-140%)}55%,100%{transform:translateX(440%)}}.bf{overflow:hidden}.bf::after{content:&quot;&quot;;position:absolute;top:0;bottom:0;left:0;width:55%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.30),transparent);transform:translateX(-110%);animation:bfX 2.8s linear infinite;pointer-events:none}@keyframes bfX{0%{transform:translateX(-110%)}100%{transform:translateX(300%)}}.vbar,.dbar{position:relative;overflow:hidden}.vbar::after,.dbar::after{content:&quot;&quot;;position:absolute;left:0;right:0;bottom:0;height:45%;background:linear-gradient(0deg,transparent,rgba(255,255,255,.26),transparent);transform:translateY(120%);animation:vbY 3.2s linear infinite;pointer-events:none}@keyframes vbY{0%{transform:translateY(120%)}100%{transform:translateY(-330%)}}.tab,.scard{position:relative;overflow:hidden}.tab::after,.scard::after{content:&quot;&quot;;position:absolute;top:-40%;bottom:-40%;left:0;width:24%;background:linear-gradient(90deg,transparent,rgba(180,235,255,.2),transparent);transform:translateX(-160%) skewX(-18deg);animation:sheenX 4.8s ease-in-out infinite;pointer-events:none}@keyframes sheenX{0%{transform:translateX(-160%) skewX(-18deg)}60%,100%{transform:translateX(560%) skewX(-18deg)}}.tab:nth-child(2)::after{animation-delay:.6s}.tab:nth-child(3)::after{animation-delay:1.2s}.tab:nth-child(4)::after{animation-delay:1.8s}.scard:nth-child(2)::after{animation-delay:.8s}.scard:nth-child(3)::after{animation-delay:1.6s}.box{position:relative}.box::after{content:&quot;&quot;;position:absolute;inset:-2px;border-radius:6px;pointer-events:none;box-shadow:0 0 12px rgba(0,229,255,.6);opacity:.15;animation:oP 2.6s ease-in-out infinite}.box:nth-child(2)::after{animation-delay:.2s}.box:nth-child(3)::after{animation-delay:.4s}.box:nth-child(4)::after{animation-delay:.6s}.box:nth-child(5)::after{animation-delay:.8s}.box:nth-child(6)::after{animation-delay:1s}@keyframes oP{0%,100%{opacity:.15}50%{opacity:1}}.compass{filter:drop-shadow(0 0 8px rgba(34,211,238,.35))}.donut{position:relative}.donut::after{content:&quot;&quot;;position:absolute;inset:0;border-radius:50%;pointer-events:none;background:conic-gradient(from 0deg,transparent 0 72%,rgba(255,255,255,.28) 84%,transparent 96%);-webkit-mask:radial-gradient(circle,transparent 54%,#000 56% 90%,transparent 92%);mask:radial-gradient(circle,transparent 54%,#000 56% 90%,transparent 92%);animation:ringSpin 5.5s linear infinite}@keyframes ringSpin{to{transform:rotate(360deg)}}}&lt;/style&gt;&lt;style&gt;.panel{display:flex!important;flex-direction:column!important;height:100%}.panel&gt;section{display:flex;flex:1;flex-direction:column;min-height:0}.item{flex:1;align-items:center}.item:last-child{margin-bottom:0}html.host-mobile .panel&gt;section{display:block;flex:none}html.host-mobile .item{margin-bottom:7px;align-items:flex-start}&lt;/style&gt;&lt;style&gt;html,body{height:100%!important;-webkit-text-size-adjust:100%;text-size-adjust:100%}body{display:flex!important;flex-direction:column!important}body&gt;:first-child{flex:1 0 auto;display:flow-root}html.host-mobile,html.host-mobile body{height:auto!important;min-height:0!important;overflow-x:hidden!important}html.host-mobile body{display:block!important}html.host-mobile body&gt;:first-child{height:auto!important;min-height:0!important;flex:none!important}html.host-mobile .panel{height:auto!important;min-height:0!important}html.host-mobile .tab,html.host-mobile button{min-height:44px}html.host-mobile .hd h1{white-space:normal!important;line-height:1.35}html.host-mobile .grp-t{flex-wrap:wrap}html.host-mobile .strategy{align-items:flex-start!important;flex-wrap:wrap!important}&lt;/style&gt;&lt;/head&gt;
+&lt;body&gt;
+&lt;div class=&quot;panel&quot;&gt;
+  &lt;i class=&quot;cn tl&quot;&gt;&lt;/i&gt;&lt;i class=&quot;cn tr&quot;&gt;&lt;/i&gt;&lt;i class=&quot;cn bl&quot;&gt;&lt;/i&gt;&lt;i class=&quot;cn br&quot;&gt;&lt;/i&gt;
+  &lt;header class=&quot;hd&quot;&gt;&lt;h1&gt;视频号 · 近10条 TOP8&lt;/h1&gt;&lt;span class=&quot;mt&quot;&gt;√ 刻度&lt;/span&gt;&lt;/header&gt;
+  &lt;div class=&quot;trend&quot;&gt;&lt;div class=&quot;tcard&quot;&gt;&lt;span class=&quot;tl2&quot;&gt;视频号 · 7日播放&lt;/span&gt;&lt;span class=&quot;tv2&quot;&gt;17,116 &lt;small&gt;净增 0&lt;/small&gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;tcard&quot;&gt;&lt;span class=&quot;tl2&quot;&gt;抖音 · 7日播放&lt;/span&gt;&lt;span class=&quot;tv2&quot;&gt;39,300 &lt;small&gt;▲ +62 粉丝&lt;/small&gt;&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;
+  &lt;section aria-label=&quot;视频号近10条作品播放榜&quot;&gt;&lt;div class=&quot;item hot&quot;&gt;&lt;span class=&quot;rank r1&quot;&gt;1&lt;/span&gt;&lt;div class=&quot;ib&quot;&gt;
+      &lt;p class=&quot;t&quot; title=&quot;第14轴 · 该不该停 · 孙颖莎退赛&quot;&gt;第14轴 · 该不该停 · 孙颖莎退赛&lt;/p&gt;
+      &lt;div class=&quot;bt&quot;&gt;&lt;div class=&quot;bf&quot; data-w=&quot;100.0&quot;&gt;&lt;/div&gt;&lt;/div&gt;
+      &lt;div class=&quot;stats&quot;&gt;&lt;span class=&quot;play&quot;&gt;3,318&lt;/span&gt;&lt;span&gt;赞 1&lt;/span&gt;&lt;span&gt;评 0&lt;/span&gt;&lt;span&gt;藏 0&lt;/span&gt;&lt;span class=&quot;dt&quot;&gt;08-03&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;item&quot;&gt;&lt;span class=&quot;rank r2&quot;&gt;2&lt;/span&gt;&lt;div class=&quot;ib&quot;&gt;
+      &lt;p class=&quot;t&quot; title=&quot;第13轴 · 见过大场面 · 回来干老活&quot;&gt;第13轴 · 见过大场面 · 回来干老活&lt;/p&gt;
+      &lt;div class=&quot;bt&quot;&gt;&lt;div class=&quot;bf&quot; data-w=&quot;49.7&quot;&gt;&lt;/div&gt;&lt;/div&gt;
+      &lt;div class=&quot;stats&quot;&gt;&lt;span class=&quot;play&quot;&gt;819&lt;/span&gt;&lt;span&gt;赞 0&lt;/span&gt;&lt;span&gt;评 0&lt;/span&gt;&lt;span&gt;藏 1&lt;/span&gt;&lt;span class=&quot;dt&quot;&gt;08-02&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;item&quot;&gt;&lt;span class=&quot;rank r3&quot;&gt;3&lt;/span&gt;&lt;div class=&quot;ib&quot;&gt;
+      &lt;p class=&quot;t&quot; title=&quot;第15轴 · 巨幕观赛 · 远方能否变主场&quot;&gt;第15轴 · 巨幕观赛 · 远方能否变主场&lt;/p&gt;
+      &lt;div class=&quot;bt&quot;&gt;&lt;div class=&quot;bf&quot; data-w=&quot;42.7&quot;&gt;&lt;/div&gt;&lt;/div&gt;
+      &lt;div class=&quot;stats&quot;&gt;&lt;span class=&quot;play&quot;&gt;604&lt;/span&gt;&lt;span&gt;赞 1&lt;/span&gt;&lt;span&gt;评 0&lt;/span&gt;&lt;span&gt;藏 0&lt;/span&gt;&lt;span class=&quot;dt&quot;&gt;08-03&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;item&quot;&gt;&lt;span class=&quot;rank&quot;&gt;4&lt;/span&gt;&lt;div class=&quot;ib&quot;&gt;
+      &lt;p class=&quot;t&quot; title=&quot;第17轴 · 孩子追星 · 大人该不该帮&quot;&gt;第17轴 · 孩子追星 · 大人该不该帮&lt;/p&gt;
+      &lt;div class=&quot;bt&quot;&gt;&lt;div class=&quot;bf&quot; data-w=&quot;28.9&quot;&gt;&lt;/div&gt;&lt;/div&gt;
+      &lt;div class=&quot;stats&quot;&gt;&lt;span class=&quot;play&quot;&gt;278&lt;/span&gt;&lt;span&gt;赞 0&lt;/span&gt;&lt;span&gt;评 0&lt;/span&gt;&lt;span&gt;藏 0&lt;/span&gt;&lt;span class=&quot;dt&quot;&gt;08-04&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;item&quot;&gt;&lt;span class=&quot;rank&quot;&gt;5&lt;/span&gt;&lt;div class=&quot;ib&quot;&gt;
+      &lt;p class=&quot;t&quot; title=&quot;第16轴 · 赢了强队 · 先夸还是提醒&quot;&gt;第16轴 · 赢了强队 · 先夸还是提醒&lt;/p&gt;
+      &lt;div class=&quot;bt&quot;&gt;&lt;div class=&quot;bf&quot; data-w=&quot;26.0&quot;&gt;&lt;/div&gt;&lt;/div&gt;
+      &lt;div class=&quot;stats&quot;&gt;&lt;span class=&quot;play&quot;&gt;225&lt;/span&gt;&lt;span&gt;赞 0&lt;/span&gt;&lt;span&gt;评 0&lt;/span&gt;&lt;span&gt;藏 0&lt;/span&gt;&lt;span class=&quot;dt&quot;&gt;08-04&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;item&quot;&gt;&lt;span class=&quot;rank&quot;&gt;6&lt;/span&gt;&lt;div class=&quot;ib&quot;&gt;
+      &lt;p class=&quot;t&quot; title=&quot;第20轴 · 旧球台 · 该不该换新&quot;&gt;第20轴 · 旧球台 · 该不该换新&lt;/p&gt;
+      &lt;div class=&quot;bt&quot;&gt;&lt;div class=&quot;bf&quot; data-w=&quot;25.4&quot;&gt;&lt;/div&gt;&lt;/div&gt;
+      &lt;div class=&quot;stats&quot;&gt;&lt;span class=&quot;play&quot;&gt;214&lt;/span&gt;&lt;span&gt;赞 0&lt;/span&gt;&lt;span&gt;评 0&lt;/span&gt;&lt;span&gt;藏 0&lt;/span&gt;&lt;span class=&quot;dt&quot;&gt;08-06&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;item&quot;&gt;&lt;span class=&quot;rank&quot;&gt;7&lt;/span&gt;&lt;div class=&quot;ib&quot;&gt;
+      &lt;p class=&quot;t&quot; title=&quot;第19轴 · 机器陪练 · 能否替代老球友&quot;&gt;第19轴 · 机器陪练 · 能否替代老球友&lt;/p&gt;
+      &lt;div class=&quot;bt&quot;&gt;&lt;div class=&quot;bf&quot; data-w=&quot;25.4&quot;&gt;&lt;/div&gt;&lt;/div&gt;
+      &lt;div class=&quot;stats&quot;&gt;&lt;span class=&quot;play&quot;&gt;214&lt;/span&gt;&lt;span&gt;赞 0&lt;/span&gt;&lt;span&gt;评 0&lt;/span&gt;&lt;span&gt;藏 0&lt;/span&gt;&lt;span class=&quot;dt&quot;&gt;08-06&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;item&quot;&gt;&lt;span class=&quot;rank&quot;&gt;8&lt;/span&gt;&lt;div class=&quot;ib&quot;&gt;
+      &lt;p class=&quot;t&quot; title=&quot;第21轴 · 赢了欧洲青训 · 马上留洋吗&quot;&gt;第21轴 · 赢了欧洲青训 · 马上留洋吗&lt;/p&gt;
+      &lt;div class=&quot;bt&quot;&gt;&lt;div class=&quot;bf&quot; data-w=&quot;24.7&quot;&gt;&lt;/div&gt;&lt;/div&gt;
+      &lt;div class=&quot;stats&quot;&gt;&lt;span class=&quot;play&quot;&gt;203&lt;/span&gt;&lt;span&gt;赞 0&lt;/span&gt;&lt;span&gt;评 0&lt;/span&gt;&lt;span&gt;藏 0&lt;/span&gt;&lt;span class=&quot;dt&quot;&gt;08-06&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/section&gt;
+  &lt;p class=&quot;foot&quot;&gt;&lt;b&gt;√ 压缩刻度&lt;/b&gt;：条宽 = √(播放/榜首播放)。TOP8 合计 &lt;b&gt;5,875&lt;/b&gt;，占视频号 7 日播放 &lt;b&gt;34.3%&lt;/b&gt;；第22轴“功夫女足”刚发布为 0，待冷启动回收后进入榜单。&lt;/p&gt;
+&lt;/div&gt;
+&lt;script&gt;
+(function(){
+  var els = document.querySelectorAll(&quot;.bf[data-w]&quot;);
+  els.forEach(function(el,i){
+    el.style.transitionDelay = (0.1 + i*0.06) + &quot;s&quot;;
+    requestAnimationFrame(function(){ requestAnimationFrame(function(){ el.style.width = el.dataset.w + &quot;%&quot;; }); });
+  });
+})();
+&lt;/script&gt;
+&lt;script&gt;setTimeout(function(){document.querySelectorAll(&quot;[data-w]&quot;).forEach(function(el){el.style.transition=&quot;none&quot;;el.style.width=parseFloat(el.dataset.w)+&quot;%&quot;;});document.querySelectorAll(&quot;.vchart,.duo&quot;).forEach(function(ch){var H=ch.clientHeight;ch.querySelectorAll(&quot;[data-h]&quot;).forEach(function(el){var lab=el.parentElement.querySelector(&quot;.vval&quot;);var max=H-(lab?lab.offsetHeight+8:8);el.style.transition=&quot;none&quot;;el.style.height=Math.max(2,max*parseFloat(el.dataset.h)/100)+&quot;px&quot;;});});},1600);&lt;/script&gt;&lt;/body&gt;
+&lt;/html&gt;
+" scrolling="no"></iframe></div>
+</div>
+</main>
+<div class="cell brow" style="--nh:257px"><iframe title="策略 · 风险 · 下一条" srcdoc="&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;zh-CN&quot;&gt;
+&lt;head&gt;
+&lt;meta charset=&quot;UTF-8&quot;&gt;
+&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+&lt;title&gt;策略 · 风险 · 下一条&lt;/title&gt;
+&lt;style&gt;
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{background:transparent}
+  body{font-family:var(--kimi-font-sans,-apple-system,BlinkMacSystemFont,&quot;PingFang SC&quot;,&quot;Microsoft YaHei&quot;,sans-serif);color:#eaf6ff;padding:8px;font-variant-numeric:tabular-nums;line-height:1.6}
+  .panel{position:relative;background:linear-gradient(165deg,rgba(13,26,62,.97),rgba(7,14,38,.98));border:1px solid rgba(0,229,255,.26);border-radius:8px;box-shadow:0 12px 34px rgba(2,10,40,.5),inset 0 0 30px rgba(0,90,220,.08);padding:10px 14px 12px}
+  .cn{position:absolute;width:11px;height:11px;border:2px solid rgba(0,229,255,.7);z-index:2;pointer-events:none}
+  .tl{top:-1px;left:-1px;border-right:none;border-bottom:none;border-radius:6px 0 0 0}
+  .tr{top:-1px;right:-1px;border-left:none;border-bottom:none;border-radius:0 6px 0 0}
+  .bl{bottom:-1px;left:-1px;border-right:none;border-top:none;border-radius:0 0 0 6px}
+  .br{bottom:-1px;right:-1px;border-left:none;border-top:none;border-radius:0 0 6px 0}
+  .hd{position:relative;text-align:center;margin:0 0 10px;padding:5px 10px 7px;background:linear-gradient(180deg,rgba(18,44,96,.55),rgba(10,22,56,.1));border-bottom:1px solid rgba(0,229,255,.22)}
+  .hd h1{display:inline-block;font-size:13.5px;font-weight:800;color:#bfefff;text-shadow:0 0 10px rgba(0,229,255,.45);padding:0 12px;position:relative;white-space:nowrap}
+  .hd h1::before,.hd h1::after{content:&quot;&quot;;position:absolute;top:50%;width:26px;height:1px;background:linear-gradient(90deg,transparent,#00e5ff);box-shadow:0 0 6px rgba(0,229,255,.7)}
+  .hd h1::before{right:100%}.hd h1::after{left:100%;transform:scaleX(-1)}
+  .hd .mt{position:absolute;right:calc(var(--daimon-widget-host-safe-inline-end,82px) + 2px);top:8px;font-size:8.5px;color:rgba(150,190,230,.55)}
+
+  .strategy{display:flex;align-items:center;gap:11px;border:1px solid rgba(96,190,255,.32);border-radius:11px;
+    background:linear-gradient(90deg,rgba(59,130,246,.16),rgba(168,85,247,.10));padding:8px 12px;margin-bottom:11px}
+  .strategy .st{flex:none;font-size:10px;font-weight:800;color:#04122e;background:linear-gradient(150deg,#9deeff,#38bdf8);border-radius:7px;padding:3px 9px;box-shadow:0 0 12px rgba(34,211,238,.4)}
+  .strategy p{flex:1;min-width:0;font-size:11.5px;line-height:1.6}
+  .strategy p b{color:#7fe9ff}
+  .strategy .conf{flex:none;font-size:9px;color:rgba(150,190,230,.65)}
+
+  .cards{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+  .card{border-radius:11px;padding:10px 11px;border:1px solid rgba(251,191,36,.32);background:rgba(251,191,36,.05)}
+  .card.next{border-color:rgba(52,211,153,.4);background:rgba(52,211,153,.06)}
+  .card .ck{display:flex;align-items:center;gap:7px;margin-bottom:6px}
+  .card .ico{flex:none;width:22px;height:22px;border-radius:7px;display:grid;place-items:center;font-size:12px;font-weight:800;
+    background:rgba(251,191,36,.15);color:#fbbf24;border:1px solid rgba(251,191,36,.4)}
+  .card.next .ico{background:rgba(52,211,153,.15);color:#34d399;border-color:rgba(52,211,153,.45)}
+  .card .ct{font-size:11px;font-weight:800;color:#ffe9c0}
+  .card.next .ct{color:#c8f5e4}
+  .card .cv{font-size:8.5px;color:rgba(150,190,230,.6);font-weight:400}
+  .card p{font-size:10px;line-height:1.6;color:rgba(234,246,255,.9)}
+  .card p b{color:#fbbf24}
+  .card.next p b{color:#34d399}
+  .tagrow{display:flex;gap:6px;margin-top:7px;flex-wrap:wrap}
+  .tag{font-size:8.5px;border:1px solid rgba(52,211,153,.4);color:#7ef0c4;border-radius:999px;padding:2px 8px}
+
+  @media (max-width:900px){.cards{grid-template-columns:repeat(2,1fr)}}
+  @media (max-width:520px){.cards{grid-template-columns:1fr}}
+&lt;/style&gt;
+&lt;style&gt;.hd .mt,.mt{display:none!important}&lt;/style&gt;&lt;style&gt;@media (prefers-reduced-motion:no-preference){.cn{animation:cnP 3s ease-in-out infinite}@keyframes cnP{0%,100%{opacity:.6}50%{opacity:1}}.hd{overflow:hidden}.hd::after{content:&quot;&quot;;position:absolute;top:0;bottom:0;left:0;width:30%;background:linear-gradient(105deg,transparent,rgba(140,225,255,.15),transparent);transform:translateX(-140%);animation:hdSweep 5.5s ease-in-out infinite;pointer-events:none}@keyframes hdSweep{0%{transform:translateX(-140%)}55%,100%{transform:translateX(440%)}}.bf{overflow:hidden}.bf::after{content:&quot;&quot;;position:absolute;top:0;bottom:0;left:0;width:55%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.30),transparent);transform:translateX(-110%);animation:bfX 2.8s linear infinite;pointer-events:none}@keyframes bfX{0%{transform:translateX(-110%)}100%{transform:translateX(300%)}}.vbar,.dbar{position:relative;overflow:hidden}.vbar::after,.dbar::after{content:&quot;&quot;;position:absolute;left:0;right:0;bottom:0;height:45%;background:linear-gradient(0deg,transparent,rgba(255,255,255,.26),transparent);transform:translateY(120%);animation:vbY 3.2s linear infinite;pointer-events:none}@keyframes vbY{0%{transform:translateY(120%)}100%{transform:translateY(-330%)}}.tab,.scard{position:relative;overflow:hidden}.tab::after,.scard::after{content:&quot;&quot;;position:absolute;top:-40%;bottom:-40%;left:0;width:24%;background:linear-gradient(90deg,transparent,rgba(180,235,255,.2),transparent);transform:translateX(-160%) skewX(-18deg);animation:sheenX 4.8s ease-in-out infinite;pointer-events:none}@keyframes sheenX{0%{transform:translateX(-160%) skewX(-18deg)}60%,100%{transform:translateX(560%) skewX(-18deg)}}.tab:nth-child(2)::after{animation-delay:.6s}.tab:nth-child(3)::after{animation-delay:1.2s}.tab:nth-child(4)::after{animation-delay:1.8s}.scard:nth-child(2)::after{animation-delay:.8s}.scard:nth-child(3)::after{animation-delay:1.6s}.box{position:relative}.box::after{content:&quot;&quot;;position:absolute;inset:-2px;border-radius:6px;pointer-events:none;box-shadow:0 0 12px rgba(0,229,255,.6);opacity:.15;animation:oP 2.6s ease-in-out infinite}.box:nth-child(2)::after{animation-delay:.2s}.box:nth-child(3)::after{animation-delay:.4s}.box:nth-child(4)::after{animation-delay:.6s}.box:nth-child(5)::after{animation-delay:.8s}.box:nth-child(6)::after{animation-delay:1s}@keyframes oP{0%,100%{opacity:.15}50%{opacity:1}}.compass{filter:drop-shadow(0 0 8px rgba(34,211,238,.35))}.donut{position:relative}.donut::after{content:&quot;&quot;;position:absolute;inset:0;border-radius:50%;pointer-events:none;background:conic-gradient(from 0deg,transparent 0 72%,rgba(255,255,255,.28) 84%,transparent 96%);-webkit-mask:radial-gradient(circle,transparent 54%,#000 56% 90%,transparent 92%);mask:radial-gradient(circle,transparent 54%,#000 56% 90%,transparent 92%);animation:ringSpin 5.5s linear infinite}@keyframes ringSpin{to{transform:rotate(360deg)}}}&lt;/style&gt;&lt;style&gt;html,body{height:100%!important;-webkit-text-size-adjust:100%;text-size-adjust:100%}body{display:flex!important;flex-direction:column!important}body&gt;:first-child{flex:1 0 auto;display:flow-root}html.host-mobile,html.host-mobile body{height:auto!important;min-height:0!important;overflow-x:hidden!important}html.host-mobile body{display:block!important}html.host-mobile body&gt;:first-child{height:auto!important;min-height:0!important;flex:none!important}html.host-mobile .panel{height:auto!important;min-height:0!important}html.host-mobile .tab,html.host-mobile button{min-height:44px}html.host-mobile .hd h1{white-space:normal!important;line-height:1.35}html.host-mobile .grp-t{flex-wrap:wrap}html.host-mobile .strategy{align-items:flex-start!important;flex-wrap:wrap!important}&lt;/style&gt;&lt;/head&gt;
+&lt;body&gt;
+&lt;div class=&quot;panel&quot;&gt;
+  &lt;i class=&quot;cn tl&quot;&gt;&lt;/i&gt;&lt;i class=&quot;cn tr&quot;&gt;&lt;/i&gt;&lt;i class=&quot;cn bl&quot;&gt;&lt;/i&gt;&lt;i class=&quot;cn br&quot;&gt;&lt;/i&gt;
+  &lt;header class=&quot;hd&quot;&gt;&lt;h1&gt;策略 · 风险 · 下一条&lt;/h1&gt;&lt;span class=&quot;mt&quot;&gt;飞轮复盘 · 08-07 15:24&lt;/span&gt;&lt;/header&gt;
+  &lt;section class=&quot;strategy&quot; aria-label=&quot;一句话策略&quot;&gt;&lt;span class=&quot;st&quot;&gt;策略&lt;/span&gt;&lt;p&gt;即时体育事件给点击理由，小白用连续实体动作把热点变成生活决策，大陈用画内真实对白完成判断；字幕必须烧录。&lt;/p&gt;&lt;span class=&quot;conf&quot;&gt;信心 78&lt;/span&gt;&lt;/section&gt;
+  &lt;section class=&quot;cards&quot; aria-label=&quot;核心风险与行动&quot;&gt;
+    &lt;article class=&quot;card&quot;&gt;&lt;div class=&quot;ck&quot;&gt;&lt;span class=&quot;ico&quot;&gt;!&lt;/span&gt;&lt;div&gt;&lt;div class=&quot;ct&quot;&gt;抖音留存继续下滑&lt;/div&gt;&lt;div class=&quot;cv&quot;&gt;最高优先级&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;p&gt;抖音完播率 14.26%，2 秒跳出 26.72%，增长和互动改善尚未修复留存。 &lt;b&gt;下一轮先修前 2 秒与信息密度。&lt;/b&gt;&lt;/p&gt;&lt;/article&gt;
+    &lt;article class=&quot;card&quot;&gt;&lt;div class=&quot;ck&quot;&gt;&lt;span class=&quot;ico&quot;&gt;×&lt;/span&gt;&lt;div&gt;&lt;div class=&quot;ct&quot;&gt;视频号推荐依赖&lt;/div&gt;&lt;div class=&quot;cv&quot;&gt;结构风险&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;p&gt;视频号推荐流占 96.9%，7 日新增 1、流失 1，分发韧性不足。 &lt;b&gt;抖音强样本不能直接迁移为视频号结论。&lt;/b&gt;&lt;/p&gt;&lt;/article&gt;
+    &lt;article class=&quot;card&quot;&gt;&lt;div class=&quot;ck&quot;&gt;&lt;span class=&quot;ico&quot;&gt;✓&lt;/span&gt;&lt;div&gt;&lt;div class=&quot;ct&quot;&gt;即时体育公式有效&lt;/div&gt;&lt;div class=&quot;cv&quot;&gt;阶段信号&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;p&gt;第18轴抖音 1 万播放、360赞、12评、2转；第21轴 3,444 播放但互动偏弱。 小白连续动作是叙事条件，&lt;b&gt;不是独立的分发充分条件。&lt;/b&gt;&lt;/p&gt;&lt;/article&gt;
+    &lt;article class=&quot;card next&quot;&gt;&lt;div class=&quot;ck&quot;&gt;&lt;span class=&quot;ico&quot;&gt;→&lt;/span&gt;&lt;div&gt;&lt;div class=&quot;ct&quot;&gt;下一步 · 回收第22轴&lt;/div&gt;&lt;div class=&quot;cv&quot;&gt;功夫女足轴&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;p&gt;先回收第22轴的 2h / 24h / 48h 数据，单独验证 30 秒时长与烧录字幕对完播的影响。&lt;/p&gt;&lt;div class=&quot;tagrow&quot;&gt;&lt;span class=&quot;tag&quot;&gt;KPI：完播 / 平均观看 / 2秒跳出&lt;/span&gt;&lt;span class=&quot;tag&quot;&gt;节点：2h / 24h / 48h&lt;/span&gt;&lt;/div&gt;&lt;/article&gt;
+  &lt;/section&gt;
+&lt;/div&gt;
+&lt;script&gt;setTimeout(function(){document.querySelectorAll(&quot;[data-w]&quot;).forEach(function(el){el.style.transition=&quot;none&quot;;el.style.width=parseFloat(el.dataset.w)+&quot;%&quot;;});document.querySelectorAll(&quot;.vchart,.duo&quot;).forEach(function(ch){var H=ch.clientHeight;ch.querySelectorAll(&quot;[data-h]&quot;).forEach(function(el){var lab=el.parentElement.querySelector(&quot;.vval&quot;);var max=H-(lab?lab.offsetHeight+8:8);el.style.transition=&quot;none&quot;;el.style.height=Math.max(2,max*parseFloat(el.dataset.h)/100)+&quot;px&quot;;});});},1600);&lt;/script&gt;&lt;/body&gt;
+&lt;/html&gt;
+" scrolling="no"></iframe></div>
+<p class="foot">广州潮少 · 双平台运营飞轮看板 · 统计周期 2026-07-31 ~ 08-06 · 静态快照,无密钥无接口 · v4.18</p>
+</div>
 <script>
 (function(){
-  var el=document.getElementById("clock");
-  function pad(n){return (n<10?"0":"")+n}
-  function tick(){var d=new Date();el.textContent=pad(d.getHours())+":"+pad(d.getMinutes())+":"+pad(d.getSeconds())}
-  tick();setInterval(tick,1000);
-  /* ───────── v4.2 动态化渲染 ─────────
-     原来:罗盘弧与画像环的 dasharray 写死在 HTML 里、完全静止;柱体只有尺寸动画,
-          颜色是硬编码 class,和数值没有关系。
-     现在:①所有罗盘/环从 0 扫到目标值 ②柱体与环的颜色由数值驱动
-          (保留各自的语义色相,用数值决定亮度/不透明度/辉光强度,大的更亮、小的更暗)
-          ③健康分数字与指针的颜色走 红→琥珀→绿 健康刻度。
-     JS 失败时 CSS 里的静态配色仍在,只是不再动——不会白板。 */
-  var HUE={dy:"37,214,230",sp:"168,85,247",gold:"251,191,36",dim:"120,150,190",
-           c1:"251,191,36",c2:"168,85,247",c3:"37,214,230",c4:"168,85,247",c5:"37,214,230",c6:"168,85,247",
-           win:"37,214,230",lose:"248,113,113"};
-  function hueOf(el,def){
-    if(el.dataset.hue) return el.dataset.hue;
-    for(var k in HUE){ if(el.classList.contains(k)) return HUE[k]; }
-    return def||"37,214,230";
+  "use strict";
+  var mq = window.matchMedia("(max-width:1180px)");
+  var frames = Array.prototype.slice.call(document.querySelectorAll(".cell iframe"));
+  var observers = new Map();
+  var genericCss = "html{-webkit-text-size-adjust:100%;text-size-adjust:100%}html.host-mobile,html.host-mobile body{height:auto!important;min-height:0!important;overflow-x:hidden!important}html.host-mobile body{display:block!important}html.host-mobile body>:first-child{height:auto!important;min-height:0!important;flex:none!important}html.host-mobile .panel{height:auto!important;min-height:0!important}html.host-mobile .tab,html.host-mobile button{min-height:44px}html.host-mobile .hd h1{white-space:normal!important;line-height:1.35}html.host-mobile .grp-t{flex-wrap:wrap}html.host-mobile .strategy{align-items:flex-start!important;flex-wrap:wrap!important}";
+  var titleCss = "@media(max-width:760px){body{padding:3px 0!important}.band{height:auto!important;min-height:92px;grid-template-columns:1fr auto!important;grid-template-areas:'title title' 'left right';gap:8px 10px!important;padding:11px 13px!important}.title{grid-area:title;padding:0 4px!important}.title h1{font-size:18px!important;line-height:1.25!important;white-space:normal!important}.title .sub{font-size:9px!important;margin-top:3px!important}.side:first-child{grid-area:left}.side.r{grid-area:right}.side{font-size:10px!important}.pill{padding:3px 8px!important}.side .pill.long,.live,.dots{display:none!important}.clock{font-size:12px!important}.wing{display:none!important}}";
+  function docOf(frame){ try{return frame.contentDocument;}catch(_){return null;} }
+  function inject(frame){
+    var doc=docOf(frame); if(!doc||!doc.head) return null;
+    doc.documentElement.classList.toggle("host-mobile",mq.matches);
+    if(!doc.getElementById("mobile-intrinsic-fix")){
+      var style=doc.createElement("style"); style.id="mobile-intrinsic-fix";
+      style.textContent=genericCss+(frame.title.indexOf("标题栏")===0?titleCss:"");
+      doc.head.appendChild(style);
+    }
+    return doc;
   }
-  /* 健康刻度:0=红 50=琥珀 100=绿 */
-  function healthColor(v){
-    var a=[248,113,113],b=[251,191,36],c=[52,211,153],lo,hi,t;
-    v=Math.max(0,Math.min(100,v));
-    if(v<=50){lo=a;hi=b;t=v/50}else{lo=b;hi=c;t=(v-50)/50}
-    return "rgb("+lo.map(function(x,i){return Math.round(x+(hi[i]-x)*t)}).join(",")+")";
+  function measure(frame){
+    var doc=inject(frame); if(!doc||!doc.body) return;
+    if(!mq.matches){frame.style.removeProperty("height");frame.parentElement.style.removeProperty("height");return;}
+    var first=doc.body.firstElementChild; if(!first) return;
+    var cs=doc.defaultView.getComputedStyle(doc.body);
+    var pad=(parseFloat(cs.paddingTop)||0)+(parseFloat(cs.paddingBottom)||0);
+    var height=Math.ceil(Math.max(first.scrollHeight,first.getBoundingClientRect().height)+pad+1);
+    if(height>0&&Math.abs(frame.clientHeight-height)>1){frame.style.height=height+"px";frame.parentElement.style.height=height+"px";}
   }
-  /* 数值→亮度:v 越大,主色越实、辉光越强 */
-  function paint(el,v,dir){
-    var h=hueOf(el), i=Math.max(0,Math.min(1,v/100));
-    var strong="rgba("+h+","+(0.5+0.5*i).toFixed(3)+")", weak="rgba("+h+",0.2)";
-    el.style.background="linear-gradient("+dir+","+(dir==="90deg"?weak+","+strong:strong+","+weak)+")";
-    el.style.boxShadow="0 0 "+(3+13*i).toFixed(1)+"px rgba("+h+","+(0.08+0.37*i).toFixed(3)+")";
+  function watch(frame){
+    var doc=inject(frame); if(!doc||!doc.body) return;
+    if(observers.has(frame)) observers.get(frame).disconnect();
+    if("ResizeObserver" in window){
+      var ro=new ResizeObserver(function(){measure(frame)}); ro.observe(doc.body.firstElementChild||doc.body); observers.set(frame,ro);
+    }
+    requestAnimationFrame(function(){measure(frame);requestAnimationFrame(function(){measure(frame)})});
+    setTimeout(function(){measure(frame)},1700);
   }
-
-  /* 横向柱(TOP榜/平台对比) */
-  document.querySelectorAll(".bf[data-w]").forEach(function(b,i){
-    var v=parseFloat(b.dataset.w)||0;
-    paint(b,v,"90deg");
-    b.style.transitionDelay=(0.1+i*0.04)+"s";
-    requestAnimationFrame(function(){requestAnimationFrame(function(){b.style.width=v+"%"})});
-  });
-  /* 纵向柱(流量来源/涨粉断层) */
-  document.querySelectorAll(".bar[data-h]").forEach(function(b,i){
-    var v=parseFloat(b.dataset.h)||0;
-    paint(b,v,"180deg");
-    b.style.transitionDelay=(0.15+i*0.06)+"s";
-    requestAnimationFrame(function(){requestAnimationFrame(function(){b.style.height=v+"%"})});
-  });
-  /* 堆叠条(粉丝来源构成) */
-  document.querySelectorAll(".stack .sg[data-w]").forEach(function(s,i){
-    var v=parseFloat(s.dataset.w)||0, h=hueOf(s);
-    s.style.background="rgba("+h+","+(0.45+0.5*Math.min(1,v/60)).toFixed(3)+")";
-    s.style.transitionDelay=(0.3+i*0.07)+"s";
-    requestAnimationFrame(function(){requestAnimationFrame(function(){s.style.width=v+"%"})});
-  });
-  /* 罗盘弧:半圆 r=80 → 全长 π*80 = 251.3 */
-  document.querySelectorAll(".garc[data-v]").forEach(function(p){
-    var v=parseFloat(p.dataset.v)||0, L=251.3;
-    requestAnimationFrame(function(){requestAnimationFrame(function(){
-      p.setAttribute("stroke-dasharray",(L*v/100).toFixed(1)+" "+L);
-    })});
-  });
-  /* 画像环:整圆 r=38 → 全长 2π*38 = 238.8 */
-  document.querySelectorAll(".rarc[data-v]").forEach(function(c,i){
-    var v=parseFloat(c.dataset.v)||0, L=238.8, h=hueOf(c);
-    c.setAttribute("stroke","rgba("+h+","+(0.55+0.45*Math.min(1,v/100)).toFixed(3)+")");
-    c.style.filter="drop-shadow(0 0 "+(2+6*v/100).toFixed(1)+"px rgba("+h+",.55))";
-    c.style.transitionDelay=(0.2+i*0.15)+"s";
-    requestAnimationFrame(function(){requestAnimationFrame(function(){
-      c.setAttribute("stroke-dasharray",(L*v/100).toFixed(1)+" "+L);
-    })});
-  });
-  /* 健康分数字 + 指针:颜色走健康刻度 */
-  document.querySelectorAll(".hv[data-v]").forEach(function(b){
-    var col=healthColor(parseFloat(b.dataset.v)||0);
-    b.style.color=col; b.style.textShadow="0 0 14px "+col.replace("rgb(","rgba(").replace(")",",.55)");
-  });
-  var needle=document.getElementById("needle");
-  if(needle){
-    var nv=parseFloat(needle.dataset.v)||0, ncol=healthColor(nv);
-    var np=document.getElementById("ndl"), nc=document.getElementById("ndlc");
-    if(np){np.setAttribute("fill",ncol);np.style.filter="drop-shadow(0 0 6px "+ncol.replace("rgb(","rgba(").replace(")",",.85)")+")"}
-    if(nc){nc.setAttribute("stroke",ncol)}
-    var base=nv*1.8-90;
-    setTimeout(function(){needle.style.transform="rotate("+base.toFixed(1)+"deg)"},300);
-    /* 仪表"活着"的轻微游动:±0.3°(=±0.17 分),配合已有的 1.4s 缓动 → 缓慢呼吸。
-       幅度刻意压到读数分辨率以下,不会被误读成数值在变。 */
-    var sw=0;
-    setInterval(function(){sw=sw?0:1;needle.style.transform="rotate("+(base+(sw?0.3:-0.3)).toFixed(2)+"deg)"},2600);
-  }
-
-  /* ★持续动效:给罗盘弧与两个画像环各叠一条"流光",沿已填充的那段来回跑。
-     流光是独立的装饰元素,原弧/原环一点没动——数值不受影响。 */
-  function addRunner(el,total,dashLen,dur){
-    var v=parseFloat(el.dataset.v)||0, filled=total*v/100;
-    if(filled<dashLen*1.5) return;                    // 太短就不加,免得看着像卡住
-    var run=el.cloneNode(false);
-    run.removeAttribute("data-v");
-    run.setAttribute("class","arc-run");
-    run.setAttribute("stroke-dasharray",dashLen+" "+total);
-    run.setAttribute("stroke",el.dataset.hue?"rgba("+el.dataset.hue+",1)":"#bff4ff");
-    run.setAttribute("stroke-width",(parseFloat(el.getAttribute("stroke-width"))||10)-2);
-    run.style.setProperty("--run",(-filled).toFixed(1));
-    run.style.setProperty("--dur",dur+"s");
-    run.style.filter="drop-shadow(0 0 5px currentColor)";
-    el.parentNode.insertBefore(run,el.nextSibling);
-  }
-  document.querySelectorAll(".garc[data-v]").forEach(function(p){addRunner(p,251.3,6,2.8)});
-  document.querySelectorAll(".rarc[data-v]").forEach(function(c,i){addRunner(c,238.8,5,3.2+i*0.5)});
-  document.querySelectorAll("#tabs .tab").forEach(function(t){
-    t.addEventListener("click",function(){
-      document.querySelectorAll("#tabs .tab").forEach(function(x){x.classList.remove("on")});
-      document.querySelectorAll(".tp").forEach(function(x){x.classList.remove("on")});
-      t.classList.add("on");document.getElementById(t.dataset.t).classList.add("on");
-    });
-  });
+  frames.forEach(function(frame){frame.addEventListener("load",function(){watch(frame)});watch(frame)});
+  function refresh(){frames.forEach(measure)}
+  if(mq.addEventListener) mq.addEventListener("change",refresh); else mq.addListener(refresh);
+  window.addEventListener("resize",function(){clearTimeout(window.__boardResizeTimer);window.__boardResizeTimer=setTimeout(refresh,80)},{passive:true});
 })();
 </script>
 </body>
